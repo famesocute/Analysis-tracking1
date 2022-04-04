@@ -11,7 +11,7 @@ export class DangertoCCComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  displayedColumns = [ 'name', 'weight', 'symbol'];
+  displayedColumns = [ 'task', 'process', 'name', 'time', 'comment', 'cc'];
   dataSource = ELEMENT_DATA;
 
   displayedColumns2 = [ 'top', 'side', 'view'];
@@ -19,22 +19,25 @@ export class DangertoCCComponent implements OnInit {
 }
 
 export interface PeriodicElement {
+  task: string ;
+  process: string;
   name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+  time: string;
+  comment : string;
+  cc : string;
+}      
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: '', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {task: 'Pending request', process: 'Issuer', name: '', time: '', comment : '1' , cc : '-'},
+  {task: '', process: 'Confirm 1', name: '', time: '', comment : '1', cc : '-'},
+  {task: '', process: 'Confirm 2', name: '', time: '', comment : '1', cc : '-'},
+  {task: '', process: 'Request approval', name: '', time: '', comment : '1', cc : '-'},
+  {task: 'Analysis section', process: 'Controller', name: '', time: '', comment : '1', cc : '-'},
+  {task: '', process: 'Analyst', name: '', time: '', comment : '1', cc : '-'},
+  {task: 'Report approval', process: 'Check', name: '', time: '', comment : '1', cc : '-'},
+  {task: '', process: 'Confirm', name: '', time: '', comment : '1', cc : '-'},
+  {task: '', process: 'Approver', name: '', time: '', comment : '1', cc : '-'},
+  {task: 'CS Evaluation', process: 'Issuer', name: '', time: '', comment : '1', cc : '-'},
+  {task: 'Completed', process: 'Close', name: '', time: '', comment : '1', cc : '-'},
 ];
 
 export interface PeriodicElement2 {

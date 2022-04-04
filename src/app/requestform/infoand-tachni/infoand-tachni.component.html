@@ -76,12 +76,12 @@
             <!-- IssueDate Requter -->
             <div class="col-sm-5">
                 <h4>Issue Date:</h4>       
-                    <mat-form-field appearance="fill">       
-                        <mat-select>
-                         <mat-option value="one">First option</mat-option>
-                         <mat-option value="two">Second option</mat-option>
-                        </mat-select>
-                    </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>                           
                 <p> Requester: Pichayapak Nantasai</p>
                 <div class="row">
                     <div class="col-sm-4">
@@ -108,7 +108,7 @@
                       </mat-form-field>
                     </div>
                   </div>
-
+               <!-- Product -->
                 <div class="row">
                     <div class="col-sm-3">
                         <p>Product:</p>
@@ -116,10 +116,37 @@
                     <div class="col-sm-3">
                       <mat-form-field appearance="fill">       
                           <mat-select>
-                            <mat-option value="MT300">BLM</mat-option>
-                            <mat-option value="MT400">PAC</mat-option>
-                            <mat-option value="MT500">MKV</mat-option>
-                            <mat-option value="MT600">MAOPN</mat-option> 
+                            <mat-option value="MLCC">MLCC</mat-option>
+                            <mat-option value="BLM">BLM</mat-option>
+                            <mat-option value="MAWTR">MAWTR</mat-option>
+                            <mat-option value="MAOPN">MAOPN</mat-option>
+                            <mat-option value="MKVLED">MKVLED</mat-option>
+                            <mat-option value="SMD">SMD</mat-option>
+                            <mat-option value="PAC">PAC</mat-option>
+                            <mat-option value="METAL PLATE">METAL PLATE</mat-option>
+                            <mat-option value="PLASTIC INJECTION">PLASTIC INJECTION</mat-option>
+                            <mat-option value="MACHINE PART">MACHINE PART</mat-option>
+                            <mat-option value="TERMINAL">TERMINAL</mat-option>
+                            <mat-option value="PRECISION PARTS">PRECISION PARTS</mat-option>
+                            <mat-option value="CUTTING BLADE">CUTTING BLADE</mat-option>
+                            <mat-option value="LLHP">LLHP</mat-option>
+                            <mat-option value="BUZZER">BUZZER</mat-option> 
+                            <mat-option value="MICRO BROWER">MICRO BROWER</mat-option> 
+                            <mat-option value="AIR PUMP">AIR PUMP</mat-option> 
+                            <mat-option value="YM00">YM00</mat-option>  
+                            <mat-option value="MGSSR">MGSSR</mat-option> 
+                            <mat-option value="REDSSR">REDSSR</mat-option> 
+                            <mat-option value="CAPGL">CAPGL</mat-option> 
+                            <mat-option value="AXIAL">AXIAL</mat-option> 
+                            <mat-option value="LP-DCM">LP-DCM</mat-option> 
+                            <mat-option value="CILANT">CILANT</mat-option>
+                            <mat-option value="TKANTB">TKANTB</mat-option>  
+                            <mat-option value="TKANTC">TKANTC</mat-option> 
+                            <mat-option value="MONOBK">MONOBK</mat-option> 
+                            <mat-option value="PSiP">PSiP</mat-option> 
+                            <mat-option value="PS-MOD">PS-MOD</mat-option>
+                            <mat-option value="MME671">MME671</mat-option>
+                            <mat-option value="Other">Other</mat-option> 
                           </mat-select>
                         </mat-form-field>
                       </div>
@@ -314,14 +341,13 @@
                          <p>Send Sample Date:</p>
                     </div>
                     <div class="col-sm-1">
-                         <mat-form-field appearance="fill">       
-                             <mat-select>
-                             <mat-option value="MT300">BLM</mat-option>
-                             <mat-option value="MT400">PAC</mat-option>
-                             <mat-option value="MT500">MKV</mat-option>
-                             <mat-option value="MT600">MAOPN</mat-option> 
-                             </mat-select>
-                         </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          
                     </div>
                </div>
             </div>
@@ -332,14 +358,12 @@
                          <p>Expected Finish:</p>
                      </div>
                      <div class="col-sm-1">
-                         <mat-form-field appearance="fill">       
-                             <mat-select>
-                             <mat-option value="MT300">BLM</mat-option>
-                             <mat-option value="MT400">PAC</mat-option>
-                             <mat-option value="MT500">MKV</mat-option>
-                             <mat-option value="MT600">MAOPN</mat-option> 
-                             </mat-select>
-                         </mat-form-field>
+                         <mat-form-field appearance="fill">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field> 
                      </div>
                  </div>
              </div>
