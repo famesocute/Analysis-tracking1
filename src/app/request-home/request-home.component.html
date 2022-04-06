@@ -1,10 +1,81 @@
-<div class="row">
+<div class="row ">
 <div class=" col-sm-2">
-    Hollo
-</div>
+    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 230px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+          <svg class="bi me-2" width="50" height="40"><use xlink:href="#bootstrap"/></svg>
+          <span class="fs-4">Status</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="#" class="nav-link active " aria-current="page">
+              <svg class="bi " width="16" height="16"><use xlink:href="#Pending Request"/></svg>
+              Pending Request
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link link-dark">
+              <svg class="bi " width="16" height="16"><use xlink:href="#Not Complete Request"/></svg>
+              NotComplete Request
+            </a>
+          </li>
+          <li>
+            <a href="#" class="nav-link link-dark">
+              <svg class="bi " width="16" height="16"><use xlink:href="#table"/></svg>
+              Complete Request
+            </a>
+          </li>
+        </ul>
+        
+      </div>
+</div >
 
-<div class="col-sm-3 pt-3">
-    <h1><dl><dt> Request form</dt></dl></h1>
+<div class = " col-sm-7 ">
+    <h1>
+        Analysis Request 
+    </h1>
+    <button mat-raised-button color="primary"> Request Form </button>
+    <br>
+    <mat-form-field appearance="standard">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+      </mat-form-field>
+      
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef> Weight </th>
+          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef> Symbol </th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+      
 </div>
 </div>
 
