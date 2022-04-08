@@ -1,0 +1,185 @@
+<div class="container-fluid">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+      </a>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary" style=" margin-right: 50px; ">Home</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark buttom1">Features</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark buttom1">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark buttom1">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark buttom1">About</a></li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <button type="button" class="btn btn-outline-primary me-2">Login</button>
+        <button type="button" class="btn btn-primary">Sign-up</button>
+      </div>
+    </header>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-1"></div>
+
+    <div class="col-sm-10">
+        <h1 style="margin-left : 100px " >Request Form</h1>
+        <mat-card class="card1">
+            <mat-card-title-group>
+              <mat-card-title>Analysis request form</mat-card-title>  
+            </mat-card-title-group>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="form-group input1">
+                            <label for="Title">Title:</label>
+                            <input type="Title" class="form-control" id="Title">
+                          </div>
+                          <div class="form-group input1">
+                            <label for="Background">Background:</label>
+                            <textarea class="form-control" rows="3" id="Background"></textarea>
+                          </div>
+                          <div class="form-group input1">
+                            <label for="Purpose">Purpose:</label>
+                            <textarea class="form-control" rows="3" id="Purpose"></textarea>
+                          </div>
+                          <div class="form-group input1">
+                            <label for="Hypothesis">Hypothesis:</label>
+                            <textarea class="form-control" rows="3" id="Hypothesis"></textarea>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm-3 ">
+                                <label for="comment" class="font-weight-bold"> Analysis type : </label>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-check-inline">
+                                    <label class="form-check-label" for="radio1">
+                                    <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">Customer complaint
+                                    </label>
+                                </div>
+                                 <div class="form-check-inline">
+                                     <label class="form-check-label" for="radio2">
+                                     <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">NC/Reject
+                                     </label>
+                                 </div>
+                                 <div class="form-check-inline">
+                                     <label class="form-check-label" for="radio3">
+                                     <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">Defective
+                                     </label>
+                                 </div>
+                                 <div class="form-check-inline">
+                                     <label class="form-check-label" for="radio4">
+                                     <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">Material evaluation   
+                                     </label>
+                                 </div>
+                                <div class="form-check-inline">
+                                     <label class="form-check-label" for="radio5">
+                                     <input type="radio" class="form-check-input" id="radio5" name="optradio" value="option5">Process evaluation
+                                     </label>
+                                </div>
+                                 <div class="form-check-inline">
+                                     <label class="form-check-label" for="radio6">
+                                     <input type="radio" class="form-check-input" id="radio6" name="optradio" value="option6">Product evaluation
+        
+                                     </label>
+                                 </div>
+                                 <div class="form-check-inline">
+                                     <label class="form-check-label" for="radio7">
+                                     <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option7">RoHS Spacial
+                                     </label>
+                                 </div>
+                                 <div class="row">
+                                        <div class=" col-sm-2 "><p class="centercolumn">Other :</p></div>
+                                        <div class="input2 col-sm-10"><input type="text" id="disabledTextInput" class="form-control  "> </div>   
+                                 </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-sm-5">
+                        <h4 style=" margin-top:30px ">Issue Date: 1 April 2022</h4>
+                        <h4> Requester: Pichayapak </h4>
+                        <div class="row">
+                            <div class=" col-sm-2"><p class="centercolumn">Phone:</p></div>
+                            <div class="input2 col-sm-10"><input type="text" id="disabledTextInput" class="form-control  "> </div>   
+                     </div>
+                        <mat-form-field appearance="outline">   
+                            <mat-label>Department</mat-label>    
+                            <mat-select>
+                              <mat-option value="MT300">MT300</mat-option>
+                              <mat-option value="MT400">MT400</mat-option>
+                              <mat-option value="MT500">MT500</mat-option>
+                              <mat-option value="MT600">MT600</mat-option>
+                              <mat-option value="MT700">MT700</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
+                          <mat-form-field appearance="outline"> 
+                            <mat-label>Product</mat-label>        
+                            <mat-select>
+                              <mat-option value="MLCC">MLCC</mat-option>
+                              <mat-option value="BLM">BLM</mat-option>
+                              <mat-option value="MAWTR">MAWTR</mat-option>
+                              <mat-option value="MAOPN">MAOPN</mat-option>
+                              <mat-option value="MKVLED">MKVLED</mat-option>
+                              <mat-option value="SMD">SMD</mat-option>
+                              <mat-option value="PAC">PAC</mat-option>
+                              <mat-option value="METAL PLATE">METAL PLATE</mat-option>
+                              <mat-option value="PLASTIC INJECTION">PLASTIC INJECTION</mat-option>
+                              <mat-option value="MACHINE PART">MACHINE PART</mat-option>
+                              <mat-option value="TERMINAL">TERMINAL</mat-option>
+                              <mat-option value="PRECISION PARTS">PRECISION PARTS</mat-option>
+                              <mat-option value="CUTTING BLADE">CUTTING BLADE</mat-option>
+                              <mat-option value="LLHP">LLHP</mat-option>
+                              <mat-option value="BUZZER">BUZZER</mat-option> 
+                              <mat-option value="MICRO BROWER">MICRO BROWER</mat-option> 
+                              <mat-option value="AIR PUMP">AIR PUMP</mat-option> 
+                              <mat-option value="YM00">YM00</mat-option>  
+                              <mat-option value="MGSSR">MGSSR</mat-option> 
+                              <mat-option value="REDSSR">REDSSR</mat-option> 
+                              <mat-option value="CAPGL">CAPGL</mat-option> 
+                              <mat-option value="AXIAL">AXIAL</mat-option> 
+                              <mat-option value="LP-DCM">LP-DCM</mat-option> 
+                              <mat-option value="CILANT">CILANT</mat-option>
+                              <mat-option value="TKANTB">TKANTB</mat-option>  
+                              <mat-option value="TKANTC">TKANTC</mat-option> 
+                              <mat-option value="MONOBK">MONOBK</mat-option> 
+                              <mat-option value="PSiP">PSiP</mat-option> 
+                              <mat-option value="PS-MOD">PS-MOD</mat-option>
+                              <mat-option value="MME671">MME671</mat-option>
+                              <mat-option value="Other">Other</mat-option> 
+                            </mat-select>
+                          </mat-form-field>
+                          <mat-card class="cardAT">
+                            <mat-card-title>Attached file</mat-card-title>
+                            <mat-card-subtitle>(Specific experiment design/photo/concerned information)
+                            </mat-card-subtitle>
+                            <mat-card-actions>
+                                <button mat-button>CLICK</button>                          
+                            </mat-card-actions>
+                        </mat-card>
+                    </div>
+                  </div>
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card1">
+            <mat-card-title-group>
+              <mat-card-title>Analysis request form</mat-card-title>  
+            </mat-card-title-group>
+            <mat-card-content>
+                
+            </mat-card-content>
+          </mat-card>
+          <mat-card class="card1">
+            <mat-card-title-group>
+              <mat-card-title>Analysis request form</mat-card-title>  
+            </mat-card-title-group>
+            <mat-card-content>
+                
+            </mat-card-content>
+          </mat-card>
+    </div>
+
+    <div class="col-sm-1"></div>
+  </div>
+
+ 

@@ -9,6 +9,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +21,7 @@ import { RequestformComponent } from './requestform/requestform.component';
 import { InfoandTachniComponent } from './requestform/infoand-tachni/infoand-tachni.component';
 import { DangertoCCComponent } from './requestform/dangerto-cc/dangerto-cc.component';
 import { RequestHomeComponent } from './request-home/request-home.component';
+import { RequestformfillComponent } from './requestformfill/requestformfill.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { RequestHomeComponent } from './request-home/request-home.component';
     RequestformComponent,
     InfoandTachniComponent,
     DangertoCCComponent,
-    RequestHomeComponent
+    RequestHomeComponent,
+    RequestformfillComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,7 @@ import { RequestHomeComponent } from './request-home/request-home.component';
     MatTableModule,
     MatInputModule,
     MatNativeDateModule,
- 
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

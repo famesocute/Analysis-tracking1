@@ -1,8 +1,39 @@
 
-<div class="card col-sm-10 container ">
+<div class="container">
+    <h2>Hover Rows</h2>
+    <p>The .table-hover class enables a hover state on table rows:</p>            
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John</td>
+          <td>Doe</td>
+          <td>john@example.com</td>
+        </tr>
+        <tr>
+          <td>Mary</td>
+          <td>Moe</td>
+          <td>mary@example.com</td>
+        </tr>
+        <tr>
+          <td>July</td>
+          <td>Dooley</td>
+          <td>july@example.com</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<div class="card container ">
     <div class="card-header ">
         <h2>Request Information</h2>
     </div>
+
     <div class="card-body">
         <div class="row">
             <!-- Title Background Purpose -->
@@ -84,7 +115,7 @@
                   </mat-form-field>                           
                 <p> Requester: Pichayapak Nantasai</p>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <p>Phone number:</p>
                     </div>
                     <div class="col-sm-7">
@@ -93,11 +124,11 @@
                  </div>
                  <br>
                 <div class="row">
-                  <div class="col-sm-3">
+                  <div class="col-sm-5">
                       <p>Department:</p>
                   </div>
-                  <div class="col-sm-3">
-                    <mat-form-field appearance="fill">       
+                  <div class="col-sm-7">
+                    <mat-form-field appearance="outline">       
                         <mat-select>
                           <mat-option value="MT300">MT300</mat-option>
                           <mat-option value="MT400">MT400</mat-option>
