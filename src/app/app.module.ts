@@ -12,26 +12,31 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormfieldComponent } from './formfield/formfield.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RequestformComponent } from './requestform/requestform.component';
 import { InfoandTachniComponent } from './requestform/infoand-tachni/infoand-tachni.component';
 import { DangertoCCComponent } from './requestform/dangerto-cc/dangerto-cc.component';
 import { RequestHomeComponent } from './request-home/request-home.component';
 import { RequestformfillComponent } from './requestformfill/requestformfill.component';
+import { AnalyrequehomeComponent } from './analyrequehome/analyrequehome.component';
+import { PaddingrequeComponent } from './paddingreque/paddingreque.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormfieldComponent,
+    
     RequestformComponent,
     InfoandTachniComponent,
     DangertoCCComponent,
     RequestHomeComponent,
-    RequestformfillComponent
+    RequestformfillComponent,
+    AnalyrequehomeComponent,
+    PaddingrequeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -47,7 +52,8 @@ import { RequestformfillComponent } from './requestformfill/requestformfill.comp
     MatTableModule,
     MatInputModule,
     MatNativeDateModule,
-    MatToolbarModule
+    MatToolbarModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
