@@ -1,0 +1,27 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  .card1 {
+    max-width: 900px;
+    margin-top: 8px;
+    margin: auto;
+    background-color:#FFFAF0;
+  }
+  .mat-card-content {
+      padding: 20px;
+  }
+  .button1{
+      background-color:  rgb(255, 185, 185);
+      height: 30px;
+      border-radius: 8px;
+  }
+  .mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
