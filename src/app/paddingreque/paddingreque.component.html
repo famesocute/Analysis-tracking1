@@ -22,7 +22,26 @@
       </div>
   
       <div class="col-sm-10">
-        <h1 style=" padding: 20px 60px; ">Request Form</h1>
+        <h1 style=" padding: 20px 100px; ">Request Form</h1>
+        <div class="row" style="margin-bottom:15px;" >
+          <div class="col-sm-2"></div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-3">
+            <h2>Request no.</h2></div>
+        
+          <div class="col-sm-3">
+            <div class="row ">
+              <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
+                <mat-icon>create</mat-icon>
+              </button>
+              <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" style="margin-left:20px;">
+                <mat-icon>save</mat-icon>
+              </button>
+            </div>
+            
+          </div>
+        </div>  
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Analysis request form</mat-card-title>
@@ -244,12 +263,12 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Task</th>
-                  <th>Process</th>
-                  <th>Name</th>
-                  <th>Processing date and time</th>
-                  <th>Comment</th>
-                  <th>cc</th>
+                  <th class="Titlereview">Task</th>
+                  <th class="Titlereview">Process</th>
+                  <th class="Titlereview">Name</th>
+                  <th class="Titlereview">Processing date&time</th>
+                  <th class="Titlereview">Comment</th>
+                  <th class="Titlereview">cc</th>
                 </tr>
               </thead>
               <tbody>
@@ -266,13 +285,13 @@
                   <td>Confirm</td>
                   <td></td>
                   <td></td>
-                  <td></td>
-                  <td></td>
+                  <td><textarea rows="2" id="Background" class="border-light" ></textarea></td>
+                  <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-light" ></td>
                 </tr>
                 <tr>
                   <td>Analysis section</td>
                   <td>Controller</td>
-                  <td></td>
+                  <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-light" ></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -280,7 +299,7 @@
                 <tr>
                   <td></td>
                   <td>Analyst</td>
-                  <td></td>
+                  <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-light" ></td>
                   <td></td>
                   <td></td>
                   <td></td>
