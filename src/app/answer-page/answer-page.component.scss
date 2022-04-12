@@ -5,7 +5,8 @@
     height: auto;
   }
   .card1 {
-    max-width: 900px;   
+    max-width: 900px;
+    margin-top: 8px;
     margin: auto;
     background-color:#FFFAF0;
   }
@@ -17,22 +18,10 @@
       height: 30px;
       border-radius: 8px;
   }
-  .button2{
-    border-radius: 15px;   
-}
   .mat-stepper-horizontal {
     margin-top: 8px;
   }
   
-  .mat-form-field {    
-    max-width: 120px;
+  .mat-form-field {
+    margin-top: 16px;
   }
-  .input1 {
-    padding: 10px 0;
-}
-.inputreview {
-    max-width: 130px;
-}
-.Titlereview {
-    text-align: center;
-}
