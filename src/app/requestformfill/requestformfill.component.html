@@ -33,19 +33,22 @@
             <div class="col-sm-7">
               <div class="form-group input1">
                 <label for="Title"><b>Title:</b></label>
-                <input type="Title" class="form-control" id="Title">
+                <input type="Title" class="form-control" id="Title" [(ngModel)]="this.Title" (keyup)="display()">
               </div>
               <div class="form-group input1">
                 <label for="Background"><b>Background:</b></label>
-                <textarea class="form-control" rows="3" id="Background"></textarea>
+                <textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.Background"
+                  (keyup)="display()"> </textarea>
               </div>
               <div class="form-group input1">
                 <label for="Purpose"><b>Purpose:</b></label>
-                <textarea class="form-control" rows="3" id="Purpose"></textarea>
+                <textarea class="form-control" rows="3" id="Purpose" [(ngModel)]="this.Purpose"
+                  (keyup)="display()"></textarea>
               </div>
               <div class="form-group input1">
                 <label for="Hypothesis"><b>Hypothesis:</b></label>
-                <textarea class="form-control" rows="3" id="Hypothesis"></textarea>
+                <textarea class="form-control" rows="3" id="Hypothesis" [(ngModel)]="this.Hypothesis"
+                  (keyup)="display()"></textarea>
               </div>
               <div class="row">
                 <div class="col-sm-3 ">
@@ -94,12 +97,20 @@
                     </label>
                   </div>
                   <div class="row">
-                    <div class=" col-sm-2 ">
-                      <p class="centercolumn">Other :</p>
+                    <div class="col-sm-1 center" style="padding: 0 15px;">
+                      <div class="form-check">
+                        <label class="form-check-label" for="radio7">
+                          <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option7">
+                        </label>
+                      </div>
                     </div>
-                    <div class="input2 col-sm-10"><input type="text" id="disabledTextInput" class="form-control  ">
+                    <div class="col-sm-11">
+                      <div class="input3">
+                        <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.AnalysistypeOther" (keyup)="display()" >
+                      </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -110,7 +121,10 @@
                 <div class=" col-sm-2">
                   <p class="centercolumn"><b>Phone:</b></p>
                 </div>
-                <div class="input2 col-sm-10"><input type="text" id="disabledTextInput" class="form-control  "> </div>
+                <div class="input2 col-sm-10">
+                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Phone"
+                    (keyup)="display()">
+                </div>
               </div>
               <mat-form-field appearance="outline">
                 <mat-label>Department</mat-label>
@@ -182,43 +196,59 @@
               <label for="comment" class="font-weight-bold"> <b>Structure analysis : </b></label>
             </div>
             <div class="col-sm-9">
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio1">
-                  <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">X-ray 2D
-                </label>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      X-ray 2D
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                      X-ray 3D
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      SEM-Microscope
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                      Cross section
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Ion-milling
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                      VHX
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Metallurgical Microscope
+                    </label>
+                  </div>
+                </div>
               </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio2">
-                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">X-ray 3D
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio3">
-                  <input type="radio" class="form-check-input" id="radio3" name="optradio"
-                    value="option3">SEM-Microscope
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio4">
-                  <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">Cross section
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio4">
-                  <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">Ion-milling
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio4">
-                  <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">VHX
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio4">
-                  <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">Metallurgical
-                  Microscope
-                </label>
-              </div>
+
             </div>
           </div>
           <!-- Composition select -->
@@ -227,30 +257,45 @@
               <label for="comment" class="font-weight-bold"><b> Composition analysis : </b></label>
             </div>
             <div class="col-sm-9">
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio1">
-                  <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">SEM-EDX
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio2">
-                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">SEM-Mapping
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio3">
-                  <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">EDXRF
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio3">
-                  <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">ICP
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio3">
-                  <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">CS Analyzer
-                </label>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      SEM-EDX
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                      SEM-Mapping
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      EDXRF
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      CS Analyzer
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      ICP
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -260,15 +305,23 @@
               <label for="comment" class="font-weight-bold"><b> Organic analysis : </b></label>
             </div>
             <div class="col-sm-9">
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio1">
-                  <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">FTIR
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio2">
-                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">GCMS
-                </label>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      FTIR
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      GCMS
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -278,15 +331,23 @@
               <label for="comment" class="font-weight-bold"><b> Thermal analysis : </b></label>
             </div>
             <div class="col-sm-9">
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio1">
-                  <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">DSC
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio2">
-                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">TG-DTA
-                </label>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      DSC
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      TG-DTA
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -296,28 +357,43 @@
               <label for="comment" class="font-weight-bold"><b> Other analysis : </b></label>
             </div>
             <div class="col-sm-9">
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio1">
-                  <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">Solder
-                  wettability
-                </label>
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Solder wettability
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Micro-probe
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Dust monitering
+                    </label>
+                  </div>
+                </div>
+                <div class="col-sm-3">
+
+                </div>
               </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio2">
-                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Dust
-                  monitering
-                </label>
-              </div>
-              <div class="form-check-inline">
-                <label class="form-check-label" for="radio2">
-                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Micro-probe
-                </label>
-              </div>
+
               <div class="row">
                 <div class=" col-sm-1">
                   <p class="centercolumn">Other:</p>
                 </div>
-                <div class="input2 col-sm-11"><input type="text" id="disabledTextInput" class="form-control  "> </div>
+                <div class="input2 col-sm-11">
+                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.RequestTechniquesOther" (keyup)="display()" > 
+                </div>
               </div>
             </div>
           </div>
@@ -411,32 +487,32 @@
           <div class=" col-sm-12 ">
             <div class="form-check-inline">
               <label class="form-check-label" for="radio1">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">Dangerous
+                <input type="radio" class="form-check-input" id="radio1" name="optradio2" value="option1">Dangerous
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio2">
-                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Poisonous
+                <input type="radio" class="form-check-input" id="radio2" name="optradio2" value="option2">Poisonous
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio3">
-                <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">Deleterious
+                <input type="radio" class="form-check-input" id="radio3" name="optradio2" value="option3">Deleterious
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">Heavy metal
+                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4">Heavy metal
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">ESD
+                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4">ESD
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">No
+                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4">No
               </label>
             </div>
           </div>
@@ -447,12 +523,14 @@
 
             <div class="form-check-inline">
               <label class="form-check-label" for="radio1">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1"> Dispose sample
+                <input type="radio" class="form-check-input" id="radio1" name="optradio3" value="option1"> Dispose
+                sample
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label" for="radio2">
-                <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Return Residual
+                <input type="radio" class="form-check-input" id="radio2" name="optradio3" value="option2">Return
+                Residual
                 Sample
               </label>
             </div>
@@ -639,13 +717,13 @@
                 <td>Issuer</td>
                 <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-white rounded"></td>
                 <td></td>
-                <td><textarea rows="2" id="Background" class=" rounded"></textarea></td>
-                <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-white rounded"></td>
+                <td><textarea rows="2" id="ComIssuer" class=" rounded"></textarea></td>
+                <td><input type="ccIssuer" id="ccIssuer" class="inputreview border-white rounded"></td>
               </tr>
               <tr>
                 <td></td>
                 <td>Confirm</td>
-                <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-white rounded"></td>
+                <td><input type="NameConfirm" id="NameConfirm" class="inputreview border-white rounded"></td>
                 <td></td>
                 <td></td>
                 <td></td>

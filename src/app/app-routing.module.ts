@@ -7,6 +7,7 @@ import { QuestionComponent } from './question/question.component';
 import { SummaryresultComponent } from './summaryresult/summaryresult.component';
 import { AnswerPageComponent } from './answer-page/answer-page.component';
 import { BooingEquipComponent } from './booing-equip/booing-equip.component';
+import { CSresultComponent } from './csresult/csresult.component';
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
 { path: 'Analyrequehome', component: AnalyrequehomeComponent }, 
@@ -14,7 +15,8 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'Question', component: QuestionComponent },
 { path: 'Summaryresult', component: SummaryresultComponent },
 { path: 'AnswerPage', component: AnswerPageComponent },
-{ path: 'BooingEquip', component: BooingEquipComponent },];
+{ path: 'BooingEquip', component: BooingEquipComponent },
+{ path: 'CSresult', component: CSresultComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

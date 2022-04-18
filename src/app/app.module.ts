@@ -11,6 +11,10 @@ import {MatInputModule} from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import { FormsModule } from '@angular/forms'
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +27,7 @@ import { QuestionComponent } from './question/question.component';
 import { SummaryresultComponent } from './summaryresult/summaryresult.component';
 import { AnswerPageComponent } from './answer-page/answer-page.component';
 import { BooingEquipComponent } from './booing-equip/booing-equip.component';
+import { CSresultComponent } from './csresult/csresult.component';
 
 
 @NgModule({
@@ -35,6 +40,7 @@ import { BooingEquipComponent } from './booing-equip/booing-equip.component';
     SummaryresultComponent,
     AnswerPageComponent,
     BooingEquipComponent,
+    CSresultComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +58,10 @@ import { BooingEquipComponent } from './booing-equip/booing-equip.component';
     MatNativeDateModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    FormsModule
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
