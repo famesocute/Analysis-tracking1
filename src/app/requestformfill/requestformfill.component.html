@@ -57,42 +57,61 @@
                 <div class="col-sm-9">
                   <div class="form-check-inline">
                     <label class="form-check-label" for="radio1">
-                      <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1">Customer
+                      <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1">Customer
                       complaint
                     </label>
                   </div>
                   <div class="form-check-inline">
                     <label class="form-check-label" for="radio2">
-                      <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">NC/Reject
+                      <input type="radio" class="form-check-input" id="radio2" name="Analysistype1" value="option2" >NC/Reject
                     </label>
+                    <mat-radio-group color="warn">
+
+                      <mat-radio-button class="example-radio-button"  value="1" (click)="getdata(1)" >
+
+                          Testttttttttttt1
+
+                      </mat-radio-button>
+                      <mat-radio-button class="example-radio-button" value="2"  (click)="getdata(2)" >
+
+                        Testttttttttttt2
+
+                    </mat-radio-button>
+                    <mat-radio-button class="example-radio-button"value="3"  (click)="getdata(3)" >
+
+                      Testttttttttttt3
+
+                  </mat-radio-button>
+
+                  </mat-radio-group>
                   </div>
                   <div class="form-check-inline">
                     <label class="form-check-label" for="radio3">
-                      <input type="radio" class="form-check-input" id="radio3" name="optradio" value="option3">Defective
+                      <input type="radio" class="form-check-input" id="radio3" name="Analysistype1" value="option3">Defective
                     </label>
                   </div>
                   <div class="form-check-inline">
                     <label class="form-check-label" for="radio4">
-                      <input type="radio" class="form-check-input" id="radio4" name="optradio" value="option4">Material
+                      <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4">Material
                       evaluation
                     </label>
                   </div>
                   <div class="form-check-inline">
                     <label class="form-check-label" for="radio5">
-                      <input type="radio" class="form-check-input" id="radio5" name="optradio" value="option5">Process
+                      <input type="radio" class="form-check-input" id="radio5" name="Analysistype1" value="option5">Process
                       evaluation
                     </label>
                   </div>
                   <div class="form-check-inline">
                     <label class="form-check-label" for="radio6">
-                      <input type="radio" class="form-check-input" id="radio6" name="optradio" value="option6">Product
+                      <input type="radio" class="form-check-input" id="radio6" name="Analysistype1" value="option6">Product
                       evaluation
 
                     </label>
                   </div>
                   <div class="form-check-inline">
                     <label class="form-check-label" for="radio7">
-                      <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option7">RoHS
+                      <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7">RoHS
                       Spacial
                     </label>
                   </div>
@@ -100,7 +119,7 @@
                     <div class="col-sm-1 center" style="padding: 0 15px;">
                       <div class="form-check">
                         <label class="form-check-label" for="radio7">
-                          <input type="radio" class="form-check-input" id="radio7" name="optradio" value="option7">
+                          <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option8">
                         </label>
                       </div>
                     </div>
@@ -128,7 +147,7 @@
               </div>
               <mat-form-field appearance="outline">
                 <mat-label>Department</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="this.Department">
                   <mat-option value="MT300">MT300</mat-option>
                   <mat-option value="MT400">MT400</mat-option>
                   <mat-option value="MT500">MT500</mat-option>
@@ -409,7 +428,7 @@
             <div class="col-sm-3">
               <div class="form-group" style="margin-left: 10px; ">
                 <label for="Title"><b>Number of sample:</b></label>
-                <input type="Title" class="form-control inputNumSam" id="Title">
+                <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample" (keyup)="display()">
               </div>
             </div>
             <div class="col-sm-4">
@@ -436,7 +455,7 @@
               </mat-form-field>
               <div class="form-group" style="margin-left: 10px; ">
                 <label for="Title"><b>Reason:</b></label>
-                <input type="Title" class="form-control inputNumSam" id="Title">
+                <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason" (keyup)="display()">
               </div>
             </div>
           </div>
@@ -445,21 +464,21 @@
             <div class="col-sm-4">
               <div class="form-group input1">
                 <label for="Lotno"><b>Lot no.:</b></label>
-                <input type="Lotno" class="form-control" id="Lotno">
+                <input type="Lotno" class="form-control" id="Lotno" [(ngModel)]="this.Lotno" (keyup)="display()">
               </div>
               <button mat-flat-button class="ButtonaddLot"> + Add lot no. </button>
             </div>
             <div class="col-sm-5">
               <div class="form-group input1">
                 <label for="Samplename"><b>Sample name:</b></label>
-                <input type="Samplename" class="form-control" id="Samplename">
+                <input type="Samplename" class="form-control" id="Samplename" [(ngModel)]="this.Samplename" (keyup)="display()">
               </div>
               <button mat-flat-button class="Buttonaddsam"> + Add Sample </button>
             </div>
             <div class="col-sm-3">
               <div class="form-group input1">
                 <label for="Remarks"><b>Remarks:</b></label>
-                <input type="Remarks" class="form-control" id="Remarks">
+                <input type="Remarks" class="form-control" id="Remarks" [(ngModel)]="this.Remarks" (keyup)="display()">
               </div>
             </div>
 
@@ -473,7 +492,7 @@
         </mat-card-title-group>
         <mat-card-content>
           <div class="form-group input1">
-            <textarea class="form-control" rows="3" id="Background"></textarea>
+            <textarea class="form-control" rows="3" id="AnaComment" [(ngModel)]="this.AnaComment" (keyup)="display()"></textarea>
           </div>
         </mat-card-content>
       </mat-card>
@@ -690,7 +709,7 @@
         </mat-card-title-group>
         <mat-card-content>
           <div class=" container-fluid center" style=" background-color: #ffebcd; ">
-            <button mat-flat-button class="Buttonaddquetion"> + Add question </button>
+            <button mat-flat-button class="Buttonaddquetion" (click)= 'NavQuestion()'> + Add question </button>
           </div>
         </mat-card-content>
       </mat-card>
@@ -715,15 +734,15 @@
               <tr>
                 <th> Pending request</th>
                 <td>Issuer</td>
-                <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-white rounded"></td>
+                <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-white rounded" [(ngModel)]="this.NameIssuer" (keyup)="display()"></td>
                 <td></td>
-                <td><textarea rows="2" id="ComIssuer" class=" rounded"></textarea></td>
-                <td><input type="ccIssuer" id="ccIssuer" class="inputreview border-white rounded"></td>
+                <td><textarea rows="2" id="ComIssuer" class=" rounded" [(ngModel)]="this.ComIssuer" (keyup)="display()"></textarea></td>
+                <td><input type="ccIssuer" id="ccIssuer" class="inputreview border-white rounded" [(ngModel)]="this.ccIssuer" (keyup)="display()"></td>
               </tr>
               <tr>
                 <td></td>
                 <td>Confirm</td>
-                <td><input type="NameConfirm" id="NameConfirm" class="inputreview border-white rounded"></td>
+                <td><input type="NameConfirm" id="NameConfirm" class="inputreview border-white rounded" [(ngModel)]="this.NameConfirm" (keyup)="display()"></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -789,7 +808,7 @@
         </mat-card-content>
       </mat-card>
       <div class="center">
-        <button mat-raised-button color="primary">Issue</button>
+        <button mat-raised-button color="primary" (click)="display()">Issue</button>
       </div>
     </div>
 

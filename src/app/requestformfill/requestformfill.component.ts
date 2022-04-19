@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-requestformfill',
@@ -11,7 +12,7 @@ export class RequestformfillComponent implements OnInit {
   Background = ""
   Purpose =""
   Hypothesis=""
-  Analysistype=""
+  Analysistype = ""
   AnalysistypeOther=""
   IssueDate=""
   Requester=""
@@ -40,7 +41,7 @@ export class RequestformfillComponent implements OnInit {
   ccIssuer=""
   NameConfirm=""
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -53,5 +54,27 @@ export class RequestformfillComponent implements OnInit {
     console.log(this.Phone);
     console.log(this.AnalysistypeOther);
     console.log(this.RequestTechniquesOther);
+    console.log(this.Numsample);
+    console.log(this.Reason);
+    console.log(this.Lotno);
+    console.log(this.Samplename);
+    console.log(this.Remarks);
+    console.log(this.AnaComment);
+    console.log(this.NameIssuer);
+    console.log(this.ComIssuer);
+    console.log(this.ccIssuer);
+    console.log(this.NameConfirm);
+    console.log(this.Analysistype);
+    console.log(this.Department);
+    
+  }
+
+  NavQuestion(){
+    this.router.navigate(['/Question'])
+   }
+  getdata(value: any){
+    
+    this.Analysistype = value
+    console.log(this.Analysistype);
   }
 }

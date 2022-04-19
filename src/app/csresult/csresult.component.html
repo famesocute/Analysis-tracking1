@@ -1,1 +1,65 @@
-<input [(ngModel)]="this.input"> <button mat-menu-item (click)="Test()"> sss </button>
+<label><b>10.ในการทำกิจกรรม QCC ครั้งต่อไปท่านอยากให้ทาง Q00 และคณะกรรมการ QCC มีการทำกิจกรรมอะไร
+
+    เพื่อสนับสนุนการทำกิจกรรม QCC ของท่านให้ประสบความสำเร็จ</b></label>
+
+<mat-hint align="end">(สามารถเลือกได้มากกว่า 1 ข้อ)</mat-hint>
+
+<section class="example-choice">
+
+    <mat-checkbox *ngFor="let Q_10 of Q_10; let i = index" [(ngModel)]="Q_10.check" color="warn" (ngModelChange)="AnsMany()">
+        <span class="wrap-mat-radio-label text-center">
+
+            {{ Q_10.data }}
+
+        </span>
+    </mat-checkbox>
+
+    <mat-checkbox color="warn" [(ngModel)]="other" (ngModelChange)="AnsMany()">
+
+        <mat-form-field>
+
+            <mat-label>Other</mat-label>
+
+            <input matInput [(ngModel)]="comment">
+
+        </mat-form-field>
+
+    </mat-checkbox>
+
+
+
+</section>
+<br>
+<section class="example-choice">
+
+    <mat-checkbox  [(ngModel)]="Q_10[0].check" color="warn" (ngModelChange)="AnsMany()">
+        <span class="wrap-mat-radio-label text-center">
+
+            {{ Q_10[0].data }}
+
+        </span>
+    </mat-checkbox>
+    <mat-checkbox  [(ngModel)]="Q_10[1].check" color="warn" (ngModelChange)="AnsMany()">
+        <span class="wrap-mat-radio-label text-center">
+
+            {{ Q_10[1].data }}
+
+        </span>
+    </mat-checkbox>
+
+    <mat-checkbox color="warn" [(ngModel)]="other" (ngModelChange)="AnsMany()">
+
+        <mat-form-field>
+
+            <mat-label>Other</mat-label>
+
+            <input matInput [(ngModel)]="comment">
+
+        </mat-form-field>
+
+    </mat-checkbox>
+
+
+
+</section>
+<br>
