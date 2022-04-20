@@ -33,106 +33,101 @@
             <div class="col-sm-7">
               <div class="form-group input1">
                 <label for="Title"><b>Title:</b></label>
-                <input type="Title" class="form-control" id="Title" [(ngModel)]="this.Title" (keyup)="display()">
+                <input type="Title" class="form-control" id="Title" [(ngModel)]="this.Title">
               </div>
               <div class="form-group input1">
                 <label for="Background"><b>Background:</b></label>
-                <textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.Background"
-                  (keyup)="display()"> </textarea>
+                <textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.Background"> </textarea>
               </div>
               <div class="form-group input1">
                 <label for="Purpose"><b>Purpose:</b></label>
-                <textarea class="form-control" rows="3" id="Purpose" [(ngModel)]="this.Purpose"
-                  (keyup)="display()"></textarea>
+                <textarea class="form-control" rows="3" id="Purpose" [(ngModel)]="this.Purpose"></textarea>
               </div>
               <div class="form-group input1">
                 <label for="Hypothesis"><b>Hypothesis:</b></label>
-                <textarea class="form-control" rows="3" id="Hypothesis" [(ngModel)]="this.Hypothesis"
-                  (keyup)="display()"></textarea>
+                <textarea class="form-control" rows="3" id="Hypothesis" [(ngModel)]="this.Hypothesis"></textarea>
               </div>
-              <div class="row">
-                <div class="col-sm-3 ">
-                  <label for="comment" class="font-weight-bold"><b> Analysis type : </b></label>
-                </div>
-                <div class="col-sm-9">
-                  <div class="form-check-inline">
-                    <label class="form-check-label" for="radio1">
-                      <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1">Customer
-                      complaint
-                    </label>
-                  </div>
-                  <div class="form-check-inline">
-                    <label class="form-check-label" for="radio2">
-                      <input type="radio" class="form-check-input" id="radio2" name="Analysistype1" value="option2" >NC/Reject
-                    </label>
-                    <mat-radio-group color="warn">
-
-                      <mat-radio-button class="example-radio-button"  value="1" (click)="getdata(1)" >
-
-                          Testttttttttttt1
-
-                      </mat-radio-button>
-                      <mat-radio-button class="example-radio-button" value="2"  (click)="getdata(2)" >
-
-                        Testttttttttttt2
-
-                    </mat-radio-button>
-                    <mat-radio-button class="example-radio-button"value="3"  (click)="getdata(3)" >
-
-                      Testttttttttttt3
-
-                  </mat-radio-button>
-
-                  </mat-radio-group>
-                  </div>
-                  <div class="form-check-inline">
-                    <label class="form-check-label" for="radio3">
-                      <input type="radio" class="form-check-input" id="radio3" name="Analysistype1" value="option3">Defective
-                    </label>
-                  </div>
-                  <div class="form-check-inline">
-                    <label class="form-check-label" for="radio4">
-                      <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4">Material
-                      evaluation
-                    </label>
-                  </div>
-                  <div class="form-check-inline">
-                    <label class="form-check-label" for="radio5">
-                      <input type="radio" class="form-check-input" id="radio5" name="Analysistype1" value="option5">Process
-                      evaluation
-                    </label>
-                  </div>
-                  <div class="form-check-inline">
-                    <label class="form-check-label" for="radio6">
-                      <input type="radio" class="form-check-input" id="radio6" name="Analysistype1" value="option6">Product
-                      evaluation
-
-                    </label>
-                  </div>
-                  <div class="form-check-inline">
-                    <label class="form-check-label" for="radio7">
-                      <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7">RoHS
-                      Spacial
-                    </label>
-                  </div>
+              
+                  <label for="comment" class="font-weight-bold"><b> Analysis type</b></label>
                   <div class="row">
-                    <div class="col-sm-1 center" style="padding: 0 15px;">
-                      <div class="form-check">
-                        <label class="form-check-label" for="radio7">
-                          <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option8">
+                    <div class="col-sm-2">RankA :</div>
+                    <div class="col-sm-10">
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio1">
+                          <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1"
+                            (click)="getdata('Customercomplaint')">Customer complaint
                         </label>
                       </div>
                     </div>
-                    <div class="col-sm-11">
-                      <div class="input3">
-                        <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.AnalysistypeOther" (keyup)="display()" >
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-2">RankB :</div>
+                    <div class="col-sm-10">
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio2">
+                          <input type="radio" class="form-check-input" id="radio2" name="Analysistype1" value="option2"
+                            (click)="getdata('NC/Reject')">NC/Reject
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio3">
+                          <input type="radio" class="form-check-input" id="radio3" name="Analysistype1" value="option3"
+                            (click)="getdata('Defective')">Defective
+                        </label>
                       </div>
                     </div>
                   </div>
-
-                </div>
-              </div>
-            </div>
+                  <div class="row">
+                    <div class="col-sm-2">RankC :</div>
+                    <div class="col-sm-10">
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio4">
+                          <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4"
+                            (click)="getdata('Materialevaluation')">Material evaluation
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio5">
+                          <input type="radio" class="form-check-input" id="radio5" name="Analysistype1" value="option5"
+                            (click)="getdata('Processevaluation')">Process evaluation
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio6">
+                          <input type="radio" class="form-check-input" id="radio6" name="Analysistype1" value="option6"
+                            (click)="getdata('Productevaluation')">Product evaluation
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-2">RankD :</div>
+                    <div class="col-sm-10">
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio7">
+                          <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7"
+                            (click)="getdata('RoHS')">RoHS Spacial
+                        </label>
+                      </div>
+                      <div class="col-sm-5">
+                        <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option8"
+                          (click)="activate = true">
+                        <label class="form-check-label" for="radio7"> Other analysis type </label>
+                      </div>
+                      <div class="col-sm-7">
+                        <div *ngIf="activate">
+                          <div class="input3">
+                            <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Analysistype"
+                              (keyup)="display()">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 
+                    
+                 
+                </div>              
             <div class="col-sm-5">
               <h4 style=" margin-top:30px "><b>Issue Date:</b> 1 April 2022</h4>
               <h4> <b>Requester: Pichayapak </b></h4>
@@ -141,24 +136,26 @@
                   <p class="centercolumn"><b>Phone:</b></p>
                 </div>
                 <div class="input2 col-sm-10">
-                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Phone"
-                    (keyup)="display()">
+                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Phone">
                 </div>
               </div>
               <mat-form-field appearance="outline">
                 <mat-label>Department</mat-label>
                 <mat-select [(ngModel)]="this.Department">
+                  <mat-option value="MT100">MT100</mat-option>
                   <mat-option value="MT300">MT300</mat-option>
                   <mat-option value="MT400">MT400</mat-option>
                   <mat-option value="MT500">MT500</mat-option>
                   <mat-option value="MT600">MT600</mat-option>
                   <mat-option value="MT700">MT700</mat-option>
+                  <mat-option value="MT800">MT800</mat-option>
+                  <mat-option value="MT900">MT900</mat-option>
                 </mat-select>
               </mat-form-field>
 
               <mat-form-field appearance="outline">
                 <mat-label>Product</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="this.Product">
                   <mat-option value="MLCC">MLCC</mat-option>
                   <mat-option value="BLM">BLM</mat-option>
                   <mat-option value="MAWTR">MAWTR</mat-option>
@@ -218,13 +215,15 @@
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[0].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       X-ray 2D
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                      [(ngModel)]="Tech[1].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckChecked">
                       X-ray 3D
                     </label>
@@ -232,13 +231,15 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[2].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       SEM-Microscope
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                      [(ngModel)]="Tech[3].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckChecked">
                       Cross section
                     </label>
@@ -246,13 +247,15 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[4].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       Ion-milling
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                      [(ngModel)]="Tech[5].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckChecked">
                       VHX
                     </label>
@@ -260,7 +263,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[6].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       Metallurgical Microscope
                     </label>
@@ -279,13 +283,15 @@
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[7].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       SEM-EDX
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                      [(ngModel)]="Tech[8].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckChecked">
                       SEM-Mapping
                     </label>
@@ -293,7 +299,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[9].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       EDXRF
                     </label>
@@ -301,7 +308,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[10].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       CS Analyzer
                     </label>
@@ -309,7 +317,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[11].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       ICP
                     </label>
@@ -327,7 +336,8 @@
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[12].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       FTIR
                     </label>
@@ -335,7 +345,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[13].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       GCMS
                     </label>
@@ -353,7 +364,8 @@
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[14].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       DSC
                     </label>
@@ -361,7 +373,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[15].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       TG-DTA
                     </label>
@@ -379,7 +392,8 @@
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[16].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       Solder wettability
                     </label>
@@ -387,7 +401,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[17].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       Micro-probe
                     </label>
@@ -395,7 +410,8 @@
                 </div>
                 <div class="col-sm-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                      [(ngModel)]="Tech[18].check" (ngModelChange)="AnsMany()">
                     <label class="form-check-label" for="flexCheckDefault">
                       Dust monitering
                     </label>
@@ -411,7 +427,7 @@
                   <p class="centercolumn">Other:</p>
                 </div>
                 <div class="input2 col-sm-11">
-                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.RequestTechniquesOther" (keyup)="display()" > 
+                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="other" >
                 </div>
               </div>
             </div>
@@ -428,34 +444,34 @@
             <div class="col-sm-3">
               <div class="form-group" style="margin-left: 10px; ">
                 <label for="Title"><b>Number of sample:</b></label>
-                <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample" (keyup)="display()">
+                <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample">
               </div>
             </div>
             <div class="col-sm-4">
-              <mat-form-field appearance="outline">
+              <mat-form-field color="accent" appearance="outline">
                 <mat-label>Send sample date:</mat-label>
-                <input matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Piority:</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="this.Piority">
                   <mat-option value="Urgent">Urgent</mat-option>
                   <mat-option value="Normal">Normal</mat-option>
                 </mat-select>
               </mat-form-field>
             </div>
             <div class="col-sm-5">
-              <mat-form-field appearance="outline">
-                <mat-label>Expected finish date: </mat-label>
-                <input matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+              <mat-form-field color="accent" appearance="outline">
+                <mat-label>Expected finish date:</mat-label>
+                <input matInput [matDatepicker]="picker2" [(ngModel)]="this.EepectedDate">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 color="primary"></mat-datepicker>
               </mat-form-field>
               <div class="form-group" style="margin-left: 10px; ">
                 <label for="Title"><b>Reason:</b></label>
-                <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason" (keyup)="display()">
+                <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason">
               </div>
             </div>
           </div>
@@ -464,21 +480,21 @@
             <div class="col-sm-4">
               <div class="form-group input1">
                 <label for="Lotno"><b>Lot no.:</b></label>
-                <input type="Lotno" class="form-control" id="Lotno" [(ngModel)]="this.Lotno" (keyup)="display()">
+                <input type="Lotno" class="form-control" id="Lotno" [(ngModel)]="this.Lotno">
               </div>
               <button mat-flat-button class="ButtonaddLot"> + Add lot no. </button>
             </div>
             <div class="col-sm-5">
               <div class="form-group input1">
                 <label for="Samplename"><b>Sample name:</b></label>
-                <input type="Samplename" class="form-control" id="Samplename" [(ngModel)]="this.Samplename" (keyup)="display()">
+                <input type="Samplename" class="form-control" id="Samplename" [(ngModel)]="this.Samplename">
               </div>
               <button mat-flat-button class="Buttonaddsam"> + Add Sample </button>
             </div>
             <div class="col-sm-3">
               <div class="form-group input1">
                 <label for="Remarks"><b>Remarks:</b></label>
-                <input type="Remarks" class="form-control" id="Remarks" [(ngModel)]="this.Remarks" (keyup)="display()">
+                <input type="Remarks" class="form-control" id="Remarks" [(ngModel)]="this.Remarks">
               </div>
             </div>
 
@@ -492,7 +508,7 @@
         </mat-card-title-group>
         <mat-card-content>
           <div class="form-group input1">
-            <textarea class="form-control" rows="3" id="AnaComment" [(ngModel)]="this.AnaComment" (keyup)="display()"></textarea>
+            <textarea class="form-control" rows="3" id="AnaComment" [(ngModel)]="this.AnaComment"></textarea>
           </div>
         </mat-card-content>
       </mat-card>
@@ -505,52 +521,57 @@
           <!-- Dangerous -->
           <div class=" col-sm-12 ">
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio1">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio2" value="option1">Dangerous
+              <label class="form-check-label textbig" for="radio1">
+                <input type="radio" class="form-check-input" id="radio1" name="optradio2" value="option1"
+                  (click)="getdatadan('Dangerous')"> Dangerous
               </label>
             </div>
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio2">
-                <input type="radio" class="form-check-input" id="radio2" name="optradio2" value="option2">Poisonous
+              <label class="form-check-label textbig" for="radio2">
+                <input type="radio" class="form-check-input" id="radio2" name="optradio2" value="option2"
+                  (click)="getdatadan('Poisonous')"> Poisonous
               </label>
             </div>
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio3">
-                <input type="radio" class="form-check-input" id="radio3" name="optradio2" value="option3">Deleterious
+              <label class="form-check-label textbig" for="radio3">
+                <input type="radio" class="form-check-input" id="radio3" name="optradio2" value="option3"
+                  (click)="getdatadan('Deleterious')"> Deleterious
               </label>
             </div>
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4">Heavy metal
+              <label class="form-check-label textbig" for="radio4">
+                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+                  (click)="getdatadan('Heavy metal')"> Heavy metal 
               </label>
             </div>
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4">ESD
+              <label class="form-check-label textbig" for="radio4">
+                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+                  (click)="getdatadan('ESD')"> ESD
               </label>
             </div>
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4">No
+              <label class="form-check-label textbig" for="radio4">
+                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+                  (click)="getdatadan('No')"> No
               </label>
             </div>
           </div>
           <!-- Sample after tested -->
           <div class=" col-sm-12">
-            <label for="comment" class="font-weight-bold" style=" margin-right: 10px"><b> Sample after tested:
+            <label for="comment" class="font-weight-bold textbig" style=" margin-right: 10px"><b> Sample after tested:
               </b></label>
 
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio1">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio3" value="option1"> Dispose
-                sample
+              <label class="form-check-label textbig" for="radio1">
+                <input type="radio" class="form-check-input" id="radio1" name="optradio3" value="option1"
+                  (click)="getdataSamAf('Dispose sample')"> Dispose sample
               </label>
             </div>
             <div class="form-check-inline">
-              <label class="form-check-label" for="radio2">
-                <input type="radio" class="form-check-input" id="radio2" name="optradio3" value="option2">Return
-                Residual
-                Sample
+              <label class="form-check-label textbig" for="radio2">
+                <input type="radio" class="form-check-input" id="radio2" name="optradio3" value="option2"
+                  (click)="getdataSamAf('ReturnResidualSample')">Return Residual Sample
               </label>
             </div>
           </div>
@@ -617,7 +638,7 @@
             <div class="col-sm-4">
               <mat-form-field appearance="outline">
                 <mat-label>Characteristic:</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="KeywordCharact">
                   <mat-option value="Adhesive">Adhesive</mat-option>
                   <mat-option value="Binder">Binder</mat-option>
                   <mat-option value="Detergent">Detergent</mat-option>
@@ -650,7 +671,7 @@
             <div class="col-sm-4">
               <mat-form-field appearance="outline">
                 <mat-label>State:</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="KeywordState">
                   <mat-option value="Boundary">Boundary</mat-option>
                   <mat-option value="Chip">Chip</mat-option>
                   <mat-option value="Film">Film</mat-option>
@@ -673,7 +694,7 @@
             <div class="col-sm-4">
               <mat-form-field appearance="outline">
                 <mat-label>Phenomena:</mat-label>
-                <mat-select>
+                <mat-select [(ngModel)]="KeywordPheno">
                   <mat-option value="Discolor">Discolor</mat-option>
                   <mat-option value="Change in form">Change in form</mat-option>
                   <mat-option value="Chemical state">Chemical state</mat-option>
@@ -709,7 +730,7 @@
         </mat-card-title-group>
         <mat-card-content>
           <div class=" container-fluid center" style=" background-color: #ffebcd; ">
-            <button mat-flat-button class="Buttonaddquetion" (click)= 'NavQuestion()'> + Add question </button>
+            <button mat-flat-button class="Buttonaddquetion" (click)='NavQuestion()'> + Add question </button>
           </div>
         </mat-card-content>
       </mat-card>
@@ -734,15 +755,18 @@
               <tr>
                 <th> Pending request</th>
                 <td>Issuer</td>
-                <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-white rounded" [(ngModel)]="this.NameIssuer" (keyup)="display()"></td>
+                <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-white rounded"
+                    [(ngModel)]="this.NameIssuer"></td>
                 <td></td>
-                <td><textarea rows="2" id="ComIssuer" class=" rounded" [(ngModel)]="this.ComIssuer" (keyup)="display()"></textarea></td>
-                <td><input type="ccIssuer" id="ccIssuer" class="inputreview border-white rounded" [(ngModel)]="this.ccIssuer" (keyup)="display()"></td>
+                <td><textarea rows="2" id="ComIssuer" class=" rounded" [(ngModel)]="this.ComIssuer"></textarea></td>
+                <td><input type="ccIssuer" id="ccIssuer" class="inputreview border-white rounded"
+                    [(ngModel)]="this.ccIssuer"></td>
               </tr>
               <tr>
                 <td></td>
                 <td>Confirm</td>
-                <td><input type="NameConfirm" id="NameConfirm" class="inputreview border-white rounded" [(ngModel)]="this.NameConfirm" (keyup)="display()"></td>
+                <td><input type="NameConfirm" id="NameConfirm" class="inputreview border-white rounded"
+                    [(ngModel)]="this.NameConfirm"></td>
                 <td></td>
                 <td></td>
                 <td></td>
