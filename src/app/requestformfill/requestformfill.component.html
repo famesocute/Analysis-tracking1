@@ -30,7 +30,7 @@
         </mat-card-title-group>
         <mat-card-content>
           <div class="row">
-            <div class="col-sm-7">
+            <div class="col-sm-8">
               <div class="form-group input1">
                 <label for="Title"><b>Title:</b></label>
                 <input type="Title" class="form-control" id="Title" [(ngModel)]="this.Title">
@@ -49,9 +49,10 @@
               </div>
               
                   <label for="comment" class="font-weight-bold"><b> Analysis type</b></label>
+                 <div style=" padding: 10px; ">
                   <div class="row">
-                    <div class="col-sm-2">RankA :</div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-1">RankA:</div>
+                    <div class="col-sm-11">
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio1">
                           <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1"
@@ -61,8 +62,8 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-2">RankB :</div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-1">RankB:</div>
+                    <div class="col-sm-11">
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio2">
                           <input type="radio" class="form-check-input" id="radio2" name="Analysistype1" value="option2"
@@ -78,8 +79,8 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-2">RankC :</div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-1">RankC:</div>
+                    <div class="col-sm-11">
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio4">
                           <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4"
@@ -101,8 +102,8 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-2">RankD :</div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-1">RankD:</div>
+                    <div class="col-sm-11">
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio7">
                           <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7"
@@ -124,13 +125,30 @@
                       </div>
                     </div>
                   </div>
-                 
+                </div>
                     
                  
                 </div>              
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <h4 style=" margin-top:30px "><b>Issue Date:</b> 1 April 2022</h4>
-              <h4> <b>Requester: Pichayapak </b></h4>
+              <form class="example-form">
+                <mat-form-field class="example-full-width " appearance="outline">
+                  <mat-label>Requester</mat-label>
+                  <input type="text"
+                         placeholder="Pick one"
+                         aria-label="Name"
+                         matInput
+                         [formControl]="myControl"
+                         [matAutocomplete]="auto"
+                         [(ngModel)]="this.Requester">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+              
               <div class="row">
                 <div class=" col-sm-2">
                   <p class="centercolumn"><b>Phone:</b></p>
@@ -150,6 +168,7 @@
                   <mat-option value="MT700">MT700</mat-option>
                   <mat-option value="MT800">MT800</mat-option>
                   <mat-option value="MT900">MT900</mat-option>
+                  <mat-option value="SGA">SGA</mat-option>
                 </mat-select>
               </mat-form-field>
 
@@ -208,10 +227,10 @@
         <mat-card-content>
           <!-- Structure select -->
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
               <label for="comment" class="font-weight-bold"> <b>Structure analysis : </b></label>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-10">
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
@@ -276,10 +295,10 @@
           </div>
           <!-- Composition select -->
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
               <label for="comment" class="font-weight-bold"><b> Composition analysis : </b></label>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-10">
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
@@ -329,10 +348,10 @@
           </div>
           <!-- Organic select -->
           <div class="row">
-            <div class="col-sm-3 ">
+            <div class="col-sm-2 ">
               <label for="comment" class="font-weight-bold"><b> Organic analysis : </b></label>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-10">
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
@@ -357,10 +376,10 @@
           </div>
           <!-- Thermal select -->
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
               <label for="comment" class="font-weight-bold"><b> Thermal analysis : </b></label>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-10">
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
@@ -385,10 +404,10 @@
           </div>
           <!-- Other select -->
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-2">
               <label for="comment" class="font-weight-bold"><b> Other analysis : </b></label>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-10">
               <div class="row">
                 <div class="col-sm-3">
                   <div class="form-check">
@@ -441,13 +460,16 @@
         </mat-card-title-group>
         <mat-card-content>
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
+              <div class="centerbox">
               <div class="form-group" style="margin-left: 10px; ">
                 <label for="Title"><b>Number of sample:</b></label>
                 <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample">
               </div>
             </div>
+            </div>
             <div class="col-sm-4">
+             
               <mat-form-field color="accent" appearance="outline">
                 <mat-label>Send sample date:</mat-label>
                 <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
@@ -461,8 +483,9 @@
                   <mat-option value="Normal">Normal</mat-option>
                 </mat-select>
               </mat-form-field>
+         
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <mat-form-field color="accent" appearance="outline">
                 <mat-label>Expected finish date:</mat-label>
                 <input matInput [matDatepicker]="picker2" [(ngModel)]="this.EepectedDate">
@@ -729,6 +752,26 @@
           <mat-card-title>Question and Answer form</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="200px" >Question no.1  </th>
+                <th width="600px" >Title</th>
+                <th width="200px" >Issued Date</th>
+                <th width="200px" >Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Question no.1 </td>
+                <td>Confirm purpose  </td>
+                <td> <button mat-raised-button color="primary" >Read</button></td>
+                <td>Anwser already</td>
+              
+              </tr>
+             
+            </tbody>
+          </table>
           <div class=" container-fluid center" style=" background-color: #ffebcd; ">
             <button mat-flat-button class="Buttonaddquetion" (click)='NavQuestion()'> + Add question </button>
           </div>
@@ -740,7 +783,8 @@
           <mat-card-title>Review Information</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
-          <table class="table ">
+         
+          <table class="table tablestyle border">
             <thead>
               <tr>
                 <th class="Titlereview">Task</th>
@@ -755,18 +799,76 @@
               <tr>
                 <th> Pending request</th>
                 <td>Issuer</td>
-                <td><input type="NameIssuer" id="NameIssuer" class="inputreview border-white rounded"
-                    [(ngModel)]="this.NameIssuer"></td>
+                <td>
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Select Name</mat-label>
+                      <input type="text"
+                             placeholder="Pick one"
+                             aria-label="Name"
+                             matInput
+                             [formControl]="myControl"
+                             [matAutocomplete]="auto"
+                             [(ngModel)]="this.NameIssuer">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
                 <td></td>
-                <td><textarea rows="2" id="ComIssuer" class=" rounded" [(ngModel)]="this.ComIssuer"></textarea></td>
-                <td><input type="ccIssuer" id="ccIssuer" class="inputreview border-white rounded"
-                    [(ngModel)]="this.ccIssuer"></td>
+                <td>
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Leave a comment</mat-label>
+                      <textarea matInput placeholder="..." [(ngModel)]="this.ComIssuer" ></textarea>
+                    </mat-form-field>
+                  </form>
+                 
+                </td>
+                <td>
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width " appearance="outline">
+                      <mat-label>Select Name</mat-label>
+                      <input type="text"
+                             placeholder="Pick one"
+                             aria-label="Name"
+                             matInput
+                             [formControl]="myControl"
+                             [matAutocomplete]="auto"
+                             [(ngModel)]="this.ccIssuer">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                  
               </tr>
               <tr>
                 <td></td>
                 <td>Confirm</td>
-                <td><input type="NameConfirm" id="NameConfirm" class="inputreview border-white rounded"
-                    [(ngModel)]="this.NameConfirm"></td>
+                <td>
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Select Name</mat-label>
+                      <input type="text"
+                             placeholder="Pick one"
+                             aria-label="Name"
+                             matInput
+                             [formControl]="myControl"
+                             [matAutocomplete]="auto"
+                             [(ngModel)]="this.NameConfirm">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                 
                 <td></td>
                 <td></td>
                 <td></td>
@@ -829,6 +931,7 @@
               </tr>
             </tbody>
           </table>
+       
         </mat-card-content>
       </mat-card>
       <div class="center">
@@ -842,3 +945,4 @@
     </div>
   </div>
 </div>
+

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 @Component({
   selector: 'app-requestformfill',
@@ -7,6 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./requestformfill.component.scss']
 })
 export class RequestformfillComponent implements OnInit {
+  
+
+  myControl = new FormControl();
+  options: string[] = [
+    'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>', 
+    'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>' ];
+  filteredOptions!: Observable<string[]>;
 
   Title = ""
   Background = ""
@@ -39,6 +49,7 @@ export class RequestformfillComponent implements OnInit {
   ccIssuer=""
   NameConfirm=""
  
+  
 
   activate : boolean = false
 
@@ -74,16 +85,29 @@ export class RequestformfillComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
   }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  
+
+
   display(){
-    this.RequestTech = this.RequestTech + this.other
+    // this.RequestTech = this.RequestTech + this.other
     console.log(this.Title);
     console.log(this.Background);
     console.log(this.Purpose);
     console.log(this.Hypothesis);
     console.log(this.Analysistype);
     console.log(this.Phone);
+    console.log(this.Requester);
     console.log(this.Department);
     console.log(this.Product);
     console.log(this.RequestTech);
@@ -138,7 +162,7 @@ export class RequestformfillComponent implements OnInit {
       }
     }
   }
-  AnsOther() {
-    this.RequestTech = this.RequestTech + this.other
-  }
+  // AnsOther() {
+  //   this.RequestTech = this.RequestTech + this.other
+  // }
 }

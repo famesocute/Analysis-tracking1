@@ -1,65 +1,42 @@
-<label><b>10.ในการทำกิจกรรม QCC ครั้งต่อไปท่านอยากให้ทาง Q00 และคณะกรรมการ QCC มีการทำกิจกรรมอะไร
+<div class="container">  
+      
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">  
 
-    เพื่อสนับสนุนการทำกิจกรรม QCC ของท่านให้ประสบความสำเร็จ</b></label>
-
-<mat-hint align="end">(สามารถเลือกได้มากกว่า 1 ข้อ)</mat-hint>
-
-<section class="example-choice">
-
-    <mat-checkbox *ngFor="let Q_10 of Q_10; let i = index" [(ngModel)]="Q_10.check" color="warn" (ngModelChange)="AnsMany()">
-        <span class="wrap-mat-radio-label text-center">
-
-            {{ Q_10.data }}
-
-        </span>
-    </mat-checkbox>
-
-    <mat-checkbox color="warn" [(ngModel)]="other" (ngModelChange)="AnsMany()">
-
-        <mat-form-field>
-
-            <mat-label>Other</mat-label>
-
-            <input matInput [(ngModel)]="comment">
-
-        </mat-form-field>
-
-    </mat-checkbox>
-
-
-
-</section>
-<br>
-<section class="example-choice">
-
-    <mat-checkbox  [(ngModel)]="Q_10[0].check" color="warn" (ngModelChange)="AnsMany()">
-        <span class="wrap-mat-radio-label text-center">
-
-            {{ Q_10[0].data }}
-
-        </span>
-    </mat-checkbox>
-    <mat-checkbox  [(ngModel)]="Q_10[1].check" color="warn" (ngModelChange)="AnsMany()">
-        <span class="wrap-mat-radio-label text-center">
-
-            {{ Q_10[1].data }}
-
-        </span>
-    </mat-checkbox>
-
-    <mat-checkbox color="warn" [(ngModel)]="other" (ngModelChange)="AnsMany()">
-
-        <mat-form-field>
-
-            <mat-label>Other</mat-label>
-
-            <input matInput [(ngModel)]="comment">
-
-        </mat-form-field>
-
-    </mat-checkbox>
-
-
-
-</section>
-<br>
+      <table  formArrayName="quantities">  
+        <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i"> 
+            <td>  
+                <div class="form-group input1" style="padding: 0 20px ;">
+                    <label for="Lotno"><b>Lot no:</b></label>
+                    <input type="text" class="form-control" id="Lotno" formControlName="Lotno" >
+                  </div> 
+              </td> 
+          <td>  
+            <div class="form-group input1" style="padding: 0 20px ;">
+                <label for="Lotno"><b>Sample name:</b></label>
+                <input type="text" class="form-control" id="Lotno" formControlName="Samplename" >
+              </div>
+             
+          </td>  
+          <td>  
+            <div class="form-group input1" style="padding: 0 20px ;">
+                <label for="Samplename"><b>Remarks:</b></label>
+                <input type="Samplename" class="form-control" id="Samplename" formControlName="Remarks" >
+              </div>         
+          </td>  
+          <td style="padding-top: 20px">  
+              <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>  
+          </td>
+        </tr> 
+        <tr>
+          
+          <td>
+            <button mat-flat-button class="Buttonaddsam" (click)="addQuantity()"> + Add Sample </button>
+        </td> 
+        </tr> 
+      </table>      
+    </form>  
+        
+    <br/>  
+    <button mat-flat-button class="Buttonaddsam" (click)=" display() "> submit </button>
+    {{this.productForm.value | json}}  
+  </div>
