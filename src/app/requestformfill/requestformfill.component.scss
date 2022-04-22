@@ -1,8 +1,8 @@
-.example-spacer {
-    flex: 1 1 auto;
-  }
 .buttom1 {
     margin-left: 15px;
+}
+.button2{
+    border-radius: 15px;   
 }
 .ButtonaddLot{
     background: rgb(255, 185, 185);
@@ -63,7 +63,12 @@
 .tablestyle {
     padding: 10px;
     thead tr th { background-color: rgb(255, 185, 185); }
+    
 }
 .centerbox{
     padding-left: 20px; ;
 }
+thead tr th {
+    background-color: rgb(255, 185, 185);
+}
+  

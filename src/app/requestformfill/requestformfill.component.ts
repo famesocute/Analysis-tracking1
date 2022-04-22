@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms'  
 
 @Component({
   selector: 'app-requestformfill',
@@ -10,8 +11,8 @@ import {map, startWith} from 'rxjs/operators';
   styleUrls: ['./requestformfill.component.scss']
 })
 export class RequestformfillComponent implements OnInit {
-  
 
+   
   myControl = new FormControl();
   options: string[] = [
     'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>', 
@@ -48,9 +49,8 @@ export class RequestformfillComponent implements OnInit {
   ComIssuer=""
   ccIssuer=""
   NameConfirm=""
+  NameControl=""
  
-  
-
   activate : boolean = false
 
   Tech =
@@ -74,15 +74,16 @@ export class RequestformfillComponent implements OnInit {
   { data: 'Solder wettability', check: false },
   { data: 'Micro-probe', check: false },
   { data: 'Dust monitering', check: false },
-
-
   ];
 
-  other: any // check box other
+  productForm: FormGroup; 
 
-  comment = "" // ช่อง input other
-
-  constructor(public router: Router) { }
+  constructor(public router: Router,private fb:FormBuilder) {
+    this.productForm = this.fb.group({  
+   
+      quantities: this.fb.array([]) ,  
+    });  
+   }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -91,12 +92,70 @@ export class RequestformfillComponent implements OnInit {
     );
   }
 
+  // Add input
+  quantities() : FormArray {  
+    return this.productForm.get("quantities") as FormArray  
+  }  
+     
+  newQuantity(): FormGroup {  
+    return this.fb.group({  
+      Lotno: '',
+      Samplename: '',  
+      Remarks: '',  
+    })  
+  }  
+     
+  addQuantity() {  
+    this.quantities().push(this.newQuantity());  
+  }  
+     
+  removeQuantity(i:number) {  
+    this.quantities().removeAt(i);  
+  }   
+
+    // seach box
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
-  
+  // Navi to Question
+  NavQuestion(){
+    this.router.navigate(['/Question'])
+   }
+  //  Retio tool
+  getdata(value: any){
+    this.Analysistype = value  
+  }
+  getdatadan(value: any){
+    this.Dangerous = value  
+  }
+  getdataSamAf(value: any){
+    this.SamAftertest = value 
+  }
+
+  // check box
+
+  other: any // check box other
+  comment = "" // ช่อง input other
+  AnsMany() {
+    this.RequestTech = ""
+
+    // console.log(this.other, this.comment)
+
+    var i
+    var count = 0
+    
+    for (i in this.Tech) {
+      count = count + 1
+      if (this.Tech[i].check == true) {
+        this.RequestTech = this.RequestTech + this.Tech[i].data + ","
+      }
+    }
+  }
+  // AnsOther() {
+  //   this.RequestTech = this.RequestTech + this.other
+  // }
 
 
   display(){
@@ -116,9 +175,7 @@ export class RequestformfillComponent implements OnInit {
     console.log(this.EepectedDate);
     console.log(this.Piority);
     console.log(this.Reason);
-    console.log(this.Lotno);
-    console.log(this.Samplename);
-    console.log(this.Remarks);
+    console.log(this.productForm.value); 
     console.log(this.AnaComment);
     console.log(this.Dangerous);
     console.log(this.SamAftertest);
@@ -129,40 +186,8 @@ export class RequestformfillComponent implements OnInit {
     console.log(this.ComIssuer);
     console.log(this.ccIssuer);
     console.log(this.NameConfirm);
+    console.log(this.NameControl);
   }
 
-  NavQuestion(){
-    this.router.navigate(['/Question'])
-   }
-  getdata(value: any){
-    this.Analysistype = value
-    
-  }
-  getdatadan(value: any){
-    this.Dangerous = value
-    
-  }
-  getdataSamAf(value: any){
-    this.SamAftertest = value
-    
-  }
-
-  AnsMany() {
-    this.RequestTech = ""
-
-    // console.log(this.other, this.comment)
-
-    var i
-    var count = 0
-    
-    for (i in this.Tech) {
-      count = count + 1
-      if (this.Tech[i].check == true) {
-        this.RequestTech = this.RequestTech + this.Tech[i].data + ","
-      }
-    }
-  }
-  // AnsOther() {
-  //   this.RequestTech = this.RequestTech + this.other
-  // }
+  
 }

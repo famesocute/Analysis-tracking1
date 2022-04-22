@@ -47,100 +47,95 @@
                 <label for="Hypothesis"><b>Hypothesis:</b></label>
                 <textarea class="form-control" rows="3" id="Hypothesis" [(ngModel)]="this.Hypothesis"></textarea>
               </div>
-              
-                  <label for="comment" class="font-weight-bold"><b> Analysis type</b></label>
-                 <div style=" padding: 10px; ">
-                  <div class="row">
-                    <div class="col-sm-1">RankA:</div>
-                    <div class="col-sm-11">
-                      <div class="form-check-inline">
-                        <label class="form-check-label" for="radio1">
-                          <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1"
-                            (click)="getdata('Customercomplaint')">Customer complaint
-                        </label>
-                      </div>
+
+              <label for="comment" class="font-weight-bold"><b> Analysis type</b></label>
+              <div style=" padding: 10px; ">
+                <div class="row">
+                  <div class="col-sm-1">RankA:</div>
+                  <div class="col-sm-11">
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio1">
+                        <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1"
+                          (click)="getdata('Customercomplaint')">Customer complaint
+                      </label>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-sm-1">RankB:</div>
-                    <div class="col-sm-11">
-                      <div class="form-check-inline">
-                        <label class="form-check-label" for="radio2">
-                          <input type="radio" class="form-check-input" id="radio2" name="Analysistype1" value="option2"
-                            (click)="getdata('NC/Reject')">NC/Reject
-                        </label>
-                      </div>
-                      <div class="form-check-inline">
-                        <label class="form-check-label" for="radio3">
-                          <input type="radio" class="form-check-input" id="radio3" name="Analysistype1" value="option3"
-                            (click)="getdata('Defective')">Defective
-                        </label>
-                      </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-1">RankB:</div>
+                  <div class="col-sm-11">
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio2">
+                        <input type="radio" class="form-check-input" id="radio2" name="Analysistype1" value="option2"
+                          (click)="getdata('NC/Reject')">NC/Reject
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio3">
+                        <input type="radio" class="form-check-input" id="radio3" name="Analysistype1" value="option3"
+                          (click)="getdata('Defective')">Defective
+                      </label>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-sm-1">RankC:</div>
-                    <div class="col-sm-11">
-                      <div class="form-check-inline">
-                        <label class="form-check-label" for="radio4">
-                          <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4"
-                            (click)="getdata('Materialevaluation')">Material evaluation
-                        </label>
-                      </div>
-                      <div class="form-check-inline">
-                        <label class="form-check-label" for="radio5">
-                          <input type="radio" class="form-check-input" id="radio5" name="Analysistype1" value="option5"
-                            (click)="getdata('Processevaluation')">Process evaluation
-                        </label>
-                      </div>
-                      <div class="form-check-inline">
-                        <label class="form-check-label" for="radio6">
-                          <input type="radio" class="form-check-input" id="radio6" name="Analysistype1" value="option6"
-                            (click)="getdata('Productevaluation')">Product evaluation
-                        </label>
-                      </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-1">RankC:</div>
+                  <div class="col-sm-11">
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio4">
+                        <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4"
+                          (click)="getdata('Materialevaluation')">Material evaluation
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio5">
+                        <input type="radio" class="form-check-input" id="radio5" name="Analysistype1" value="option5"
+                          (click)="getdata('Processevaluation')">Process evaluation
+                      </label>
+                    </div>
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio6">
+                        <input type="radio" class="form-check-input" id="radio6" name="Analysistype1" value="option6"
+                          (click)="getdata('Productevaluation')">Product evaluation
+                      </label>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-sm-1">RankD:</div>
-                    <div class="col-sm-11">
-                      <div class="form-check-inline">
-                        <label class="form-check-label" for="radio7">
-                          <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7"
-                            (click)="getdata('RoHS')">RoHS Spacial
-                        </label>
-                      </div>
-                      <div class="col-sm-5">
-                        <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option8"
-                          (click)="activate = true">
-                        <label class="form-check-label" for="radio7"> Other analysis type </label>
-                      </div>
-                      <div class="col-sm-7">
-                        <div *ngIf="activate">
-                          <div class="input3">
-                            <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Analysistype"
-                              (keyup)="display()">
-                          </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-1">RankD:</div>
+                  <div class="col-sm-11">
+                    <div class="form-check-inline">
+                      <label class="form-check-label" for="radio7">
+                        <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7"
+                          (click)="getdata('RoHS')">RoHS Spacial
+                      </label>
+                    </div>
+                    <div class="col-sm-5">
+                      <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option8"
+                        (click)="activate = true">
+                      <label class="form-check-label" for="radio7"> Other analysis type </label>
+                    </div>
+                    <div class="col-sm-7">
+                      <div *ngIf="activate">
+                        <div class="input3">
+                          <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Analysistype"
+                            (keyup)="display()">
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                    
-                 
-                </div>              
+              </div>
+
+
+            </div>
             <div class="col-sm-4">
               <h4 style=" margin-top:30px "><b>Issue Date:</b> 1 April 2022</h4>
               <form class="example-form">
                 <mat-form-field class="example-full-width " appearance="outline">
                   <mat-label>Requester</mat-label>
-                  <input type="text"
-                         placeholder="Pick one"
-                         aria-label="Name"
-                         matInput
-                         [formControl]="myControl"
-                         [matAutocomplete]="auto"
-                         [(ngModel)]="this.Requester">
+                  <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto" [(ngModel)]="this.Requester">
                   <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                     <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                       {{option}}
@@ -148,7 +143,7 @@
                   </mat-autocomplete>
                 </mat-form-field>
               </form>
-              
+
               <div class="row">
                 <div class=" col-sm-2">
                   <p class="centercolumn"><b>Phone:</b></p>
@@ -446,7 +441,7 @@
                   <p class="centercolumn">Other:</p>
                 </div>
                 <div class="input2 col-sm-11">
-                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="other" >
+                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="other">
                 </div>
               </div>
             </div>
@@ -462,14 +457,14 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="centerbox">
-              <div class="form-group" style="margin-left: 10px; ">
-                <label for="Title"><b>Number of sample:</b></label>
-                <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample">
+                <div class="form-group" style="margin-left: 10px; ">
+                  <label for="Title"><b>Number of sample:</b></label>
+                  <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample">
+                </div>
               </div>
             </div>
-            </div>
             <div class="col-sm-4">
-             
+
               <mat-form-field color="accent" appearance="outline">
                 <mat-label>Send sample date:</mat-label>
                 <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
@@ -483,7 +478,7 @@
                   <mat-option value="Normal">Normal</mat-option>
                 </mat-select>
               </mat-form-field>
-         
+
             </div>
             <div class="col-sm-4">
               <mat-form-field color="accent" appearance="outline">
@@ -498,29 +493,45 @@
               </div>
             </div>
           </div>
+          <div class="container">
 
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="form-group input1">
-                <label for="Lotno"><b>Lot no.:</b></label>
-                <input type="Lotno" class="form-control" id="Lotno" [(ngModel)]="this.Lotno">
-              </div>
-              <button mat-flat-button class="ButtonaddLot"> + Add lot no. </button>
-            </div>
-            <div class="col-sm-5">
-              <div class="form-group input1">
-                <label for="Samplename"><b>Sample name:</b></label>
-                <input type="Samplename" class="form-control" id="Samplename" [(ngModel)]="this.Samplename">
-              </div>
-              <button mat-flat-button class="Buttonaddsam"> + Add Sample </button>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group input1">
-                <label for="Remarks"><b>Remarks:</b></label>
-                <input type="Remarks" class="form-control" id="Remarks" [(ngModel)]="this.Remarks">
-              </div>
-            </div>
+            <form [formGroup]="productForm">
 
+              <table formArrayName="quantities">
+                <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+                  <td>
+                    <div class="form-group input1" style="padding: 0 20px ;">
+                      <label for="Lotno"><b>Lot no:</b></label>
+                      <input type="text" class="form-control " id="Lotno" formControlName="Lotno">
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group input1" style="padding: 0 20px ;">
+                      <label for="Lotno"><b>Sample name:</b></label>
+                      <input type="text" class="form-control" id="Lotno" formControlName="Samplename">
+                    </div>
+
+                  </td>
+                  <td>
+                    <div class="form-group input1" style="padding: 0 20px ;">
+                      <label for="Samplename"><b>Remarks:</b></label>
+                      <input type="Samplename" class="form-control" id="Samplename" formControlName="Remarks">
+                    </div>
+                  </td>
+                  <td style="padding-top: 20px">
+                    <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td style="padding: 10px 30px">
+                    <button mat-flat-button class="Buttonaddsam" (click)="addQuantity()"> + Add Sample </button>
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </table>
+            </form>
           </div>
         </mat-card-content>
       </mat-card>
@@ -564,7 +575,7 @@
             <div class="form-check-inline">
               <label class="form-check-label textbig" for="radio4">
                 <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
-                  (click)="getdatadan('Heavy metal')"> Heavy metal 
+                  (click)="getdatadan('Heavy metal')"> Heavy metal
               </label>
             </div>
             <div class="form-check-inline">
@@ -752,28 +763,28 @@
           <mat-card-title>Question and Answer form</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th width="200px" >Question no.1  </th>
-                <th width="600px" >Title</th>
-                <th width="200px" >Issued Date</th>
-                <th width="200px" >Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Question no.1 </td>
-                <td>Confirm purpose  </td>
-                <td> <button mat-raised-button color="primary" >Read</button></td>
-                <td>Anwser already</td>
-              
-              </tr>
-             
-            </tbody>
-          </table>
-          <div class=" container-fluid center" style=" background-color: #ffebcd; ">
-            <button mat-flat-button class="Buttonaddquetion" (click)='NavQuestion()'> + Add question </button>
+          <div>
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th width="100px" class=" Titlereview">No.</th>
+                  <th width="300px">Title</th>
+                  <th width="100px"></th>
+                  <th width="100px" class=" Titlereview">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class=" Titlereview">Question no.1:</th>
+                  <td>Confirm purpose </td>
+                  <td class=" Titlereview"><button mat-raised-button color="primary" class="button2">Read</button></td>
+                  <td class=" Titlereview">Anwser already</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class=" container-fluid center" style=" background-color: #ffebcd; ">
+              <button mat-flat-button class="Buttonaddquetion" (click)="NavQuestion()"> + Add question </button>
+            </div>
           </div>
         </mat-card-content>
       </mat-card>
@@ -783,7 +794,7 @@
           <mat-card-title>Review Information</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
-         
+
           <table class="table tablestyle border">
             <thead>
               <tr>
@@ -803,13 +814,8 @@
                   <form class="example-form">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Select Name</mat-label>
-                      <input type="text"
-                             placeholder="Pick one"
-                             aria-label="Name"
-                             matInput
-                             [formControl]="myControl"
-                             [matAutocomplete]="auto"
-                             [(ngModel)]="this.NameIssuer">
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="this.NameIssuer">
                       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                           {{option}}
@@ -822,22 +828,17 @@
                   <form class="example-form">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Leave a comment</mat-label>
-                      <textarea matInput placeholder="..." [(ngModel)]="this.ComIssuer" ></textarea>
+                      <textarea matInput placeholder="..." [(ngModel)]="this.ComIssuer"></textarea>
                     </mat-form-field>
                   </form>
-                 
+
                 </td>
                 <td>
                   <form class="example-form">
                     <mat-form-field class="example-full-width " appearance="outline">
                       <mat-label>Select Name</mat-label>
-                      <input type="text"
-                             placeholder="Pick one"
-                             aria-label="Name"
-                             matInput
-                             [formControl]="myControl"
-                             [matAutocomplete]="auto"
-                             [(ngModel)]="this.ccIssuer">
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="this.ccIssuer">
                       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                           {{option}}
@@ -845,7 +846,7 @@
                       </mat-autocomplete>
                     </mat-form-field>
                   </form>
-                  
+
               </tr>
               <tr>
                 <td></td>
@@ -854,13 +855,8 @@
                   <form class="example-form">
                     <mat-form-field class="example-full-width" appearance="outline">
                       <mat-label>Select Name</mat-label>
-                      <input type="text"
-                             placeholder="Pick one"
-                             aria-label="Name"
-                             matInput
-                             [formControl]="myControl"
-                             [matAutocomplete]="auto"
-                             [(ngModel)]="this.NameConfirm">
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="this.NameConfirm">
                       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                           {{option}}
@@ -868,7 +864,7 @@
                       </mat-autocomplete>
                     </mat-form-field>
                   </form>
-                 
+
                 <td></td>
                 <td></td>
                 <td></td>
@@ -876,7 +872,18 @@
               <tr>
                 <th>Analysis section</th>
                 <td>Controller</td>
-                <td></td>
+                <td><form class="example-form">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.NameControl">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -931,7 +938,7 @@
               </tr>
             </tbody>
           </table>
-       
+
         </mat-card-content>
       </mat-card>
       <div class="center">
@@ -945,4 +952,3 @@
     </div>
   </div>
 </div>
-

@@ -16,6 +16,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ReactiveFormsModule} from '@angular/forms';
+import {MatTreeModule} from '@angular/material/tree';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -64,7 +65,8 @@ import { CSresultComponent } from './csresult/csresult.component';
     MatRadioModule,
     FormsModule,
     MatAutocompleteModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTreeModule
    
   ],
   providers: [],
