@@ -2,7 +2,7 @@
     <div class="border-bottom">
         <div class="row">
             <div class="col-xl-1"></div>
-            <div class="col-xl-8 center" style="margin-bottom:15px; margin-top:15px;">
+            <div class="col-xl-8 center" style="padding : 15px 0 ;">
                 <button mat-button>Home</button>
                 <button mat-button>Analysis request form</button>
                 <button mat-button>Equipment Calendar</button>
@@ -38,18 +38,37 @@
                     <mat-card-title>Information</mat-card-title>
                 </mat-card-title-group>
                 <mat-card-content>
-                    <div class="form-group row " style="margin-top: 10px;">
+                    <div class="form-group row ">
                         <div class="col-sm-2 center"><label for="Title"><b>Send question to:</b></label></div>
-                        <div class="col-sm-3"><input type="Title" class="form-control" id="Title"></div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-4"></div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="example-full-width " appearance="outline">
+                                <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                                  [matAutocomplete]="auto" [(ngModel)]="this.geterQution">
+                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                            </div>
+                        <div class="col-sm-7"></div>
                     </div>
-                    <div></div>
                     <div class="form-group row" style="margin-top: 10px;">
                         <div class="col-sm-2 center"><label for="Title"><b>CC question to:</b></label></div>
-                        <div class="col-sm-3"><input type="Title" class="form-control" id="Title"></div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-4"></div>
+                        <div class="col-sm-3">
+                            <mat-form-field class="example-full-width " appearance="outline">
+                               
+                                <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                                  [matAutocomplete]="auto" [(ngModel)]="this.CCgeterQution">
+                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                              </mat-form-field>
+                        </div>
+                        <div class="col-sm-7"></div>
+                        
                     </div>
                     <div class="form-group row" style="margin-top: 10px;">
                         <div class="col-sm-2 center"></div>
@@ -79,7 +98,7 @@
                 <mat-card-content>                                          
                         <textarea class="form-control" rows="3" id="Background"></textarea>
                         <div class="center" style="padding: 15px 0;">
-                            <button mat-flat-button class="button1">Attach question</button>
+                            <button mat-flat-button class="button1" (click)="back()">Attach question</button>
                         </div>
                 </mat-card-content>
             </mat-card>

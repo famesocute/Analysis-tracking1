@@ -1,0 +1,101 @@
+<div class="container-fluid">
+    <div class="border-bottom">
+        <div class="row">
+            <div class="col-xl-1"></div>
+            <div class="col-xl-8 center" style="padding : 15px 0 ;">
+                <button mat-button>Home</button>
+                <button mat-button>Analysis request form</button>
+                <button mat-button>Equipment Calendar</button>
+                <button mat-button>Job tracking</button>
+                <button mat-button>Search previous report</button>
+            </div>
+            <div class="col-xl-2 center ">
+                <button mat-raised-button color="primary">Login</button>
+                <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1">
+        </div>
+
+        <div class="col-sm-10">
+            <h1 style=" padding: 30px 200px; ">Job tracking</h1>
+            <div class="container stepsize">
+                <mat-stepper [labelPosition]="'bottom'">
+                    <mat-step label="Issued Board" state="phone">
+                        <p>Put down your phones.</p>
+                        <div>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+                    </mat-step>
+                    <mat-step label="Approved Board" state="chat">
+                        <p>Socialize with each other.</p>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+                    </mat-step>
+                    <mat-step label=" Approved cost">
+                        <p>You're welcome.</p>
+                    </mat-step>
+                    <mat-step label="Q30 section">
+                        <p>Yoo.</p>
+                    </mat-step>
+
+                    <!-- Icon overrides. -->
+                    <ng-template matStepperIcon="phone">
+                        <mat-icon>call_end</mat-icon>
+                    </ng-template>
+                    <ng-template matStepperIcon="chat">
+                        <mat-icon>forum</mat-icon>
+                    </ng-template>
+                </mat-stepper>
+            </div>
+            <mat-card class="card1" style="margin-top: 10px;" >
+                <mat-card-title-group>
+                    <mat-card-title>Analytical information</mat-card-title>
+                </mat-card-title-group>
+                <mat-card-content style="padding:10px;">                                          
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h4><b>Title:</b></h4>
+                            <h4><b>Analysis type:</b></h4>
+                        </div>
+                        <div class="col-sm-4">
+                           <h4><b>Requester:</b></h4>
+                           <h4><b>Department:</b></h4> 
+                        </div>
+                      </div>
+                </mat-card-content>
+            </mat-card>
+            <div class="container Tablesize">
+                <table class="table tablestyle border">
+                    <thead>
+                      <tr>
+                        <th class="Titlereview" width="100px" >Step</th>
+                        <th class="Titlereview" width="200px">Technique</th>
+                        <th class="Titlereview" width="100px">Quantity</th>
+                        <th class="Titlereview" width="200px">Plan time</th>
+                        <th class="Titlereview" width="300px">Status</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>0</th>
+                        <td class="center">Pending approved</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                   
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+
+    </div>
