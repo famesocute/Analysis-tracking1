@@ -18,7 +18,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ReactiveFormsModule} from '@angular/forms';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -70,7 +70,8 @@ import { SteppaddingComponent } from './steppadding/steppadding.component';
     MatAutocompleteModule,
     ReactiveFormsModule,
     MatTreeModule,
-    MatStepperModule
+    MatStepperModule,
+    HttpClientModule
    
   ],
   providers: [],

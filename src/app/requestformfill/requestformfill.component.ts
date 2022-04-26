@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { FormGroup, FormArray, FormBuilder } from '@angular/forms'  
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms' 
+import { ProductService } from '../api/product.service'; 
 
 @Component({
   selector: 'app-requestformfill',
@@ -19,17 +20,20 @@ export class RequestformfillComponent implements OnInit {
     'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>' ];
   filteredOptions!: Observable<string[]>;
 
+  RequestNo =""
   Title = ""
   Background = ""
   Purpose =""
   Hypothesis=""
   Analysistype = ""
+  Analysistype2 = ""
   IssueDate=""
   Requester=""
   Phone=""
   Department=""
   Product="" 
   RequestTech=""
+  RequestTech2=""
   Numsample=0
   Sendsampledate=""
   EepectedDate =""
@@ -78,7 +82,7 @@ export class RequestformfillComponent implements OnInit {
 
   productForm: FormGroup; 
 
-  constructor(public router: Router,private fb:FormBuilder) {
+  constructor(public router: Router,private fb:FormBuilder,public productService: ProductService) {
     this.productForm = this.fb.group({  
    
       quantities: this.fb.array([]) ,  
@@ -90,6 +94,7 @@ export class RequestformfillComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
+    
   }
 
   // Add input
@@ -141,8 +146,7 @@ export class RequestformfillComponent implements OnInit {
   AnsMany() {
     this.RequestTech = ""
 
-    // console.log(this.other, this.comment)
-
+  
     var i
     var count = 0
     
@@ -153,23 +157,22 @@ export class RequestformfillComponent implements OnInit {
       }
     }
   }
-  // AnsOther() {
-  //   this.RequestTech = this.RequestTech + this.other
-  // }
 
 
   display(){
-    // this.RequestTech = this.RequestTech + this.other
+    
     console.log(this.Title);
     console.log(this.Background);
     console.log(this.Purpose);
     console.log(this.Hypothesis);
     console.log(this.Analysistype);
+    console.log(this.Analysistype2);
     console.log(this.Phone);
     console.log(this.Requester);
     console.log(this.Department);
     console.log(this.Product);
     console.log(this.RequestTech);
+    console.log(this.RequestTech2);
     console.log(this.Numsample);
     console.log(this.Sendsampledate);
     console.log(this.EepectedDate);
@@ -187,6 +190,24 @@ export class RequestformfillComponent implements OnInit {
     console.log(this.ccIssuer);
     console.log(this.NameConfirm);
     console.log(this.NameControl);
+    var qtest = ""
+    qtest = qtest +"INSERT INTO `mtq10_project_tracking_analysis`.`data_all` "+
+    "(`REQ_NUM`, `TITLE`, `BACKGRUD`, `PURPOSE`, `HYPO`, `ANA_TYPE`,`ANA_TYPE2`, `ISSUE_DATE`, "+
+    "`REQ_TER`, `PHONE`, `DEP_MENT`, `PRODUCT`, `ATTACH_FILE`, `REQ_ANA_TECHNI`,`REQ_ANA_TECHNI2`, `NUM_SAMPLE`"+
+    ", `SEND_SAM_DATE`, `FINISH_DATE`, `PIORITY`, `REASON`, `LOTNO`, `SAM_NAME`, `REMARK`, "+
+    "`COMM_SAM_INFOR`, `DANGER`, `SAM_AF_TEST`, `RELATE_MAT`, `KEY_CHARA`, `KEY_STATE`, "+
+    "`KEY_PHENO`, `QUESTION`, `REVI_PAND_ISSUER`, `REVI_PAND_CONFIRM`, `REVI_ANASEC_CONTROL`, "+
+    "`REVI_ANASEC_ANAL`, `REVI_REAPPROV_CHECK`, `REVI_REAPPROV_CONFIRM`, `REVI_REAPPROV_APPROV`,"+
+     "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`) "+
+    " VALUES ('"+this.RequestNo+"', '"+this.Title+"', '"+this.Background+"', '"+this.Purpose+"', '"+this.Hypothesis+"', '"+this.Analysistype+"',"+
+    " '"+this.Analysistype2+"', '"+this.IssueDate+"', '"+this.Requester+"', '"+this.Phone+"', '"+this.Department+"', '"+this.Product+"','1', '"+this.RequestTech+"', '"+this.RequestTech2+"',"+
+     " '"+this.Numsample+"', '"+this.Sendsampledate+"', '"+this.EepectedDate+"', '"+this.Piority+"', '"+this.Reason+"', '"+this.Lotno+"', '"+this.Samplename+"',"+
+     " '"+this.Remarks+"', '"+this.AnaComment+"', '"+this.Dangerous+"', '"+this.SamAftertest+"', '"+this.Relatedmatters+"', '"+this.KeywordCharact+"', '"+this.KeywordState+"', '"+this.KeywordPheno+"', "+
+    " '', '"+this.NameIssuer+"', '"+this.NameConfirm+"','"+this.NameControl+"','','','','','',''  );"
+    console.log(qtest);
+    // this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+    //   console.log(data);
+    // })
   }
 
   
