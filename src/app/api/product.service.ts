@@ -29,7 +29,12 @@ export class ProductService {
     })
 
   }
-  changeMessage(message: string) {
+
+  TRACKING_ANALYSIS_SELECT_DATA() {
+
+    return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/02_TRACKING_ANALYSIS_SELECT_DATA.php')
+  }
+    Message(message: string) {
 
     this.messageSource.next(message)
 

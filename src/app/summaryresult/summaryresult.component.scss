@@ -1,38 +1,12 @@
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-  }
-  .card1 {
-    max-width: 900px;   
-    margin: auto;
-    background-color:#FFFAF0;
-  }
-  .mat-card-content {
-      padding: 20px;
-  }
-  .button1{
-      background-color:  rgb(255, 185, 185);
-      height: 30px;
-      border-radius: 8px;
-  }
-  .button2{
-    border-radius: 15px;   
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 }
-  .mat-stepper-horizontal {
-    margin-top: 8px;
-  }
-  
-  .mat-form-field {    
-    max-width: 120px;
-  }
-  .input1 {
-    padding: 10px 0;
-}
-.inputreview {
-    max-width: 130px;
-}
-.Titlereview {
-    text-align: center;
+.card1 {
+  max-width: 1100px;
+  margin-bottom: 8px;
+  margin: auto;
+  background-color:#FFFAF0;
 }

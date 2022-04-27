@@ -27,11 +27,11 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
         <div class="col-sm-2"></div>
-        <div class="col-sm-4 ">
+        <div class="col-sm-3 ">
           <h2>Request no.</h2>
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-3">
           <div class="row ">
             <button mat-mini-fab matTooltip="Edit" matTooltipClass="example-tooltip-red"
               aria-label="Button that shows a red tooltip" matTooltipPosition="above">
@@ -53,23 +53,23 @@
           <div class="row">
             <div class="col-sm-8">
               <div class="form-group input1">
-                <label for="Title"><b>Title:</b> </label>
+                <label for="Title"><b>Title:</b> {{this.DataRes[0].TITLE}}</label>
               </div>
               <div class="form-group input1">
-                <label for="Background"><b>Background:</b></label>
+                <label for="Background"><b>Background:</b>{{this.DataRes[0].BACKGRUD}}</label>
 
               </div>
               <div class="form-group input1">
-                <label for="Purpose"><b>Purpose:</b></label>
+                <label for="Purpose"><b>Purpose:</b>{{this.DataRes[0].PURPOSE}}</label>
 
               </div>
               <div class="form-group input1">
-                <label for="Hypothesis"><b>Hypothesis:</b></label>
+                <label for="Hypothesis"><b>Hypothesis:</b>{{this.DataRes[0].HYPO}}</label>
 
               </div>
 
               <div class="form-group input1">
-                <label for="Hypothesis"><b> Analysis type:</b></label>
+                <label for="Hypothesis"><b> Analysis type:</b>{{this.DataRes[0].ANA_TYPE}},{{this.DataRes[0].ANA_TYPE2}}</label>
 
               </div>
 
@@ -82,11 +82,11 @@
               <h4> <b>Requester: </b> Pichayapak </h4>
               <div class="row">
                 <div class=" col-sm-2">
-                  <p class="centercolumn"><b>Phone:</b></p>
+                  <p class="centercolumn"><b>Phone:</b>{{this.DataRes[0].PHONE}}</p>
                 </div>
               </div>
-              <h4> <b>Department: </b> </h4>
-              <h4> <b>Product: </b> </h4>
+              <h4> <b>Department:</b>{{this.DataRes[0].DEP_MENT}} </h4>
+              <h4> <b>Product: </b>{{this.DataRes[0].PRODUCT}} </h4>
 
 
 
@@ -102,7 +102,7 @@
           <mat-card-title>Request Analysis Techniques</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
-          <h4> <b>VHX , X-ray , SEM </b> </h4>
+          <h4> <b>{{this.DataRes[0].REQ_ANA_TECHNI}}{{this.DataRes[0].REQ_ANA_TECHNI2}} </b> </h4>
         </mat-card-content>
       </mat-card>
 
@@ -114,16 +114,16 @@
           <div class="row">
             <div class="col-sm-3">
               <div class="form-group" style="margin-left: 10px; ">
-                <label for="Title"><b>Number of sample:</b></label>
+                <label for="Title"><b>Number of sample:</b>{{this.DataRes[0].NUM_SAMPLE}}</label>
               </div>
             </div>
             <div class="col-sm-4">
-              <h4> <b>Send sample date: </b> </h4>
-              <h4> <b>Piority: </b> </h4>
+              <h4> <b>Send sample date:</b> {{this.DataRes[0].SEND_SAM_DATE}} </h4>
+              <h4> <b>Piority:</b> {{this.DataRes[0].PIORITY}} </h4>
             </div>
             <div class="col-sm-5">
-              <h4> <b>Expected finish date: </b> </h4>
-              <h4> <b>Reason: </b> </h4>
+              <h4> <b>Expected finish date:</b> {{this.DataRes[0].FINISH_DATE}} </h4>
+              <h4> <b>Reason:</b> {{this.DataRes[0].REASON}} </h4>
             </div>
           </div>
 
@@ -169,8 +169,7 @@
           <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
-          <div class="form-group input1">
-          </div>
+          {{this.DataRes[0].COMM_SAM_INFOR}}
         </mat-card-content>
       </mat-card>
 
@@ -181,12 +180,12 @@
         <mat-card-content>
           <!-- Dangerous -->
           <div class=" col-sm-12 ">
-            No
+            {{this.DataRes[0].DANGER}}
           </div>
           <!-- Sample after tested -->
           <div class=" col-sm-12">
             <label for="comment" class="font-weight-bold" style=" margin-right: 10px"> <b>Sample after tested:</b>
-              Dispose sample</label>
+              {{this.DataRes[0].SAM_AF_TEST}}</label>
 
           </div>
 
@@ -236,14 +235,14 @@
         <mat-card-content>
           <div class="row" style=" margin-left: 10px; margin-right: 10px;">
             <div class="col-sm-4">
-              <h4> <b>Characteristic: </b> </h4>
+              <h4> <b>Characteristic:</b>{{this.DataRes[0].KEY_CHARA}} </h4>
 
             </div>
             <div class="col-sm-4">
-              <h4> <b>State: </b> </h4>
+              <h4> <b>State:</b>{{this.DataRes[0].KEY_STATE}} </h4>
             </div>
             <div class="col-sm-4">
-              <h4> <b>Phenomena: </b> </h4>
+              <h4> <b>Phenomena:</b>{{this.DataRes[0].KEY_PHENO}} </h4>
             </div>
           </div>
         </mat-card-content>
@@ -315,24 +314,27 @@
               <tr>
                 <td> Pending request</td>
                 <td>Issuer</td>
+                <td>{{this.DataRes[0].REVI_PAND_ISSUER}} </td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td>
-
+                <td>{{this.DataRes[0].REVI_PAND_ISSUE_COM}} </td>
+                <td>{{this.DataRes[0].REVI_PAND_ISSUE_CC}} </td>
               </tr>
               <tr>
                 <td></td>
                 <td>Confirm</td>
-                <td></td>
-                <td><div class="center" style="padding-top: 15px;"><button mat-raised-button color="primary" class="button2">Approve</button></div></td>
-                <td><form class="example-form">
+                <td>{{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                <td><div class="center" style="padding-top: 15px;">
+                  <button mat-raised-button color="primary" class="button2" (click)="display()">Approve
+
+                  </button></div></td>
+                <td>
                   <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Leave a comment</mat-label>
-                    <textarea matInput placeholder="..." [(ngModel)]="this.ComConfirm"></textarea>
+                    <textarea matInput [(ngModel)]="this.ComConfirm" ></textarea>
                   </mat-form-field>
-                </form></td>
-                <td><form class="example-form">
+                </td>
+                <td>                 
+                  <form class="example-form">
                   <mat-form-field class="example-full-width " appearance="outline">
                     <mat-label>Select Name</mat-label>
                     <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"

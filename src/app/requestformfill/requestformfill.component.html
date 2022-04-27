@@ -118,8 +118,8 @@
                     <div class="col-sm-7">
                       <div *ngIf="activate">
                         <div class="input3">
-                          <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Analysistype2"
-                            (keyup)="display()">
+                          <input type="text" id="disabledTextInput" class="form-control"
+                            [(ngModel)]="this.Analysistype2" (keyup)="display()">
                         </div>
                       </div>
                     </div>
@@ -130,7 +130,7 @@
 
             </div>
             <div class="col-sm-4">
-              <h4 style=" margin-top:30px "><b>Issue Date:</b> 1 April 2022</h4>
+              <h4 style=" margin-top:30px "><b>Issue Date:</b></h4>
               <form class="example-form">
                 <mat-form-field class="example-full-width " appearance="outline">
                   <mat-label>Requester</mat-label>
@@ -794,7 +794,7 @@
           <mat-card-title>Review Information</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
-
+           
           <table class="table tablestyle border">
             <thead>
               <tr>
@@ -825,13 +825,10 @@
                   </form>
                 <td></td>
                 <td>
-                  <!-- <form class="example-form">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                      <mat-label>Leave a comment</mat-label>
-                      <textarea matInput placeholder="..." [(ngModel)]="this.ComIssuer"></textarea>
-                    </mat-form-field>
-                  </form> -->
-
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Leave a comment</mat-label>
+                    <textarea matInput [(ngModel)]="this.ComIssuer"></textarea>
+                  </mat-form-field>
                 </td>
                 <td>
                   <form class="example-form">
@@ -872,18 +869,20 @@
               <tr>
                 <th>Analysis section</th>
                 <td>Controller</td>
-                <td><form class="example-form">
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Select Name</mat-label>
-                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                      [matAutocomplete]="auto" [(ngModel)]="this.NameControl">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                        {{option}}
-                      </mat-option>
-                    </mat-autocomplete>
-                  </mat-form-field>
-                </form></td>
+                <td>
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Select Name</mat-label>
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="this.NameControl">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
