@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./analyrequehome.component.scss']
 })
 export class AnalyrequehomeComponent implements OnInit {
+  panelOpenState = false;
 
   constructor(public router: Router) { }
 

@@ -1,13 +1,14 @@
+<body>
 <div class="container-fluid">
-  <div class="border-bottom">
+  <div class="border-bottom Toolbar">
     <div class="row">
       <div class="col-xl-1"></div>
-      <div class="col-xl-8 center" style="padding : 15px 0 ;">
-        <button mat-button>Home</button>
-        <button mat-button>Analysis request form</button>
-        <button mat-button>Equipment Calendar</button>
-        <button mat-button>Job tracking</button>
-        <button mat-button>Search previous report</button>
+      <div class="col-xl-8 center" style="padding-top : 15px ;">
+        <button mat-button><h2 >Home</h2></button>
+        <button mat-button><h2 >Analysis request form</h2></button>
+        <button mat-button><h2 >Equipment Calendar</h2></button>
+        <button mat-button><h2 >Job tracking</h2></button>
+        <button mat-button><h2 >Search previous report</h2></button>
       </div>
       <div class="col-xl-2 center ">
         <button mat-raised-button color="primary">Login</button>
@@ -22,7 +23,7 @@
     </div>
 
     <div class="col-sm-10">
-      <h1 style=" padding: 20px 100px; ">Request Form</h1>
+      <div style=" padding-top: 60px;" class=" font1 center mat-display-3">Request Form</div>
 
       <mat-card class="card1">
         <mat-card-title-group>
@@ -612,7 +613,7 @@
 
         </mat-card-content>
       </mat-card>
-      <mat-card class="card1">
+      <!-- <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Related matters</mat-card-title>
         </mat-card-title-group>
@@ -661,7 +662,7 @@
             </tbody>
           </table>
         </mat-card-content>
-      </mat-card>
+      </mat-card> -->
 
       <mat-card class="card1">
         <mat-card-title-group>
@@ -768,8 +769,7 @@
               <thead>
                 <tr>
                   <th width="100px" class=" Titlereview">No.</th>
-                  <th width="300px">Title</th>
-                  <th width="100px"></th>
+                  <th width="400px">Title</th>
                   <th width="100px" class=" Titlereview">Status</th>
                 </tr>
               </thead>
@@ -777,12 +777,11 @@
                 <tr>
                   <th class=" Titlereview">Question no.1:</th>
                   <td>Confirm purpose </td>
-                  <td class=" Titlereview"><button mat-raised-button color="primary" class="button2">Read</button></td>
                   <td class=" Titlereview">Anwser already</td>
                 </tr>
               </tbody>
             </table>
-            <div class=" container-fluid center" style=" background-color: #ffebcd; ">
+            <div class=" container-fluid center" >
               <button mat-flat-button class="Buttonaddquetion" (click)="NavQuestion()"> + Add question </button>
             </div>
           </div>
@@ -794,8 +793,8 @@
           <mat-card-title>Review Information</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
-           
-          <table class="table tablestyle border">
+           <div class="tablestyle">
+          <table class="table  border-dark ">
             <thead>
               <tr>
                 <th class="Titlereview">Task</th>
@@ -937,7 +936,7 @@
               </tr>
             </tbody>
           </table>
-
+        </div>
         </mat-card-content>
       </mat-card>
       <div class="center">
@@ -951,3 +950,4 @@
     </div>
   </div>
 </div>
+</body>

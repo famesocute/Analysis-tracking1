@@ -1,109 +1,128 @@
 <div class="container-fluid">
-    <div class="border-bottom">
-      <div class="row">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-8 center" style="padding : 15px 0 ;">
-          <button mat-button>Home</button>
-          <button mat-button>Analysis request form</button>
-          <button mat-button>Equipment Calendar</button>
-          <button mat-button>Job tracking</button>
-          <button mat-button>Search previous report</button>
-        </div>
-        <div class="col-xl-2 center ">
-          <button mat-raised-button color="primary">Login</button>
-          <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
-        </div>
+  <div class="border-bottom">
+    <div class="row">
+      <div class="col-xl-1"></div>
+      <div class="col-xl-8 center" style="padding : 15px 0 ;">
+        <button mat-button>Home</button>
+        <button mat-button>Analysis request form</button>
+        <button mat-button>Equipment Calendar</button>
+        <button mat-button>Job tracking</button>
+        <button mat-button>Search previous report</button>
+      </div>
+      <div class="col-xl-2 center ">
+        <button mat-raised-button color="primary">Login</button>
+        <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
       </div>
     </div>
-  
-    <div class="row">
-      <div class="col-sm-1">
-  
-      </div>
-  
-      <div class="col-sm-10">
-        <h1 style=" padding: 20px 100px; ">Request Form</h1>
-        <div class="row" style="margin-bottom:5px;">
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-2"></div>
-          <div class="col-sm-3 ">
-            <h2>Request no.</h2>
-          </div>
-  
-          <div class="col-sm-3">
-            <div class="row ">
-              <button mat-mini-fab matTooltip="Edit" matTooltipClass="example-tooltip-red"
-                aria-label="Button that shows a red tooltip" matTooltipPosition="above">
-                <mat-icon>create</mat-icon>
-              </button>
-              <button mat-mini-fab matTooltip="Save" matTooltipClass="example-tooltip-red"
-                aria-label="Button that shows a red tooltip" matTooltipPosition="above" style="margin-left:20px;">
-                <mat-icon>save</mat-icon>
-              </button>
-            </div>
-  
-          </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-1">
+
+    </div>
+
+    <div class="col-sm-10">
+      <h1 style=" padding: 20px 100px; ">Request Form</h1>
+      <div class="row" style="margin-bottom:5px;">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-2"></div>
+        <div class="col-sm-3 ">
+          <h2>Request no.</h2>
         </div>
-        
+
+        <div class="col-sm-3">
+          <div class="row ">
+            <button mat-mini-fab matTooltip="Edit" matTooltipClass="example-tooltip-red"
+              aria-label="Button that shows a red tooltip" matTooltipPosition="above">
+              <mat-icon>create</mat-icon>
+            </button>
+            <button mat-mini-fab matTooltip="Save" matTooltipClass="example-tooltip-red"
+              aria-label="Button that shows a red tooltip" matTooltipPosition="above" style="margin-left:20px;">
+              <mat-icon>save</mat-icon>
+            </button>
+          </div>
+
+        </div>
+      </div>
+      <div style=" padding-bottom: 15px">
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Receive sample </mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
             <div class="row">
-                <div class="col-sm-4">
-                    <mat-form-field color="accent" appearance="outline">
-                        <mat-label>Send sample date:</mat-label>
-                        <input matInput [matDatepicker]="picker1" >
-                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-8">
-                    <mat-form-field color="accent" appearance="outline">
-                        <mat-label>Expected finish date:</mat-label>
-                        <input matInput [matDatepicker]="picker2">
-                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                        <mat-datepicker #picker2 color="primary"></mat-datepicker>
-                      </mat-form-field>
-                </div>
+              <div class="col-sm-4">
+                <mat-form-field color="accent" appearance="outline">
+                  <mat-label>Send sample date:</mat-label>
+                  <input matInput [matDatepicker]="picker1">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
               </div>
-            
+              <div class="col-sm-8">
+                <mat-form-field color="accent" appearance="outline">
+                  <mat-label>Expected finish date:</mat-label>
+                  <input matInput [matDatepicker]="picker2">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+
           </mat-card-content>
         </mat-card>
+      </div>
 
+      <div style=" padding-bottom: 15px">
         <mat-card class="card1">
-            <mat-card-title-group>
-              <mat-card-title>Result file</mat-card-title>
-            </mat-card-title-group>
-            <mat-card-content>
-              
-            </mat-card-content>
-          </mat-card>
+          <mat-card-title-group>
+            <mat-card-title>Interim report</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="form-group input1">
+              <textarea class="form-control" rows="2" id="Background"> </textarea>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-          <mat-card class="card1">
-            <mat-card-title-group>
-              <mat-card-title>Summary</mat-card-title>
-            </mat-card-title-group>
-            <mat-card-content>
-                <div class="form-group input1">
-                    <label for="Background"><b>Background:</b></label>
-                    <textarea class="form-control" rows="3" id="Background" > </textarea>
-                  </div>
-            </mat-card-content>
-          </mat-card>
-  
+      <div style=" padding-bottom: 15px">
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Result file</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="form-group input1">
+              <textarea class="form-control" rows="2" id="Background"> </textarea>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div style=" padding-bottom: 15px">
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Summary</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="form-group input1">
+              <textarea class="form-control" rows="6" id="Background"> </textarea>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <div style=" padding-bottom: 15px">
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Review Information</mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
-  
+
             <table class="table tablestyle border">
               <thead>
                 <tr>
-                  <th class="Titlereview" width="150px" >Task</th>
+                  <th class="Titlereview" width="150px">Task</th>
                   <th class="Titlereview" width="100px">Process</th>
                   <th class="Titlereview" width="200px">Name</th>
                   <th class="Titlereview" width="300px">Processing date&time</th>
@@ -119,7 +138,7 @@
                   <td></td>
                   <td></td>
                   <td>
-  
+
                 </tr>
                 <tr>
                   <td></td>
@@ -187,15 +206,15 @@
                 </tr>
               </tbody>
             </table>
-  
+
           </mat-card-content>
         </mat-card>
-  
-      </div>
-  
-  
-      <div class="col-sm-1">
-  
       </div>
     </div>
+
+
+    <div class="col-sm-1">
+
+    </div>
   </div>
+</div>

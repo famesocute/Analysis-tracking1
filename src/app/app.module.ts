@@ -19,6 +19,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatStepperModule} from '@angular/material/stepper';
 import { HttpClientModule } from '@angular/common/http';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,7 +72,8 @@ import { SteppaddingComponent } from './steppadding/steppadding.component';
     ReactiveFormsModule,
     MatTreeModule,
     MatStepperModule,
-    HttpClientModule
+    HttpClientModule,
+    MatExpansionModule
    
   ],
   providers: [],
