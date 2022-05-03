@@ -24,11 +24,7 @@
     <div class="col-sm-10">
       <h1 style="padding-top: 40px; padding-left:300px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
       <div class="row" style="margin-bottom:5px;">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-3"></div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-2"></div>
-
+        <div class="col-sm-9"></div>
         <div class="col-sm-3">
           <div class="row ">
             <button mat-mini-fab matTooltip="Edit" matTooltipClass="example-tooltip-red"
@@ -40,7 +36,6 @@
               <mat-icon>save</mat-icon>
             </button>
           </div>
-
         </div>
       </div>
       <mat-card class="card1">
@@ -50,44 +45,68 @@
         <mat-card-content>
           <div class="row">
             <div class="col-sm-8">
-              <div class="form-group input1">
-                <label for="Title"><b>Title:</b> {{this.DataRes[0].TITLE}}</label>
-              </div>
-              <div class="form-group input1">
-                <label for="Background"><b>Background:</b>{{this.DataRes[0].BACKGRUD}}</label>
-
-              </div>
-              <div class="form-group input1">
-                <label for="Purpose"><b>Purpose:</b>{{this.DataRes[0].PURPOSE}}</label>
-
-              </div>
-              <div class="form-group input1">
-                <label for="Hypothesis"><b>Hypothesis:</b>{{this.DataRes[0].HYPO}}</label>
-
-              </div>
-
-              <div class="form-group input1">
-                <label for="Hypothesis"><b> Analysis
-                    type:</b>{{this.DataRes[0].ANA_TYPE}},{{this.DataRes[0].ANA_TYPE2}}</label>
-
-              </div>
-
-
-
-
-            </div>
-            <div class="col-sm-4">
-              <h4 style=" margin-top:30px "><b>Issue Date:</b>{{this.DataRes[0].ISSUE_DATE}}</h4>
-              <h4> <b>Requester: </b> Pichayapak </h4>
-              <div class="row">
-                <div class=" col-sm-2">
-                  <p class="centercolumn"><b>Phone:</b>{{this.DataRes[0].PHONE}}</p>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-1"><b>Title:</b></div>
+                  <div class="col-sm-11">{{this.DataRes[0].TITLE}}</div>
                 </div>
               </div>
-              <h4> <b>Department:</b>{{this.DataRes[0].DEP_MENT}} </h4>
-              <h4> <b>Product: </b>{{this.DataRes[0].PRODUCT}} </h4>
-
-
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-2"><b>Background:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].BACKGRUD}}</div>
+                </div>
+              </div>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-2"><b>Purpose:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].PURPOSE}}</div>
+                </div>
+              </div>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-2"><b>Hypothesis:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].HYPO}}</div>
+                </div>
+              </div>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-2"><b>Analysis type:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].ANA_TYPE}},{{this.DataRes[0].ANA_TYPE2}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+             
+                <div class="row" style=" padding-top : 30px;">
+                  <div class="col-sm-4"><b>Issue Date:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].ISSUE_DATE}}</div>
+                </div>
+              
+              
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Requester:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
+                </div>
+             
+             
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Phone:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
+                </div>
+              
+              
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Department:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
+                </div>
+              
+            
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Product:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].PRODUCT}}</div>
+                </div>
+             
 
               <mat-card class="cardAT">
 
@@ -112,17 +131,42 @@
         <mat-card-content>
           <div class="row">
             <div class="col-sm-3">
-              <div class="form-group" style="margin-left: 10px; ">
-                <label for="Title"><b>Number of sample:</b>{{this.DataRes[0].NUM_SAMPLE}}</label>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-7"><b>Number of sample:</b></div>
+                  <div class="col-sm-5">{{this.DataRes[0].NUM_SAMPLE}} </div>
+                </div>
               </div>
             </div>
             <div class="col-sm-4">
-              <h4> <b>Send sample date:</b> {{this.DataRes[0].SEND_SAM_DATE}} </h4>
-              <h4> <b>Piority:</b> {{this.DataRes[0].PIORITY}} </h4>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-5"><b>Send sample date:</b></div>
+                  <div class="col-sm-7">{{this.DataRes[0].SEND_SAM_DATE}}</div>
+                </div>
+              </div>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-2"><b>Piority:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].PIORITY}}</div>
+                </div>
+              </div>
+
             </div>
             <div class="col-sm-5">
-              <h4> <b>Expected finish date:</b> {{this.DataRes[0].FINISH_DATE}} </h4>
-              <h4> <b>Reason:</b> {{this.DataRes[0].REASON}} </h4>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-5"><b>Expected finish date:</b></div>
+                  <div class="col-sm-7">{{this.DataRes[0].FINISH_DATE}}</div>
+                </div>
+              </div>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-2"><b>Reason:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
+                </div>
+              </div>
+              
             </div>
           </div>
 
@@ -131,35 +175,35 @@
               <table>
                 <tr>
                   <td width="300px">
-                    <div class="form-group input1" style="padding: 0 20px ;">
-                      <label for="Lotno"><b>Lot no:</b></label>
-
+                    <div class="input1" style="padding: 0 10px ;">
+                      <div class="row">
+                        <div class="col-sm-3"><b>Lot no:</b></div>
+                        <div class="col-sm-9"></div>
+                      </div>
                     </div>
+                    
                   </td>
                   <td width="400px">
-                    <div class="form-group input1" style="padding: 0 20px ;">
-                      <label for="Lotno"><b>Sample name:</b></label>
-
+                    <div class="input1" style="padding: 0 10px ;">
+                      <div class="row">
+                        <div class="col-sm-4"><b>Sample name:</b></div>
+                        <div class="col-sm-8"></div>
+                      </div>
                     </div>
 
                   </td>
                   <td width="200px">
-                    <div class="form-group input1" style="padding: 0 20px ;">
-                      <label for="Samplename"><b>Remarks:</b></label>
-
+                    <div class="input1" style="padding: 0 10px ;">
+                      <div class="row">
+                        <div class="col-sm-3"><b>Remarks:</b></div>
+                        <div class="col-sm-9"></div>
+                      </div>
                     </div>
                   </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
                 </tr>
               </table>
             </form>
           </div>
-
         </mat-card-content>
       </mat-card>
 
@@ -182,15 +226,16 @@
             {{this.DataRes[0].DANGER}}
           </div>
           <!-- Sample after tested -->
-          <div class=" col-sm-12">
-            <label for="comment" class="font-weight-bold" style=" margin-right: 10px"> <b>Sample after tested:</b>
-              {{this.DataRes[0].SAM_AF_TEST}}</label>
-
-          </div>
+          
+            <div class="row">
+              <div class="col-sm-2"><b>Sample after tested:</b></div>
+              <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
+            </div>
 
         </mat-card-content>
       </mat-card>
-      <mat-card class="card1">
+
+      <!-- <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Related matters</mat-card-title>
         </mat-card-title-group>
@@ -225,27 +270,44 @@
             </tbody>
           </table>
         </mat-card-content>
-      </mat-card>
+      </mat-card> -->
 
       <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Keywords for searching</mat-card-title>
         </mat-card-title-group>
         <mat-card-content>
-          <div class="row" style=" margin-left: 10px; margin-right: 10px;">
+          <div class="row">
             <div class="col-sm-4">
-              <h4> <b>Characteristic:</b>{{this.DataRes[0].KEY_CHARA}} </h4>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-4"><b>Characteristic:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].KEY_CHARA}}</div>
+                </div>
+              </div>
 
             </div>
             <div class="col-sm-4">
-              <h4> <b>State:</b>{{this.DataRes[0].KEY_STATE}} </h4>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-2"><b>State:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].KEY_STATE}}</div>
+                </div>
+              </div>
+
             </div>
             <div class="col-sm-4">
-              <h4> <b>Phenomena:</b>{{this.DataRes[0].KEY_PHENO}} </h4>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-3"><b>Phenomena:</b></div>
+                  <div class="col-sm-9">{{this.DataRes[0].KEY_PHENO}}</div>
+                </div>
+              </div>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
+
       <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Question and Answer form</mat-card-title>
@@ -271,7 +333,8 @@
               </tbody>
             </table>
             <div class=" container-fluid center">
-              <button mat-flat-button class="Buttonaddquetion" (click)="NavQuestion()"> + Add question </button>
+            
+              <button mat-flat-button class="Buttonaddquetion"> + Add question </button>
             </div>
           </div>
         </mat-card-content>

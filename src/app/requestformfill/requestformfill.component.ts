@@ -54,6 +54,7 @@ export class RequestformfillComponent implements OnInit {
   ccIssuer = ""
   NameConfirm = ""
   NameControl = ""
+  month = ""
 
   activate: boolean = false
 
@@ -161,27 +162,6 @@ export class RequestformfillComponent implements OnInit {
 
   display() {
 
-
-    // console.log(this.Title);
-    // console.log(this.Background);
-    // console.log(this.Purpose);
-    // console.log(this.Hypothesis);
-    // console.log(this.Analysistype);
-    // console.log(this.Analysistype2);
-    // console.log(this.Phone);
-    // console.log(this.Requester);
-    // console.log(this.Department);
-    // console.log(this.Product);
-    // console.log(this.RequestTech);
-    // console.log(this.RequestTech2);
-    // console.log(this.Numsample);
-    // console.log(this.Sendsampledate);
-    // console.log(this.EepectedDate);
-    // console.log(this.Piority);
-    // console.log(this.Reason);
-    console.log(this.productForm.value);
-    console.log(this.productForm.value.quantities);
-
     var val2 = ""
 
     for (var val in this.productForm.value.quantities) {
@@ -190,27 +170,16 @@ export class RequestformfillComponent implements OnInit {
     }
     val2 = val2.substring(0, val2.length - 1);
     console.log(val2)
-    // console.log(this.AnaComment);
-    // console.log(this.Dangerous);
-    // console.log(this.SamAftertest);
-    // console.log(this.KeywordCharact);
-    // console.log(this.KeywordState);
-    // console.log(this.KeywordPheno);
-    // console.log(this.NameIssuer);
-    console.log(this.ComIssuer);
-    // console.log(this.ccIssuer);
-    // console.log(this.NameConfirm);
-    // console.log(this.NameControl);
     var qtest = ""
     qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`data_all` " +
-      "(`REQ_NUM`, `TITLE`, `BACKGRUD`, `PURPOSE`, `HYPO`, `ANA_TYPE`,`ANA_TYPE2`, `ISSUE_DATE`, " +
+      "(`REQ_NUM`,`MONTH`, `TITLE`, `BACKGRUD`, `PURPOSE`, `HYPO`, `ANA_TYPE`,`ANA_TYPE2`, `ISSUE_DATE`, " +
       "`REQ_TER`, `PHONE`, `DEP_MENT`, `PRODUCT`, `ATTACH_FILE`, `REQ_ANA_TECHNI`,`REQ_ANA_TECHNI2`, `NUM_SAMPLE`" +
       ", `SEND_SAM_DATE`, `FINISH_DATE`, `PIORITY`, `REASON`,  `SAM_NAME`, " +
       "`COMM_SAM_INFOR`, `DANGER`, `SAM_AF_TEST`, `RELATE_MAT`, `KEY_CHARA`, `KEY_STATE`, " +
       "`KEY_PHENO`, `QUESTION`, `REVI_PAND_ISSUER`, `REVI_PAND_CONFIRM`, `REVI_ANASEC_CONTROL`, " +
       "`REVI_ANASEC_ANAL`, `REVI_REAPPROV_CHECK`, `REVI_REAPPROV_CONFIRM`, `REVI_REAPPROV_APPROV`," +
       "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " +
-      " VALUES ('" + this.RequestNo + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
+      " VALUES ('" + this.RequestNo + "', '" + this.month + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
       " '" + this.Analysistype2 + "', '" + this.IssueDate + "', '" + this.Requester + "', '" + this.Phone + "', '" + this.Department + "', '" + this.Product + "','1', '" + this.RequestTech + "', '" + this.RequestTech2 + "'," +
       " '" + this.Numsample + "', '" + this.Sendsampledate + "', '" + this.EepectedDate + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
       " '" + this.AnaComment + "', '" + this.Dangerous + "', '" + this.SamAftertest + "', '" + this.Relatedmatters + "', '" + this.KeywordCharact + "', '" + this.KeywordState + "', '" + this.KeywordPheno + "', " +
@@ -218,6 +187,151 @@ export class RequestformfillComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
+    })
+
+  }
+
+  NewregisterNum() {
+    var MonthRes: any
+
+    var runnumberRes: any
+
+    var runnumberNew: any
+    var fame
+    this.productService.TRACKING_ANALYSIS_SELECT_GET_LAST_MONTH().subscribe((data: {}) => {
+
+      console.log(data);
+
+      MonthRes = data;
+
+
+      let date: Date = new Date();
+
+      var date2 = date.toLocaleString()
+      this.IssueDate = date2
+      var years = date2.substring(6, 8)
+
+      const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+const d = new Date();
+this.month = months[d.getMonth()];
+
+
+      console.log(date2);
+      console.log(years);
+
+      var date3:any
+
+      if (date2.substring(0, 2) == "10") {
+
+        date3 = "X"
+
+      }
+
+      else if (date2.substring(0, 2) == "11") {
+
+        date3 = "Y"
+
+      }
+
+      else if (date2.substring(0, 2) == "12") {
+
+        date3 = "X"
+
+      }
+
+      else {
+
+        date3 = date2.substring(0, 1)
+
+      }
+      console.log("Month = " + date3);
+
+      console.log(MonthRes[0].MONTH);
+
+      var runnumber2
+
+      var runnumber
+
+
+
+      if (date3 == MonthRes[0].MONTH) {
+
+        console.log("num = num + 001 ");
+
+
+
+        this.productService.TRACKING_ANALYSIS_SELECT_SUBSTRING_REQ_NUM().subscribe((data: {}) => {
+
+          console.log(data);
+
+          runnumberRes = data
+
+          runnumber2 = parseInt(runnumberRes[0].LASTNUM)
+
+          runnumber = runnumber2 + 1
+
+          var str = "" + runnumber
+
+          var pad = "000"
+
+          runnumber = pad.substring(0, pad.length - str.length) + str
+
+          console.log(runnumber)
+
+
+          
+          var Department2
+
+          Department2 = this.Department.substring(2, 5)
+          console.log(Department2)
+          runnumberNew = "R" + Department2 + years + date3 + runnumber
+    
+          //R300224001
+    
+          console.log(runnumberNew);
+          console.log(runnumberNew.length);
+          this.RequestNo = runnumberNew
+    
+          if (runnumberNew.length == 10) {
+            console.log("True");
+            fame = true
+            this.display()
+          }
+          else {
+            fame = false
+          }
+        })
+
+      }
+
+      else {
+
+      console.log("Num =  001 ");
+
+      runnumber = "001"
+
+      var Department2
+
+      Department2 = this.Department.substring(2, 5)
+      console.log(Department2)
+      runnumberNew = "R" + Department2 + years + date3 + runnumber
+
+      //R300224001
+
+      console.log(runnumberNew);
+      console.log(runnumberNew.length);
+      this.RequestNo = runnumberNew
+
+      if (runnumberNew.length == 10) {
+        console.log("True");
+        fame = true
+        this.display()
+      }
+      else {
+        fame = false
+      }
+      }
     })
   }
 

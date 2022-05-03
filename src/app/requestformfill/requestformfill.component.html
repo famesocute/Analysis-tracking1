@@ -5,7 +5,7 @@
       <div class="col-xl-1"></div>
       <div class="col-xl-8 center" style="padding-top : 15px ;">
         <button mat-button><h2 >Home</h2></button>
-        <button mat-button><h2 >Analysis request form</h2></button>
+        <button mat-button (click)="NewregisterNum()"><h2 >Analysis request form</h2></button>
         <button mat-button><h2 >Equipment Calendar</h2></button>
         <button mat-button><h2 >Job tracking</h2></button>
         <button mat-button><h2 >Search previous report</h2></button>
@@ -940,7 +940,7 @@
         </mat-card-content>
       </mat-card>
       <div class="center">
-        <button mat-raised-button color="primary" (click)="display()">Issue</button>
+        <button mat-raised-button color="primary" (click)="NewregisterNum()">Issue</button>
       </div>
     </div>
 

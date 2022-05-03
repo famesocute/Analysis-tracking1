@@ -5,6 +5,8 @@ import {map, startWith} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 
+
+
 @Component({
   selector: 'app-paddingreque',
   templateUrl: './paddingreque.component.html',
@@ -15,6 +17,7 @@ export class PaddingrequeComponent implements OnInit {
   ComConfirm=""
   ccConfirm=""
   DataRes : any
+ 
   
   myControl = new FormControl();
   options: string[] = [
@@ -40,12 +43,10 @@ export class PaddingrequeComponent implements OnInit {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
-  NavQuestion(){
-    this.router.navigate(['/Question'])
-   }
 
-   display(){
+  display(){
      console.log(this.ComConfirm);
      console.log(this.ccConfirm);
    }
 }
+

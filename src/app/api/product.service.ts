@@ -39,4 +39,26 @@ export class ProductService {
     this.messageSource.next(message)
 
   }
+  TRACKING_ANALYSIS_SELECT_ALL() {
+
+    return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/05_TRACKING_ANALYSIS_SELECT_ALL.php')
+  }
+
+    //Test TRACKING_ANALYSIS_SELECT_GET_LAST_MONTH
+
+    TRACKING_ANALYSIS_SELECT_GET_LAST_MONTH() {
+
+      console.log("TRACKING_ANALYSIS_SELECT_GET_LAST_MONTH Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/03_TRACKING_ANALYSIS_SELECT_GET_LAST_MONTH.php')
+  
+    }
+  
+    TRACKING_ANALYSIS_SELECT_SUBSTRING_REQ_NUM() {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_SUBSTRING_REQ_NUM Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/04_TRACKING_ANALYSIS_SELECT_SUBSTRING_REQ_NUM.php')
+  
+    }
 }
