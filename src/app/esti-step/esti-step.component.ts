@@ -9,12 +9,11 @@ import { QuestionComponent } from '../question/question.component';
 
 
 @Component({
-  selector: 'app-paddingreque',
-  templateUrl: './paddingreque.component.html',
-  styleUrls: ['./paddingreque.component.scss']
+  selector: 'app-esti-step',
+  templateUrl: './esti-step.component.html',
+  styleUrls: ['./esti-step.component.scss']
 })
-export class PaddingrequeComponent implements OnInit {
-
+export class EstiStepComponent implements OnInit {
   ComConfirm=""
   ccConfirm=""
   DataRes : any
@@ -26,10 +25,7 @@ export class PaddingrequeComponent implements OnInit {
     'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>' ];
   filteredOptions!: Observable<string[]>;
 
-
-
-  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog) {
-   }
+  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -40,26 +36,16 @@ export class PaddingrequeComponent implements OnInit {
       console.log(data);
       this.DataRes = data
     })
-    
   }
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
-
-  display(){
-     console.log(this.ComConfirm);
-     console.log(this.ccConfirm);
-   }
    onOpenDialogClick(){
     this.matDialog.open(QuestionComponent,{
       width : '500px'})
     
   }
 
-
-
 }
-

@@ -20,6 +20,8 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatStepperModule} from '@angular/material/stepper';
 import { HttpClientModule } from '@angular/common/http';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +36,8 @@ import { AnswerPageComponent } from './answer-page/answer-page.component';
 import { BooingEquipComponent } from './booing-equip/booing-equip.component';
 import { CSresultComponent } from './csresult/csresult.component';
 import { SteppaddingComponent } from './steppadding/steppadding.component';
+import { EstiStepComponent } from './esti-step/esti-step.component';
+import { EstiCostComponent } from './esti-cost/esti-cost.component';
 
 
 @NgModule({
@@ -48,6 +52,8 @@ import { SteppaddingComponent } from './steppadding/steppadding.component';
     BooingEquipComponent,
     CSresultComponent,
     SteppaddingComponent,
+    EstiStepComponent,
+    EstiCostComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,8 +79,9 @@ import { SteppaddingComponent } from './steppadding/steppadding.component';
     MatTreeModule,
     MatStepperModule,
     HttpClientModule,
-    MatExpansionModule
-   
+    MatExpansionModule,
+    MatDialogModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

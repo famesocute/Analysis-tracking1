@@ -1,77 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms'  
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import {  VERSION, ViewChild} from '@angular/core';
+import { AfterViewInit } from '@angular/core';
+import { MatStepper } from '@angular/material/stepper';
 
-interface FoodNode {
-  name: string;
-  children?: FoodNode[];
-}
 
-const TREE_DATA: FoodNode[] = [
-  {
-    name: 'Fruit',
-    children: [{name: 'Apple'}, {name: 'Banana'}, {name: 'Fruit loops'}],
-  },
-  {
-    name: 'January',
-    children: [
-      {
-        name: 'Pichayapak Nantasai',
-        children: [{name: 'Broccoli'}, {name: 'Brussels sprouts'}],
-      },
-      {
-        name: 'Orange',
-        children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
-      },
-    ],
-  },
-];
-
-/** Flat node with expandable and level information */
-interface ExampleFlatNode {
-  expandable: boolean;
-  name: string;
-  level: number;
-}
 
 @Component({
   selector: 'app-csresult',
   templateUrl: './csresult.component.html',
   styleUrls: ['./csresult.component.scss']
 })
-export class CSresultComponent implements OnInit {
-
-  private _transformer = (node: FoodNode, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level,
-    };
-  };
-
-  treeControl = new FlatTreeControl<ExampleFlatNode>(
-    node => node.level,
-    node => node.expandable,
-  );
-
-  treeFlattener = new MatTreeFlattener(
-    this._transformer,
-    node => node.level,
-    node => node.expandable,
-    node => node.children,
-  );
-
-  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+export class CSresultComponent implements OnInit, AfterViewInit {
+  private ngVersion: string = VERSION.full;
   
-  constructor() {
-    this.dataSource.data = TREE_DATA;
-  }
-
-  hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
+  // Only required when not passing the id in methods
+  @ViewChild('stepper') private myStepper!: MatStepper;
+  totalStepsCount!: number;
+  
+  constructor() {}
 
   ngOnInit(): void {
     
   }
+  // Event fired after view is initialized
+  ngAfterViewInit() {
+    this.totalStepsCount = this.myStepper._steps.length;
+  }
+
+  goBack(stepper: MatStepper) {
+    stepper.previous();
+  }
+  goForward(stepper: MatStepper) {
+    stepper.next();
+  }
+  
   
 }

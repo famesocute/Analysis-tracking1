@@ -2,12 +2,12 @@
   <div class="border-bottom Toolbar">
     <div class="row">
       <div class="col-xl-1"></div>
-      <div class="col-xl-8 center" style="padding-top : 15px ;">
-        <button mat-button><h2 >Home</h2></button>
-        <button mat-button><h2 >Analysis request form</h2></button>
-        <button mat-button><h2 >Equipment Calendar</h2></button>
-        <button mat-button><h2 >Job tracking</h2></button>
-        <button mat-button><h2 >Search previous report</h2></button>
+      <div class="col-xl-8 center" style="padding :15px 0 ;">
+        <button mat-button>Home</button>
+        <button mat-button>Analysis request form</button>
+        <button mat-button>Equipment Calendar</button>
+        <button mat-button>Job tracking</button>
+        <button mat-button>Search previous report</button>
       </div>
       <div class="col-xl-2 center ">
         <button mat-raised-button color="primary">Login</button>
@@ -334,11 +334,12 @@
             </table>
             <div class=" container-fluid center">
             
-              <button mat-flat-button class="Buttonaddquetion"> + Add question </button>
+              <button mat-flat-button class="Buttonaddquetion" (click)="onOpenDialogClick()"> + Add question </button>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
+      
 
       <mat-card class="card1">
         <mat-card-title-group>
@@ -387,7 +388,7 @@
                 <td>{{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
                 <td>
                   <div class="center" style="padding-top: 15px;">
-                    <button mat-raised-button color="primary" class="button2" (click)="display()">Approve
+                    <button mat-raised-button color="primary" class="button2" >Approve
 
                     </button>
                   </div>

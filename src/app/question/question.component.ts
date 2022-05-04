@@ -6,6 +6,7 @@ import {map, startWith} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'
 
+
 @Component({
   selector: 'app-question',
   templateUrl: './question.component.html',
@@ -43,8 +44,6 @@ export class QuestionComponent implements OnInit {
   NavAnaformfill(){
     this.router.navigate(['/Requestformfill'])
    }
-   back(): void {
-    this.location.back()
-  }
+ 
 
 }
