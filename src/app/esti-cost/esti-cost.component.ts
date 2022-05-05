@@ -32,7 +32,7 @@ export class EstiCostComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
-    this.productService.TRACKING_ANALYSIS_SELECT_DATA().subscribe((data: {}) => {
+    this.productService.TRACKING_ANALYSIS_SELECT_ALL().subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
     })

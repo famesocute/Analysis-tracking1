@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-answer-page',
@@ -16,7 +17,7 @@ export class AnswerPageComponent implements OnInit {
     'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>' ];
   filteredOptions!: Observable<string[]>;
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -28,6 +29,10 @@ export class AnswerPageComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  NavAnapadding(){
+    this.router.navigate(['/Paddingreque'])
   }
 
 }

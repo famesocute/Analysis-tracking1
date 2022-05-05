@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  VERSION, ViewChild} from '@angular/core';
-import { AfterViewInit } from '@angular/core';
-import { MatStepper } from '@angular/material/stepper';
-
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms'
 
 
 @Component({
@@ -10,29 +7,44 @@ import { MatStepper } from '@angular/material/stepper';
   templateUrl: './csresult.component.html',
   styleUrls: ['./csresult.component.scss']
 })
-export class CSresultComponent implements OnInit, AfterViewInit {
-  private ngVersion: string = VERSION.full;
+export class CSresultComponent implements OnInit {
+ 
+  productForm: FormGroup;
   
-  // Only required when not passing the id in methods
-  @ViewChild('stepper') private myStepper!: MatStepper;
-  totalStepsCount!: number;
-  
-  constructor() {}
+  constructor(private fb: FormBuilder) {
+    this.productForm = this.fb.group({
+
+      quantities: this.fb.array([]),
+    });
+  }
 
   ngOnInit(): void {
     
   }
-  // Event fired after view is initialized
-  ngAfterViewInit() {
-    this.totalStepsCount = this.myStepper._steps.length;
+  // Add input
+  quantities(): FormArray {
+    return this.productForm.get("quantities") as FormArray
   }
 
-  goBack(stepper: MatStepper) {
-    stepper.previous();
+  newQuantity(): FormGroup {
+    return this.fb.group({
+      Lotno: '',
+      Samplename: '',
+
+    })
   }
-  goForward(stepper: MatStepper) {
-    stepper.next();
+
+  addQuantity() {
+    this.quantities().push(this.newQuantity());
   }
-  
+
+  removeQuantity(i: number) {
+    this.quantities().removeAt(i);
+  }
+  // Event fired after view is initialized
+ 
+  display(){
+    console.log(this.productForm.value.quantities)
+  }
   
 }

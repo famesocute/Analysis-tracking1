@@ -18,6 +18,7 @@ export class PaddingrequeComponent implements OnInit {
   ComConfirm=""
   ccConfirm=""
   DataRes : any
+ 
 
   
   myControl = new FormControl();
@@ -36,7 +37,7 @@ export class PaddingrequeComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
-    this.productService.TRACKING_ANALYSIS_SELECT_DATA().subscribe((data: {}) => {
+    this.productService.TRACKING_ANALYSIS_SELECT_ALL().subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
     })
@@ -58,8 +59,12 @@ export class PaddingrequeComponent implements OnInit {
       width : '500px'})
     
   }
-
-
+  GoAswer(){
+    this.router.navigate(['/AnswerPage']) 
+  }
+  GoEstiStep(){
+    this.router.navigate(['/Estistep']) 
+  }
 
 }
 

@@ -95,6 +95,8 @@ export class RequestformfillComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
+    this.quantities().push(this.newQuantity());
+
 
   }
 

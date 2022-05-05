@@ -1,26 +1,63 @@
-<div class="solution">
-<mat-horizontal-stepper #stepper>
-  <mat-step>
-    Step 1
-  </mat-step>
-  <mat-step>
-    Step 2
-  </mat-step>
-  <mat-step>
-    Step 3
-  </mat-step>
-  <!-- one option -->
-  
-</mat-horizontal-stepper>
 
-<!-- second option -->
-<div>
-  <button (click)="goBack(stepper)" type="button" >Back</button>
-  <button (click)="goForward(stepper)" type="button" >Next</button>
+<form [formGroup]="productForm">
 
-  <!-- using totalStepsCount -->
-  <!-- <button (click)="goForward(stepper)" type="button" [disabled]="stepper.selectedIndex === totalStepsCount-1">Next</button> -->
-</div>
-<!--------------------------------------------------------------------------------------->
+  <table formArrayName="quantities">
+    <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+      <td>
+        <div style="padding-top: 10px;">
+        <mat-form-field appearance="outline" >
+          <mat-label>Techniques</mat-label>
+          <mat-select formControlName="Lotno">
+              <mat-option value="X-ray 2D">X-ray 2D</mat-option>
+              <mat-option value="X-ray 3D">X-ray 3D</mat-option>
+              <mat-option value="SEM-Microscope">SEM-Microscope</mat-option>
+              <mat-option value="Cross section">Cross section</mat-option>
+              <mat-option value="Ion-milling">Ion-milling</mat-option>
+              <mat-option value="VHX">VHX</mat-option>
+              <mat-option value="Metallurgical">Metallurgical</mat-option>
+              <mat-option value="SEM-EDX">SEM-EDX</mat-option>
+              <mat-option value="SEM-Mapping">SEM-Mapping</mat-option>
+              <mat-option value="EDXRF">EDXRF</mat-option>
+              <mat-option value="ICP">ICP</mat-option>
+              <mat-option value="CS Analyzer">CS Analyzer</mat-option>
+              <mat-option value="FTIR">FTIR</mat-option>
+              <mat-option value="GCMS">GCMS</mat-option>
+              <mat-option value="DSC">DSC</mat-option>
+              <mat-option value="TG-DTA">TG-DTA</mat-option>
+              <mat-option value="Solderwet">Solderwet</mat-option>
+              <mat-option value="Dust monitering">Dust monitering</mat-option>
+              <mat-option value="Micro-probe">Micro-probe</mat-option>
+              <mat-option value="Other">Other</mat-option> 
+          </mat-select>
+      </mat-form-field>
+    </div>
+      </td>
+      <td>
+        <div class="row">
+          <div class="col-sm-4">
+            <h4 style="padding-left:30px ;"><b>Sample number</b></h4>
+          </div>
+          <div class="col-sm-8">
+            <div class="form-group input1" style="padding: 0 20px ;">
+              <input type="text" class="form-control" id="Lotno" formControlName="Samplename">
+            </div>
+          </div>
+        </div>
+        
 
-</div>
+      </td>
+      <td style="padding-top: 20px">
+        <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td style="padding: 10px 30px">
+        <button mat-flat-button class="Buttonaddsam" (click)="addQuantity()"> + Add Sample </button>
+      </td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+</form>
+<button (click)="display()">Go</button>
