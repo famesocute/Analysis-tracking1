@@ -215,14 +215,14 @@ export class RequestformfillComponent implements OnInit {
 
       const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-const d = new Date();
-this.month = months[d.getMonth()];
+      const d = new Date();
+      this.month = months[d.getMonth()];
 
 
       console.log(date2);
       console.log(years);
 
-      var date3:any
+      var date3: any
 
       if (date2.substring(0, 2) == "10") {
 
@@ -282,19 +282,19 @@ this.month = months[d.getMonth()];
           console.log(runnumber)
 
 
-          
+
           var Department2
 
           Department2 = this.Department.substring(2, 5)
           console.log(Department2)
           runnumberNew = "R" + Department2 + years + date3 + runnumber
-    
+
           //R300224001
-    
+
           console.log(runnumberNew);
           console.log(runnumberNew.length);
           this.RequestNo = runnumberNew
-    
+
           if (runnumberNew.length == 10) {
             console.log("True");
             fame = true
@@ -309,32 +309,34 @@ this.month = months[d.getMonth()];
 
       else {
 
-      console.log("Num =  001 ");
+        console.log("Num =  001 ");
 
-      runnumber = "001"
+        runnumber = "001"
 
-      var Department2
+        var Department2
 
-      Department2 = this.Department.substring(2, 5)
-      console.log(Department2)
-      runnumberNew = "R" + Department2 + years + date3 + runnumber
+        Department2 = this.Department.substring(2, 5)
+        console.log(Department2)
+        runnumberNew = "R" + Department2 + years + date3 + runnumber
 
-      //R300224001
+        //R300224001
 
-      console.log(runnumberNew);
-      console.log(runnumberNew.length);
-      this.RequestNo = runnumberNew
+        console.log(runnumberNew);
+        console.log(runnumberNew.length);
+        this.RequestNo = runnumberNew
 
-      if (runnumberNew.length == 10) {
-        console.log("True");
-        fame = true
-        this.display()
-      }
-      else {
-        fame = false
-      }
+        if (runnumberNew.length == 10) {
+          console.log("True");
+          fame = true
+          this.display()
+        }
+        else {
+          fame = false
+        }
       }
     })
+
+    this.router.navigate(['/Analyrequehome'])
   }
 
 

@@ -47,5 +47,8 @@ export class EstiCostComponent implements OnInit {
       width : '500px'})
     
   }
+  GoAswer(){
+    this.router.navigate(['/AnswerPage']) 
+  }
 
 }

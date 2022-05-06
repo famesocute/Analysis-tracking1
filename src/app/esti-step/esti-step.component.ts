@@ -59,6 +59,10 @@ export class EstiStepComponent implements OnInit {
   GoEstiCost(){
     this.router.navigate(['/Esticost']) 
   }
+  
+  GoAswer(){
+    this.router.navigate(['/AnswerPage']) 
+  }
 
   // Add input
   quantities(): FormArray {

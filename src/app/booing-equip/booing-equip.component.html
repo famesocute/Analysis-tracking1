@@ -221,6 +221,34 @@
                       </div>
                 </mat-card-content>
             </mat-card>
+
+            <div class="solution">
+                <mat-horizontal-stepper #stepper>
+                  <mat-step>
+                    Step 1
+                  </mat-step>
+                  <mat-step>
+                    Step 2
+                  </mat-step>
+                  <mat-step>
+                    Step 3
+                  </mat-step>
+                  <!-- one option -->
+                  
+                </mat-horizontal-stepper>
+                
+                <!-- second option -->
+                <div>
+                  <button (click)="goBack(stepper)" type="button" >Back</button>
+                  <button (click)="goForward(stepper)" type="button" >Next</button>
+                
+                  <!-- using totalStepsCount -->
+                  <!-- <button (click)="goForward(stepper)" type="button" [disabled]="stepper.selectedIndex === totalStepsCount-1">Next</button> -->
+                </div>
+                <!--------------------------------------------------------------------------------------->
+                
+                </div>
+
         </div>
         <div class="col-sm-1">
         </div>

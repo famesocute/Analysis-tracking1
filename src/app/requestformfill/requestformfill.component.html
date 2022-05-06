@@ -830,18 +830,28 @@
                   </mat-form-field>
                 </td>
                 <td>
-                  <form class="example-form">
-                    <mat-form-field class="example-full-width " appearance="outline">
-                      <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.ccIssuer">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{option}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </form>
+                  <form [formGroup]="productForm">
+                  <table class="table  border-dark " formArrayName="quantities">
+                    <tbody>
+                      <td>
+                      <form class="example-form">
+                        <mat-form-field class="example-full-width " appearance="outline">
+                          <mat-label>Select Name</mat-label>
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                            [matAutocomplete]="auto" [(ngModel)]="this.ccIssuer">
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
+                    </td>
+                    </tbody>
+                  </table>
+                </form>
+
+                  
 
               </tr>
               <tr>
