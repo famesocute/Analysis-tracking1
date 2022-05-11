@@ -21,7 +21,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { HttpClientModule } from '@angular/common/http';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,6 +38,9 @@ import { CSresultComponent } from './csresult/csresult.component';
 import { SteppaddingComponent } from './steppadding/steppadding.component';
 import { EstiStepComponent } from './esti-step/esti-step.component';
 import { EstiCostComponent } from './esti-cost/esti-cost.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
+import { AnalyrequehomeListComponent } from './dialog/analyrequehome-list/analyrequehome-list.component';
 
 
 @NgModule({
@@ -54,6 +57,9 @@ import { EstiCostComponent } from './esti-cost/esti-cost.component';
     SteppaddingComponent,
     EstiStepComponent,
     EstiCostComponent,
+    SignupComponent,
+    LoginComponent,
+    AnalyrequehomeListComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +87,7 @@ import { EstiCostComponent } from './esti-cost/esti-cost.component';
     HttpClientModule,
     MatExpansionModule,
     MatDialogModule,
+    MatTabsModule,
 
   ],
   providers: [],

@@ -20,6 +20,7 @@ export class RequestformfillComponent implements OnInit {
     'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>'];
   filteredOptions!: Observable<string[]>;
 
+
   RequestNo = ""
   Title = ""
   Background = ""
@@ -51,9 +52,10 @@ export class RequestformfillComponent implements OnInit {
   KeywordPheno = ""
   NameIssuer = ""
   ComIssuer = ""
-  ccIssuer = ""
+  ccIssuer1 = ""
+  ccIssuer2 = ""
   NameConfirm = ""
-  NameControl = ""
+  NameControl = "Wanutsanun Hintuang <wanutsanun.hin@murata.com>"
   month = ""
 
   activate: boolean = false
@@ -85,8 +87,8 @@ export class RequestformfillComponent implements OnInit {
 
   constructor(public router: Router, private fb: FormBuilder, public productService: ProductService) {
     this.productForm = this.fb.group({
-
       quantities: this.fb.array([]),
+      quantitiesCC: this.fb.array([]),
     });
   }
 
@@ -96,7 +98,7 @@ export class RequestformfillComponent implements OnInit {
       map(value => this._filter(value)),
     );
     this.quantities().push(this.newQuantity());
-
+   
 
   }
 
@@ -104,6 +106,7 @@ export class RequestformfillComponent implements OnInit {
   quantities(): FormArray {
     return this.productForm.get("quantities") as FormArray
   }
+  
 
   newQuantity(): FormGroup {
     return this.fb.group({
@@ -121,12 +124,18 @@ export class RequestformfillComponent implements OnInit {
     this.quantities().removeAt(i);
   }
 
+  
+
   // seach box
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    
   }
+
+  // seach controler
+  
   // Navi to Question
   NavQuestion() {
     this.router.navigate(['/Question'])
@@ -161,9 +170,21 @@ export class RequestformfillComponent implements OnInit {
     }
   }
 
-
+check(){
+  
+}
   display() {
+    var DatereceiveSam = ""
+    var Sendsampledate2 = this.Sendsampledate.toLocaleString()
+     DatereceiveSam = Sendsampledate2.substring(0, 9)
+     console.log(DatereceiveSam)
 
+    var DateEepectSam = ""
+    var DateEepectSam2 = this.EepectedDate.toLocaleString()
+    DateEepectSam = DateEepectSam2.substring(0, 9)
+     console.log(DateEepectSam)
+
+    
     var val2 = ""
 
     for (var val in this.productForm.value.quantities) {
@@ -183,9 +204,9 @@ export class RequestformfillComponent implements OnInit {
       "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " +
       " VALUES ('" + this.RequestNo + "', '" + this.month + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
       " '" + this.Analysistype2 + "', '" + this.IssueDate + "', '" + this.Requester + "', '" + this.Phone + "', '" + this.Department + "', '" + this.Product + "','1', '" + this.RequestTech + "', '" + this.RequestTech2 + "'," +
-      " '" + this.Numsample + "', '" + this.Sendsampledate + "', '" + this.EepectedDate + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
+      " '" + this.Numsample + "', '" + DatereceiveSam + "', '" + DateEepectSam + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
       " '" + this.AnaComment + "', '" + this.Dangerous + "', '" + this.SamAftertest + "', '" + this.Relatedmatters + "', '" + this.KeywordCharact + "', '" + this.KeywordState + "', '" + this.KeywordPheno + "', " +
-      " '', '" + this.NameIssuer + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.ccIssuer + "'  );"
+      " '', '" + this.NameIssuer + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.ccIssuer1 + "'  );"
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
@@ -211,13 +232,13 @@ export class RequestformfillComponent implements OnInit {
 
       var date2 = date.toLocaleString()
       this.IssueDate = date2
+
       var years = date2.substring(6, 8)
 
       const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
       const d = new Date();
       this.month = months[d.getMonth()];
-
 
       console.log(date2);
       console.log(years);

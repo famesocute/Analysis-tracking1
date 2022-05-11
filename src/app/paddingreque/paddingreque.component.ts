@@ -18,6 +18,7 @@ export class PaddingrequeComponent implements OnInit {
   ComConfirm=""
   ccConfirm=""
   DataRes : any
+  message = ""
  
 
   
@@ -31,15 +32,18 @@ export class PaddingrequeComponent implements OnInit {
 
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog) {
    }
-
+   loading = true
   ngOnInit(): void {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
-    this.productService.TRACKING_ANALYSIS_SELECT_ALL().subscribe((data: {}) => {
+    this.productService.currentMessage.subscribe(message => this.message = message)
+   
+    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
+      this.loading = false
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
     })
     
   }

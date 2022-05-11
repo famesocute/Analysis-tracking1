@@ -1,619 +1,620 @@
 <body>
-<div class="container-fluid">
-  <div class="border-bottom Toolbar">
+  <div class="container-fluid">
+    <div class="border-bottom Toolbar">
+      <div class="row">
+        <div class="col-xl-1"></div>
+        <div class="col-xl-8 center" style="padding :15px 0 ;">
+          <button mat-button>Home</button>
+          <button mat-button>Analysis request form</button>
+          <button mat-button>Equipment Calendar</button>
+          <button mat-button>Job tracking</button>
+          <button mat-button>Search previous report</button>
+        </div>
+        <div class="col-xl-2 center ">
+          <button mat-raised-button color="primary">Login</button>
+          <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
-      <div class="col-xl-1"></div>
-      <div class="col-xl-8 center" style="padding :15px 0 ;">
-        <button mat-button>Home</button>
-        <button mat-button>Analysis request form</button>
-        <button mat-button>Equipment Calendar</button>
-        <button mat-button>Job tracking</button>
-        <button mat-button>Search previous report</button>
+      <div class="col-sm-1">
+
       </div>
-      <div class="col-xl-2 center ">
-        <button mat-raised-button color="primary">Login</button>
-        <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col-sm-1">
+      <div class="col-sm-10">
+        <div style=" padding-top: 60px;" class=" font1 center mat-display-3">Request Form</div>
 
-    </div>
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Analysis request form</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="form-group input1">
+                  <label for="Title"><b>Title:</b></label>
+                  <input type="Title" class="form-control" id="Title" [(ngModel)]="this.Title">
+                </div>
+                <div class="form-group input1">
+                  <label for="Background"><b>Background:</b></label>
+                  <textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.Background"> </textarea>
+                </div>
+                <div class="form-group input1">
+                  <label for="Purpose"><b>Purpose:</b></label>
+                  <textarea class="form-control" rows="3" id="Purpose" [(ngModel)]="this.Purpose"></textarea>
+                </div>
+                <div class="form-group input1">
+                  <label for="Hypothesis"><b>Hypothesis:</b></label>
+                  <textarea class="form-control" rows="3" id="Hypothesis" [(ngModel)]="this.Hypothesis"></textarea>
+                </div>
 
-    <div class="col-sm-10">
-      <div style=" padding-top: 60px;" class=" font1 center mat-display-3">Request Form</div>
-
-      <mat-card class="card1">
-        <mat-card-title-group>
-          <mat-card-title>Analysis request form</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-          <div class="row">
-            <div class="col-sm-8">
-              <div class="form-group input1">
-                <label for="Title"><b>Title:</b></label>
-                <input type="Title" class="form-control" id="Title" [(ngModel)]="this.Title">
-              </div>
-              <div class="form-group input1">
-                <label for="Background"><b>Background:</b></label>
-                <textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.Background"> </textarea>
-              </div>
-              <div class="form-group input1">
-                <label for="Purpose"><b>Purpose:</b></label>
-                <textarea class="form-control" rows="3" id="Purpose" [(ngModel)]="this.Purpose"></textarea>
-              </div>
-              <div class="form-group input1">
-                <label for="Hypothesis"><b>Hypothesis:</b></label>
-                <textarea class="form-control" rows="3" id="Hypothesis" [(ngModel)]="this.Hypothesis"></textarea>
-              </div>
-
-              <label for="comment" class="font-weight-bold"><b> Analysis type</b></label>
-              <div style=" padding: 10px; ">
-                <div class="row">
-                  <div class="col-sm-1">RankA:</div>
-                  <div class="col-sm-11">
-                    <div class="form-check-inline">
-                      <label class="form-check-label" for="radio1">
-                        <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1"
-                          (click)="getdata('Customercomplaint')">Customer complaint
-                      </label>
+                <label for="comment" class="font-weight-bold"><b> Analysis type</b></label>
+                <div style=" padding: 10px; ">
+                  <div class="row">
+                    <div class="col-sm-1">RankA:</div>
+                    <div class="col-sm-11">
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio1">
+                          <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1"
+                            (click)="getdata('Customercomplaint')">Customer complaint
+                        </label>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-1">RankB:</div>
-                  <div class="col-sm-11">
-                    <div class="form-check-inline">
-                      <label class="form-check-label" for="radio2">
-                        <input type="radio" class="form-check-input" id="radio2" name="Analysistype1" value="option2"
-                          (click)="getdata('NC/Reject')">NC/Reject
-                      </label>
-                    </div>
-                    <div class="form-check-inline">
-                      <label class="form-check-label" for="radio3">
-                        <input type="radio" class="form-check-input" id="radio3" name="Analysistype1" value="option3"
-                          (click)="getdata('Defective')">Defective
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-1">RankC:</div>
-                  <div class="col-sm-11">
-                    <div class="form-check-inline">
-                      <label class="form-check-label" for="radio4">
-                        <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4"
-                          (click)="getdata('Materialevaluation')">Material evaluation
-                      </label>
-                    </div>
-                    <div class="form-check-inline">
-                      <label class="form-check-label" for="radio5">
-                        <input type="radio" class="form-check-input" id="radio5" name="Analysistype1" value="option5"
-                          (click)="getdata('Processevaluation')">Process evaluation
-                      </label>
-                    </div>
-                    <div class="form-check-inline">
-                      <label class="form-check-label" for="radio6">
-                        <input type="radio" class="form-check-input" id="radio6" name="Analysistype1" value="option6"
-                          (click)="getdata('Productevaluation')">Product evaluation
-                      </label>
+                  <div class="row">
+                    <div class="col-sm-1">RankB:</div>
+                    <div class="col-sm-11">
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio2">
+                          <input type="radio" class="form-check-input" id="radio2" name="Analysistype1" value="option2"
+                            (click)="getdata('NC/Reject')">NC/Reject
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio3">
+                          <input type="radio" class="form-check-input" id="radio3" name="Analysistype1" value="option3"
+                            (click)="getdata('Defective')">Defective
+                        </label>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-1">RankD:</div>
-                  <div class="col-sm-11">
-                    <div class="form-check-inline">
-                      <label class="form-check-label" for="radio7">
-                        <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7"
-                          (click)="getdata('RoHS')">RoHS Spacial
-                      </label>
+                  <div class="row">
+                    <div class="col-sm-1">RankC:</div>
+                    <div class="col-sm-11">
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio4">
+                          <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4"
+                            (click)="getdata('Materialevaluation')">Material evaluation
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio5">
+                          <input type="radio" class="form-check-input" id="radio5" name="Analysistype1" value="option5"
+                            (click)="getdata('Processevaluation')">Process evaluation
+                        </label>
+                      </div>
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio6">
+                          <input type="radio" class="form-check-input" id="radio6" name="Analysistype1" value="option6"
+                            (click)="getdata('Productevaluation')">Product evaluation
+                        </label>
+                      </div>
                     </div>
-                    <div class="col-sm-5">
-                      <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option8"
-                        (click)="activate = true">
-                      <label class="form-check-label" for="radio7"> Other analysis type </label>
-                    </div>
-                    <div class="col-sm-7">
-                      <div *ngIf="activate">
-                        <div class="input3">
-                          <input type="text" id="disabledTextInput" class="form-control"
-                            [(ngModel)]="this.Analysistype2" (keyup)="display()">
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-1">RankD:</div>
+                    <div class="col-sm-11">
+                      <div class="form-check-inline">
+                        <label class="form-check-label" for="radio7">
+                          <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7"
+                            (click)="getdata('RoHS')">RoHS Spacial
+                        </label>
+                      </div>
+                      <div class="col-sm-5">
+                        <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option8"
+                          (click)="activate = true">
+                        <label class="form-check-label" for="radio7"> Other analysis type </label>
+                      </div>
+                      <div class="col-sm-7">
+                        <div *ngIf="activate">
+                          <div class="input3">
+                            <input type="text" id="disabledTextInput" class="form-control"
+                              [(ngModel)]="this.Analysistype2" (keyup)="display()">
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+
+
               </div>
+              <div class="col-sm-4">
+                <h4 style=" margin-top:30px "><b>Issue Date:</b></h4>
+                <form class="example-form">
+                  <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Requester</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.Requester">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
 
-
-            </div>
-            <div class="col-sm-4">
-              <h4 style=" margin-top:30px "><b>Issue Date:</b></h4>
-              <form class="example-form">
-                <mat-form-field class="example-full-width " appearance="outline">
-                  <mat-label>Requester</mat-label>
-                  <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                    [matAutocomplete]="auto" [(ngModel)]="this.Requester">
-                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                      {{option}}
-                    </mat-option>
-                  </mat-autocomplete>
+                <div class="row">
+                  <div class=" col-sm-2">
+                    <p class="centercolumn"><b>Phone:</b></p>
+                  </div>
+                  <div class="input2 col-sm-10">
+                    <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Phone">
+                  </div>
+                </div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Department</mat-label>
+                  <mat-select [(ngModel)]="this.Department">
+                    <mat-option value="MT100">MT100</mat-option>
+                    <mat-option value="MT300">MT300</mat-option>
+                    <mat-option value="MT400">MT400</mat-option>
+                    <mat-option value="MT500">MT500</mat-option>
+                    <mat-option value="MT600">MT600</mat-option>
+                    <mat-option value="MT700">MT700</mat-option>
+                    <mat-option value="MT800">MT800</mat-option>
+                    <mat-option value="MT900">MT900</mat-option>
+                    <mat-option value="SGA">SGA</mat-option>
+                  </mat-select>
                 </mat-form-field>
-              </form>
 
-              <div class="row">
-                <div class=" col-sm-2">
-                  <p class="centercolumn"><b>Phone:</b></p>
-                </div>
-                <div class="input2 col-sm-10">
-                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Phone">
-                </div>
+                <mat-form-field appearance="outline">
+                  <mat-label>Product</mat-label>
+                  <mat-select [(ngModel)]="this.Product">
+                    <mat-option value="MLCC">MLCC</mat-option>
+                    <mat-option value="BLM">BLM</mat-option>
+                    <mat-option value="MAWTR">MAWTR</mat-option>
+                    <mat-option value="MAOPN">MAOPN</mat-option>
+                    <mat-option value="MKVLED">MKVLED</mat-option>
+                    <mat-option value="SMD">SMD</mat-option>
+                    <mat-option value="PAC">PAC</mat-option>
+                    <mat-option value="METAL PLATE">METAL PLATE</mat-option>
+                    <mat-option value="PLASTIC INJECTION">PLASTIC INJECTION</mat-option>
+                    <mat-option value="MACHINE PART">MACHINE PART</mat-option>
+                    <mat-option value="TERMINAL">TERMINAL</mat-option>
+                    <mat-option value="PRECISION PARTS">PRECISION PARTS</mat-option>
+                    <mat-option value="CUTTING BLADE">CUTTING BLADE</mat-option>
+                    <mat-option value="LLHP">LLHP</mat-option>
+                    <mat-option value="BUZZER">BUZZER</mat-option>
+                    <mat-option value="MICRO BROWER">MICRO BROWER</mat-option>
+                    <mat-option value="AIR PUMP">AIR PUMP</mat-option>
+                    <mat-option value="YM00">YM00</mat-option>
+                    <mat-option value="MGSSR">MGSSR</mat-option>
+                    <mat-option value="REDSSR">REDSSR</mat-option>
+                    <mat-option value="CAPGL">CAPGL</mat-option>
+                    <mat-option value="AXIAL">AXIAL</mat-option>
+                    <mat-option value="LP-DCM">LP-DCM</mat-option>
+                    <mat-option value="CILANT">CILANT</mat-option>
+                    <mat-option value="TKANTB">TKANTB</mat-option>
+                    <mat-option value="TKANTC">TKANTC</mat-option>
+                    <mat-option value="MONOBK">MONOBK</mat-option>
+                    <mat-option value="PSiP">PSiP</mat-option>
+                    <mat-option value="PS-MOD">PS-MOD</mat-option>
+                    <mat-option value="MME671">MME671</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-card class="cardAT">
+                  <mat-card-title>Attached file</mat-card-title>
+                  <mat-card-subtitle>(Specific experiment design/photo/concerned information)
+                  </mat-card-subtitle>
+                  <mat-card-actions>
+                    <button mat-button>CLICK</button>
+                  </mat-card-actions>
+                </mat-card>
               </div>
-              <mat-form-field appearance="outline">
-                <mat-label>Department</mat-label>
-                <mat-select [(ngModel)]="this.Department">
-                  <mat-option value="MT100">MT100</mat-option>
-                  <mat-option value="MT300">MT300</mat-option>
-                  <mat-option value="MT400">MT400</mat-option>
-                  <mat-option value="MT500">MT500</mat-option>
-                  <mat-option value="MT600">MT600</mat-option>
-                  <mat-option value="MT700">MT700</mat-option>
-                  <mat-option value="MT800">MT800</mat-option>
-                  <mat-option value="MT900">MT900</mat-option>
-                  <mat-option value="SGA">SGA</mat-option>
-                </mat-select>
-              </mat-form-field>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Request Analysis Techniques</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <!-- Structure select -->
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="comment" class="font-weight-bold"> <b>Structure analysis : </b></label>
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[0].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        X-ray 2D
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="Tech[1].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        X-ray 3D
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[2].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        SEM-Microscope
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="Tech[3].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        Cross section
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[4].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Ion-milling
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="Tech[5].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        VHX
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[6].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Metallurgical Microscope
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Product</mat-label>
-                <mat-select [(ngModel)]="this.Product">
-                  <mat-option value="MLCC">MLCC</mat-option>
-                  <mat-option value="BLM">BLM</mat-option>
-                  <mat-option value="MAWTR">MAWTR</mat-option>
-                  <mat-option value="MAOPN">MAOPN</mat-option>
-                  <mat-option value="MKVLED">MKVLED</mat-option>
-                  <mat-option value="SMD">SMD</mat-option>
-                  <mat-option value="PAC">PAC</mat-option>
-                  <mat-option value="METAL PLATE">METAL PLATE</mat-option>
-                  <mat-option value="PLASTIC INJECTION">PLASTIC INJECTION</mat-option>
-                  <mat-option value="MACHINE PART">MACHINE PART</mat-option>
-                  <mat-option value="TERMINAL">TERMINAL</mat-option>
-                  <mat-option value="PRECISION PARTS">PRECISION PARTS</mat-option>
-                  <mat-option value="CUTTING BLADE">CUTTING BLADE</mat-option>
-                  <mat-option value="LLHP">LLHP</mat-option>
-                  <mat-option value="BUZZER">BUZZER</mat-option>
-                  <mat-option value="MICRO BROWER">MICRO BROWER</mat-option>
-                  <mat-option value="AIR PUMP">AIR PUMP</mat-option>
-                  <mat-option value="YM00">YM00</mat-option>
-                  <mat-option value="MGSSR">MGSSR</mat-option>
-                  <mat-option value="REDSSR">REDSSR</mat-option>
-                  <mat-option value="CAPGL">CAPGL</mat-option>
-                  <mat-option value="AXIAL">AXIAL</mat-option>
-                  <mat-option value="LP-DCM">LP-DCM</mat-option>
-                  <mat-option value="CILANT">CILANT</mat-option>
-                  <mat-option value="TKANTB">TKANTB</mat-option>
-                  <mat-option value="TKANTC">TKANTC</mat-option>
-                  <mat-option value="MONOBK">MONOBK</mat-option>
-                  <mat-option value="PSiP">PSiP</mat-option>
-                  <mat-option value="PS-MOD">PS-MOD</mat-option>
-                  <mat-option value="MME671">MME671</mat-option>
-                  <mat-option value="Other">Other</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-card class="cardAT">
-                <mat-card-title>Attached file</mat-card-title>
-                <mat-card-subtitle>(Specific experiment design/photo/concerned information)
-                </mat-card-subtitle>
-                <mat-card-actions>
-                  <button mat-button>CLICK</button>
-                </mat-card-actions>
-              </mat-card>
+              </div>
             </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-      <mat-card class="card1">
-        <mat-card-title-group>
-          <mat-card-title>Request Analysis Techniques</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-          <!-- Structure select -->
-          <div class="row">
-            <div class="col-sm-2">
-              <label for="comment" class="font-weight-bold"> <b>Structure analysis : </b></label>
-            </div>
-            <div class="col-sm-10">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[0].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      X-ray 2D
-                    </label>
+            <!-- Composition select -->
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="comment" class="font-weight-bold"><b> Composition analysis : </b></label>
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[7].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        SEM-EDX
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="Tech[8].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        SEM-Mapping
+                      </label>
+                    </div>
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                      [(ngModel)]="Tech[1].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckChecked">
-                      X-ray 3D
-                    </label>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[9].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        EDXRF
+                      </label>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[2].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      SEM-Microscope
-                    </label>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[10].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        CS Analyzer
+                      </label>
+                    </div>
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                      [(ngModel)]="Tech[3].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckChecked">
-                      Cross section
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[4].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Ion-milling
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                      [(ngModel)]="Tech[5].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckChecked">
-                      VHX
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[6].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Metallurgical Microscope
-                    </label>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[11].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        ICP
+                      </label>
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <!-- Organic select -->
+            <div class="row">
+              <div class="col-sm-2 ">
+                <label for="comment" class="font-weight-bold"><b> Organic analysis : </b></label>
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[12].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        FTIR
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[13].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        GCMS
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Thermal select -->
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="comment" class="font-weight-bold"><b> Thermal analysis : </b></label>
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[14].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        DSC
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[15].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        TG-DTA
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Other select -->
+            <div class="row">
+              <div class="col-sm-2">
+                <label for="comment" class="font-weight-bold"><b> Other analysis : </b></label>
+              </div>
+              <div class="col-sm-10">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[16].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Solder wettability
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[17].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Micro-probe
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[18].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Dust monitering
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
 
-            </div>
-          </div>
-          <!-- Composition select -->
-          <div class="row">
-            <div class="col-sm-2">
-              <label for="comment" class="font-weight-bold"><b> Composition analysis : </b></label>
-            </div>
-            <div class="col-sm-10">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[7].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      SEM-EDX
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
-                      [(ngModel)]="Tech[8].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckChecked">
-                      SEM-Mapping
-                    </label>
                   </div>
                 </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[9].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      EDXRF
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[10].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      CS Analyzer
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[11].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      ICP
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Organic select -->
-          <div class="row">
-            <div class="col-sm-2 ">
-              <label for="comment" class="font-weight-bold"><b> Organic analysis : </b></label>
-            </div>
-            <div class="col-sm-10">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[12].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      FTIR
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[13].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      GCMS
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Thermal select -->
-          <div class="row">
-            <div class="col-sm-2">
-              <label for="comment" class="font-weight-bold"><b> Thermal analysis : </b></label>
-            </div>
-            <div class="col-sm-10">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[14].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      DSC
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[15].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      TG-DTA
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Other select -->
-          <div class="row">
-            <div class="col-sm-2">
-              <label for="comment" class="font-weight-bold"><b> Other analysis : </b></label>
-            </div>
-            <div class="col-sm-10">
-              <div class="row">
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[16].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Solder wettability
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[17].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Micro-probe
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
-                      [(ngModel)]="Tech[18].check" (ngModelChange)="AnsMany()">
-                    <label class="form-check-label" for="flexCheckDefault">
-                      Dust monitering
-                    </label>
-                  </div>
-                </div>
-                <div class="col-sm-3">
 
-                </div>
-              </div>
-
-              <div class="row">
-                <div class=" col-sm-1">
-                  <p class="centercolumn">Other:</p>
-                </div>
-                <div class="input2 col-sm-11">
-                  <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="RequestTech2">
+                <div class="row">
+                  <div class=" col-sm-1">
+                    <p class="centercolumn">Other:</p>
+                  </div>
+                  <div class="input2 col-sm-11">
+                    <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="RequestTech2">
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
+          </mat-card-content>
+        </mat-card>
 
-      <mat-card class="card1">
-        <mat-card-title-group>
-          <mat-card-title>Sample Information</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="centerbox">
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Sample Information</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="centerbox">
+                  <div class="form-group" style="margin-left: 10px; ">
+                    <label for="Title"><b>Number of sample:</b></label>
+                    <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+
+                <mat-form-field color="accent" appearance="outline">
+                  <mat-label>Send sample date:</mat-label>
+                  <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Piority:</mat-label>
+                  <mat-select [(ngModel)]="this.Piority">
+                    <mat-option value="Urgent">Urgent</mat-option>
+                    <mat-option value="Normal">Normal</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field color="accent" appearance="outline">
+                  <mat-label>Expected finish date:</mat-label>
+                  <input matInput [matDatepicker]="picker2" [(ngModel)]="this.EepectedDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                </mat-form-field>
                 <div class="form-group" style="margin-left: 10px; ">
-                  <label for="Title"><b>Number of sample:</b></label>
-                  <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample">
+                  <label for="Title"><b>Reason:</b></label>
+                  <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason">
                 </div>
               </div>
             </div>
-            <div class="col-sm-4">
+            <div class="container">
 
-              <mat-form-field color="accent" appearance="outline">
-                <mat-label>Send sample date:</mat-label>
-                <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field appearance="outline">
-                <mat-label>Piority:</mat-label>
-                <mat-select [(ngModel)]="this.Piority">
-                  <mat-option value="Urgent">Urgent</mat-option>
-                  <mat-option value="Normal">Normal</mat-option>
-                </mat-select>
-              </mat-form-field>
+              <form [formGroup]="productForm">
 
+                <table formArrayName="quantities">
+                  <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+                    <td>
+                      <div class="form-group input1" style="padding: 0 20px ;">
+                        <label for="Lotno"><b>Lot no:</b></label>
+                        <input type="text" class="form-control " id="Lotno" formControlName="Lotno">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="form-group input1" style="padding: 0 20px ;">
+                        <label for="Lotno"><b>Sample name:</b></label>
+                        <input type="text" class="form-control" id="Lotno" formControlName="Samplename">
+                      </div>
+
+                    </td>
+                    <td>
+                      <div class="form-group input1" style="padding: 0 20px ;">
+                        <label for="Samplename"><b>Remarks:</b></label>
+                        <input type="Samplename" class="form-control" id="Samplename" formControlName="Remarks">
+                      </div>
+                    </td>
+                    <td style="padding-top: 20px">
+                      <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td style="padding: 10px 30px">
+                      <button mat-flat-button class="Buttonaddsam" (click)="addQuantity()"> + Add Sample </button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </table>
+              </form>
             </div>
-            <div class="col-sm-4">
-              <mat-form-field color="accent" appearance="outline">
-                <mat-label>Expected finish date:</mat-label>
-                <input matInput [matDatepicker]="picker2" [(ngModel)]="this.EepectedDate">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2 color="primary"></mat-datepicker>
-              </mat-form-field>
-              <div class="form-group" style="margin-left: 10px; ">
-                <label for="Title"><b>Reason:</b></label>
-                <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason">
+            <button (click)="check()">click</button>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="form-group input1">
+              <textarea class="form-control" rows="3" id="AnaComment" [(ngModel)]="this.AnaComment"></textarea>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Attention: Are dangerous or ESD substance included?</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <!-- Dangerous -->
+            <div class=" col-sm-12 ">
+              <div class="form-check-inline">
+                <label class="form-check-label textbig" for="radio1">
+                  <input type="radio" class="form-check-input" id="radio1" name="optradio2" value="option1"
+                    (click)="getdatadan('Dangerous')"> Dangerous
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label textbig" for="radio2">
+                  <input type="radio" class="form-check-input" id="radio2" name="optradio2" value="option2"
+                    (click)="getdatadan('Poisonous')"> Poisonous
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label textbig" for="radio3">
+                  <input type="radio" class="form-check-input" id="radio3" name="optradio2" value="option3"
+                    (click)="getdatadan('Deleterious')"> Deleterious
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label textbig" for="radio4">
+                  <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+                    (click)="getdatadan('Heavy metal')"> Heavy metal
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label textbig" for="radio4">
+                  <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+                    (click)="getdatadan('ESD')"> ESD
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label textbig" for="radio4">
+                  <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+                    (click)="getdatadan('No')"> No
+                </label>
               </div>
             </div>
-          </div>
-          <div class="container">
+            <!-- Sample after tested -->
+            <div class=" col-sm-12">
+              <label for="comment" class="font-weight-bold textbig" style=" margin-right: 10px"><b> Sample after tested:
+                </b></label>
 
-            <form [formGroup]="productForm">
+              <div class="form-check-inline">
+                <label class="form-check-label textbig" for="radio1">
+                  <input type="radio" class="form-check-input" id="radio1" name="optradio3" value="option1"
+                    (click)="getdataSamAf('Dispose sample')"> Dispose sample
+                </label>
+              </div>
+              <div class="form-check-inline">
+                <label class="form-check-label textbig" for="radio2">
+                  <input type="radio" class="form-check-input" id="radio2" name="optradio3" value="option2"
+                    (click)="getdataSamAf('ReturnResidualSample')">Return Residual Sample
+                </label>
+              </div>
+            </div>
 
-              <table formArrayName="quantities">
-                <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
-                  <td>
-                    <div class="form-group input1" style="padding: 0 20px ;">
-                      <label for="Lotno"><b>Lot no:</b></label>
-                      <input type="text" class="form-control " id="Lotno" formControlName="Lotno">
-                    </div>
-                  </td>
-                  <td>
-                    <div class="form-group input1" style="padding: 0 20px ;">
-                      <label for="Lotno"><b>Sample name:</b></label>
-                      <input type="text" class="form-control" id="Lotno" formControlName="Samplename">
-                    </div>
-
-                  </td>
-                  <td>
-                    <div class="form-group input1" style="padding: 0 20px ;">
-                      <label for="Samplename"><b>Remarks:</b></label>
-                      <input type="Samplename" class="form-control" id="Samplename" formControlName="Remarks">
-                    </div>
-                  </td>
-                  <td style="padding-top: 20px">
-                    <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td style="padding: 10px 30px">
-                    <button mat-flat-button class="Buttonaddsam" (click)="addQuantity()"> + Add Sample </button>
-                  </td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </table>
-            </form>
-          </div>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="card1">
-        <mat-card-title-group>
-          <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-          <div class="form-group input1">
-            <textarea class="form-control" rows="3" id="AnaComment" [(ngModel)]="this.AnaComment"></textarea>
-          </div>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-card class="card1">
-        <mat-card-title-group>
-          <mat-card-title>Attention: Are dangerous or ESD substance included?</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-          <!-- Dangerous -->
-          <div class=" col-sm-12 ">
-            <div class="form-check-inline">
-              <label class="form-check-label textbig" for="radio1">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio2" value="option1"
-                  (click)="getdatadan('Dangerous')"> Dangerous
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label textbig" for="radio2">
-                <input type="radio" class="form-check-input" id="radio2" name="optradio2" value="option2"
-                  (click)="getdatadan('Poisonous')"> Poisonous
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label textbig" for="radio3">
-                <input type="radio" class="form-check-input" id="radio3" name="optradio2" value="option3"
-                  (click)="getdatadan('Deleterious')"> Deleterious
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label textbig" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
-                  (click)="getdatadan('Heavy metal')"> Heavy metal
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label textbig" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
-                  (click)="getdatadan('ESD')"> ESD
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label textbig" for="radio4">
-                <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
-                  (click)="getdatadan('No')"> No
-              </label>
-            </div>
-          </div>
-          <!-- Sample after tested -->
-          <div class=" col-sm-12">
-            <label for="comment" class="font-weight-bold textbig" style=" margin-right: 10px"><b> Sample after tested:
-              </b></label>
-
-            <div class="form-check-inline">
-              <label class="form-check-label textbig" for="radio1">
-                <input type="radio" class="form-check-input" id="radio1" name="optradio3" value="option1"
-                  (click)="getdataSamAf('Dispose sample')"> Dispose sample
-              </label>
-            </div>
-            <div class="form-check-inline">
-              <label class="form-check-label textbig" for="radio2">
-                <input type="radio" class="form-check-input" id="radio2" name="optradio3" value="option2"
-                  (click)="getdataSamAf('ReturnResidualSample')">Return Residual Sample
-              </label>
-            </div>
-          </div>
-
-        </mat-card-content>
-      </mat-card>
-      <!-- <mat-card class="card1">
+          </mat-card-content>
+        </mat-card>
+        <!-- <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Related matters</mat-card-title>
         </mat-card-title-group>
@@ -664,102 +665,102 @@
         </mat-card-content>
       </mat-card> -->
 
-      <mat-card class="card1">
-        <mat-card-title-group>
-          <mat-card-title>Keywords for searching</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-          <div class="row" style=" margin-left: 10px; margin-right: 10px;">
-            <div class="col-sm-4">
-              <mat-form-field appearance="outline">
-                <mat-label>Characteristic:</mat-label>
-                <mat-select [(ngModel)]="KeywordCharact">
-                  <mat-option value="Adhesive">Adhesive</mat-option>
-                  <mat-option value="Binder">Binder</mat-option>
-                  <mat-option value="Detergent">Detergent</mat-option>
-                  <mat-option value="Electrode">Electrode</mat-option>
-                  <mat-option value="Filler">Filler</mat-option>
-                  <mat-option value="Flux">Flux</mat-option>
-                  <mat-option value="Glass">Glass</mat-option>
-                  <mat-option value="Insulator">Insulator</mat-option>
-                  <mat-option value="Magnetic material">Magnetic material</mat-option>
-                  <mat-option value="Metal">Metal</mat-option>
-                  <mat-option value="Paste">Paste</mat-option>
-                  <mat-option value="Piezoelectric">Piezoelectric</mat-option>
-                  <mat-option value="Plating solution">Plating solution</mat-option>
-                  <mat-option value="Printing ink">Printing ink</mat-option>
-                  <mat-option value="Raw material">Raw material</mat-option>
-                  <mat-option value="Resin">Resin</mat-option>
-                  <mat-option value="Resist">Resist</mat-option>
-                  <mat-option value="Semiconductor">Semiconductor</mat-option>
-                  <mat-option value="Solder">Solder</mat-option>
-                  <mat-option value="Solvent">Solvent</mat-option>
-                  <mat-option value="Varnish">Varnish</mat-option>
-                  <mat-option value="Waste water">Waste water</mat-option>
-                  <mat-option value="Wax">Wax</mat-option>
-                  <mat-option value="Oil">Oil</mat-option>
-                  <mat-option value="Painting">Painting</mat-option>
-                  <mat-option value="Other">Other</mat-option>
-                </mat-select>
-              </mat-form-field>
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Keywords for searching</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="row" style=" margin-left: 10px; margin-right: 10px;">
+              <div class="col-sm-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Characteristic:</mat-label>
+                  <mat-select [(ngModel)]="KeywordCharact">
+                    <mat-option value="Adhesive">Adhesive</mat-option>
+                    <mat-option value="Binder">Binder</mat-option>
+                    <mat-option value="Detergent">Detergent</mat-option>
+                    <mat-option value="Electrode">Electrode</mat-option>
+                    <mat-option value="Filler">Filler</mat-option>
+                    <mat-option value="Flux">Flux</mat-option>
+                    <mat-option value="Glass">Glass</mat-option>
+                    <mat-option value="Insulator">Insulator</mat-option>
+                    <mat-option value="Magnetic material">Magnetic material</mat-option>
+                    <mat-option value="Metal">Metal</mat-option>
+                    <mat-option value="Paste">Paste</mat-option>
+                    <mat-option value="Piezoelectric">Piezoelectric</mat-option>
+                    <mat-option value="Plating solution">Plating solution</mat-option>
+                    <mat-option value="Printing ink">Printing ink</mat-option>
+                    <mat-option value="Raw material">Raw material</mat-option>
+                    <mat-option value="Resin">Resin</mat-option>
+                    <mat-option value="Resist">Resist</mat-option>
+                    <mat-option value="Semiconductor">Semiconductor</mat-option>
+                    <mat-option value="Solder">Solder</mat-option>
+                    <mat-option value="Solvent">Solvent</mat-option>
+                    <mat-option value="Varnish">Varnish</mat-option>
+                    <mat-option value="Waste water">Waste water</mat-option>
+                    <mat-option value="Wax">Wax</mat-option>
+                    <mat-option value="Oil">Oil</mat-option>
+                    <mat-option value="Painting">Painting</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>State:</mat-label>
+                  <mat-select [(ngModel)]="KeywordState">
+                    <mat-option value="Boundary">Boundary</mat-option>
+                    <mat-option value="Chip">Chip</mat-option>
+                    <mat-option value="Film">Film</mat-option>
+                    <mat-option value="Gas">Gas</mat-option>
+                    <mat-option value="Jig">Jig</mat-option>
+                    <mat-option value="Liquid">Liquid</mat-option>
+                    <mat-option value="Multilayer">Multilayer</mat-option>
+                    <mat-option value="Powder">Powder</mat-option>
+                    <mat-option value="Paste">Paste</mat-option>
+                    <mat-option value="Plate">Plate</mat-option>
+                    <mat-option value="Sheet">Sheet</mat-option>
+                    <mat-option value="Slurry">Slurry</mat-option>
+                    <mat-option value="Substate">Substate</mat-option>
+                    <mat-option value="Unit">Unit</mat-option>
+                    <mat-option value="Wire">Wire</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Phenomena:</mat-label>
+                  <mat-select [(ngModel)]="KeywordPheno">
+                    <mat-option value="Discolor">Discolor</mat-option>
+                    <mat-option value="Change in form">Change in form</mat-option>
+                    <mat-option value="Chemical state">Chemical state</mat-option>
+                    <mat-option value="Composition">Composition</mat-option>
+                    <mat-option value="Contamination">Contamination</mat-option>
+                    <mat-option value="Corrosion">Corrosion</mat-option>
+                    <mat-option value="Crack">Crack</mat-option>
+                    <mat-option value="Deformation">Deformation</mat-option>
+                    <mat-option value="Detachment">Detachment</mat-option>
+                    <mat-option value="Diffusion">Diffusion</mat-option>
+                    <mat-option value="Electrical characteristics">Electrical characteristics</mat-option>
+                    <mat-option value="Element distribution">Element distribution</mat-option>
+                    <mat-option value="Foreign object">Foreign object</mat-option>
+                    <mat-option value="Migration">Migration</mat-option>
+                    <mat-option value="Oxidization">Oxidization</mat-option>
+                    <mat-option value="Pore/Void">Pore/Void</mat-option>
+                    <mat-option value="Residue">Residue</mat-option>
+                    <mat-option value="Segregation">Segregation</mat-option>
+                    <mat-option value="Stress">Stress</mat-option>
+                    <mat-option value="Structure change">Structure change</mat-option>
+                    <mat-option value="Surface">Surface</mat-option>
+                    <mat-option value="Thermal properties change">Thermal properties change</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
             </div>
-            <div class="col-sm-4">
-              <mat-form-field appearance="outline">
-                <mat-label>State:</mat-label>
-                <mat-select [(ngModel)]="KeywordState">
-                  <mat-option value="Boundary">Boundary</mat-option>
-                  <mat-option value="Chip">Chip</mat-option>
-                  <mat-option value="Film">Film</mat-option>
-                  <mat-option value="Gas">Gas</mat-option>
-                  <mat-option value="Jig">Jig</mat-option>
-                  <mat-option value="Liquid">Liquid</mat-option>
-                  <mat-option value="Multilayer">Multilayer</mat-option>
-                  <mat-option value="Powder">Powder</mat-option>
-                  <mat-option value="Paste">Paste</mat-option>
-                  <mat-option value="Plate">Plate</mat-option>
-                  <mat-option value="Sheet">Sheet</mat-option>
-                  <mat-option value="Slurry">Slurry</mat-option>
-                  <mat-option value="Substate">Substate</mat-option>
-                  <mat-option value="Unit">Unit</mat-option>
-                  <mat-option value="Wire">Wire</mat-option>
-                  <mat-option value="Other">Other</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col-sm-4">
-              <mat-form-field appearance="outline">
-                <mat-label>Phenomena:</mat-label>
-                <mat-select [(ngModel)]="KeywordPheno">
-                  <mat-option value="Discolor">Discolor</mat-option>
-                  <mat-option value="Change in form">Change in form</mat-option>
-                  <mat-option value="Chemical state">Chemical state</mat-option>
-                  <mat-option value="Composition">Composition</mat-option>
-                  <mat-option value="Contamination">Contamination</mat-option>
-                  <mat-option value="Corrosion">Corrosion</mat-option>
-                  <mat-option value="Crack">Crack</mat-option>
-                  <mat-option value="Deformation">Deformation</mat-option>
-                  <mat-option value="Detachment">Detachment</mat-option>
-                  <mat-option value="Diffusion">Diffusion</mat-option>
-                  <mat-option value="Electrical characteristics">Electrical characteristics</mat-option>
-                  <mat-option value="Element distribution">Element distribution</mat-option>
-                  <mat-option value="Foreign object">Foreign object</mat-option>
-                  <mat-option value="Migration">Migration</mat-option>
-                  <mat-option value="Oxidization">Oxidization</mat-option>
-                  <mat-option value="Pore/Void">Pore/Void</mat-option>
-                  <mat-option value="Residue">Residue</mat-option>
-                  <mat-option value="Segregation">Segregation</mat-option>
-                  <mat-option value="Stress">Stress</mat-option>
-                  <mat-option value="Structure change">Structure change</mat-option>
-                  <mat-option value="Surface">Surface</mat-option>
-                  <mat-option value="Thermal properties change">Thermal properties change</mat-option>
-                  <mat-option value="Other">Other</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-          </div>
-        </mat-card-content>
-      </mat-card>
-      <!-- <mat-card class="card1">
+          </mat-card-content>
+        </mat-card>
+        <!-- <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Question and Answer form</mat-card-title>
         </mat-card-title-group>
@@ -788,57 +789,33 @@
         </mat-card-content>
       </mat-card> -->
 
-      <mat-card class="card1">
-        <mat-card-title-group>
-          <mat-card-title>Review Information</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-           <div class="tablestyle">
-          <table class="table  border-dark ">
-            <thead>
-              <tr>
-                <th class="Titlereview">Task</th>
-                <th class="Titlereview">Process</th>
-                <th class="Titlereview">Name</th>
-                <th class="Titlereview">Processing date&time</th>
-                <th class="Titlereview">Comment</th>
-                <th class="Titlereview">cc</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th> Pending request</th>
-                <td>Issuer</td>
-                <td>
-                  <form class="example-form">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                      <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.NameIssuer">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{option}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </form>
-                <td></td>
-                <td>
-                  <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Leave a comment</mat-label>
-                    <textarea matInput [(ngModel)]="this.ComIssuer"></textarea>
-                  </mat-form-field>
-                </td>
-                <td>
-                  <form [formGroup]="productForm">
-                  <table class="table  border-dark " formArrayName="quantities">
-                    <tbody>
-                      <td>
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Review Information</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="tablestyle">
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th class="Titlereview">Task</th>
+                    <th class="Titlereview">Process</th>
+                    <th class="Titlereview">Name</th>
+                    <th class="Titlereview">Processing date&time</th>
+                    <th class="Titlereview">Comment</th>
+                    <th class="Titlereview">cc</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th> Pending request</th>
+                    <td>Issuer</td>
+                    <td>
                       <form class="example-form">
-                        <mat-form-field class="example-full-width " appearance="outline">
+                        <mat-form-field class="example-full-width" appearance="outline">
                           <mat-label>Select Name</mat-label>
                           <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                            [matAutocomplete]="auto" [(ngModel)]="this.ccIssuer">
+                            [matAutocomplete]="auto" [(ngModel)]="this.NameIssuer">
                           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                               {{option}}
@@ -847,117 +824,135 @@
                         </mat-form-field>
                       </form>
                     </td>
-                    </tbody>
-                  </table>
-                </form>
+                    <td></td>
+                    <td>
+                      <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea matInput [(ngModel)]="this.ComIssuer"></textarea>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <form class="example-form">
+                        <mat-form-field class="example-full-width " appearance="outline">
+                          <mat-label>Select Name</mat-label>
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                            [matAutocomplete]="auto" [(ngModel)]="this.ccIssuer1">
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
+                      <form class="example-form">
+                        <mat-form-field class="example-full-width " appearance="outline">
+                          <mat-label>Select Name</mat-label>
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                            [matAutocomplete]="auto" [(ngModel)]="this.ccIssuer2">
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
+                    </td>
 
-                  
 
-              </tr>
-              <tr>
-                <td></td>
-                <td>Confirm</td>
-                <td>
-                  <form class="example-form">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                      <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.NameConfirm">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{option}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </form>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Confirm</td>
+                    <td>
+                      <form class="example-form">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                          <mat-label>Select Name</mat-label>
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                            [matAutocomplete]="auto" [(ngModel)]="this.NameConfirm">
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
 
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th>Analysis section</th>
-                <td>Controller</td>
-                <td>
-                  <form class="example-form">
-                    <mat-form-field class="example-full-width" appearance="outline">
-                      <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.NameControl">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{option}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </form>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Analyst</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th>Report approval</th>
-                <td>Check</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Confirm</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>Report approval</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th>CS Evaluation</th>
-                <td>Issuer</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              <tr>
-                <th>Completed</th>
-                <td>Close</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>Analysis section</th>
+                    <td>Controller</td>
+                    <td>
+                      Wanutsanun Hintuang
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Analyst</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>Report approval</th>
+                    <td>Check</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Confirm</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td>Report approval</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>CS Evaluation</th>
+                    <td>Issuer</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <th>Completed</th>
+                    <td>Close</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </mat-card-content>
+        </mat-card>
+        <div class="center">
+          <button mat-raised-button color="primary" (click)="NewregisterNum()">Issue</button>
         </div>
-        </mat-card-content>
-      </mat-card>
-      <div class="center">
-        <button mat-raised-button color="primary" (click)="NewregisterNum()">Issue</button>
+      </div>
+
+
+      <div class="col-sm-1">
+
       </div>
     </div>
-
-
-    <div class="col-sm-1">
-
-    </div>
   </div>
-</div>
 </body>

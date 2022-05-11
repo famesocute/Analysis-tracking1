@@ -19,7 +19,11 @@ export class ProductService {
       'content-type': 'application/json'
     })
   }
+  changeMessage(message: string) {
 
+    this.messageSource.next(message)
+
+  }
   TRACKING_ANALYSIS_QUERY_DATA(product: any) {
 
     return this.http.post('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/01_TRACKING_ANALYSIS_INSERT_DATA.php', product, {
@@ -59,6 +63,20 @@ export class ProductService {
       console.log("TRACKING_ANALYSIS_SELECT_SUBSTRING_REQ_NUM Loop ")
   
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/04_TRACKING_ANALYSIS_SELECT_SUBSTRING_REQ_NUM.php')
+  
+    }
+    TRACKING_ANALYSIS_SELECT_ALL_ORDER() {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_ALL_ORDER Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/06_TRACKING_ANALYSIS_SELECT_ALL_ORDER.php')
+  
+    }
+    TRACKING_ANALYSIS_SELECT_DATA_BY_ID(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_ALL_ORDER Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/07_TRACKING_ANALYSIS_SELECT_DATA_BY_ID.php?data1='+data1)
   
     }
 }

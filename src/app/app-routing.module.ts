@@ -11,6 +11,8 @@ import { CSresultComponent } from './csresult/csresult.component';
 import { SteppaddingComponent } from './steppadding/steppadding.component';
 import { EstiStepComponent } from './esti-step/esti-step.component';
 import { EstiCostComponent } from './esti-cost/esti-cost.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
 { path: 'Analyrequehome', component: AnalyrequehomeComponent }, 
@@ -22,7 +24,9 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'CSresult', component: CSresultComponent },
 { path: 'Steppadding', component: SteppaddingComponent },
 { path: 'Estistep', component: EstiStepComponent },
-{ path: 'Esticost', component: EstiCostComponent },];
+{ path: 'Esticost', component: EstiCostComponent },
+{ path: 'Signup', component: SignupComponent },
+{ path: 'Login', component: LoginComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

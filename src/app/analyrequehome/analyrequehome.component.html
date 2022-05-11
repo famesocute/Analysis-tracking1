@@ -19,6 +19,15 @@
   <div class="row">
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
+
+        
+
+
+      <div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+      </div>
+
+      <ng-template #elseBlock>
       <div class="row">
         <div class="col-sm-2" >
           <mat-card class="card1" >
@@ -41,6 +50,13 @@
           <div style=" padding-top: 30px;" class=" font1 center mat-display-3">Analysis request</div>
           <button mat-raised-button color="primary" style=" margin-bottom: 20px;" (click)='addform()'>+ Add analysis
             request form</button>
+            <br>
+            <div class="btn-group btn-group-justified">
+              <a class="btn btn-primary">ALL</a>
+              <a class="btn btn-primary">Apr</a>
+              <a  class="btn btn-primary">May</a>
+              <a  class="btn btn-primary">Jun</a>
+            </div>
             <mat-accordion>
               <table class="table table-striped">
                 <thead>
@@ -72,11 +88,134 @@
               </table>
               
             </mat-accordion>
-      
+            <mat-tab-group>
+              <mat-tab label="All">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Month</th>
+                      <th>Department</th>
+                      <th>Request No.</th>
+                      <th>Title</th>
+                      <th>Issuer</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of table let i = index">
+  
+                      <td class="text-center">{{ item.MONTH }}</td>
+          
+                      <td class="text-center">{{ item.DEP_MENT }}</td>
+          
+                      <td class="text-center">{{ item.REQ_NUM }}</td>
+          
+                      <td class="text-center">{{ item.TITLE }}</td>
+          
+                      <td class="text-center">{{ item.REQ_TER }}</td>
+                      <td class="text-center"> <button> open </button> </td>
+          
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-tab>
+
+              <mat-tab label="April">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <!-- <th>Department</th>
+                      <th>Request No.</th>
+                      <th>Title</th>
+                      <th>Issuer</th> -->
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of table let i = index">
+
+                      <div *ngIf="item.MONTH == 'April'">
+
+                      <button mat-raised-button class="block" (click)="onOpenpading(item.ID)"> 
+                        <div class="row">
+                          <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                            <div class="col-sm-3" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                            <div class="col-sm-3" style="text-align: left ;">{{item.TITLE}}</div>
+                            <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                          </div>
+                    </button>
+
+                      </div>
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-tab>
+              <mat-tab label="May">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                     
+                      <th>Department</th>
+                      <th>Request No.</th>
+                      <th>Title</th>
+                      <th>Issuer</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of table let i = index">
+
+                      <td class="text-center">{{ item.DEP_MENT }}</td>
+          
+                      <td class="text-center">{{ item.REQ_NUM }}</td>
+          
+                      <td class="text-center">{{ item.TITLE }}</td>
+          
+                      <td class="text-center">{{ item.REQ_TER }}</td>
+                      <td class="text-center"> <button> open </button> </td>
+          
+                    </tr>
+                  </tbody>
+                </table>
+              </mat-tab>
+            </mat-tab-group>
+            
+
+
+            <!-- <mat-accordion>
+
+              <mat-expansion-panel hideToggle *ngFor="let item of month let e = index">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                   <b> {{ item }} </b>
+                   
+              </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-expansion-panel hideToggle *ngFor="let item of dep2[e] let a = index">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <b> {{ item }} </b>
+                      
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                        <button mat-raised-button class="block" *ngFor="let item of Sheet[a]"> 
+                          <div class="row">
+                              <div class="col-sm-4" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                              <div class="col-sm-4">Issur by {{item.REVI_PAND_ISSUER}}</div>
+                            </div>
+                      </button>
+            
+                </mat-expansion-panel>
+              </mat-expansion-panel>
+              </mat-accordion> -->
           </div>
+         
           <div class="col-sm-1"></div>
       
         </div>
+      </ng-template>
       </div>
         </div>
       </div>

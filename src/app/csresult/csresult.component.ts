@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 
+
 @Component({
   selector: 'app-csresult',
   templateUrl: './csresult.component.html',
@@ -9,15 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CSresultComponent implements OnInit {
  
- 
   
   constructor() {
-    
+   
   }
 
   ngOnInit(): void {
     
   }
-  
   
 }
