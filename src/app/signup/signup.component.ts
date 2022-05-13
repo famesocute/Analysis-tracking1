@@ -25,15 +25,32 @@ export class SignupComponent implements OnInit {
   constructor(public productService: ProductService) { }
 
   ngOnInit(): void {
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
   }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    
+  }
+
 display(){
-  var qtest = ""
-    qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`user_login`"+
-    " (`EMPLOY_CODE`, `NAME`, `DEPARTMENT`, `PASSWORD`)"+
-    " VALUES ('"+this.Employeecode+"', '"+this.Name+"', '"+this.Department+"', '"+this.Password+"');"
-    console.log(qtest);
-    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-      console.log(data);
-    })
+  console.log(this.Name)
+  console.log(this.Department)
+  console.log(this.Employeecode)
+  console.log(this.Password)
+
+  // var qtest = ""
+  //   qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`user_login`"+
+  //   " (`EMPLOY_CODE`, `NAME`, `DEPARTMENT`, `PASSWORD`)"+
+  //   " VALUES ('"+this.Employeecode+"', '"+this.Name+"', '"+this.Department+"', '"+this.Password+"');"
+  //   console.log(qtest);
+  //   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+  //     console.log(data);
+  //   })
   }
 }
