@@ -3,12 +3,10 @@
 <div class="bg-text">
   <div style="padding:20px;">
   <h1><b>Create an account</b></h1>
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Enter employee code</mat-label>
-      <input matInput placeholder="Ex. 91360" [(ngModel)]="this.Employeecode">
-    </mat-form-field>
-  </form>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter employee code</mat-label>
+    <input matInput placeholder="Ex. 91360" [(ngModel)]="this.Employeecode">
+  </mat-form-field>
   <form class="example-form">
     <mat-form-field class="example-full-width " appearance="outline">
       <mat-label>Name</mat-label>
@@ -36,12 +34,11 @@
     </mat-select>
   </mat-form-field>
 
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Enter your password</mat-label>
-      <input matInput [(ngModel)]="this.Password">
-    </mat-form-field>
-  </form>
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your password</mat-label>
+    <input matInput placeholder="Ex. 91360" [(ngModel)]="this.Password">
+  </mat-form-field>
+
   <div class="center">
     <button mat-raised-button class="Buttoncom" (click)="display()">Complete</button>
   </div>

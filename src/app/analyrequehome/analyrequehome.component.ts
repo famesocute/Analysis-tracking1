@@ -31,6 +31,9 @@ export class AnalyrequehomeComponent implements OnInit {
       this.table = data
       this.productService.currentMessage.subscribe(message => this.message = message)
 
+      // var Title
+      // Title = this.table.TITLE.substring(0, 20)
+
       var x
       var y
       var nameData

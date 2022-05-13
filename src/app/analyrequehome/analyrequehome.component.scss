@@ -30,16 +30,17 @@
   color:#ffffff;
 }
 img {
-  height: 200px;
+  width: 100%;
+  height: auto;
 }
 .block {
   display: block;
   width: 100%;
   border: none;
   // background-color: #bbe8d7;
-  padding: 15px 28px;
+  padding: 5px 28px;
   font-size: 14px;
   cursor: pointer;
-  margin-bottom: 10px;
+
  
 }

@@ -3,6 +3,7 @@ import { ProductService } from '../api/product.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +23,7 @@ export class SignupComponent implements OnInit {
     'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>'];
   filteredOptions!: Observable<string[]>;
 
-  constructor(public productService: ProductService) { }
+  constructor(public productService: ProductService , public router: Router) { }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -39,18 +40,15 @@ export class SignupComponent implements OnInit {
   }
 
 display(){
-  console.log(this.Name)
-  console.log(this.Department)
-  console.log(this.Employeecode)
-  console.log(this.Password)
+  var qtest = ""
+    qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`user_login`"+
+    " (`EMPLOY_CODE`, `NAME`, `DEPARTMENT`, `PASSWORD`)"+
+    " VALUES ('"+this.Employeecode+"', '"+this.Name+"', '"+this.Department+"', '"+this.Password+"');"
+    console.log(qtest);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+      console.log(data);
+    })
 
-  // var qtest = ""
-  //   qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`user_login`"+
-  //   " (`EMPLOY_CODE`, `NAME`, `DEPARTMENT`, `PASSWORD`)"+
-  //   " VALUES ('"+this.Employeecode+"', '"+this.Name+"', '"+this.Department+"', '"+this.Password+"');"
-  //   console.log(qtest);
-  //   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-  //     console.log(data);
-  //   })
+    this.router.navigate(['/Login'])
   }
 }

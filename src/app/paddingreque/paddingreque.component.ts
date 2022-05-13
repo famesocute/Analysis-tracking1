@@ -40,12 +40,14 @@ export class PaddingrequeComponent implements OnInit {
       console.log(data);
       this.DataRes = data
       this.loading = false
-      this.filteredOptions = this.myControl.valueChanges.pipe(
-        startWith(''),
-        map(value => this._filter(value)),
-      );
+     
     })
     
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
+     
   }
 
   private _filter(value: string): string[] {
