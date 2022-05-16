@@ -20,18 +20,13 @@ export class EstiCostComponent implements OnInit {
 
   
   myControl = new FormControl();
-  options: string[] = [
-    'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>', 
-    'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>' ];
+  options: string[] = [ ];
   filteredOptions!: Observable<string[]>;
 
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
+    
     this.productService.TRACKING_ANALYSIS_SELECT_ALL().subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data

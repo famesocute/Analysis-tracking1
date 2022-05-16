@@ -12,13 +12,15 @@ import { ProductService } from '../api/product.service';
   styleUrls: ['./requestformfill.component.scss']
 })
 export class RequestformfillComponent implements OnInit {
-
+  table : any
 
   myControl = new FormControl();
-  options: string[] = [
-    'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>',
-    'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>'];
+  options: string[] = [];
   filteredOptions!: Observable<string[]>;
+
+  namelocal  : any 
+  Codelocal  : any
+  departmentlocal : any
 
 
   RequestNo = ""
@@ -93,11 +95,40 @@ export class RequestformfillComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
+      console.log(data);
+      this.table = data
+      var dataselect = ""
+      var x
+        for(x in this.table){
+            dataselect = dataselect +  this.table[x].DISPLAY_NAME + ' <'+  this.table[x].MAIL_ADDRESS +'>,'  
+          
+        }
+        dataselect = dataselect.substring(0, dataselect.length - 1);
+
+        const myArray = dataselect.split(",");
+
+        this.options = myArray
+        console.log(this.options)
+    })
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
     this.quantities().push(this.newQuantity());
+ 
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
+    if (this.departmentlocal != null) {
+      
+    }else{
+      window.alert("ผิดค้าบบบ")
+    }
+console.log(this.namelocal)
+console.log(this.Codelocal)
+console.log(this.departmentlocal)
    
 
   }
@@ -171,7 +202,7 @@ export class RequestformfillComponent implements OnInit {
   }
 
 check(){
-  
+  console.log(this.departmentlocal)
 }
   display() {
     var DatereceiveSam = ""
@@ -201,15 +232,15 @@ check(){
       "`COMM_SAM_INFOR`, `DANGER`, `SAM_AF_TEST`, `RELATE_MAT`, `KEY_CHARA`, `KEY_STATE`, " +
       "`KEY_PHENO`, `QUESTION`, `REVI_PAND_ISSUER`, `REVI_PAND_CONFIRM`, `REVI_ANASEC_CONTROL`, " +
       "`REVI_ANASEC_ANAL`, `REVI_REAPPROV_CHECK`, `REVI_REAPPROV_CONFIRM`, `REVI_REAPPROV_APPROV`," +
-      "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " +
+      "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`,`REVI_PAND_ISSUE_CC_2`) " +
       " VALUES ('" + this.RequestNo + "', '" + this.month + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
-      " '" + this.Analysistype2 + "', '" + this.IssueDate + "', '" + this.Requester + "', '" + this.Phone + "', '" + this.Department + "', '" + this.Product + "','1', '" + this.RequestTech + "', '" + this.RequestTech2 + "'," +
+      " '" + this.Analysistype2 + "', '" + this.IssueDate + "', '" + this.namelocal + "', '" + this.Phone + "', '" + this.departmentlocal + "', '" + this.Product + "','1', '" + this.RequestTech + "', '" + this.RequestTech2 + "'," +
       " '" + this.Numsample + "', '" + DatereceiveSam + "', '" + DateEepectSam + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
       " '" + this.AnaComment + "', '" + this.Dangerous + "', '" + this.SamAftertest + "', '" + this.Relatedmatters + "', '" + this.KeywordCharact + "', '" + this.KeywordState + "', '" + this.KeywordPheno + "', " +
-      " '', '" + this.NameIssuer + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.ccIssuer1 + "'  );"
+      " '', '" + this.namelocal + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.ccIssuer1 + "' ,'" + this.ccIssuer2 + "' );"
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-      console.log(data);
+      console.log(data); 
     })
 
   }
@@ -233,7 +264,7 @@ check(){
       var date2 = date.toLocaleString()
       this.IssueDate = date2
 
-      var years = date2.substring(6, 8)
+      var years = date2.substring(7, 9)
 
       const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -306,7 +337,7 @@ check(){
 
           var Department2
 
-          Department2 = this.Department.substring(2, 5)
+          Department2 = this.departmentlocal.substring(2, 5)
           console.log(Department2)
           runnumberNew = "R" + Department2 + years + date3 + runnumber
 
@@ -336,7 +367,7 @@ check(){
 
         var Department2
 
-        Department2 = this.Department.substring(2, 5)
+        Department2 = this.departmentlocal.substring(2, 5)
         console.log(Department2)
         runnumberNew = "R" + Department2 + years + date3 + runnumber
 

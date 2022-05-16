@@ -5,26 +5,23 @@
         <div style="padding-bottom:10px ;" >
             <img src="../assets/Image/Logomurata.png">
         </div>
-        <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Employee code</mat-label>
-                <input matInput placeholder="Ex. 91360">
+                <input matInput placeholder="Ex. 91360"  [(ngModel)]="this.Employcode">
             </mat-form-field>
-        </form>
-        <form class="example-form">
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="example-full-width" appearance="outline" >
                 <mat-label>password</mat-label>
-                <input matInput >
+                <input type="password" matInput [(ngModel)]="this.Password" >
             </mat-form-field>
-        </form>
+
         <div class="center">
-            <button mat-raised-button class="Buttoncom">Log in</button>
+            <button mat-raised-button class="Buttoncom" (click)="login()">Log in</button>
         </div>
     </div>
     <div style="padding-bottom:20px; padding-top: 15px;">
     <p>If you haven't account.Please sign in.</p>
     <div class="center">
-        <button mat-raised-button class="Buttoncom">Sign up</button>
+        <button mat-raised-button class="Buttoncom" (click)="Gosignup()">Sign up</button>
     </div>
     </div> 
 </div>

@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+  table : any
 
   Employeecode=""
   Department=""
@@ -18,23 +19,38 @@ export class SignupComponent implements OnInit {
   Password=""
 
   myControl = new FormControl();
-  options: string[] = [
-    'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>',
-    'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>'];
+  options: string[] = [];
   filteredOptions!: Observable<string[]>;
 
   constructor(public productService: ProductService , public router: Router) { }
 
   ngOnInit(): void {
+    this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
+      console.log(data);
+      this.table = data
+      var dataselect = ""
+      var x
+        for(x in this.table){
+            dataselect = dataselect +  this.table[x].DISPLAY_NAME + ' <'+  this.table[x].MAIL_ADDRESS +'>,'  
+          
+        }
+        dataselect = dataselect.substring(0, dataselect.length - 1);
+
+        const myArray = dataselect.split(",");
+
+        this.options = myArray
+        console.log(this.options)
+    })
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
+
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
     
   }
@@ -51,4 +67,6 @@ display(){
 
     this.router.navigate(['/Login'])
   }
-}
+  }
+  
+

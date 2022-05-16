@@ -9,10 +9,21 @@
         <button mat-button>Job tracking</button>
         <button mat-button>Search previous report</button>
       </div>
-      <div class="col-xl-2 center ">
-        <button mat-raised-button color="primary">Login</button>
-        <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
-      </div>
+
+        <div class="col-xl-2 center " *ngIf="isValid;else other_content">
+       {{this.nameonly}}
+       ({{this.Codelocal}})
+       {{this.departmentlocal}}
+        </div>
+
+    <ng-template #other_content>
+    <div class="col-xl-2 center ">
+      <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+      <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+    </div>
+  </ng-template>
+
+
     </div>
   </div>
 
@@ -20,202 +31,1035 @@
     <div class="col-sm-1"></div>
     <div class="col-sm-10">
 
-        
 
 
-      <div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+
+      <div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
         <span class="sr-only"></span>
       </div>
 
       <ng-template #elseBlock>
-      <div class="row">
-        <div class="col-sm-2" >
-          <mat-card class="card1" >
-            <mat-card-content >    
-                    <img src="../assets/Image/702867-removebg-preview.png">                                      
-                    <div class="row" style="padding-top : 30px;">
-                    <h1 class="center WText ">Status</h1>
-                    <button class="button button3 border border-light WText">Pending Request</button>
-                    <button class="button button3 border border-light WText">Not Complete Request</button>
-                    <button class="button button3 border border-white WText">Complete Request</button>
-                  </div>
-            </mat-card-content>
-        </mat-card>
-                  
-        </div>
-        
+        <div class="row">
+          <div class="col-sm-2">
+            <mat-card class="card1">
+              <mat-card-content>
+                <img src="../assets/Image/702867-removebg-preview.png">
+                <div class="row" style="padding-top : 30px;">
+                  <h1 class="center WText ">Status</h1>
+                  <button class="button button3 border border-light WText">Pending Request</button>
+                  <button class="button button3 border border-light WText">Not Complete Request</button>
+                  <button class="button button3 border border-white WText">Complete Request</button>
+                  <button class="button button3 border border-white WText">My Request and Job</button>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
 
 
-        <div class="col-sm-10" style="padding: 40px; ">
-          <div style=" padding-top: 30px;" class=" font1 center mat-display-3">Analysis request</div>
-          <button mat-raised-button color="primary" style=" margin-bottom: 20px;" (click)='addform()'>+ Add analysis
-            request form</button>
+
+          <div class="col-sm-10" style="padding: 40px; ">
+            <div style=" padding-top: 30px;" class=" font1 center mat-display-3">Analysis request</div>
+            <button mat-raised-button color="primary" style=" margin-bottom: 20px;" (click)='addform()'>+ Add analysis
+              request form</button>
             <br>
-
+<!-- All -->
             <mat-tab-group>
-              <!-- <mat-tab label="All">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Month</th>
-                      <th>Department</th>
-                      <th>Request No.</th>
-                      <th>Title</th>
-                      <th>Issuer</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of table let i = index">
-  
-                      <td class="text-center">{{ item.MONTH }}</td>
-          
-                      <td class="text-center">{{ item.DEP_MENT }}</td>
-          
-                      <td class="text-center">{{ item.REQ_NUM }}</td>
-          
-                      <td class="text-center">{{ item.TITLE }}</td>
-          
-                      <td class="text-center">{{ item.REQ_TER }}</td>
-                      <td class="text-center"> <button> open </button> </td>
-          
-                    </tr>
-                  </tbody>
-                </table>
-              </mat-tab> -->
               <mat-tab label="All">
-                <table class="table ">
-                  <thead>
-                    <tr>
-                      <th width="130px">Department</th>
-                      <th width="130px">Request No.</th>
-                      <th width="130px">Title</th>
-                      <th width="100px">Issuer</th>
-                    </tr>
-                  </thead>
-                </table>
-                <table class="table ">
-                  <tbody>
-                    <tr *ngFor="let item of table let i = index">
+                <mat-tab-group>
+                  <mat-tab label="All">
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
 
-                      <button mat-raised-button class="block" (click)="onOpenpading(item.ID)"> 
-                        <div class="row">
-                          <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                          <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                            <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                            <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                            <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <div class="row">
+                              <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                              <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                              <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                              <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                            </div>
+                          </button>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT300">
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'MT300'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
                           </div>
-                    </button>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT400">
 
-                 
-                    </tr>
-                  </tbody>
-                </table>
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'MT400'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT500">
+
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'MT500'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT600">
+
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'MT600'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT700">
+
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'MT700'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT800">
+
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'MT800'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT900">
+
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'MT900'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="SGA">
+
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'SGA'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT100">
+
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="100px">Month</th>
+                          <th width="170px">Department</th>
+                          <th width="270px">Request No.</th>
+                          <th width="300px">Title</th>
+                          <th>Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+
+                          <div *ngIf="item.DEP_MENT == 'MT100'">
+
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                </mat-tab-group>
               </mat-tab>
-              
-
+<!-- April -->
               <mat-tab label="April">
-                <table class="table ">
-                  <thead>
-                    <tr>
-                      <th width="130px">Department</th>
-                      <th width="130px">Request No.</th>
-                      <th width="130px">Title</th>
-                      <th width="100px">Issuer</th>
-                    </tr>
-                  </thead>
-                </table>
-                <table class="table ">
-                  <tbody>
-                    <tr *ngFor="let item of table let i = index">
-
-                      <div *ngIf="item.MONTH == 'April'">
-
-                      <button mat-raised-button class="block" (click)="onOpenpading(item.ID)"> 
-                        <div class="row">
-                          <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                            <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                            <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                            <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                <mat-tab-group>
+                  <mat-tab label="All"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+    
                           </div>
-                    </button>
-
-                      </div>
-                    </tr>
-                  </tbody>
-                </table>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT300"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'MT300'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT400"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'MT400'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT500"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'MT500'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT600"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'MT600'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT700"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'MT700'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT800"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'MT800'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT900"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'MT900'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="SGA"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'SGA'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT100"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'April'">
+                            <div *ngIf="item.DEP_MENT == 'MT100'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                </mat-tab-group>
               </mat-tab>
+ <!-- May  -->             
               <mat-tab label="May">
-                <table class="table ">
-                  <thead>
-                    <tr>
-                      <th width="130px">Department</th>
-                      <th width="130px">Request No.</th>
-                      <th width="130px">Title</th>
-                      <th width="100px">Issuer</th>
-                    </tr>
-                  </thead>
-                </table>
-                <table class="table ">
-                  <tbody>
-                    <tr *ngFor="let item of table let i = index">
-
-                      <div *ngIf="item.MONTH == 'May'">
-
-                      <button mat-raised-button class="block" (click)="onOpenpading(item.ID)"> 
-                        <div class="row">
-                          <div class="col-sm-3" style="text-align: left ;" >{{item.DEP_MENT}}</div>
-                            <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                            <div class="col-sm-4" style="text-align: left ;"  >{{item.TITLE}}</div>
-                            <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                <mat-tab-group>
+                  <mat-tab label="All"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+    
                           </div>
-                    </button>
-
-                      </div>
-                    </tr>
-                  </tbody>
-                </table>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-tab>
+                  <mat-tab label="MT300"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'MT300'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT400"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'MT400'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT500"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'MT500'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT600"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'MT600'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT700"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'MT700'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT800"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'MT800'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT900"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'MT900'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="SGA"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'SGA'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                  <mat-tab label="MT100"> 
+                    <table class="table ">
+                      <thead>
+                        <tr>
+                          <th width="130px">Department</th>
+                          <th width="130px">Request No.</th>
+                          <th width="130px">Title</th>
+                          <th width="100px">Issuer</th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <table class="table ">
+                      <tbody>
+                        <tr *ngFor="let item of table let i = index">
+    
+                          <div *ngIf="item.MONTH == 'May'">
+                            <div *ngIf="item.DEP_MENT == 'MT100'">
+    
+                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                              </div>
+                            </button>
+                            </div>
+                          </div>
+                        </tr>
+                      </tbody>
+                    </table> 
+                  </mat-tab>
+                </mat-tab-group>
+               
               </mat-tab>
             </mat-tab-group>
-            
 
-
-            <!-- <mat-accordion>
-
-              <mat-expansion-panel hideToggle *ngFor="let item of month let e = index">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                   <b> {{ item }} </b>
-                   
-              </mat-panel-title>
-                </mat-expansion-panel-header>
-
-                <mat-expansion-panel hideToggle *ngFor="let item of dep2[e] let a = index">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      <b> {{ item }} </b>
-                      
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                        <button mat-raised-button class="block" *ngFor="let item of Sheet[a]"> 
-                          <div class="row">
-                              <div class="col-sm-4" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                              <div class="col-sm-4">Issur by {{item.REVI_PAND_ISSUER}}</div>
-                            </div>
-                      </button>
-            
-                </mat-expansion-panel>
-              </mat-expansion-panel>
-              </mat-accordion> -->
           </div>
-         
+
           <div class="col-sm-1"></div>
-      
+
         </div>
       </ng-template>
-      </div>
-        </div>
-      </div>
-      
+    </div>
+  </div>
+</div>

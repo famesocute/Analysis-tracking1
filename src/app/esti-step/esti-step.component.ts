@@ -15,6 +15,8 @@ import { QuestionComponent } from '../question/question.component';
   styleUrls: ['./esti-step.component.scss']
 })
 export class EstiStepComponent implements OnInit {
+table : any
+
   ComControl=""
   ccControl = ""
   Analyzer=""
@@ -23,9 +25,7 @@ export class EstiStepComponent implements OnInit {
   productForm: FormGroup;
   
   myControl = new FormControl();
-  options: string[] = [
-    'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>', 
-    'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>' ];
+  options: string[] = [ ];
   filteredOptions!: Observable<string[]>;
 
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder) {
@@ -36,15 +36,32 @@ export class EstiStepComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value)),
-    );
     this.productService.TRACKING_ANALYSIS_SELECT_ALL().subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
     })
     this.quantities().push(this.newQuantity());
+
+    this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
+      console.log(data);
+      this.table = data
+      var dataselect = ""
+      var x
+        for(x in this.table){
+            dataselect = dataselect +  this.table[x].DISPLAY_NAME + ' <'+  this.table[x].MAIL_ADDRESS +'>,'  
+          
+        }
+        dataselect = dataselect.substring(0, dataselect.length - 1);
+
+        const myArray = dataselect.split(",");
+
+        this.options = myArray
+        console.log(this.options)
+    })
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)),
+    );
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();

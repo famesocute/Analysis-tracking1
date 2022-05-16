@@ -381,7 +381,7 @@
               <tr>
                 <td> Pending request</td>
                 <td>Issuer</td>
-                <td>{{this.DataRes[0].REVI_PAND_ISSUER}} </td>
+                <td>{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
                 <td></td>
                 <td>{{this.DataRes[0].REVI_PAND_ISSUE_COM}} </td>
                 <td>{{this.DataRes[0].REVI_PAND_ISSUE_CC}} </td>
@@ -408,7 +408,19 @@
                     <mat-form-field class="example-full-width " appearance="outline">
                       <mat-label>Select Name</mat-label>
                       <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.ccConfirm">
+                        [matAutocomplete]="auto" [(ngModel)]="this.ccConfirm1">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width " appearance="outline">
+                      <mat-label>Select Name</mat-label>
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="this.ccConfirm2">
                       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                           {{option}}

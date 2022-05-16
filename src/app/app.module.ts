@@ -41,6 +41,7 @@ import { EstiCostComponent } from './esti-cost/esti-cost.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { AnalyrequehomeListComponent } from './dialog/analyrequehome-list/analyrequehome-list.component';
+import { RequestinfoComponent } from './requestinfo/requestinfo.component';
 
 
 @NgModule({
@@ -60,6 +61,7 @@ import { AnalyrequehomeListComponent } from './dialog/analyrequehome-list/analyr
     SignupComponent,
     LoginComponent,
     AnalyrequehomeListComponent,
+    RequestinfoComponent,
   ],
   imports: [
     BrowserModule,

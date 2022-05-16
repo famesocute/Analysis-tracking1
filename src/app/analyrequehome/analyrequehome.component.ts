@@ -11,6 +11,10 @@ import { AnalyrequehomeListComponent } from '../dialog/analyrequehome-list/analy
   styleUrls: ['./analyrequehome.component.scss']
 })
 export class AnalyrequehomeComponent implements OnInit {
+  namelocal: any
+  Codelocal: any
+  departmentlocal: any
+  nameonly: any
 
   table: any
 
@@ -23,7 +27,8 @@ export class AnalyrequehomeComponent implements OnInit {
   loading = true
   test = 0
   message = ""
-  constructor(public router: Router, public productService: ProductService,private matDialog: MatDialog) { }
+  isValid = false
+  constructor(public router: Router, public productService: ProductService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.productService.TRACKING_ANALYSIS_SELECT_ALL_ORDER().subscribe((data: {}) => {
@@ -31,8 +36,17 @@ export class AnalyrequehomeComponent implements OnInit {
       this.table = data
       this.productService.currentMessage.subscribe(message => this.message = message)
 
-      // var Title
-      // Title = this.table.TITLE.substring(0, 20)
+      this.namelocal = localStorage.getItem("NAME");
+
+      this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+      this.departmentlocal = localStorage.getItem("DEPARTMENT");
+
+      if (this.namelocal != null) {
+        this.isValid = true
+      }
+
+
+      this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
 
       var x
       var y
@@ -40,11 +54,11 @@ export class AnalyrequehomeComponent implements OnInit {
       for (x in this.table) {
         this.month[x] = this.table[x].MONTH;
 
-        nameData= this.table[x].REVI_PAND_ISSUER.split("<");
-        this.name[x] =nameData[0]
+        nameData = this.table[x].REVI_PAND_ISSUER.split("<");
+        this.name[x] = nameData[0]
       }
 
-      
+
       console.log(this.month);
       console.log(this.dep2);
 
@@ -71,29 +85,29 @@ export class AnalyrequehomeComponent implements OnInit {
       console.log(this.Sheet);
       console.log(this.month);
       console.log(this.dep2);
-      
+
       var dataselect = "["
-      var deparray = ["MT100","MT300","MT400","MT500","MT600","MT700","MT800","MT900","SGA"]
+      var deparray = ["MT100", "MT300", "MT400", "MT500", "MT600", "MT700", "MT800", "MT900", "SGA"]
       var name = this.table[0].REVI_PAND_ISSUER.split("<");
-     
-      var Chk :any
+
+      var Chk: any
 
 
-      for(x in this.month){
-          for( y in this.dep2[x]){
-            dataselect = dataselect + "["
-            for(z in this.table){
-              
-              if (this.table[z].MONTH == this.month[x] && this.table[z].DEP_MENT == this.dep2[x][y]){
-                dataselect = dataselect + '{"REQ_NUM":"' + this.table[z].REQ_NUM + '",'
-                dataselect = dataselect + '"TITLE":"' + this.table[z].TITLE + '",'
-                dataselect = dataselect + '"REVI_PAND_ISSUER":"' + name[z] + '"},'
-              
-              }
+      for (x in this.month) {
+        for (y in this.dep2[x]) {
+          dataselect = dataselect + "["
+          for (z in this.table) {
+
+            if (this.table[z].MONTH == this.month[x] && this.table[z].DEP_MENT == this.dep2[x][y]) {
+              dataselect = dataselect + '{"REQ_NUM":"' + this.table[z].REQ_NUM + '",'
+              dataselect = dataselect + '"TITLE":"' + this.table[z].TITLE + '",'
+              dataselect = dataselect + '"REVI_PAND_ISSUER":"' + name[z] + '"},'
+
             }
-            dataselect = dataselect.substring(0, dataselect.length - 1);
-            dataselect = dataselect + "],"
           }
+          dataselect = dataselect.substring(0, dataselect.length - 1);
+          dataselect = dataselect + "],"
+        }
 
       }
 
@@ -111,15 +125,18 @@ export class AnalyrequehomeComponent implements OnInit {
     })
 
   }
+
+  Gologin() {
+    this.router.navigate(['/Login'])
+  }
+  GoSignup() {
+    this.router.navigate(['/Signup'])
+  }
+
   addform() {
     this.router.navigate(['/Requestformfill'])
   }
-  onOpenDialogClick(){
-    this.matDialog.open(AnalyrequehomeListComponent,{
-      width : '500px'})
-    
-  }
-  onOpenpading(ID:any){
+  onOpenpading(ID: any) {
     this.productService.changeMessage(ID)
     this.router.navigate(['/Paddingreque'])
   }

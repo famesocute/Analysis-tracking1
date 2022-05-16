@@ -14,18 +14,17 @@ import { QuestionComponent } from '../question/question.component';
   styleUrls: ['./paddingreque.component.scss']
 })
 export class PaddingrequeComponent implements OnInit {
+  table : any
 
   ComConfirm=""
-  ccConfirm=""
+  ccConfirm1=""
+  ccConfirm2=""
   DataRes : any
   message = ""
  
-
   
   myControl = new FormControl();
-  options: string[] = [
-    'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>', 
-    'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Pichayapak Nantasai <pichayapak.nan@murata.com>' ];
+  options: string[] = [];
   filteredOptions!: Observable<string[]>;
 
 
@@ -41,6 +40,23 @@ export class PaddingrequeComponent implements OnInit {
       this.DataRes = data
       this.loading = false
      
+    })
+
+    this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
+      console.log(data);
+      this.table = data
+      var dataselect = ""
+      var x
+        for(x in this.table){
+            dataselect = dataselect +  this.table[x].DISPLAY_NAME + ' <'+  this.table[x].MAIL_ADDRESS +'>,'  
+          
+        }
+        dataselect = dataselect.substring(0, dataselect.length - 1);
+
+        const myArray = dataselect.split(",");
+
+        this.options = myArray
+        console.log(this.options)
     })
     
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -58,7 +74,8 @@ export class PaddingrequeComponent implements OnInit {
 
   display(){
      console.log(this.ComConfirm);
-     console.log(this.ccConfirm);
+     console.log(this.ccConfirm1);
+     console.log(this.ccConfirm2);
    }
    onOpenDialogClick(){
     this.matDialog.open(QuestionComponent,{
@@ -69,6 +86,14 @@ export class PaddingrequeComponent implements OnInit {
     this.router.navigate(['/AnswerPage']) 
   }
   GoEstiStep(){
+    var qtest = ""
+    qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`data_all` " +
+      "(`REVI_PAND_CONFIRM_COM`,`REVI_PAND_CONFIRM_CC1`,`REVI_PAND_CONFIRM_CC2`) " +
+      " VALUES ('" + this.ComConfirm + "', '" + this.ccConfirm1 + "', '" + this.ccConfirm2 + "' );"
+    console.log(qtest);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+      console.log(data); 
+    })
     this.router.navigate(['/Estistep']) 
   }
 

@@ -74,9 +74,23 @@ export class ProductService {
     }
     TRACKING_ANALYSIS_SELECT_DATA_BY_ID(data1:any) {
   
-      console.log("TRACKING_ANALYSIS_SELECT_ALL_ORDER Loop ")
+      console.log("TRACKING_ANALYSIS_SELECT_DATA_BY_ID Loop ")
   
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/07_TRACKING_ANALYSIS_SELECT_DATA_BY_ID.php?data1='+data1)
+  
+    }
+    TRACKING_ANALYSIS_READ_EXCEL() {
+  
+      console.log("TRACKING_ANALYSIS_READ_EXCEL Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/08_TRACKING_ANALYSIS_READ_EXCEL.php')
+  
+    }
+    TRACKING_ANALYSIS_CHKPASS_LOGIN(data1:any,data2:any) {
+  
+      console.log("TRACKING_ANALYSIS_CHKPASS_LOGIN Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/09_TRACKING_ANALYSIS_CHKPASS_LOGIN.php?data1='+data1+'&data2='+data2)
   
     }
 }

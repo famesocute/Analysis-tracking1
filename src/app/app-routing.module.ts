@@ -13,6 +13,7 @@ import { EstiStepComponent } from './esti-step/esti-step.component';
 import { EstiCostComponent } from './esti-cost/esti-cost.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { RequestinfoComponent } from './requestinfo/requestinfo.component';
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
 { path: 'Analyrequehome', component: AnalyrequehomeComponent }, 
@@ -26,7 +27,8 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'Estistep', component: EstiStepComponent },
 { path: 'Esticost', component: EstiCostComponent },
 { path: 'Signup', component: SignupComponent },
-{ path: 'Login', component: LoginComponent },];
+{ path: 'Login', component: LoginComponent },
+{ path: 'Requestinfo', component: RequestinfoComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
