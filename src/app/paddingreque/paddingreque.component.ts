@@ -20,9 +20,12 @@ export class PaddingrequeComponent implements OnInit {
   ccConfirm1=""
   ccConfirm2=""
   DataRes : any
+
   message = ""
- 
-  
+
+  sample1 : any
+  sample2:any
+
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
@@ -39,9 +42,31 @@ export class PaddingrequeComponent implements OnInit {
       console.log(data);
       this.DataRes = data
       this.loading = false
-     
-    })
+      
+      this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
+      console.log(this.sample1)
+      var x
+      var a
 
+      this.sample2 = "["
+
+      for(x in this.sample1)
+      {
+        a = this.sample1[x].split("||")
+        this.sample2 = this.sample2 + '{"Lot_no":"' + a[0] + '",'
+        this.sample2 = this.sample2 + '"Sample_name":"' + a[1] + '",'
+        this.sample2 = this.sample2 + '"Remarks":"' +a[2] + '"},'
+
+      }
+      this.sample2 =  this.sample2.substring(0,  this.sample2.length - 1);
+      this.sample2 =  this.sample2 + "]";
+      console.log( this.sample2)
+
+      var obj = JSON.parse( this.sample2);
+      this.sample2 = obj
+      console.log( this.sample2)
+    })
+    
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
       console.log(data);
       this.table = data
@@ -72,12 +97,8 @@ export class PaddingrequeComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
-  display(){
-     console.log(this.ComConfirm);
-     console.log(this.ccConfirm1);
-     console.log(this.ccConfirm2);
-   }
    onOpenDialogClick(){
+    this.productService.changeMessage(this.DataRes[0].REQ_NUM)
     this.matDialog.open(QuestionComponent,{
       width : '500px'})
     
@@ -87,15 +108,17 @@ export class PaddingrequeComponent implements OnInit {
   }
   GoEstiStep(){
     var qtest = ""
-    qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`data_all` " +
-      "(`REVI_PAND_CONFIRM_COM`,`REVI_PAND_CONFIRM_CC1`,`REVI_PAND_CONFIRM_CC2`) " +
-      " VALUES ('" + this.ComConfirm + "', '" + this.ccConfirm1 + "', '" + this.ccConfirm2 + "' );"
+    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+      " SET `REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "', `REVI_PAND_CONFIRM_CC1` = '"+ this.ccConfirm1 +"', " +
+      " `REVI_PAND_CONFIRM_CC2` = '" + this.ccConfirm2 + "' WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
     })
     this.router.navigate(['/Estistep']) 
+    this.productService.changeMessage(this.DataRes[0].ID)
+   
   }
-
+  
 }
 

@@ -177,12 +177,12 @@
           <div class="container">
             <form>
               <table>
-                <tr>
+                <tr *ngFor="let item of sample2 let i = index">
                   <td width="300px">
                     <div class="input1" style="padding: 0 10px ;">
                       <div class="row">
                         <div class="col-sm-3"><b>Lot no:</b></div>
-                        <div class="col-sm-9"></div>
+                        <div class="col-sm-9"> {{ item.Lot_no }}</div>
                       </div>
                     </div>
                     
@@ -191,7 +191,7 @@
                     <div class="input1" style="padding: 0 10px ;">
                       <div class="row">
                         <div class="col-sm-4"><b>Sample name:</b></div>
-                        <div class="col-sm-8"></div>
+                        <div class="col-sm-8">{{ item.Sample_name }}</div>
                       </div>
                     </div>
 
@@ -199,8 +199,8 @@
                   <td width="200px">
                     <div class="input1" style="padding: 0 10px ;">
                       <div class="row">
-                        <div class="col-sm-3"><b>Remarks:</b></div>
-                        <div class="col-sm-9"></div>
+                        <div class="col-sm-4"><b>Remarks:</b></div>
+                        <div class="col-sm-8">{{ item.Remarks }}</div>
                       </div>
                     </div>
                   </td>

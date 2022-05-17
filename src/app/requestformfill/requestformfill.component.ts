@@ -220,7 +220,7 @@ check(){
 
     for (var val in this.productForm.value.quantities) {
       console.log(val); // prints values: 10, 20, 30, 40
-      val2 = val2 + this.productForm.value.quantities[val].Lotno + "," + this.productForm.value.quantities[val].Samplename + "," + this.productForm.value.quantities[val].Remarks + "|"
+      val2 = val2 + this.productForm.value.quantities[val].Lotno + "||" + this.productForm.value.quantities[val].Samplename + "||" + this.productForm.value.quantities[val].Remarks + "[]"
     }
     val2 = val2.substring(0, val2.length - 1);
     console.log(val2)

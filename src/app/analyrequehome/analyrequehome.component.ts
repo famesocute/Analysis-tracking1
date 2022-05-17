@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AnalyrequehomeListComponent } from '../dialog/analyrequehome-list/analyrequehome-list.component';
+
 
 
 @Component({
@@ -45,81 +45,79 @@ export class AnalyrequehomeComponent implements OnInit {
         this.isValid = true
       }
 
-
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
 
-      var x
-      var y
-      var nameData
-      for (x in this.table) {
-        this.month[x] = this.table[x].MONTH;
+      // var x
+      // var y
+      // var nameData 
+      // for (x in this.table) {
+      //   this.month[x] = this.table[x].MONTH;
 
-        nameData = this.table[x].REVI_PAND_ISSUER.split("<");
-        this.name[x] = nameData[0]
-      }
-
-
-      console.log(this.month);
-      console.log(this.dep2);
+      //   nameData = this.table[x].REVI_PAND_ISSUER.split("<");
+      //   this.name[x] = nameData[0]
+      // }
 
 
-
-      this.month = [...new Set(this.month)];
-      var count = 0
-      for (y in this.month) {
-        for (x in this.table) {
-          console.log(this.table[x].MONTH);
-          if (this.month[y] == this.table[x].MONTH) {
-            this.dep2[y][count] = this.table[x].DEP_MENT
-            count = count + 1
-          }
-        }
-        count = 0
-      }
-      var i
-      var z
-      var t
-      for (i in this.dep2) {
-        this.dep2[i] = [...new Set(this.dep2[i])];
-      }
-      console.log(this.Sheet);
-      console.log(this.month);
-      console.log(this.dep2);
-
-      var dataselect = "["
-      var deparray = ["MT100", "MT300", "MT400", "MT500", "MT600", "MT700", "MT800", "MT900", "SGA"]
-      var name = this.table[0].REVI_PAND_ISSUER.split("<");
-
-      var Chk: any
+      // console.log(this.month);
+      // console.log(this.dep2);
 
 
-      for (x in this.month) {
-        for (y in this.dep2[x]) {
-          dataselect = dataselect + "["
-          for (z in this.table) {
 
-            if (this.table[z].MONTH == this.month[x] && this.table[z].DEP_MENT == this.dep2[x][y]) {
-              dataselect = dataselect + '{"REQ_NUM":"' + this.table[z].REQ_NUM + '",'
-              dataselect = dataselect + '"TITLE":"' + this.table[z].TITLE + '",'
-              dataselect = dataselect + '"REVI_PAND_ISSUER":"' + name[z] + '"},'
+      // this.month = [...new Set(this.month)];
+      // var count = 0
+      // for (y in this.month) {
+      //   for (x in this.table) {
+      //     console.log(this.table[x].MONTH);
+      //     if (this.month[y] == this.table[x].MONTH) {
+      //       this.dep2[y][count] = this.table[x].DEP_MENT
+      //       count = count + 1
+      //     }
+      //   }
+      //   count = 0
+      // }
+      // var i
+      // var z
+      // var t
+      // for (i in this.dep2) {
+      //   this.dep2[i] = [...new Set(this.dep2[i])];
+      // }
+      // console.log(this.Sheet);
+      // console.log(this.month);
+      // console.log(this.dep2);
 
-            }
-          }
-          dataselect = dataselect.substring(0, dataselect.length - 1);
-          dataselect = dataselect + "],"
-        }
+      // var dataselect = "["
+      // var deparray = ["MT100", "MT300", "MT400", "MT500", "MT600", "MT700", "MT800", "MT900", "SGA"]
+      // var name = this.table[0].REVI_PAND_ISSUER.split("<");
 
-      }
+      // var Chk: any
 
 
-      dataselect = dataselect.substring(0, dataselect.length - 1);
-      dataselect = dataselect + "]";
-      console.log(dataselect)
+      // for (x in this.month) {
+      //   for (y in this.dep2[x]) {
+      //     dataselect = dataselect + "["
+      //     for (z in this.table) {
 
-      var obj = JSON.parse(dataselect);
-      this.Sheet = obj
-      console.log(this.Sheet)
+      //       if (this.table[z].MONTH == this.month[x] && this.table[z].DEP_MENT == this.dep2[x][y]) {
+      //         dataselect = dataselect + '{"REQ_NUM":"' + this.table[z].REQ_NUM + '",'
+      //         dataselect = dataselect + '"TITLE":"' + this.table[z].TITLE + '",'
+      //         dataselect = dataselect + '"REVI_PAND_ISSUER":"' + name[z] + '"},'
 
+      //       }
+      //     }
+      //     dataselect = dataselect.substring(0, dataselect.length - 1);
+      //     dataselect = dataselect + "],"
+      //   }
+
+      // }
+
+
+      // dataselect = dataselect.substring(0, dataselect.length - 1);
+      // dataselect = dataselect + "]";
+      // console.log(dataselect)
+
+      // var obj = JSON.parse(dataselect);
+      // this.Sheet = obj
+      // console.log(this.Sheet)
 
       this.loading = false
     })

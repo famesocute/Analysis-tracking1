@@ -3,7 +3,7 @@
     <div class="col-sm-8">
         <mat-form-field class="example-full-width " appearance="outline">
             <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-              [matAutocomplete]="auto">
+              [matAutocomplete]="auto" [(ngModel)]="this.geterQution">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}
@@ -19,7 +19,7 @@
         <mat-form-field class="example-full-width " appearance="outline">
            
             <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-              [matAutocomplete]="auto" >
+              [matAutocomplete]="auto" [(ngModel)]="this.CCgeterQution1">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}
@@ -35,7 +35,7 @@
         <mat-form-field class="example-full-width " appearance="outline">
            
             <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-              [matAutocomplete]="auto" >
+              [matAutocomplete]="auto" [(ngModel)]="this.CCgeterQution2">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}
@@ -49,7 +49,7 @@
 <div style="margin-top: 10px;"><b>Questioner:</b></div>
 <div style="margin-top: 10px;"><b>Issue Date:</b></div> 
 <h2 style="padding-top: 10px;">Question?</h2>
-<textarea class="form-control" rows="3" id="Background"></textarea>
+<textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.Q_question"></textarea>
 <div class="center" style="padding: 15px 0;">
-    <button mat-flat-button mat-dialog-close class="button1" >Attach question</button>
+    <button mat-flat-button mat-dialog-close class="button1" (click)="confirm()" >Attach question</button>
 </div>

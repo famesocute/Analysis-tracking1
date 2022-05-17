@@ -15,18 +15,27 @@ import { QuestionComponent } from '../question/question.component';
   styleUrls: ['./esti-step.component.scss']
 })
 export class EstiStepComponent implements OnInit {
-table : any
+
+  table : any
 
   ComControl=""
-  ccControl = ""
+  ccControl1=""
+  ccControl2=""
   Analyzer=""
   DataRes : any
+
+  message = ""
+
+  sample1 : any
+  sample2:any
 
   productForm: FormGroup;
   
   myControl = new FormControl();
   options: string[] = [ ];
   filteredOptions!: Observable<string[]>;
+
+  loading = true
 
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder) {
     this.productForm = this.fb.group({
@@ -36,12 +45,37 @@ table : any
    }
 
   ngOnInit(): void {
-    this.productService.TRACKING_ANALYSIS_SELECT_ALL().subscribe((data: {}) => {
+    this.productService.currentMessage.subscribe(message => this.message = message)
+   
+    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
-    })
-    this.quantities().push(this.newQuantity());
+      this.loading = false
+      
+      this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
+      console.log(this.sample1)
+      var x
+      var a
 
+      this.sample2 = "["
+
+      for(x in this.sample1)
+      {
+        a = this.sample1[x].split("||")
+        this.sample2 = this.sample2 + '{"Lot_no":"' + a[0] + '",'
+        this.sample2 = this.sample2 + '"Sample_name":"' + a[1] + '",'
+        this.sample2 = this.sample2 + '"Remarks":"' +a[2] + '"},'
+
+      }
+      this.sample2 =  this.sample2.substring(0,  this.sample2.length - 1);
+      this.sample2 =  this.sample2 + "]";
+      console.log( this.sample2)
+
+      var obj = JSON.parse( this.sample2);
+      this.sample2 = obj
+      console.log( this.sample2)
+    })
+    
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
       console.log(data);
       this.table = data
@@ -58,10 +92,13 @@ table : any
         this.options = myArray
         console.log(this.options)
     })
+    
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
+
+    this.quantities().push(this.newQuantity());
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
