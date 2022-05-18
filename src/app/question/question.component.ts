@@ -63,25 +63,23 @@ ngOnInit(): void {
 
   return this.options.filter(option => option.toLowerCase().includes(filterValue));
 }
-NavAnaformfill(ID: any){
-  this.router.navigate(['/Requestformfill'])
- 
-}
 
 confirm(){
-
   let date: Date = new Date();
-
       var date2 = date.toLocaleString()
        this.Q_issueDate = date2.substring(0, 9)
 
   var qtest = ""
   qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`question` (`REQ_NUM`,`QUESTIONER`, `QUESTION_DETAIL`, `QUESTION_SENT_TO`, `QUESTION_CC1_SENT_TO`, `QUESTION_CC2_SENT_TO`, `QUESTION_DATE`) " +
     " VALUES ('" + this.message + "', '" + this.Questioner + "', '" + this.Q_question + "', '" + this.geterQution + "', '" + this.CCgeterQution1 + "', '" + this.CCgeterQution2 + "', '" + this.Q_issueDate + "' );"
-  console.log(qtest);
+
   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
     console.log(data); 
   })
+  this.router.navigate(['/Requestformfill'])
+  this.productService.changeMessage(this.message)
+  this.router.navigate(['/Paddingreque'])
+  location.reload();
 }
 
 

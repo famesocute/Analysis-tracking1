@@ -412,15 +412,19 @@
                   <td>Confirm</td>
                   <td>{{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
                   <td></td>
-                  <td></td>
-                  <td></td>
+                  <td>{{this.DataRes[0].REVI_PAND_CONFIRM_COM}}</td>
+                  <td>
+                    {{this.DataRes[0].REVI_PAND_CONFIRM_CC1}},
+                    <br>
+                    {{this.DataRes[0].REVI_PAND_CONFIRM_CC2}}</td>
                 </tr>
                 <tr>
                   <th>Analysis section</th>
                   <td>Controller</td>
                   <td>{{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
-                  <td><div class="center" style="padding-top: 15px;">
-                    <button mat-raised-button color="primary" class="button2" >Approve
+                  <td>
+                    <div class="center" style="padding-top: 15px;">
+                    <button mat-raised-button color="primary" class="button2" (click)="save()">Approve
                     </button>
                   </div>
                 </td>

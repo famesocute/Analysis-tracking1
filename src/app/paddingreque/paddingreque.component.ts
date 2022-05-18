@@ -20,7 +20,7 @@ export class PaddingrequeComponent implements OnInit {
   ccConfirm1=""
   ccConfirm2=""
   DataRes : any
-
+  DataResQUESTION : any
   message = ""
 
   sample1 : any
@@ -65,6 +65,13 @@ export class PaddingrequeComponent implements OnInit {
       var obj = JSON.parse( this.sample2);
       this.sample2 = obj
       console.log( this.sample2)
+
+      this.productService.TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
+        console.log(data);
+        this.DataResQUESTION = data
+        console.log(this.DataResQUESTION);
+
+      })
     })
     
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {

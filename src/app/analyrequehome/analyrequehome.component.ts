@@ -43,19 +43,20 @@ export class AnalyrequehomeComponent implements OnInit {
 
       if (this.namelocal != null) {
         this.isValid = true
+        this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
       }
 
-      this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
+    
 
-      // var x
+      var x
       // var y
-      // var nameData 
-      // for (x in this.table) {
-      //   this.month[x] = this.table[x].MONTH;
+      var nameData 
+      for (x in this.table) {
+        this.month[x] = this.table[x].MONTH;
 
-      //   nameData = this.table[x].REVI_PAND_ISSUER.split("<");
-      //   this.name[x] = nameData[0]
-      // }
+        nameData = this.table[x].REVI_PAND_ISSUER.split("<");
+        this.table[x].REVI_PAND_ISSUER = nameData[0]
+      }
 
 
       // console.log(this.month);
@@ -135,7 +136,14 @@ export class AnalyrequehomeComponent implements OnInit {
     this.router.navigate(['/Requestformfill'])
   }
   onOpenpading(ID: any) {
-    this.productService.changeMessage(ID)
+    this.productService.changeMessage(this.table[0].REQ_NUM)
     this.router.navigate(['/Paddingreque'])
+  }
+
+  Logout(){
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
+    location.reload();
   }
 }

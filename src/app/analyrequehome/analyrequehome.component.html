@@ -2,7 +2,7 @@
   <div class="border-bottom Toolbar">
     <div class="row">
       <div class="col-xl-1"></div>
-      <div class="col-xl-8 center" style="padding :15px 0 ;">
+      <div class="col-xl-7 center" style="padding :15px 0 ;">
         <button mat-button>Home</button>
         <button mat-button>Analysis request form</button>
         <button mat-button>Equipment Calendar</button>
@@ -10,14 +10,21 @@
         <button mat-button>Search previous report</button>
       </div>
 
-        <div class="col-xl-2 center " *ngIf="isValid;else other_content">
+        <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+          <div class="row">
+          <div class="col-xl-8">
        {{this.nameonly}}
        ({{this.Codelocal}})
        {{this.departmentlocal}}
+      </div>
+      <div class="col-xl-4">
+       <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
         </div>
+      </div>
+    </div>
 
     <ng-template #other_content>
-    <div class="col-xl-2 center ">
+    <div class="col-xl-4 center ">
       <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
       <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
     </div>
@@ -120,7 +127,7 @@
                                 <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
                                 <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
                               </div>
                             </button>
 
@@ -154,7 +161,7 @@
                                 <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
                                 <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                                <div class="col-sm-3">Issur by {{ this.name[i]}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
                               </div>
                             </button>
 
@@ -807,10 +814,11 @@
                     <table class="table ">
                       <tbody>
                         <tr *ngFor="let item of table let i = index">
-    
-                          <div *ngIf="item.MONTH == 'May'">
+
+                          
                             <div *ngIf="item.DEP_MENT == 'MT400'">
-    
+                              <div *ngIf="item.MONTH == 'May'"  >
+
                             <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -820,8 +828,11 @@
                               </div>
                             </button>
                             </div>
+                            
                           </div>
+                          
                         </tr>
+
                       </tbody>
                     </table> 
                   </mat-tab>
@@ -839,10 +850,10 @@
                     <table class="table ">
                       <tbody>
                         <tr *ngFor="let item of table let i = index">
-    
+                          
+                          <div *ngIf="item.DEP_MENT == 'MT500'">
                           <div *ngIf="item.MONTH == 'May'">
-                            <div *ngIf="item.DEP_MENT == 'MT500'">
-    
+
                             <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -871,10 +882,9 @@
                     <table class="table ">
                       <tbody>
                         <tr *ngFor="let item of table let i = index">
-    
-                          <div *ngIf="item.MONTH == 'May'">
-                            <div *ngIf="item.DEP_MENT == 'MT600'">
-    
+                          <div *ngIf="item.DEP_MENT == 'MT600'">
+                            <div *ngIf="item.MONTH == 'May'">
+
                             <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>

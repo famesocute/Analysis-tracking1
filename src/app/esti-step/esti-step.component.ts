@@ -110,6 +110,21 @@ export class EstiStepComponent implements OnInit {
       width : '500px'})
     
   }
+  save(){
+    
+      var qtest = ""
+      qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+        " SET `REVI_ANASEC_ANAL` = '" + this.Analyzer + "',`REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.ccControl1 +"', " +
+        " `REVI_ANASEC_CONTROL_CC2` = '" + this.ccControl2 + "' WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
+      console.log(qtest);
+      this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+        console.log(data); 
+      }) 
+      this.productService.changeMessage(this.DataRes[0].ID)
+      // UPDATE `mtq10_project_tracking_analysis`.`data_all` SET `REVI_ANASEC_ANAL` = 'ewf', 
+      // ` REVI_ANASEC_CONTROL_COM` = 'few', `REVI_ANASEC_CONTROL_CC1` = 'few', `REVI_ANASEC_CONTROL_CC2` = 'ewf' WHERE (`ID` = '123');
+  }
+
   GoEstiCost(){
     this.router.navigate(['/Esticost']) 
   }

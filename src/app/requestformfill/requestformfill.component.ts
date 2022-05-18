@@ -124,7 +124,8 @@ export class RequestformfillComponent implements OnInit {
     if (this.departmentlocal != null) {
       
     }else{
-      window.alert("ผิดค้าบบบ")
+      window.alert("กรุณา login")
+      this.router.navigate(['/Analyrequehome'])
     }
 console.log(this.namelocal)
 console.log(this.Codelocal)

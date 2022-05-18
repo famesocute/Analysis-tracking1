@@ -328,11 +328,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th class=" Titlereview">Question no.1:</th>
-                  <td>Confirm purpose </td>
+                <tr  *ngFor="let item of DataResQUESTION let i = index" >
+                  <th class=" Titlereview">Question no.{{i+1}}:</th>
+                  <td>{{item.QUESTION_DETAIL}} </td>
                   <td class=" Titlereview"><button mat-raised-button color="primary" class="button2" (click)="GoAswer()">Read</button></td>
-                  <td class=" Titlereview">Anwser already</td>
+                  <td class=" Titlereview">{{item.STATUS_QUESTION}}</td>
                 </tr>
               </tbody>
             </table>
