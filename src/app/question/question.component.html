@@ -50,6 +50,17 @@
 <div style="margin-top: 10px;"><b>Issue Date:</b></div> 
 <h2 style="padding-top: 10px;">Question?</h2>
 <textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.Q_question"></textarea>
-<div class="center" style="padding: 15px 0;">
-    <button mat-flat-button mat-dialog-close class="button1" (click)="confirm()" >Attach question</button>
+<br>
+<div class="row center">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-5">
+    <button mat-flat-button mat-dialog-close class="button1 center" (click)="confirm()" >Attach question</button>
+  </div>
+  <div class="col-sm-4">
+    <button mat-flat-button mat-dialog-close class="button1 center" (click)="goback()" >cancel</button>
+  </div>
+  <div class="col-sm-1"></div>
 </div>
+   
+    
+

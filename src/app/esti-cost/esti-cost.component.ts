@@ -27,6 +27,7 @@ export class EstiCostComponent implements OnInit {
 
   ngOnInit(): void {
     
+    
     this.productService.TRACKING_ANALYSIS_SELECT_ALL().subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
@@ -39,11 +40,13 @@ export class EstiCostComponent implements OnInit {
   }
    onOpenDialogClick(){
     this.matDialog.open(QuestionComponent,{
-      width : '500px'})
-    
+      width : '500px'}) 
   }
   GoAswer(){
     this.router.navigate(['/AnswerPage']) 
+  }
+  Goanalysishome(){
+    this.router.navigate(['/Analyrequehome']) 
   }
 
 }

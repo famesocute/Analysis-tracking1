@@ -37,7 +37,7 @@ export class PaddingrequeComponent implements OnInit {
    loading = true
   ngOnInit(): void {
     this.productService.currentMessage.subscribe(message => this.message = message)
-   
+    console.log(this.message)
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
@@ -105,12 +105,24 @@ export class PaddingrequeComponent implements OnInit {
   }
 
    onOpenDialogClick(){
-    this.productService.changeMessage(this.DataRes[0].REQ_NUM)
-    this.matDialog.open(QuestionComponent,{
-      width : '500px'})
+    this.productService.changeMessage(this.DataRes[0].REQ_NUM + "||"+this.DataRes[0].ID)
+      const dialogRef = this.matDialog.open(QuestionComponent, {
+        disableClose : true,
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result );
+
+      this.ngOnInit()
+      });
     
   }
-  GoAswer(){
+  Goanalysishome(){
+    this.router.navigate(['/Analyrequehome']) 
+  }
+  GoAswer(ID:any){
+    this.productService.changeMessage(ID + "|| " + this.message)
     this.router.navigate(['/AnswerPage']) 
   }
   GoEstiStep(){

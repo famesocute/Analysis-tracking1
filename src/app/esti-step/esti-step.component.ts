@@ -16,6 +16,8 @@ import { QuestionComponent } from '../question/question.component';
 })
 export class EstiStepComponent implements OnInit {
 
+  isValid = false
+
   table : any
 
   ComControl=""
@@ -111,7 +113,6 @@ export class EstiStepComponent implements OnInit {
     
   }
   save(){
-    
       var qtest = ""
       qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
         " SET `REVI_ANASEC_ANAL` = '" + this.Analyzer + "',`REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.ccControl1 +"', " +
@@ -121,8 +122,8 @@ export class EstiStepComponent implements OnInit {
         console.log(data); 
       }) 
       this.productService.changeMessage(this.DataRes[0].ID)
-      // UPDATE `mtq10_project_tracking_analysis`.`data_all` SET `REVI_ANASEC_ANAL` = 'ewf', 
-      // ` REVI_ANASEC_CONTROL_COM` = 'few', `REVI_ANASEC_CONTROL_CC1` = 'few', `REVI_ANASEC_CONTROL_CC2` = 'ewf' WHERE (`ID` = '123');
+
+      this.isValid = true
   }
 
   GoEstiCost(){
@@ -131,6 +132,9 @@ export class EstiStepComponent implements OnInit {
   
   GoAswer(){
     this.router.navigate(['/AnswerPage']) 
+  }
+  Goanalysishome(){
+    this.router.navigate(['/Analyrequehome']) 
   }
 
   // Add input

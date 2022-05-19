@@ -7,8 +7,8 @@
     <div class="row">
       <div class="col-xl-1"></div>
       <div class="col-xl-8 center" style="padding :15px 0 ;">
-        <button mat-button>Home</button>
-        <button mat-button>Analysis request form</button>
+        <button mat-button >Home</button>
+        <button mat-button (click)="Goanalysishome()">Analysis request form</button>
         <button mat-button>Equipment Calendar</button>
         <button mat-button>Job tracking</button>
         <button mat-button>Search previous report</button>
@@ -331,7 +331,7 @@
                 <tr  *ngFor="let item of DataResQUESTION let i = index" >
                   <th class=" Titlereview">Question no.{{i+1}}:</th>
                   <td>{{item.QUESTION_DETAIL}} </td>
-                  <td class=" Titlereview"><button mat-raised-button color="primary" class="button2" (click)="GoAswer()">Read</button></td>
+                  <td class=" Titlereview"><button mat-raised-button color="primary" class="button2" (click)="GoAswer(item.ID)">Read</button></td>
                   <td class=" Titlereview">{{item.STATUS_QUESTION}}</td>
                 </tr>
               </tbody>

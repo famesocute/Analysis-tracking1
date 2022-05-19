@@ -99,4 +99,10 @@ export class ProductService {
   
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/10_TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON.php?data1='+data1)
     }
+    TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/11_TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID.php?data1='+data1)
+    }
 }

@@ -16,6 +16,8 @@ export class QuestionComponent implements OnInit {
 
   table : any
   message =""
+  ID =""
+RequestNo = ""
 
   geterQution = ""
   CCgeterQution1 = ""
@@ -35,6 +37,11 @@ ngOnInit(): void {
   
   this.productService.currentMessage.subscribe(message => this.message = message)
   console.log(this.message)
+
+  var a
+  a= this.message.split("||")
+  this.RequestNo = a[0]
+  this.ID = a[1]
 
   this.filteredOptions = this.myControl.valueChanges.pipe(
     startWith(''),
@@ -71,15 +78,16 @@ confirm(){
 
   var qtest = ""
   qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`question` (`REQ_NUM`,`QUESTIONER`, `QUESTION_DETAIL`, `QUESTION_SENT_TO`, `QUESTION_CC1_SENT_TO`, `QUESTION_CC2_SENT_TO`, `QUESTION_DATE`) " +
-    " VALUES ('" + this.message + "', '" + this.Questioner + "', '" + this.Q_question + "', '" + this.geterQution + "', '" + this.CCgeterQution1 + "', '" + this.CCgeterQution2 + "', '" + this.Q_issueDate + "' );"
+    " VALUES ('" + this.RequestNo + "', '" + this.Questioner + "', '" + this.Q_question + "', '" + this.geterQution + "', '" + this.CCgeterQution1 + "', '" + this.CCgeterQution2 + "', '" + this.Q_issueDate + "' );"
 
   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-    console.log(data); 
+    console.log(data);
+
   })
-  this.router.navigate(['/Requestformfill'])
-  this.productService.changeMessage(this.message)
-  this.router.navigate(['/Paddingreque'])
-  location.reload();
+  this.productService.changeMessage(this.ID)
+}
+goback(){
+  this.productService.changeMessage(this.ID)
 }
 
 

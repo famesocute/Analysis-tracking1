@@ -37,7 +37,6 @@ export class AnalyrequehomeComponent implements OnInit {
       this.productService.currentMessage.subscribe(message => this.message = message)
 
       this.namelocal = localStorage.getItem("NAME");
-
       this.Codelocal = localStorage.getItem("EMPLOY_CODE");
       this.departmentlocal = localStorage.getItem("DEPARTMENT");
 
@@ -136,7 +135,7 @@ export class AnalyrequehomeComponent implements OnInit {
     this.router.navigate(['/Requestformfill'])
   }
   onOpenpading(ID: any) {
-    this.productService.changeMessage(this.table[0].REQ_NUM)
+    this.productService.changeMessage(ID)
     this.router.navigate(['/Paddingreque'])
   }
 

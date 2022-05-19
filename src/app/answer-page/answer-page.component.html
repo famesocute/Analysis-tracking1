@@ -1,143 +1,210 @@
 <div class="container-fluid">
-    <div class="border-bottom Toolbar">
-        <div class="row">
-          <div class="col-xl-1"></div>
-          <div class="col-xl-8 center" style="padding :15px 0 ;">
-            <button mat-button>Home</button>
-            <button mat-button>Analysis request form</button>
-            <button mat-button>Equipment Calendar</button>
-            <button mat-button>Job tracking</button>
-            <button mat-button>Search previous report</button>
-          </div>
-          <div class="col-xl-2 center ">
-            <button mat-raised-button color="primary">Login</button>
-            <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
-          </div>
-        </div>
+  <div class="border-bottom Toolbar">
+    <div class="row">
+      <div class="col-xl-1"></div>
+      <div class="col-xl-7 center" style="padding :15px 0 ;">
+        <button mat-button>Home</button>
+        <button mat-button>Analysis request form</button>
+        <button mat-button>Equipment Calendar</button>
+        <button mat-button>Job tracking</button>
+        <button mat-button>Search previous report</button>
       </div>
 
-    <div class="row">
-        <div class="col-sm-1">
+        <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+          <div class="row">
+          <div class="col-xl-8">
+       {{this.nameonly}}
+       ({{this.Codelocal}})
+       {{this.departmentlocal}}
+      </div>
+      <div class="col-xl-4">
+       <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
         </div>
+      </div>
+    </div>
 
-        <div class="col-sm-10" >
-            <div style=" padding-top: 60px;" class=" font1 center mat-display-2">Question and Answer form</div>
+    <ng-template #other_content>
+    <div class="col-xl-4 center ">
+      <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+      <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+    </div>
+  </ng-template>
 
-                <div class="col-sm-3">
-                </div>
-            </div>
-            <mat-card class="card1" >
-                <mat-card-title-group>
-                    <mat-card-title>Information</mat-card-title>
-                </mat-card-title-group>
-                <mat-card-content>
-                    
-                    <div class="form-group row " style="margin-top: 10px;">
-                        <div class="col-sm-2 center"><label for="Title"><b>Send question to:</b></label></div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-7"></div>
-                       
-                    </div>
-                    <div></div>
-                    <div class="form-group row" style="margin-top: 10px;">
-                        <div class="col-sm-2 center"><label for="Title"><b>CC question to:</b></label></div>
-                        <div class="col-sm-3">1</div>
-                        <div class="col-sm-7"></div>
-                       
-                    </div>
-                    <div class="form-group row" style="margin-top: 10px;">
-                        <div class="col-sm-2 center"></div>
-                        <div class="col-sm-3">2</div>
-                        <div class="col-sm-7"></div>
-                       
-                    </div>
-                    <div class="input1">
-                        <div class="row">
-                          <div class="col-sm-2"><b>Questioner:</b></div>
-                          <div class="col-sm-10"></div>
-                        </div>
-                      </div>
-                      <div class="input1">
-                        <div class="row">
-                          <div class="col-sm-2"><b>Issue Date:</b></div>
-                          <div class="col-sm-10"></div>
-                        </div>
-                      </div>
-                   
-                </mat-card-content>
-            </mat-card>
-            
-            <mat-card class="card1" style="margin-top: 10px;" >
-                <mat-card-title-group>
-                    <mat-card-title>Question ?</mat-card-title>
-                </mat-card-title-group>
-                <mat-card-content>                                          
-                        
-                </mat-card-content>
-            </mat-card>
-
-            <mat-card class="card1" style="margin-top: 10px;">
-                <mat-card-title-group>
-                    <mat-card-title>Answer</mat-card-title>
-                </mat-card-title-group>
-                <mat-card-content>
-                    <textarea class="form-control" rows="3" id="Background"></textarea>
-                    <div class="center" style="padding: 15px 0;">
-                        <button mat-flat-button class="button1" (click)="NavAnapadding()">Attach answer</button>
-                    </div>
-                    <div class="form-group row ">
-                        <div class="col-sm-2 center"><label for="Title"><b>Sand answer to:</b></label></div>
-                        <div class="col-sm-10">
-                            <mat-form-field class="example-full-width " appearance="outline">
-                                <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                                  [matAutocomplete]="auto">
-                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{option}}
-                                  </mat-option>
-                                </mat-autocomplete>
-                              </mat-form-field>
-                            </div>
-                        
-                    </div>
-                    <div class="form-group row" >
-                        <div class="col-sm-2 center"><label for="Title"><b>CC answer to:</b></label></div>
-                        <div class="col-sm-10">
-                            <mat-form-field class="example-full-width " appearance="outline">
-                               
-                                <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                                  [matAutocomplete]="auto" >
-                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{option}}
-                                  </mat-option>
-                                </mat-autocomplete>
-                              </mat-form-field>
-                        </div>
-                       
-                    </div>
-                    <div class="form-group row" >
-                        <div class="col-sm-2 center"></div>
-                        <div class="col-sm-10">
-                            <mat-form-field class="example-full-width " appearance="outline">
-                               
-                                <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                                  [matAutocomplete]="auto" >
-                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                    {{option}}
-                                  </mat-option>
-                                </mat-autocomplete>
-                              </mat-form-field>
-                        </div>
-                       
-                    </div>
-                    <div style="margin-top: 10px;"><b>Issue Date:</b></div>
-                </mat-card-content>
-            </mat-card>
-                      
-        </div>
-        <div class="col-sm-1">
-        </div>
 
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+
+    <div class="col-sm-10">
+      <div style=" padding-top: 60px;" class=" font1 center mat-display-2">Question and Answer form</div>
+
+      <div class="col-sm-3">
+      </div>
+    </div>
+    <mat-card class="card1">
+      <mat-card-title-group>
+        <mat-card-title>Information</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+
+        <div class="form-group row " style="margin-top: 10px;">
+          <div class="col-sm-2 ">
+            <label for="Title">
+              <b>Send question to:</b></label></div>
+          <div class="col-sm-10">{{this.Questiondata[0].QUESTION_SENT_TO}} </div>
+
+        </div>
+        <div></div>
+        <div class="form-group row" style="margin-top: 10px;">
+          <div class="col-sm-2 "><label for="Title">
+              <b>CC question to:</b> </label>
+          </div>
+
+          <div class="col-sm-10">{{this.Questiondata[0].QUESTION_CC1_SENT_TO}}</div>
+
+        </div>
+        <div class="form-group row" style="margin-top: 10px;">
+          <div class="col-sm-2 "></div>
+
+          <div class="col-sm-10">{{this.Questiondata[0].QUESTION_CC2_SENT_TO}}</div>
+
+        </div>
+        <div class="input1">
+          <div class="row">
+            <div class="col-sm-2"><b>Questioner:</b></div>
+            <div class="col-sm-10">{{this.Questiondata[0].QUESTIONER}}</div>
+          </div>
+        </div>
+        <div class="input1">
+          <div class="row">
+            <div class="col-sm-2"><b>Issue Date:</b></div>
+            <div class="col-sm-10">{{this.Questiondata[0].QUESTION_DATE}}</div>
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card1" style="margin-top: 10px;">
+      <mat-card-title-group>
+        <mat-card-title>Question ?</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        {{this.Questiondata[0].QUESTION_DETAIL}}
+      </mat-card-content>
+    </mat-card>
+
+  <div *ngIf="isValidanswer;else answer_content">
+    <mat-card class="card1" style="margin-top: 10px;">
+      <mat-card-title-group>
+        <mat-card-title>Answer</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+        {{this.Questiondata[0].ANSWER_DETAIL}}
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="card1" style="margin-top: 10px;">
+      <mat-card-content>
+        <div class="input1">
+          <div class="row">
+            <div class="col-sm-2"><b>Sand answer to:</b></div>
+            <div class="col-sm-10">{{this.Questiondata[0].ANSWER_SENT_TO}}</div>
+          </div>
+        </div>
+        <div class="input1">
+          <div class="row">
+            <div class="col-sm-2"><b>CC answer to:</b></div>
+            <div class="col-sm-10">{{this.Questiondata[0].ANSWER_CC1_SENT_TO}}</div>
+          </div>
+        </div>
+        <div class="input1">
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">{{this.Questiondata[0].ANSWER_CC2_SENT_TO}}</div>
+          </div>
+        </div>
+        <div class="input1">
+          <div class="row">
+            <div class="col-sm-2"><b>Issue Date:</b></div>
+            <div class="col-sm-10">{{this.Questiondata[0].ANSWER_DATE}}</div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+</div>
+
+<ng-template #answer_content>
+ 
+  <mat-card class="card1" style="margin-top: 10px;">
+    <mat-card-title-group>
+      <mat-card-title>Answer</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.ANSWER_DETAIL"></textarea>
+      <div class="center" style="padding: 15px 0;">
+        <button mat-flat-button class="button1" (click)="NavAnapadding()">Attach answer</button>
+      </div>
+      <div class="form-group row ">
+        <div class="col-sm-2 center"><label for="Title"><b>Sand answer to:</b></label></div>
+        <div class="col-sm-10">
+          <mat-form-field class="example-full-width " appearance="outline">
+            <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+              [matAutocomplete]="auto" [(ngModel)]="this.ANSWER_SENT_TO">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2 center"><label for="Title"><b>CC answer to:</b></label></div>
+        <div class="col-sm-10">
+          <mat-form-field class="example-full-width " appearance="outline">
+
+            <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+              [matAutocomplete]="auto" [(ngModel)]="this.ANSWER_CC1_SENT_TO">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2 center"></div>
+        <div class="col-sm-10">
+          <mat-form-field class="example-full-width " appearance="outline">
+
+            <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+              [matAutocomplete]="auto" [(ngModel)]="this.ANSWER_CC2_SENT_TO">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div style="margin-top: 10px;"><b>Issue Date:</b></div>
+    </mat-card-content>
+  </mat-card>
+
+</ng-template>
+<div class="center" style="padding: 20px ;">
+<button mat-flat-button class="button1 center" (click)="Gobefore()">Back</button>
+</div>
+
+  </div>
+  <div class="col-sm-1">
+  </div>
+
+</div>

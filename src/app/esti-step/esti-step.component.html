@@ -3,8 +3,8 @@
       <div class="row">
         <div class="col-xl-1"></div>
         <div class="col-xl-8 center" style="padding :15px 0 ;">
-          <button mat-button>Home</button>
-          <button mat-button>Analysis request form</button>
+          <button mat-button >Home</button>
+          <button mat-button (click)="Goanalysishome()">Analysis request form</button>
           <button mat-button>Equipment Calendar</button>
           <button mat-button>Job tracking</button>
           <button mat-button>Search previous report</button>
@@ -381,6 +381,13 @@
           <button mat-raised-button color="primary" (click)="GoEstiCost()" >Issue</button>
         </div>
   
+        <div *ngIf="isValid;else review_content">
+          
+        
+      </div>
+      
+      <ng-template #review_content>
+       
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Review Information</mat-card-title>
@@ -527,6 +534,9 @@
           </div>
           </mat-card-content>
         </mat-card>
+      </ng-template>
+
+        
   
       </div>
   
