@@ -14,6 +14,8 @@ import { QuestionComponent } from '../question/question.component';
   styleUrls: ['./paddingreque.component.scss']
 })
 export class PaddingrequeComponent implements OnInit {
+
+
   table : any
 
   ComConfirm=""
@@ -30,7 +32,7 @@ export class PaddingrequeComponent implements OnInit {
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
 
-
+  EMAIL_CC: string[] = [];
 
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog) {
    }
@@ -38,6 +40,10 @@ export class PaddingrequeComponent implements OnInit {
   ngOnInit(): void {
     this.productService.currentMessage.subscribe(message => this.message = message)
     console.log(this.message)
+
+    this.message = "123"
+    this.EMAIL_CC[0] = ""
+
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
@@ -125,6 +131,11 @@ export class PaddingrequeComponent implements OnInit {
     this.productService.changeMessage(ID + "|| " + this.message)
     this.router.navigate(['/AnswerPage']) 
   }
+  GoAsweredit(ID:any){
+    this.productService.changeMessage(ID + "|| " + this.message)
+    this.router.navigate(['/AnswerEdit']) 
+  }
+
   GoEstiStep(){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
@@ -137,6 +148,20 @@ export class PaddingrequeComponent implements OnInit {
     this.router.navigate(['/Estistep']) 
     this.productService.changeMessage(this.DataRes[0].ID)
    
+  }
+
+
+  countrow = 0
+
+  addIN(){
+    this.countrow = this.countrow + 1
+    this.EMAIL_CC[this.countrow] = ""
+    console.log(this.EMAIL_CC);
+  
+  }
+  delete(i:any){
+    delete this.EMAIL_CC[i];
+    console.log(this.EMAIL_CC)
   }
   
 }

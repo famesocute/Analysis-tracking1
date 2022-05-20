@@ -42,6 +42,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { AnalyrequehomeListComponent } from './dialog/analyrequehome-list/analyrequehome-list.component';
 import { RequestinfoComponent } from './requestinfo/requestinfo.component';
+import { AnswerEditComponent } from './answer-edit/answer-edit.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { RequestinfoComponent } from './requestinfo/requestinfo.component';
     LoginComponent,
     AnalyrequehomeListComponent,
     RequestinfoComponent,
+    AnswerEditComponent,
   ],
   imports: [
     BrowserModule,

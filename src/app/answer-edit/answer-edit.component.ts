@@ -6,12 +6,11 @@ import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 
 @Component({
-  selector: 'app-answer-page',
-  templateUrl: './answer-page.component.html',
-  styleUrls: ['./answer-page.component.scss']
+  selector: 'app-answer-edit',
+  templateUrl: './answer-edit.component.html',
+  styleUrls: ['./answer-edit.component.scss']
 })
-export class AnswerPageComponent implements OnInit {
-
+export class AnswerEditComponent implements OnInit {
   message = ""
   Questiondata: any
 
@@ -43,7 +42,6 @@ export class AnswerPageComponent implements OnInit {
   constructor(public router: Router, public productService: ProductService) { }
 
   ngOnInit(): void {
-
     this.namelocal = localStorage.getItem("NAME");
     this.Codelocal = localStorage.getItem("EMPLOY_CODE");
     this.departmentlocal = localStorage.getItem("DEPARTMENT");
@@ -58,6 +56,8 @@ export class AnswerPageComponent implements OnInit {
     a = this.message.split("||")
     this.ID_Q = a[0]
     this.ID_p = a[1]
+    console.log(this.ID_Q)
+    console.log(this.ID_p)
 
     this.productService.TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID(this.ID_Q).subscribe((data: {}) => {
       console.log(data);
@@ -89,10 +89,6 @@ export class AnswerPageComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
-
-    // if (this.Questiondata[0].STATUS_QUESTION == "'Answered'") {
-    //   this.isValid = true
-    // }
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -106,10 +102,7 @@ export class AnswerPageComponent implements OnInit {
   GoSignup() {
     this.router.navigate(['/Signup'])
   }
-  Gobefore() {
-    this.productService.changeMessage(this.ID_p)
-    history.back()
-  }
+
 
   Logout() {
     localStorage.removeItem("NAME");
@@ -128,16 +121,15 @@ export class AnswerPageComponent implements OnInit {
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`question` SET `ANSWER_DETAIL` = '" + this.ANSWER_DETAIL + "', " +
       "`ANSWER_SENT_TO` = '" + this.ANSWER_SENT_TO + "', `ANSWER_CC1_SENT_TO` = '" + this.ANSWER_CC1_SENT_TO + "', " +
       "`ANSWER_CC2_SENT_TO` = '" + this.ANSWER_CC2_SENT_TO + "', `ANSWER_DATE` = '" + this.ANSWER_DATE + "'," +
-      " `STATUS_QUESTION` = '" + this.STATUS_QUESTION + "' WHERE (`ID` = '" + this.message + "');"
+      " `STATUS_QUESTION` = '" + this.STATUS_QUESTION + "' WHERE (`ID` = '" + this.ID_Q + "');"
 
 
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
-      this.isValidanswer = true
-      // this.router.navigate(['/Paddingreque'])
+      this.productService.changeMessage(this.ID_p)
+      this.router.navigate(['/Paddingreque'])
     }
     )
   }
-
 
 }

@@ -31,8 +31,7 @@
         <div class="col-sm-9"></div>
         <div class="col-sm-3">
           <div class="row ">
-            <button mat-mini-fab matTooltip="Edit" matTooltipClass="example-tooltip-red"
-              aria-label="Button that shows a red tooltip" matTooltipPosition="above">
+            <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above">
               <mat-icon>create</mat-icon>
             </button>
             <button mat-mini-fab matTooltip="Save" matTooltipClass="example-tooltip-red"
@@ -323,7 +322,8 @@
                 <tr>
                   <th width="100px" class=" Titlereview">No.</th>
                   <th width="300px">Title</th>
-                  <th width="100px"></th>
+                  <th width="50px" class=" Titlereview">Read</th>
+                  <th width="50px" class=" Titlereview">Answer&Edit</th>
                   <th width="100px" class=" Titlereview">Status</th>
                 </tr>
               </thead>
@@ -331,7 +331,16 @@
                 <tr  *ngFor="let item of DataResQUESTION let i = index" >
                   <th class=" Titlereview">Question no.{{i+1}}:</th>
                   <td>{{item.QUESTION_DETAIL}} </td>
-                  <td class=" Titlereview"><button mat-raised-button color="primary" class="button2" (click)="GoAswer(item.ID)">Read</button></td>
+                  <td class=" Titlereview">
+                    <button mat-mini-fab color="primary" class="button2" (click)="GoAswer(item.ID)" >
+                      <mat-icon>import_contacts</mat-icon>
+                    </button>
+                   </td>
+                  <td class=" Titlereview">
+                    <button mat-mini-fab color="primary" class="button3" (click)="GoAsweredit(item.ID)" >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </td>
                   <td class=" Titlereview">{{item.STATUS_QUESTION}}</td>
                 </tr>
               </tbody>
@@ -392,7 +401,7 @@
                 <td>{{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
                 <td>
                   <div class="center" style="padding-top: 15px;">
-                    <button mat-raised-button color="primary" class="button2" (click)="GoEstiStep()">Approve
+                    <button mat-raised-button color="primary" class="button4" (click)="GoEstiStep()">Approve
 
                     </button>
                   </div>
@@ -403,12 +412,14 @@
                     <textarea matInput [(ngModel)]="this.ComConfirm"></textarea>
                   </mat-form-field>
                 </td>
-                <td>
-                  <form class="example-form">
+                <!-- <td>
+                
+                
+                <form class="example-form">
                     <mat-form-field class="example-full-width " appearance="outline">
                       <mat-label>Select Name</mat-label>
                       <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.ccConfirm1">
+                        [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
                       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                           {{option}}
@@ -416,11 +427,24 @@
                       </mat-autocomplete>
                     </mat-form-field>
                   </form>
-                  <form class="example-form">
+                  <div class="center">
+                    <button mat-button (click)="addIN()">Add</button>
+                  </div>
+
+                  <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+                  <table>
+                    <tbody>
+                      <tr>{{item}}</tr>
+                      <tr><button (click)="delete(i)">delete</button></tr>
+                    </tbody>
+                  </table>
+                </tr> -->
+
+                  <!-- <form class="example-form">
                     <mat-form-field class="example-full-width " appearance="outline">
                       <mat-label>Select Name</mat-label>
                       <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.ccConfirm2">
+                        [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[0]">
                       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                           {{option}}
@@ -428,7 +452,21 @@
                       </mat-autocomplete>
                     </mat-form-field>
                   </form>
-                </td>
+
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width " appearance="outline">
+                      <mat-label>Select Name</mat-label>
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[1]">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form> -->
+                  
+                <!-- </td> -->
               </tr>
               <tr>
                 <th>Analysis section</th>
