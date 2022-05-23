@@ -60,6 +60,8 @@ export class RequestformfillComponent implements OnInit {
   NameControl = "Wanutsanun Hintuang <wanutsanun.hin@murata.com>"
   month = ""
 
+  EMAIL_CC: string[] = [];
+
   activate: boolean = false
 
   Tech =
@@ -95,6 +97,9 @@ export class RequestformfillComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.EMAIL_CC[0] = ""
+    console.log(this.EMAIL_CC);
+
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
       console.log(data);
       this.table = data
@@ -202,9 +207,20 @@ console.log(this.departmentlocal)
     }
   }
 
-check(){
-  console.log(this.departmentlocal)
-}
+  countrow = 0
+
+  addIN(){
+    console.log(this.countrow);
+    this.countrow = this.countrow + 1
+    this.EMAIL_CC[this.countrow] = ""
+    console.log(this.EMAIL_CC);
+  
+  }
+  delete(i:any){
+    this.countrow = this.countrow - 1
+    this.EMAIL_CC.splice(i, 1);
+    console.log(this.EMAIL_CC)
+  }
   display() {
     var DatereceiveSam = ""
     var Sendsampledate2 = this.Sendsampledate.toLocaleString()
@@ -233,12 +249,12 @@ check(){
       "`COMM_SAM_INFOR`, `DANGER`, `SAM_AF_TEST`, `RELATE_MAT`, `KEY_CHARA`, `KEY_STATE`, " +
       "`KEY_PHENO`, `QUESTION`, `REVI_PAND_ISSUER`, `REVI_PAND_CONFIRM`, `REVI_ANASEC_CONTROL`, " +
       "`REVI_ANASEC_ANAL`, `REVI_REAPPROV_CHECK`, `REVI_REAPPROV_CONFIRM`, `REVI_REAPPROV_APPROV`," +
-      "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`,`REVI_PAND_ISSUE_CC_2`) " +
+      "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " +
       " VALUES ('" + this.RequestNo + "', '" + this.month + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
       " '" + this.Analysistype2 + "', '" + this.IssueDate + "', '" + this.namelocal + "', '" + this.Phone + "', '" + this.departmentlocal + "', '" + this.Product + "','1', '" + this.RequestTech + "', '" + this.RequestTech2 + "'," +
       " '" + this.Numsample + "', '" + DatereceiveSam + "', '" + DateEepectSam + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
       " '" + this.AnaComment + "', '" + this.Dangerous + "', '" + this.SamAftertest + "', '" + this.Relatedmatters + "', '" + this.KeywordCharact + "', '" + this.KeywordState + "', '" + this.KeywordPheno + "', " +
-      " '', '" + this.namelocal + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.ccIssuer1 + "' ,'" + this.ccIssuer2 + "' );"
+      " '', '" + this.namelocal + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.EMAIL_CC + "'  );"
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 

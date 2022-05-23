@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
+import { ApproverStepComponent } from '../dialog/approver-step/approver-step.component';
 
 
 
@@ -15,10 +16,9 @@ import { QuestionComponent } from '../question/question.component';
   styleUrls: ['./esti-step.component.scss']
 })
 export class EstiStepComponent implements OnInit {
-
-  isValid = false
-
   table : any
+  confirmcc = ""
+  controlcc = ""
 
   ComControl=""
   ccControl1=""
@@ -32,10 +32,16 @@ export class EstiStepComponent implements OnInit {
   sample2:any
 
   productForm: FormGroup;
+
+  DataResQUESTION : any
   
   myControl = new FormControl();
   options: string[] = [ ];
   filteredOptions!: Observable<string[]>;
+
+  EMAIL_CC: string[] = [];
+
+  isValid2 = true
 
   loading = true
 
@@ -47,12 +53,20 @@ export class EstiStepComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    this.EMAIL_CC[0] = ""
+      console.log(this.EMAIL_CC);
+
     this.productService.currentMessage.subscribe(message => this.message = message)
+    this.message = "123"
    
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
       this.loading = false
+
+      this.confirmcc = this.DataRes[0].REVI_PAND_CONFIRM_CC1.split(",");
+      this.controlcc = this.DataRes[0].REVI_ANASEC_CONTROL_CC1.split(",");
       
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
@@ -76,8 +90,14 @@ export class EstiStepComponent implements OnInit {
       var obj = JSON.parse( this.sample2);
       this.sample2 = obj
       console.log( this.sample2)
+
+      this.productService.TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
+        console.log(data);
+        this.DataResQUESTION = data
+        console.log(this.DataResQUESTION)
+      })
     })
-    
+ 
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
       console.log(data);
       this.table = data
@@ -94,6 +114,7 @@ export class EstiStepComponent implements OnInit {
         this.options = myArray
         console.log(this.options)
     })
+
     
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -108,33 +129,72 @@ export class EstiStepComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
    onOpenDialogClick(){
-    this.matDialog.open(QuestionComponent,{
-      width : '500px'})
+    const dialogRef = this.matDialog.open(QuestionComponent, {
+      disableClose : true,
+      width: '500px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    console.log(result );
+
+    this.ngOnInit()
+    });
+  
     
   }
   save(){
       var qtest = ""
       qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-        " SET `REVI_ANASEC_ANAL` = '" + this.Analyzer + "',`REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.ccControl1 +"', " +
-        " `REVI_ANASEC_CONTROL_CC2` = '" + this.ccControl2 + "' WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
+        " SET `REVI_ANASEC_ANAL` = '" + this.Analyzer + "',`REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.EMAIL_CC +"' " +
+        " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
       console.log(qtest);
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
         console.log(data); 
       }) 
-      this.productService.changeMessage(this.DataRes[0].ID)
 
-      this.isValid = true
+      this.productService.changeMessage(this.DataRes[0].ID)
+      const dialogRef = this.matDialog.open(ApproverStepComponent, {
+        disableClose : true,
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result );
+
+      this.isValid2 = false
+
+      this.ngOnInit()
+      });
   }
 
   GoEstiCost(){
     this.router.navigate(['/Esticost']) 
   }
-  
-  GoAswer(){
+  GoAswer(ID:any){
+    this.productService.changeMessage(ID + "|| " + this.message)
     this.router.navigate(['/AnswerPage']) 
+  }
+  GoAsweredit(ID:any){
+    this.productService.changeMessage(ID + "|| " + this.message)
+    this.router.navigate(['/AnswerEdit']) 
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 
+  }
+
+  countrow = 0
+  addIN(){
+    console.log(this.countrow);
+    this.countrow = this.countrow + 1
+    this.EMAIL_CC[this.countrow] = ""
+    console.log(this.EMAIL_CC);
+  
+  }
+  delete(i:any){
+    this.countrow = this.countrow - 1
+    this.EMAIL_CC.splice(i, 1);
+    // delete this.EMAIL_CC[i];
+    console.log(this.EMAIL_CC)
   }
 
   // Add input

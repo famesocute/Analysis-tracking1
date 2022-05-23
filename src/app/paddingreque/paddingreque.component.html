@@ -412,9 +412,9 @@
                     <textarea matInput [(ngModel)]="this.ComConfirm"></textarea>
                   </mat-form-field>
                 </td>
-                <!-- <td>
                 
-                
+                <td>
+                  <mat-hint> *Click "Add" to confirm name</mat-hint>
                 <form class="example-form">
                     <mat-form-field class="example-full-width " appearance="outline">
                       <mat-label>Select Name</mat-label>
@@ -434,39 +434,27 @@
                   <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
                   <table>
                     <tbody>
-                      <tr>{{item}}</tr>
-                      <tr><button (click)="delete(i)">delete</button></tr>
-                    </tbody>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <div *ngIf="item != ''">
+                            <td>
+                              <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                                <mat-icon>delete</mat-icon>
+                              </button>
+                            </td>
+                       </div>
+                      </div>
+                        <div class="col-sm-9">
+                      <td>{{item}}</td>
+                      <br>
+                    </div>
+                    
+                  </div>
+                      </tbody>
                   </table>
-                </tr> -->
-
-                  <!-- <form class="example-form">
-                    <mat-form-field class="example-full-width " appearance="outline">
-                      <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[0]">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{option}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </form>
-
-                  <form class="example-form">
-                    <mat-form-field class="example-full-width " appearance="outline">
-                      <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[1]">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{option}}
-                        </mat-option>
-                      </mat-autocomplete>
-                    </mat-form-field>
-                  </form> -->
+                </tr>
                   
-                <!-- </td> -->
+                </td>
               </tr>
               <tr>
                 <th>Analysis section</th>

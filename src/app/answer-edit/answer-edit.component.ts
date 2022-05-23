@@ -122,8 +122,7 @@ export class AnswerEditComponent implements OnInit {
       "`ANSWER_SENT_TO` = '" + this.ANSWER_SENT_TO + "', `ANSWER_CC1_SENT_TO` = '" + this.ANSWER_CC1_SENT_TO + "', " +
       "`ANSWER_CC2_SENT_TO` = '" + this.ANSWER_CC2_SENT_TO + "', `ANSWER_DATE` = '" + this.ANSWER_DATE + "'," +
       " `STATUS_QUESTION` = '" + this.STATUS_QUESTION + "' WHERE (`ID` = '" + this.ID_Q + "');"
-
-
+      
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       this.productService.changeMessage(this.ID_p)

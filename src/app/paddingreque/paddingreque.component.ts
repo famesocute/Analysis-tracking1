@@ -19,8 +19,7 @@ export class PaddingrequeComponent implements OnInit {
   table : any
 
   ComConfirm=""
-  ccConfirm1=""
-  ccConfirm2=""
+  ccConfirm=""
   DataRes : any
   DataResQUESTION : any
   message = ""
@@ -38,16 +37,19 @@ export class PaddingrequeComponent implements OnInit {
    }
    loading = true
   ngOnInit(): void {
+    this.EMAIL_CC[0] = ""
+    console.log(this.EMAIL_CC);
+
     this.productService.currentMessage.subscribe(message => this.message = message)
     console.log(this.message)
-
     this.message = "123"
-    this.EMAIL_CC[0] = ""
 
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
       this.loading = false
+      this.ComConfirm = this.DataRes[0].REVI_PAND_CONFIRM_COM
+      this.ccConfirm = this.DataRes[0].REVI_PAND_CONFIRM_CC1
       
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
@@ -139,8 +141,8 @@ export class PaddingrequeComponent implements OnInit {
   GoEstiStep(){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "', `REVI_PAND_CONFIRM_CC1` = '"+ this.ccConfirm1 +"', " +
-      " `REVI_PAND_CONFIRM_CC2` = '" + this.ccConfirm2 + "' WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
+      " SET `REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "', `REVI_PAND_CONFIRM_CC1` = '"+ this.EMAIL_CC +"', " +
+      "  WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
@@ -150,17 +152,19 @@ export class PaddingrequeComponent implements OnInit {
    
   }
 
-
   countrow = 0
 
   addIN(){
+    console.log(this.countrow);
     this.countrow = this.countrow + 1
     this.EMAIL_CC[this.countrow] = ""
     console.log(this.EMAIL_CC);
   
   }
   delete(i:any){
-    delete this.EMAIL_CC[i];
+    this.countrow = this.countrow - 1
+    this.EMAIL_CC.splice(i, 1);
+    // delete this.EMAIL_CC[i];
     console.log(this.EMAIL_CC)
   }
   

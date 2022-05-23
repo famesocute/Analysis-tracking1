@@ -43,6 +43,7 @@ import { LoginComponent } from './login/login.component';
 import { AnalyrequehomeListComponent } from './dialog/analyrequehome-list/analyrequehome-list.component';
 import { RequestinfoComponent } from './requestinfo/requestinfo.component';
 import { AnswerEditComponent } from './answer-edit/answer-edit.component';
+import { ApproverStepComponent } from './dialog/approver-step/approver-step.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { AnswerEditComponent } from './answer-edit/answer-edit.component';
     AnalyrequehomeListComponent,
     RequestinfoComponent,
     AnswerEditComponent,
+    ApproverStepComponent,
   ],
   imports: [
     BrowserModule,

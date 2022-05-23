@@ -586,9 +586,9 @@
                 </label>
               </div>
             </div>
-
           </mat-card-content>
         </mat-card>
+        
         <!-- <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Related matters</mat-card-title>
@@ -768,30 +768,45 @@
                       </mat-form-field>
                     </td>
                     <td>
-                      <form class="example-form">
-                        <mat-form-field class="example-full-width " appearance="outline">
-                          <mat-label>Select Name</mat-label>
-                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                            [matAutocomplete]="auto" [(ngModel)]="this.ccIssuer1">
-                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                              {{option}}
-                            </mat-option>
-                          </mat-autocomplete>
-                        </mat-form-field>
-                      </form>
-                      <form class="example-form">
-                        <mat-form-field class="example-full-width " appearance="outline">
-                          <mat-label>Select Name</mat-label>
-                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                            [matAutocomplete]="auto" [(ngModel)]="this.ccIssuer2">
-                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                              {{option}}
-                            </mat-option>
-                          </mat-autocomplete>
-                        </mat-form-field>
-                      </form>
+                      <mat-hint> *Click "Add" to confirm name</mat-hint>
+                <form class="example-form">
+                    <mat-form-field class="example-full-width " appearance="outline">
+                      <mat-label>Select Name</mat-label>
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>
+                  <div class="center">
+                    <button mat-button (click)="addIN()">Add</button>
+                  </div>
+
+                  <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+                  <table>
+                    <tbody>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <div *ngIf="item != ''">
+                            <td>
+                              <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                                <mat-icon>delete</mat-icon>
+                              </button>
+                            </td>
+                       </div>
+                      </div>
+                        <div class="col-sm-9">
+                      <td>{{item}}</td>
+                      <br>
+                    </div>
+                    
+                  </div>
+                      </tbody>
+                  </table>
+                </tr>
                     </td>
 
 
