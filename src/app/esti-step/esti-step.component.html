@@ -1,20 +1,42 @@
+<div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
+</div>
+<ng-template #elseBlock>
 <div class="container-fluid">
-    <div class="border-bottom Toolbar">
-      <div class="row">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-8 center" style="padding :15px 0 ;">
-          <button mat-button >Home</button>
-          <button mat-button (click)="Goanalysishome()">Analysis request form</button>
-          <button mat-button>Equipment Calendar</button>
-          <button mat-button>Job tracking</button>
-          <button mat-button>Search previous report</button>
-        </div>
-        <div class="col-xl-2 center ">
-          <button mat-raised-button color="primary">Login</button>
-          <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
+  <div class="border-bottom Toolbar">
+    <div class="row">
+      <div class="col-xl-1"></div>
+      <div class="col-xl-7 center" style="padding :15px 0 ;">
+        <button mat-button>Home</button>
+        <button mat-button>Analysis request form</button>
+        <button mat-button>Equipment Calendar</button>
+        <button mat-button>Job tracking</button>
+        <button mat-button>Search previous report</button>
+      </div>
+
+        <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+          <div class="row">
+          <div class="col-xl-8">
+       {{this.nameonly}}
+       ({{this.Codelocal}})
+       {{this.departmentlocal}}
+      </div>
+      <div class="col-xl-4">
+       <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
         </div>
       </div>
     </div>
+
+    <ng-template #other_content>
+    <div class="col-xl-4 center ">
+      <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+      <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+    </div>
+  </ng-template>
+
+
+    </div>
+  </div>
   
     <div class="row">
       <div class="col-sm-1">
@@ -382,7 +404,6 @@
                       </tr>
                     </table>
                   </form>
-                  <button (click)="display()">Go</button>
                     </div>
             </mat-card-content>
         </mat-card>
@@ -660,20 +681,10 @@
         </div>
         </mat-card-content>
       </mat-card>
-  </ng-template>
-      
-   
-       
-        
-     
-
-        
-  
+  </ng-template>     
       </div>
-  
-  
       <div class="col-sm-1">
-  
       </div>
     </div>
   </div>
+</ng-template>

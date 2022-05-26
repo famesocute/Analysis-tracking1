@@ -243,14 +243,14 @@ console.log(this.departmentlocal)
     console.log(val2)
     var qtest = ""
     qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`data_all` " +
-      "(`REQ_NUM`,`MONTH`, `TITLE`, `BACKGRUD`, `PURPOSE`, `HYPO`, `ANA_TYPE`,`ANA_TYPE2`, `ISSUE_DATE`, " +
+      "(`STATUS_JOB`,`STETUS_PERSON`,`REQ_NUM`,`MONTH`, `TITLE`, `BACKGRUD`, `PURPOSE`, `HYPO`, `ANA_TYPE`,`ANA_TYPE2`, `ISSUE_DATE`, " +
       "`REQ_TER`, `PHONE`, `DEP_MENT`, `PRODUCT`, `ATTACH_FILE`, `REQ_ANA_TECHNI`,`REQ_ANA_TECHNI2`, `NUM_SAMPLE`" +
       ", `SEND_SAM_DATE`, `FINISH_DATE`, `PIORITY`, `REASON`,  `SAM_NAME`, " +
       "`COMM_SAM_INFOR`, `DANGER`, `SAM_AF_TEST`, `RELATE_MAT`, `KEY_CHARA`, `KEY_STATE`, " +
       "`KEY_PHENO`, `QUESTION`, `REVI_PAND_ISSUER`, `REVI_PAND_CONFIRM`, `REVI_ANASEC_CONTROL`, " +
       "`REVI_ANASEC_ANAL`, `REVI_REAPPROV_CHECK`, `REVI_REAPPROV_CONFIRM`, `REVI_REAPPROV_APPROV`," +
       "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " +
-      " VALUES ('" + this.RequestNo + "', '" + this.month + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
+      " VALUES ('1','" + this.NameConfirm + "','" + this.RequestNo + "', '" + this.month + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
       " '" + this.Analysistype2 + "', '" + this.IssueDate + "', '" + this.namelocal + "', '" + this.Phone + "', '" + this.departmentlocal + "', '" + this.Product + "','1', '" + this.RequestTech + "', '" + this.RequestTech2 + "'," +
       " '" + this.Numsample + "', '" + DatereceiveSam + "', '" + DateEepectSam + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
       " '" + this.AnaComment + "', '" + this.Dangerous + "', '" + this.SamAftertest + "', '" + this.Relatedmatters + "', '" + this.KeywordCharact + "', '" + this.KeywordState + "', '" + this.KeywordPheno + "', " +

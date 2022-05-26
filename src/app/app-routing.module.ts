@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { RequestinfoComponent } from './requestinfo/requestinfo.component';
 import { AnswerEditComponent } from './answer-edit/answer-edit.component';
 import { ApproverStepComponent } from './dialog/approver-step/approver-step.component';
+import { MyjobComponent } from './myjob/myjob.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
@@ -33,7 +34,8 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'Login', component: LoginComponent },
 { path: 'Requestinfo', component: RequestinfoComponent },
 { path: 'AnswerEdit', component: AnswerEditComponent },
-{ path: 'ApproverStep', component: ApproverStepComponent },];
+{ path: 'ApproverStep', component: ApproverStepComponent },
+{ path: 'Myjob', component: MyjobComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -14,7 +14,12 @@ import { QuestionComponent } from '../question/question.component';
   styleUrls: ['./paddingreque.component.scss']
 })
 export class PaddingrequeComponent implements OnInit {
+  namelocal: any
+  Codelocal: any
+  departmentlocal: any
+  nameonly: any
 
+  isValid = false
 
   table : any
 
@@ -33,16 +38,17 @@ export class PaddingrequeComponent implements OnInit {
 
   EMAIL_CC: string[] = [];
 
-  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog) {
-   }
-   loading = true
+  loading = true
+
+  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog) {}
+
   ngOnInit(): void {
     this.EMAIL_CC[0] = ""
     console.log(this.EMAIL_CC);
 
     this.productService.currentMessage.subscribe(message => this.message = message)
     console.log(this.message)
-    this.message = "123"
+    // this.message = "123"
 
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
@@ -104,6 +110,14 @@ export class PaddingrequeComponent implements OnInit {
       map(value => this._filter(value)),
     );
      
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
+
+    if (this.namelocal != null) {
+      this.isValid = true
+      this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
+    }
   }
 
   private _filter(value: string): string[] {
@@ -139,9 +153,10 @@ export class PaddingrequeComponent implements OnInit {
   }
 
   GoEstiStep(){
+    console.log(this.DataRes[0].REVI_ANASEC_CONTROL)
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "', `REVI_PAND_CONFIRM_CC1` = '"+ this.EMAIL_CC +"', " +
+      " SET `STATUS_JOB` = '2',`STETUS_PERSON` = '" + this.DataRes[0].REVI_ANASEC_CONTROL + "',`REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "', `REVI_PAND_CONFIRM_CC1` = '"+ this.EMAIL_CC +"' " +
       "  WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -159,13 +174,28 @@ export class PaddingrequeComponent implements OnInit {
     this.countrow = this.countrow + 1
     this.EMAIL_CC[this.countrow] = ""
     console.log(this.EMAIL_CC);
-  
   }
   delete(i:any){
     this.countrow = this.countrow - 1
     this.EMAIL_CC.splice(i, 1);
     // delete this.EMAIL_CC[i];
     console.log(this.EMAIL_CC)
+  }
+
+   myFunction() {
+    window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
+  }
+  Logout(){
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
+    location.reload();
+  }
+  Gologin() {
+    this.router.navigate(['/Login'])
+  }
+  GoSignup() {
+    this.router.navigate(['/Signup'])
   }
   
 }

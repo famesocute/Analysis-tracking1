@@ -45,6 +45,13 @@ export class EstiStepComponent implements OnInit {
 
   loading = true
 
+  isValid = false
+
+  namelocal: any
+  Codelocal: any
+  departmentlocal: any
+  nameonly: any
+
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder) {
     this.productForm = this.fb.group({
 
@@ -58,7 +65,7 @@ export class EstiStepComponent implements OnInit {
       console.log(this.EMAIL_CC);
 
     this.productService.currentMessage.subscribe(message => this.message = message)
-    this.message = "123"
+    // this.message = "123"
    
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
@@ -122,6 +129,15 @@ export class EstiStepComponent implements OnInit {
     );
 
     this.quantities().push(this.newQuantity());
+
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
+
+    if (this.namelocal != null) {
+      this.isValid = true
+      this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
+    }
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -145,7 +161,7 @@ export class EstiStepComponent implements OnInit {
   save(){
       var qtest = ""
       qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-        " SET `REVI_ANASEC_ANAL` = '" + this.Analyzer + "',`REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.EMAIL_CC +"' " +
+        " SET `STATUS_JOB` = '3', `STETUS_PERSON` = '" + this.Analyzer + "', `REVI_ANASEC_ANAL` = '" + this.Analyzer + "',`REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.EMAIL_CC +"' " +
         " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
       console.log(qtest);
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -168,7 +184,9 @@ export class EstiStepComponent implements OnInit {
   }
 
   GoEstiCost(){
-    this.router.navigate(['/Esticost']) 
+    console.log(this.productForm.value.quantities)
+
+    // this.router.navigate(['/Esticost']) 
   }
   GoAswer(ID:any){
     this.productService.changeMessage(ID + "|| " + this.message)
@@ -217,10 +235,18 @@ export class EstiStepComponent implements OnInit {
   removeQuantity(i: number) {
     this.quantities().removeAt(i);
   }
-  // Event fired after view is initialized
- 
-  display(){
-    console.log(this.productForm.value.quantities)
-  }
 
+  Logout(){
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
+    location.reload();
+  }
+  Gologin() {
+    this.router.navigate(['/Login'])
+  }
+  GoSignup() {
+    this.router.navigate(['/Signup'])
+  }
+  
 }

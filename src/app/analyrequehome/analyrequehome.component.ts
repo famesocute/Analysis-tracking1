@@ -145,4 +145,8 @@ export class AnalyrequehomeComponent implements OnInit {
     localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
+
+  Gomyjob(){
+    this.router.navigate(['/Myjob'])
+  }
 }

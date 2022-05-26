@@ -44,6 +44,7 @@ import { AnalyrequehomeListComponent } from './dialog/analyrequehome-list/analyr
 import { RequestinfoComponent } from './requestinfo/requestinfo.component';
 import { AnswerEditComponent } from './answer-edit/answer-edit.component';
 import { ApproverStepComponent } from './dialog/approver-step/approver-step.component';
+import { MyjobComponent } from './myjob/myjob.component';
 
 
 @NgModule({
@@ -66,6 +67,7 @@ import { ApproverStepComponent } from './dialog/approver-step/approver-step.comp
     RequestinfoComponent,
     AnswerEditComponent,
     ApproverStepComponent,
+    MyjobComponent,
   ],
   imports: [
     BrowserModule,
