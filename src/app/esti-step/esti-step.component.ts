@@ -65,15 +65,16 @@ export class EstiStepComponent implements OnInit {
       console.log(this.EMAIL_CC);
 
     this.productService.currentMessage.subscribe(message => this.message = message)
-    // this.message = "123"
+    // this.message = "126"
    
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
       this.loading = false
-
       this.confirmcc = this.DataRes[0].REVI_PAND_CONFIRM_CC1.split(",");
       this.controlcc = this.DataRes[0].REVI_ANASEC_CONTROL_CC1.split(",");
+      this.ComControl = this.DataRes[0].REVI_ANASEC_CONTROL_COM
+      this.Analyzer = this.DataRes[0].REVI_ANASEC_ANAL
       
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
@@ -186,7 +187,22 @@ export class EstiStepComponent implements OnInit {
   GoEstiCost(){
     console.log(this.productForm.value.quantities)
 
-    // this.router.navigate(['/Esticost']) 
+    var val2 = ""
+    for (var val in this.productForm.value.quantities) {
+      console.log(val);
+      val2 = val2 + this.productForm.value.quantities[val].Technique + "||" + this.productForm.value.quantities[val].Samplenumber + "[]"
+    }
+    val2 = val2.substring(0, val2.length - 2);
+    console.log(val2)
+    var qtest = ""
+    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+      " SET  `ESTI_TECHNIQUE` = '" + val2 + "' " +
+      " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
+    console.log(qtest);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+      console.log(data); 
+    })
+    this.router.navigate(['/Esticost']) 
   }
   GoAswer(ID:any){
     this.productService.changeMessage(ID + "|| " + this.message)
@@ -222,8 +238,8 @@ export class EstiStepComponent implements OnInit {
 
   newQuantity(): FormGroup {
     return this.fb.group({
-      Lotno: '',
-      Samplename: '',
+      Technique: '',
+      Samplenumber: '',
 
     })
   }

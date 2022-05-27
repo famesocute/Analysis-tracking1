@@ -17,18 +17,16 @@
     </div>
   
     <div class="row">
-      <div class="col-sm-1">
-  
+      <div class="col-sm-1">  
       </div>
-  
       <div class="col-sm-10">
-        <h1 style="padding-top: 40px; padding-left:300px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
-        <div class="row" style="margin-bottom:5px;">
-          <div class="col-sm-9"></div>
-          <div class="col-sm-3">
+        <div class="row">
+          <div class="col-sm-9">
+            <h1 style="padding:40px 0px; padding-left:150px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
+          </div>
+          <div class="col-sm-3" style="padding:40px 0px; padding-left: 90px;">
             <div class="row ">
-              <button mat-mini-fab matTooltip="Edit" matTooltipClass="example-tooltip-red"
-                aria-label="Button that shows a red tooltip" matTooltipPosition="above">
+              <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above">
                 <mat-icon>create</mat-icon>
               </button>
               <button mat-mini-fab matTooltip="Save" matTooltipClass="example-tooltip-red"

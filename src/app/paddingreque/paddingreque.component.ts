@@ -30,7 +30,7 @@ export class PaddingrequeComponent implements OnInit {
   message = ""
 
   sample1 : any
-  sample2:any
+  sample2 : any
 
   myControl = new FormControl();
   options: string[] = [];
@@ -48,7 +48,7 @@ export class PaddingrequeComponent implements OnInit {
 
     this.productService.currentMessage.subscribe(message => this.message = message)
     console.log(this.message)
-    // this.message = "123"
+    this.message = "123"
 
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);

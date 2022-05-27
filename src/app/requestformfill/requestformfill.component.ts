@@ -12,16 +12,16 @@ import { ProductService } from '../api/product.service';
   styleUrls: ['./requestformfill.component.scss']
 })
 export class RequestformfillComponent implements OnInit {
-  table : any
+  table: any
 
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
 
-  namelocal  : any 
-  Codelocal  : any
-  departmentlocal : any
-
+  namelocal: any
+  Codelocal: any
+  departmentlocal: any
+  nameonly : any
 
   RequestNo = ""
   Title = ""
@@ -59,6 +59,10 @@ export class RequestformfillComponent implements OnInit {
   NameConfirm = ""
   NameControl = "Wanutsanun Hintuang <wanutsanun.hin@murata.com>"
   month = ""
+
+  isValid = false
+
+  loading = true
 
   EMAIL_CC: string[] = [];
 
@@ -105,16 +109,16 @@ export class RequestformfillComponent implements OnInit {
       this.table = data
       var dataselect = ""
       var x
-        for(x in this.table){
-            dataselect = dataselect +  this.table[x].DISPLAY_NAME + ' <'+  this.table[x].MAIL_ADDRESS +'>,'  
-          
-        }
-        dataselect = dataselect.substring(0, dataselect.length - 1);
+      for (x in this.table) {
+        dataselect = dataselect + this.table[x].DISPLAY_NAME + ' <' + this.table[x].MAIL_ADDRESS + '>,'
 
-        const myArray = dataselect.split(",");
+      }
+      dataselect = dataselect.substring(0, dataselect.length - 1);
 
-        this.options = myArray
-        console.log(this.options)
+      const myArray = dataselect.split(",");
+
+      this.options = myArray
+      console.log(this.options)
     })
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -122,28 +126,25 @@ export class RequestformfillComponent implements OnInit {
       map(value => this._filter(value)),
     );
     this.quantities().push(this.newQuantity());
- 
+
     this.namelocal = localStorage.getItem("NAME");
     this.Codelocal = localStorage.getItem("EMPLOY_CODE");
     this.departmentlocal = localStorage.getItem("DEPARTMENT");
     if (this.departmentlocal != null) {
-      
-    }else{
+      this.isValid = true
+      this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
+    } else {
       window.alert("กรุณา login")
       this.router.navigate(['/Analyrequehome'])
     }
-console.log(this.namelocal)
-console.log(this.Codelocal)
-console.log(this.departmentlocal)
-   
 
+    this.loading = false
   }
 
   // Add input
   quantities(): FormArray {
     return this.productForm.get("quantities") as FormArray
   }
-  
 
   newQuantity(): FormGroup {
     return this.fb.group({
@@ -161,18 +162,18 @@ console.log(this.departmentlocal)
     this.quantities().removeAt(i);
   }
 
-  
+
 
   // seach box
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
-    
+
   }
 
   // seach controler
-  
+
   // Navi to Question
   NavQuestion() {
     this.router.navigate(['/Question'])
@@ -209,14 +210,14 @@ console.log(this.departmentlocal)
 
   countrow = 0
 
-  addIN(){
+  addIN() {
     console.log(this.countrow);
     this.countrow = this.countrow + 1
     this.EMAIL_CC[this.countrow] = ""
     console.log(this.EMAIL_CC);
-  
+
   }
-  delete(i:any){
+  delete(i: any) {
     this.countrow = this.countrow - 1
     this.EMAIL_CC.splice(i, 1);
     console.log(this.EMAIL_CC)
@@ -224,22 +225,22 @@ console.log(this.departmentlocal)
   display() {
     var DatereceiveSam = ""
     var Sendsampledate2 = this.Sendsampledate.toLocaleString()
-     DatereceiveSam = Sendsampledate2.substring(0, 9)
-     console.log(DatereceiveSam)
+    DatereceiveSam = Sendsampledate2.substring(0, 9)
+    console.log(DatereceiveSam)
 
     var DateEepectSam = ""
     var DateEepectSam2 = this.EepectedDate.toLocaleString()
     DateEepectSam = DateEepectSam2.substring(0, 9)
-     console.log(DateEepectSam)
+    console.log(DateEepectSam)
 
-    
+
     var val2 = ""
 
     for (var val in this.productForm.value.quantities) {
       console.log(val); // prints values: 10, 20, 30, 40
       val2 = val2 + this.productForm.value.quantities[val].Lotno + "||" + this.productForm.value.quantities[val].Samplename + "||" + this.productForm.value.quantities[val].Remarks + "[]"
     }
-    val2 = val2.substring(0, val2.length - 1);
+    val2 = val2.substring(0, val2.length - 2);
     console.log(val2)
     var qtest = ""
     qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`data_all` " +
@@ -257,7 +258,7 @@ console.log(this.departmentlocal)
       " '', '" + this.namelocal + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.EMAIL_CC + "'  );"
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-      console.log(data); 
+      console.log(data);
     })
 
   }
@@ -274,7 +275,6 @@ console.log(this.departmentlocal)
       console.log(data);
 
       MonthRes = data;
-
 
       let date: Date = new Date();
 
@@ -325,7 +325,6 @@ console.log(this.departmentlocal)
       var runnumber
 
 
-
       if (date3 == MonthRes[0].MONTH) {
 
         console.log("num = num + 001 ");
@@ -349,8 +348,6 @@ console.log(this.departmentlocal)
           runnumber = pad.substring(0, pad.length - str.length) + str
 
           console.log(runnumber)
-
-
 
           var Department2
 
@@ -408,5 +405,20 @@ console.log(this.departmentlocal)
     this.router.navigate(['/Analyrequehome'])
   }
 
+  Gologin() {
+    this.router.navigate(['/Login'])
+  }
+  GoSignup() {
+    this.router.navigate(['/Signup'])
+  }
+  Logout(){
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
+    location.reload();
+  }
+  Goanalysishome(){
+    this.router.navigate(['/Analyrequehome']) 
+  }
 
 }

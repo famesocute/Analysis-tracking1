@@ -8,7 +8,7 @@
       <div class="col-xl-1"></div>
       <div class="col-xl-7 center" style="padding :15px 0 ;">
         <button mat-button>Home</button>
-        <button mat-button>Analysis request form</button>
+        <button mat-button (click)="Goanalysishome()">Analysis request form</button>
         <button mat-button>Equipment Calendar</button>
         <button mat-button>Job tracking</button>
         <button mat-button>Search previous report</button>
@@ -44,13 +44,13 @@
       </div>
   
       <div class="col-sm-10">
-        <h1 style="padding-top: 40px; padding-left:300px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
-        <div class="row" style="margin-bottom:5px;">
-          <div class="col-sm-9"></div>
-          <div class="col-sm-3">
+        <div class="row">
+          <div class="col-sm-9">
+            <h1 style="padding:40px 0px; padding-left:150px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
+          </div>
+          <div class="col-sm-3" style="padding:40px 0px; padding-left: 90px;">
             <div class="row ">
-              <button mat-mini-fab matTooltip="Edit" matTooltipClass="example-tooltip-red"
-                aria-label="Button that shows a red tooltip" matTooltipPosition="above">
+              <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above">
                 <mat-icon>create</mat-icon>
               </button>
               <button mat-mini-fab matTooltip="Save" matTooltipClass="example-tooltip-red"
@@ -353,7 +353,7 @@
                           <div style="padding-top: 10px;">
                           <mat-form-field appearance="outline" >
                             <mat-label>Techniques</mat-label>
-                            <mat-select formControlName="Lotno">
+                            <mat-select formControlName="Technique">
                                 <mat-option value="X-ray 2D">X-ray 2D</mat-option>
                                 <mat-option value="X-ray 3D">X-ray 3D</mat-option>
                                 <mat-option value="SEM-Microscope">SEM-Microscope</mat-option>
@@ -385,7 +385,7 @@
                             </div>
                             <div class="col-sm-7">
                               <div class="form-group" >
-                                <input type="text" class="form-control" id="Lotno" formControlName="Samplename">
+                                <input type="text" class="form-control" id="Samplenumber" formControlName="Samplenumber">
                               </div>
                             </div>
                           </div>
