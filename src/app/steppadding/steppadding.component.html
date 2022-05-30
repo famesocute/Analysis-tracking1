@@ -27,73 +27,115 @@
                 <div class="col-sm-1"></div>
                 <div class="col-sm-10">
                   <div class="row">
-                    <div class="col-xl center " *ngIf="isValidPic1;else other_content1">
-                      <img src="../assets/Tracking_web/Image/document.gif">
-                      
+                    <div class="col-xl  " *ngIf="isValidPic1;else other_content1">                     
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <img src="../assets/Tracking_web/Image/add-file.png">
+                          </div>
+                          <div class="col-sm-6">
+                            <img src="../assets/Tracking_web/Image/substract_black.png">
+                          </div>                       
+                    </div>
                     </div>
                     <ng-template #other_content1>
-                      <div class="col-xl center ">
-                      <img src="../assets/Tracking_web/Image/user.png">
-                    
+                      <div class="col-xl ">
+                        <div class="row">
+                          <div class="col-sm-6" >
+                            <div class="card card_track">
+                              <div class="card-body center" >
+                                <img src="../assets/Tracking_web/Image/add-file.png">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-6" style="padding-top:15px ;">
+                            <img src="../assets/Tracking_web/Image/substract_color.png">
+                          </div>
+                        </div>
                     </div>
                     </ng-template>
-                    <div class="col-xl center " *ngIf="isValidPic2;else other_content2">
-                      <img src="../assets/Tracking_web/Image/document.gif">
-                      
+                    <div class="col-xl  " *ngIf="isValidPic2;else other_content2">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img src="../assets/Tracking_web/Image/official-documents.png">
+                        </div>
+                        <div class="col-sm-6">
+                          <img src="../assets/Tracking_web/Image/substract_black.png">
+                        </div>                       
+                  </div>
+ 
                     </div>
                     <ng-template #other_content2>
                       <div class="col-xl center ">
-                      <img src="../assets/Tracking_web/Image/user.png">
+                      <img src="../assets/Tracking_web/Image/checked.png">
                       
                     </div>
                     </ng-template>
                     <div class="col-xl center " *ngIf="isValidPic3;else other_content3">
-                      <img src="../assets/Tracking_web/Image/document.gif">
-                      
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <img src="../assets/Tracking_web/Image/list.png">
+                        </div>
+                        <div class="col-sm-6">
+                          <img src="../assets/Tracking_web/Image/substract_black.png">
+                        </div>                       
+                  </div>
                     </div>
                     <ng-template #other_content3>
                       <div class="col-xl center ">
-                      <img src="../assets/Tracking_web/Image/user.png">
+                      <img src="../assets/Tracking_web/Image/checked.png">
                       
                     </div>
                     </ng-template>
                     <div class="col-xl center " *ngIf="isValidPic4;else other_content4">
-                      <img src="../assets/Tracking_web/Image/document.gif">
+                      <img src="../assets/Tracking_web/Image/budget.png">
                       
                     </div>
                     <ng-template #other_content4>
                       <div class="col-xl center ">
-                      <img src="../assets/Tracking_web/Image/user.png">
+                      <img src="../assets/Tracking_web/Image/checked.png">
                       
                     </div>
                     </ng-template>
                     <div class="col-xl center " *ngIf="isValidPic5;else other_content5">
-                      <img src="../assets/Tracking_web/Image/document.gif">
-                      
+                      <img src="../assets/Tracking_web/Image/analysis.png">                      
                     </div>
                     <ng-template #other_content5>
                       <div class="col-xl center ">
-                      <img src="../assets/Tracking_web/Image/user.png">
+                      <img src="../assets/Tracking_web/Image/checheckedck.png">
                     </div>
                     </ng-template>
                   </div>
                 </div>
                 <div class="col-sm-1"></div>
               </div>
-             <br> 
-            <mat-card class="card1" style="margin-top: 10px;" >
+           
+            <mat-card class="card1" style="margin-top: 60px;" >
                 <mat-card-title-group>
                     <mat-card-title>Analytical information</mat-card-title>
                 </mat-card-title-group>
                 <mat-card-content style="padding:10px;">                                          
                     <div class="row">
-                        <div class="col-sm-8">
-                            <h4><b>Title:</b></h4>
-                            <h4><b>Analysis type:</b></h4>
+                        <div class="col-sm-7">
+                          <div class="row">
+                            <div class="col-sm-1"><b>Title:</b></div>
+                            <div class="col-sm-11">{{this.DataRes[0].TITLE}}</div>
+                          </div>
+                          <br>      
+                          <div class="row">
+                            <div class="col-sm-3"><b>Analysis type:</b></div>
+                            <div class="col-sm-9">{{this.DataRes[0].ANA_TYPE}}</div>
+                          </div>               
                         </div>
-                        <div class="col-sm-4">
-                           <h4><b>Requester:</b></h4>
-                           <h4><b>Department:</b></h4> 
+                        <div class="col-sm-5">
+                          <div class="row">
+                            <div class="col-sm-2"><b>Requester:</b></div>
+                            <div class="col-sm-10">{{requester[0]}}</div>
+                          </div>
+                          <br>      
+                          <div class="row">
+                            <div class="col-sm-3"><b>Department:</b></div>
+                            <div class="col-sm-9">{{this.DataRes[0].DEP_MENT}}</div>
+                          </div>          
                         </div>
                       </div>
                 </mat-card-content>

@@ -33,7 +33,7 @@ RequestNo = ""
   constructor( private fb: FormBuilder, public router: Router, private location: Location, public productService: ProductService ) { }
   
 ngOnInit(): void {
-  this.Questioner = localStorage.getItem("NAME");
+  this.Questioner = sessionStorage.getItem("NAME");
   
   this.productService.currentMessage.subscribe(message => this.message = message)
   console.log(this.message)

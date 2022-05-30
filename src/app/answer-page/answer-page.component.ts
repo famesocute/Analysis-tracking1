@@ -44,9 +44,9 @@ export class AnswerPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.namelocal = localStorage.getItem("NAME");
-    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = localStorage.getItem("DEPARTMENT");
+    this.namelocal = sessionStorage.getItem("NAME");
+    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
     if (this.namelocal != null) {
       this.isValid = true
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
@@ -112,9 +112,9 @@ export class AnswerPageComponent implements OnInit {
   }
 
   Logout() {
-    localStorage.removeItem("NAME");
-    localStorage.removeItem("EMPLOY_CODE");
-    localStorage.removeItem("DEPARTMENT");
+    sessionStorage.removeItem("NAME");
+    sessionStorage.removeItem("EMPLOY_CODE");
+    sessionStorage.removeItem("DEPARTMENT");
     location.reload();
   }
 

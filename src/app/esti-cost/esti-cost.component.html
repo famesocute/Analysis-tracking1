@@ -1,24 +1,48 @@
+<div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
+</div>
+<ng-template #elseBlock>
 <div class="container-fluid">
-    <div class="border-bottom Toolbar">
-      <div class="row">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-8 center" style="padding :15px 0 ;">
-          <button mat-button >Home</button>
-          <button mat-button (click)="Goanalysishome()">Analysis request form</button>
-          <button mat-button>Equipment Calendar</button>
-          <button mat-button>Job tracking</button>
-          <button mat-button>Search previous report</button>
-        </div>
-        <div class="col-xl-2 center ">
-          <button mat-raised-button color="primary">Login</button>
-          <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
+  <div class="border-bottom Toolbar">
+    <div class="row">
+      <div class="col-xl-1"></div>
+      <div class="col-xl-7 center" style="padding :15px 0 ;">
+        <button mat-button>Home</button>
+        <button mat-button (click)="Goanalysishome()">Analysis request form</button>
+        <button mat-button>Equipment Calendar</button>
+        <button mat-button>Job tracking</button>
+        <button mat-button>Search previous report</button>
+      </div>
+
+        <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+          <div class="row">
+          <div class="col-xl-8">
+       {{this.nameonly}}
+       ({{this.Codelocal}})
+       {{this.departmentlocal}}
+      </div>
+      <div class="col-xl-4">
+       <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
         </div>
       </div>
     </div>
+
+    <ng-template #other_content>
+    <div class="col-xl-4 center ">
+      <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+      <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+    </div>
+  </ng-template>
+
+
+    </div>
+  </div>
   
     <div class="row">
-      <div class="col-sm-1">  
+      <div class="col-sm-1">
+  
       </div>
+  
       <div class="col-sm-10">
         <div class="row">
           <div class="col-sm-9">
@@ -171,12 +195,12 @@
             <div class="container">
               <form>
                 <table>
-                  <tr>
+                  <tr *ngFor="let item of sample2 let i = index">
                     <td width="300px">
                       <div class="input1" style="padding: 0 10px ;">
                         <div class="row">
                           <div class="col-sm-3"><b>Lot no:</b></div>
-                          <div class="col-sm-9"></div>
+                          <div class="col-sm-9"> {{ item.Lot_no }}</div>
                         </div>
                       </div>
                       
@@ -185,7 +209,7 @@
                       <div class="input1" style="padding: 0 10px ;">
                         <div class="row">
                           <div class="col-sm-4"><b>Sample name:</b></div>
-                          <div class="col-sm-8"></div>
+                          <div class="col-sm-8">{{ item.Sample_name }}</div>
                         </div>
                       </div>
   
@@ -193,8 +217,8 @@
                     <td width="200px">
                       <div class="input1" style="padding: 0 10px ;">
                         <div class="row">
-                          <div class="col-sm-3"><b>Remarks:</b></div>
-                          <div class="col-sm-9"></div>
+                          <div class="col-sm-4"><b>Remarks:</b></div>
+                          <div class="col-sm-8">{{ item.Remarks }}</div>
                         </div>
                       </div>
                     </td>
@@ -232,43 +256,6 @@
   
           </mat-card-content>
         </mat-card>
-  
-        <!-- <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Related matters</mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-  
-            <div class="row">
-              <div class="col-sm-3"><button mat-raised-button color="primary">Relate with all request</button></div>
-              <div class="col-sm-3"><button mat-raised-button color="primary">Relate with your department request</button>
-              </div>
-              <div class="col-sm-3"></div>
-              <div class="col-sm-3"></div>
-            </div>
-  
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Title</th>
-                  <th>Issued By</th>
-                  <th>Issued Date</th>
-                  <th>Form</th>
-                  <th>Select</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Improvement PAC 1</td>
-                  <td>Pichayapak</td>
-                  <td>1 Jan 2021</td>
-                  <td>O</td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </mat-card-content>
-        </mat-card> -->
   
         <mat-card class="card1">
           <mat-card-title-group>
@@ -317,16 +304,26 @@
                   <tr>
                     <th width="100px" class=" Titlereview">No.</th>
                     <th width="300px">Title</th>
-                    <th width="100px"></th>
+                    <th width="50px" class=" Titlereview">Read</th>
+                    <th width="50px" class=" Titlereview">Answer&Edit</th>
                     <th width="100px" class=" Titlereview">Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th class=" Titlereview">Question no.1:</th>
-                    <td>Confirm purpose </td>
-                    <td class=" Titlereview"><button mat-raised-button color="primary" class="button2" (click)="GoAswer()">Read</button></td>
-                    <td class=" Titlereview">Anwser already</td>
+                  <tr  *ngFor="let item of DataResQUESTION let i = index" >
+                    <th class=" Titlereview">Question no.{{i+1}}:</th>
+                    <td>{{item.QUESTION_DETAIL}} </td>
+                    <td class=" Titlereview">
+                      <button mat-mini-fab color="primary" class="button4" (click)="GoAswer(item.ID)" >
+                        <mat-icon>import_contacts</mat-icon>
+                      </button>
+                     </td>
+                    <td class=" Titlereview">
+                      <button mat-mini-fab color="primary" class="button3" (click)="GoAsweredit(item.ID)" >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </td>
+                    <td class=" Titlereview">{{item.STATUS_QUESTION}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -337,163 +334,169 @@
             </div>
           </mat-card-content>
         </mat-card>
-        
+
         <mat-card class="card1" style="margin-top: 10px;">
-            <mat-card-title-group>
-                <mat-card-title>Estimate cost</mat-card-title>
-            </mat-card-title-group>
-            <mat-card-content>
-                <table class="table table-bordered Titlereview ">
-                    <thead >
-                      <tr>
-                        <th >Step</th>
-                        <th >Technique</th>
-                        <th >Quantity</th>
-                        <th >Technique cost/1pc.</th>
-                        <th >Estimate cost</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th>Step 1</th>
-                        <td>VHX</td>
-                        <td>5 pcs</td>
-                        <td>200 Baht/pc</td>
-                        <td>1000 Baht</td>
-                      </tr>
-                      <tr>
-                        <th>Step2</th>
-                        <td>X-ray3D</td>
-                        <td>5 pcs</td>
-                        <td>500 Baht/pc</td>
-                        <td>2500 Bath</td>
-                      </tr>
-                      <tr>
-                        <th>Step3</th>
-                        <td>SEM</td>
-                        <td>5 pcs</td>
-                        <td>600 Baht/pc</td>
-                        <td>3000 Bat</td>
-                      </tr>
-                      <tr>
-                        <th>Total</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>65XX Bath</td>
-                      </tr> 
-                    </tbody>
-                  </table>
-                  <div class="row center"  >
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2">Accept</button></div>
-                    <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2" >Decline</button></div>
-                    <div class="col-sm-3"></div>
-                  </div>
-            </mat-card-content>
-        </mat-card>
-  
-        <mat-card class="card1">
           <mat-card-title-group>
-            <mat-card-title>Review Information</mat-card-title>
+              <mat-card-title>Estimate cost</mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
-            <div class="tablestyle">
-            <table class="table  border-dark">
-              <thead>
-                <tr>
-                  <th class="Titlereview" width="150px">Task</th>
-                  <th class="Titlereview" width="100px">Process</th>
-                  <th class="Titlereview" width="200px">Name</th>
-                  <th class="Titlereview" width="300px">Processing date&time</th>
-                  <th class="Titlereview" width="200px">Comment</th>
-                  <th class="Titlereview" width="200px">cc</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td> Pending request</td>
-                  <td>Issuer</td>
-                  <td>{{this.DataRes[0].REVI_PAND_ISSUER}} </td>
-                  <td></td>
-                  <td>{{this.DataRes[0].REVI_PAND_ISSUE_COM}} </td>
-                  <td>{{this.DataRes[0].REVI_PAND_ISSUE_CC}} </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Confirm</td>
-                  <td>{{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
-                  <td></td>
-                  <td></td>
-                  <td> </td>
-                </tr>
-                <tr>
-                  <th>Analysis section</th>
-                  <td>Controller</td>
-                  <td>{{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Analyst</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th>Report approval</th>
-                  <td>Check</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Confirm</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Report approval</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th>CS Evaluation</th>
-                  <td>Issuer</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th>Completed</th>
-                  <td>Close</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              <table class="table table-bordered Titlereview ">
+                  <thead >
+                    <tr>
+                      <th >Step</th>
+                      <th >Technique</th>
+                      <th >Quantity</th>
+                      <th >Technique cost/1pc.</th>
+                      <th >Estimate cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>Step 1</th>
+                      <td>VHX</td>
+                      <td>5 pcs</td>
+                      <td>200 Baht/pc</td>
+                      <td>1000 Baht</td>
+                    </tr>
+                    <tr>
+                      <th>Step2</th>
+                      <td>X-ray3D</td>
+                      <td>5 pcs</td>
+                      <td>500 Baht/pc</td>
+                      <td>2500 Bath</td>
+                    </tr>
+                    <tr>
+                      <th>Step3</th>
+                      <td>SEM</td>
+                      <td>5 pcs</td>
+                      <td>600 Baht/pc</td>
+                      <td>3000 Bat</td>
+                    </tr>
+                    <tr>
+                      <th>Total</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>65XX Bath</td>
+                    </tr> 
+                  </tbody>
+                </table>
+                <div class="row center"  >
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2">Accept</button></div>
+                  <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2" >Decline</button></div>
+                  <div class="col-sm-3"></div>
+                </div>
           </mat-card-content>
-        </mat-card>
+      </mat-card>
+    
+      <mat-card class="card1">
+        <mat-card-title-group>
+          <mat-card-title>Review Information</mat-card-title>
+        </mat-card-title-group>
+        <mat-card-content>
+          <div class="tablestyle">
+          <table class="table  border-dark">
+            <thead>
+              <tr>
+                <th class="Titlereview" width="150px">Task</th>
+                <th class="Titlereview" width="100px">Process</th>
+                <th class="Titlereview" width="200px">Name</th>
+                <th class="Titlereview" width="300px">Processing date&time</th>
+                <th class="Titlereview" width="200px">Comment</th>
+                <th class="Titlereview" width="200px">cc</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td> Pending request</td>
+                <td>Issuer</td>
+                <td>{{this.DataRes[0].REVI_PAND_ISSUER}} </td>
+                <td></td>
+                <td>{{this.DataRes[0].REVI_PAND_ISSUE_COM}} </td>
+                <td>{{this.DataRes[0].REVI_PAND_ISSUE_CC}} </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Confirm</td>
+                <td>{{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                <td></td>
+                <td>{{this.DataRes[0].REVI_PAND_CONFIRM_COM}}</td>
+                <td>
+                <p *ngFor="let item of this.confirmcc let i = index" >
+                  {{item}}
+                  
+                </p></td>
+              </tr>
+              <tr>
+                <th>Analysis section</th>
+                <td>Controller</td>
+                <td>{{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                <td> </td>
+                <td>
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+              </td>
+                <td>
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_CC1}}
+              </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Analyst</td>
+                <td>{{this.DataRes[0].REVI_ANASEC_ANAL}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Report approval</th>
+                <td>Check</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Confirm</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>Report approval</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>CS Evaluation</th>
+                <td>Issuer</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <th>Completed</th>
+                <td>Close</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </mat-card-content>
+      </mat-card>
   
       </div>
-  
-  
       <div class="col-sm-1">
-  
       </div>
     </div>
   </div>
+</ng-template>

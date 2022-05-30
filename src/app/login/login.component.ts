@@ -25,9 +25,9 @@ export class LoginComponent implements OnInit {
       console.log(data);
       this.table = data
       if (this.table[0].ID != 0) {
-        localStorage.setItem("NAME", this.table[0].NAME);
-        localStorage.setItem("EMPLOY_CODE", this.table[0].EMPLOY_CODE);
-        localStorage.setItem("DEPARTMENT", this.table[0].DEPARTMENT);
+        sessionStorage.setItem("NAME", this.table[0].NAME);
+        sessionStorage.setItem("EMPLOY_CODE", this.table[0].EMPLOY_CODE);
+        sessionStorage.setItem("DEPARTMENT", this.table[0].DEPARTMENT);
         this.router.navigate(['/Analyrequehome'])
       } else {
         window.alert("Wrong enployee code or password.")

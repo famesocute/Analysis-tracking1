@@ -24,7 +24,7 @@ export class AnalyrequehomeComponent implements OnInit {
   dep: any = [[]]
   dep2: any = [[], [], [], [], [], [], [], [], [], [], [], []]
   Sheet: any = []
-  
+
   loading = true
   test = 0
   message = ""
@@ -38,27 +38,23 @@ export class AnalyrequehomeComponent implements OnInit {
       this.table = data
       this.productService.currentMessage.subscribe(message => this.message = message)
 
-      this.namelocal = localStorage.getItem("NAME");
-      this.Codelocal = localStorage.getItem("EMPLOY_CODE");
-      this.departmentlocal = localStorage.getItem("DEPARTMENT");
+      this.namelocal = sessionStorage.getItem("NAME");
+      this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
+      this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
 
       if (this.namelocal != null) {
         this.isValid = true
         this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
       }
-
-    
-
       var x
-      // var y
-      var nameData 
+      var nameData
       for (x in this.table) {
-        this.month[x] = this.table[x].MONTH;
-
         nameData = this.table[x].REVI_PAND_ISSUER.split("<");
         this.table[x].REVI_PAND_ISSUER = nameData[0]
+        if (this.table[x].TITLE.length >= 40) {
+          this.table[x].TITLE = this.table[x].TITLE.substring(0, 40) + " ..."
+        }
       }
-
       this.loading = false
     })
 
@@ -74,19 +70,34 @@ export class AnalyrequehomeComponent implements OnInit {
   addform() {
     this.router.navigate(['/Requestformfill'])
   }
-  onOpenpading(ID: any) {
-    this.productService.changeMessage(ID)
-    this.router.navigate(['/Paddingreque'])
-  }
-
-  Logout(){
-    localStorage.removeItem("NAME");
-    localStorage.removeItem("EMPLOY_CODE");
-    localStorage.removeItem("DEPARTMENT");
+  Logout() {
+    sessionStorage.removeItem("NAME");
+    sessionStorage.removeItem("EMPLOY_CODE");
+    sessionStorage.removeItem("DEPARTMENT");
     location.reload();
   }
 
-  Gomyjob(){
+  Gomyjob() {
     this.router.navigate(['/Myjob'])
+  }
+
+  Opennextpage(ID: any, STATUS_JOB: any) {
+    console.log(STATUS_JOB)
+
+    if (STATUS_JOB == '1') {
+      this.productService.changeMessage(ID)
+      this.router.navigate(['/Paddingreque'])
+    } else if (STATUS_JOB == '2') {
+      this.productService.changeMessage(ID)
+      this.router.navigate(['/Estistep'])
+    }
+    else if (STATUS_JOB == '3') {
+      this.productService.changeMessage(ID)
+      this.router.navigate(['/Estistep'])
+    }
+    else if (STATUS_JOB == '4') {
+      this.productService.changeMessage(ID)
+      this.router.navigate(['/Esticost'])
+    }
   }
 }

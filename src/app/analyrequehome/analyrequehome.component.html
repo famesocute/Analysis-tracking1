@@ -84,7 +84,7 @@
                   <table class="table ">
                     <tbody>
                       <tr *ngFor="let item of table let i = index">
-                        <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                        <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                           <div class="row">
                             <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                             <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -116,7 +116,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'MT300'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -150,7 +150,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'MT400'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -184,7 +184,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'MT500'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -218,7 +218,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'MT600'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -252,7 +252,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'MT700'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -286,7 +286,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'MT800'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -320,7 +320,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'MT900'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -354,7 +354,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'SGA'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -388,7 +388,7 @@
 
                         <div *ngIf="item.DEP_MENT == 'MT100'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -427,7 +427,7 @@
 
                         <div *ngIf="item.MONTH == 'April'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -461,7 +461,7 @@
                         <div *ngIf="item.MONTH == 'April'">
                           <div *ngIf="item.DEP_MENT == 'MT300'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -495,7 +495,7 @@
                         <div *ngIf="item.MONTH == 'April'">
                           <div *ngIf="item.DEP_MENT == 'MT400'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -529,7 +529,7 @@
                         <div *ngIf="item.MONTH == 'April'">
                           <div *ngIf="item.DEP_MENT == 'MT500'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -563,7 +563,7 @@
                         <div *ngIf="item.MONTH == 'April'">
                           <div *ngIf="item.DEP_MENT == 'MT600'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -597,7 +597,7 @@
                         <div *ngIf="item.MONTH == 'April'">
                           <div *ngIf="item.DEP_MENT == 'MT700'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -631,7 +631,7 @@
                         <div *ngIf="item.MONTH == 'April'">
                           <div *ngIf="item.DEP_MENT == 'MT800'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -665,7 +665,7 @@
                         <div *ngIf="item.DEP_MENT == 'MT900'">
                           <div *ngIf="item.MONTH == 'April'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -699,7 +699,7 @@
                         <div *ngIf="item.MONTH == 'April'">
                           <div *ngIf="item.DEP_MENT == 'SGA'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -733,7 +733,7 @@
                         <div *ngIf="item.MONTH == 'April'">
                           <div *ngIf="item.DEP_MENT == 'MT100'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -771,7 +771,7 @@
 
                         <div *ngIf="item.MONTH == 'May'">
 
-                          <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
                               <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                               <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -805,7 +805,7 @@
                         <div *ngIf="item.MONTH == 'May'">
                           <div *ngIf="item.DEP_MENT == 'MT300'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -840,7 +840,7 @@
                         <div *ngIf="item.DEP_MENT == 'MT400'">
                           <div *ngIf="item.MONTH == 'May'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -877,7 +877,7 @@
                         <div *ngIf="item.DEP_MENT == 'MT500'">
                           <div *ngIf="item.MONTH == 'May'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -910,7 +910,7 @@
                         <div *ngIf="item.DEP_MENT == 'MT600'">
                           <div *ngIf="item.MONTH == 'May'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -944,7 +944,7 @@
                         <div *ngIf="item.MONTH == 'May'">
                           <div *ngIf="item.DEP_MENT == 'MT700'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -978,7 +978,7 @@
                         <div *ngIf="item.MONTH == 'May'">
                           <div *ngIf="item.DEP_MENT == 'MT800'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -1012,7 +1012,7 @@
                         <div *ngIf="item.MONTH == 'May'">
                           <div *ngIf="item.DEP_MENT == 'MT900'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -1046,7 +1046,7 @@
                         <div *ngIf="item.MONTH == 'May'">
                           <div *ngIf="item.DEP_MENT == 'SGA'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
@@ -1080,7 +1080,7 @@
                         <div *ngIf="item.MONTH == 'May'">
                           <div *ngIf="item.DEP_MENT == 'MT100'">
 
-                            <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
                                 <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>

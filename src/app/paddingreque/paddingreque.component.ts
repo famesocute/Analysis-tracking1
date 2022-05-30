@@ -48,7 +48,7 @@ export class PaddingrequeComponent implements OnInit {
 
     this.productService.currentMessage.subscribe(message => this.message = message)
     console.log(this.message)
-    this.message = "123"
+    // this.message = "123"
 
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
       console.log(data);
@@ -110,9 +110,9 @@ export class PaddingrequeComponent implements OnInit {
       map(value => this._filter(value)),
     );
      
-    this.namelocal = localStorage.getItem("NAME");
-    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = localStorage.getItem("DEPARTMENT");
+    this.namelocal = sessionStorage.getItem("NAME");
+    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
 
     if (this.namelocal != null) {
       this.isValid = true
@@ -162,7 +162,7 @@ export class PaddingrequeComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
     })
-    this.router.navigate(['/Estistep']) 
+    this.router.navigate(['/Analyrequehome']) 
     this.productService.changeMessage(this.DataRes[0].ID)
    
   }
@@ -186,9 +186,9 @@ export class PaddingrequeComponent implements OnInit {
     window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
   }
   Logout(){
-    localStorage.removeItem("NAME");
-    localStorage.removeItem("EMPLOY_CODE");
-    localStorage.removeItem("DEPARTMENT");
+    sessionStorage.removeItem("NAME");
+    sessionStorage.removeItem("EMPLOY_CODE");
+    sessionStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Gologin() {

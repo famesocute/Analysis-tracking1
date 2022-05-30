@@ -8,8 +8,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
 import { ApproverStepComponent } from '../dialog/approver-step/approver-step.component';
 
-
-
 @Component({
   selector: 'app-esti-step',
   templateUrl: './esti-step.component.html',
@@ -41,11 +39,11 @@ export class EstiStepComponent implements OnInit {
 
   EMAIL_CC: string[] = [];
 
+  isValid = false
   isValid2 = true
+  isvalidGoNaxt = true
 
   loading = true
-
-  isValid = false
 
   namelocal: any
   Codelocal: any
@@ -76,6 +74,12 @@ export class EstiStepComponent implements OnInit {
       this.ComControl = this.DataRes[0].REVI_ANASEC_CONTROL_COM
       this.Analyzer = this.DataRes[0].REVI_ANASEC_ANAL
       
+      if (this.DataRes[0].STATUS_JOB == '3'){
+        this.isValid2 = false
+      }
+
+
+
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
       var x
@@ -131,9 +135,9 @@ export class EstiStepComponent implements OnInit {
 
     this.quantities().push(this.newQuantity());
 
-    this.namelocal = localStorage.getItem("NAME");
-    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = localStorage.getItem("DEPARTMENT");
+    this.namelocal = sessionStorage.getItem("NAME");
+    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
 
     if (this.namelocal != null) {
       this.isValid = true
@@ -155,9 +159,7 @@ export class EstiStepComponent implements OnInit {
     console.log(result );
 
     this.ngOnInit()
-    });
-  
-    
+    }); 
   }
   save(){
       var qtest = ""
@@ -179,6 +181,7 @@ export class EstiStepComponent implements OnInit {
       console.log(result );
 
       this.isValid2 = false
+      this.isvalidGoNaxt = false
 
       this.ngOnInit()
       });
@@ -196,13 +199,13 @@ export class EstiStepComponent implements OnInit {
     console.log(val2)
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `ESTI_TECHNIQUE` = '" + val2 + "' " +
+      " SET  `ESTI_TECHNIQUE` = '" + val2 + "', `STATUS_JOB` = '4' " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
     })
-    this.router.navigate(['/Esticost']) 
+    this.router.navigate(['/Analyrequehome']) 
   }
   GoAswer(ID:any){
     this.productService.changeMessage(ID + "|| " + this.message)
@@ -253,9 +256,9 @@ export class EstiStepComponent implements OnInit {
   }
 
   Logout(){
-    localStorage.removeItem("NAME");
-    localStorage.removeItem("EMPLOY_CODE");
-    localStorage.removeItem("DEPARTMENT");
+    sessionStorage.removeItem("NAME");
+    sessionStorage.removeItem("EMPLOY_CODE");
+    sessionStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Gologin() {
