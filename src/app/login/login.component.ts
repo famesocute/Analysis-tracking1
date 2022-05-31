@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(public router: Router, public productService: ProductService) { }
 
   ngOnInit(): void {
+    
   }
   Gosignup() {
     this.router.navigate(['/Signup'])

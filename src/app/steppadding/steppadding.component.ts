@@ -88,6 +88,13 @@ export class SteppaddingComponent implements OnInit {
         this.isValidPic2 = false
         this.isValidPic3 = false
         this.isValidPic4 = false
+        this.isValidPic5 = true
+      }
+      else if (this.DataRes[0].STATUS_JOB == 5){
+        this.isValidPic1 = false
+        this.isValidPic2 = false
+        this.isValidPic3 = false
+        this.isValidPic4 = false
         this.isValidPic5 = false
       }
     })

@@ -47,6 +47,7 @@ import { ApproverStepComponent } from './dialog/approver-step/approver-step.comp
 import { MyjobComponent } from './myjob/myjob.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -68,6 +69,7 @@ import { MyjobComponent } from './myjob/myjob.component';
     AnswerEditComponent,
     ApproverStepComponent,
     MyjobComponent,
+
   ],
   imports: [
     BrowserModule,

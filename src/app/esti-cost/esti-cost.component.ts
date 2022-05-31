@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
-import { ApproverStepComponent } from '../dialog/approver-step/approver-step.component';
+
 
 @Component({
   selector: 'app-esti-cost',
@@ -146,8 +146,16 @@ export class EstiCostComponent implements OnInit {
     this.ngOnInit()
     }); 
   }
-  GoEstiCost(){
-  
+  GoRequeinfo(){
+    var qtest = ""
+    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+      " SET  `STATUS_JOB` = '5' " +
+      " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
+    console.log(qtest);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+      console.log(data); 
+    })
+    this.router.navigate(['/Analyrequehome']) 
   }
   GoAswer(ID:any){
     this.productService.changeMessage(ID + "|| " + this.message)

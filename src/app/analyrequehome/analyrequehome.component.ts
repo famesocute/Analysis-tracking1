@@ -99,5 +99,9 @@ export class AnalyrequehomeComponent implements OnInit {
       this.productService.changeMessage(ID)
       this.router.navigate(['/Esticost'])
     }
+    else if (STATUS_JOB == '5') {
+      this.productService.changeMessage(ID)
+      this.router.navigate(['/Requestinfo'])
+    }
   }
 }
