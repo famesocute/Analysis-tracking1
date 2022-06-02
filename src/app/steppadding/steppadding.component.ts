@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../api/product.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,6 +19,11 @@ import { ProductService } from '../api/product.service';
 })
 export class SteppaddingComponent implements OnInit {
   requester = ""
+
+  namelocal: any
+  Codelocal: any
+  departmentlocal: any
+  nameonly: any
 
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
@@ -35,25 +41,19 @@ export class SteppaddingComponent implements OnInit {
 
   DataRes : any
 
-  constructor(private _formBuilder: FormBuilder,private route: ActivatedRoute,public productService: ProductService) { }
+  loading = true
+  isValid = false
+
+  constructor(private _formBuilder: FormBuilder,private route: ActivatedRoute,public productService: ProductService,public router: Router) { }
 
   ngOnInit(): void {
     this.userType = this.route.snapshot.queryParamMap.get("id");
-
     console.log(this.userType)
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
-    this.thirdFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
 
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
+      this.loading = false
 
       this.requester = this.DataRes[0].REVI_PAND_ISSUER.substring("<");
       var x
@@ -87,7 +87,7 @@ export class SteppaddingComponent implements OnInit {
         this.isValidPic1 = false
         this.isValidPic2 = false
         this.isValidPic3 = false
-        this.isValidPic4 = false
+        this.isValidPic4 = true
         this.isValidPic5 = true
       }
       else if (this.DataRes[0].STATUS_JOB == 5){
@@ -95,12 +95,35 @@ export class SteppaddingComponent implements OnInit {
         this.isValidPic2 = false
         this.isValidPic3 = false
         this.isValidPic4 = false
+        this.isValidPic5 = true
+      }
+      else if (this.DataRes[0].STATUS_JOB == 6){
+        this.isValidPic1 = false
+        this.isValidPic2 = false
+        this.isValidPic3 = false
+        this.isValidPic4 = false
         this.isValidPic5 = false
       }
     })
-     
-      
+    if (this.namelocal != null) {
+      this.isValid = true
+      this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
+    }
   }
-
+  Goanalysishome(){
+    this.router.navigate(['/Analyrequehome']) 
+  }
+  Logout(){
+    sessionStorage.removeItem("NAME");
+    sessionStorage.removeItem("EMPLOY_CODE");
+    sessionStorage.removeItem("DEPARTMENT");
+    location.reload();
+  }
+  Gologin() {
+    this.router.navigate(['/Login'])
+  }
+  GoSignup() {
+    this.router.navigate(['/Signup'])
+  }
 
 }

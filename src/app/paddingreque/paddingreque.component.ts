@@ -29,6 +29,7 @@ export class PaddingrequeComponent implements OnInit {
   DataResQUESTION : any
   message = ""
 
+
   sample1 : any
   sample2 : any
 
@@ -59,9 +60,9 @@ export class PaddingrequeComponent implements OnInit {
       
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
+    
       var x
       var a
-
       this.sample2 = "["
 
       for(x in this.sample1)
@@ -153,10 +154,14 @@ export class PaddingrequeComponent implements OnInit {
   }
 
   GoEstiStep(){
+    let date: Date = new Date();
+    var date2 = date.toLocaleString()
+
     console.log(this.DataRes[0].REVI_ANASEC_CONTROL)
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `STATUS_JOB` = '2',`STETUS_PERSON` = '" + this.DataRes[0].REVI_ANASEC_CONTROL + "',`REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "', `REVI_PAND_CONFIRM_CC1` = '"+ this.EMAIL_CC +"' " +
+      " SET `STATUS_JOB` = '2',`STETUS_PERSON` = '" + this.DataRes[0].REVI_ANASEC_CONTROL + "',`REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "', " +
+      " `REVI_PAND_CONFIRM_CC1` = '"+ this.EMAIL_CC +"', `REVI_ANASEC_CONTROL_TIME` = '"+ date2 +"' " +
       "  WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {

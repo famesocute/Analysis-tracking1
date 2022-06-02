@@ -1,32 +1,192 @@
-<div class="border-bottom Toolbar">
-  <div class="row">
-    <div class="col-xl-1"></div>
-    <div class="col-xl-7 center" style="padding :15px 0 ;">
-      <button mat-button>Home</button>
-      <button mat-button (click)="Goanalysishome()">Analysis request form</button>
-      <button mat-button>Equipment Calendar</button>
-      <button mat-button>Job tracking</button>
-      <button mat-button>Search previous report</button>
-    </div>
-
-    <div class="col-xl-4 center " *ngIf="isValid;else other_content">
-      <div class="row">
-        <div class="col-xl-8">
-          {{this.nameonly}}
-          ({{this.Codelocal}})
-          {{this.departmentlocal}}
-        </div>
-        <div class="col-xl-4">
-          <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
-        </div>
-      </div>
-    </div>
-
-    <ng-template #other_content>
-      <div class="col-xl-4 center ">
-        <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
-        <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
-      </div>
-    </ng-template>
-  </div>
+<div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
 </div>
+
+<ng-template #elseBlock>
+  <div class="border-bottom Toolbar">
+    <div class="row">
+      <div class="col-xl-1"></div>
+      <div class="col-xl-7 center" style="padding :15px 0 ;">
+        <button mat-button>Home</button>
+        <button mat-button (click)="Goanalysishome()">Analysis request form</button>
+        <button mat-button>Equipment Calendar</button>
+        <button mat-button>Job tracking</button>
+        <button mat-button>Search previous report</button>
+      </div>
+
+      <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+        <div class="row">
+          <div class="col-xl-8">
+            {{this.nameonly}}
+            ({{this.Codelocal}})
+            {{this.departmentlocal}}
+          </div>
+          <div class="col-xl-4">
+            <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #other_content>
+        <div class="col-xl-4 center ">
+          <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+          <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <mat-card class="card1">
+        <mat-card-title-group>
+          <mat-card-title>Analytical information</mat-card-title>
+        </mat-card-title-group>
+        <mat-card-content style="padding: 20px 50px">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-1"><b>Department:</b></div>
+                  <div class="col-sm-11"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-1"><b>Title:</b></div>
+                  <div class="col-sm-11"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-4"><b>Analyzer name:</b></div>
+                  <div class="col-sm-8"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-sm-3">
+              <mat-form-field appearance="outline">
+                <mat-label>Step*</mat-label>
+                <mat-select [(ngModel)]="this.step">
+                  <mat-option value="Step1">Step1</mat-option>
+                  <mat-option value="Step2">Step2</mat-option>
+                  <mat-option value="Step3">Step3</mat-option>
+                  <mat-option value="Step4">Step4</mat-option>
+                  <mat-option value="Step5">Step5</mat-option>
+                  <mat-option value="Step6">Step6</mat-option>
+                  <mat-option value="Step7">Step7</mat-option>
+                  <mat-option value="Step8">Step8</mat-option>
+                  <mat-option value="Step9">Step9</mat-option>
+                  <mat-option value="Step10">Step10</mat-option>
+                  <mat-option value="Step11">Step11</mat-option>
+                  <mat-option value="Step12">Step12</mat-option>
+                  <mat-option value="Step13">Step13</mat-option>
+                  <mat-option value="Step14">Step14</mat-option>
+                  <mat-option value="Step15">Step15</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-3">
+              <div class="row" style="padding-top: 15px ;">
+                <div class="col-sm-1"><b>Equipment:</b></div>
+                <div class="col-sm-11"></div>
+              </div>
+            </div>
+            <div class="col-sm-6" >
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-4" style="padding-top:15px"><b>Number of Sample:</b></div>
+                  <div class="col-sm-8 input2">
+                    <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Numsample">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+   
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="input1">
+                <mat-form-field color="accent" appearance="outline">
+                  <mat-label>Start date</mat-label>
+                  <input matInput [matDatepicker]="picker1" [(ngModel)]="this.startdate">
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="input1">
+                <div class="row " style="padding-top: 15px ;">
+                  <div class="col-sm-2"><b>Time:</b></div>
+                  <div class="col-sm-10">
+                    <input type="time" id="appt" name="appt" min="09:00" max="18:00" required [(ngModel)]="this.starttime">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="input1">
+                <div class="row" style="padding-top: 15px ;">
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="input1">
+                <mat-form-field color="accent" appearance="outline">
+                  <mat-label>Start date</mat-label>
+                  <input matInput [matDatepicker]="picker2" [(ngModel)]="this.enddate">
+                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="input1">
+                <div class="row" style="padding-top: 15px" >
+                  <div class="col-sm-2"><b>Time:</b></div>
+                  <div class="col-sm-10">
+                    <input type="time" id="appt" name="appt" min="09:00" max="18:00" required [(ngModel)]="this.endtime">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="input1">
+                <div class="row">   
+                  <form class="example-form">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Operation by</mat-label>
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                        [matAutocomplete]="auto" >
+                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          {{option}}
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                  </form>             
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <button mat-raised-button color="primary" (click)="confirm()" >Issue step</button>
+
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+</ng-template>

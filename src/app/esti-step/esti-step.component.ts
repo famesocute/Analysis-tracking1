@@ -77,7 +77,9 @@ export class EstiStepComponent implements OnInit {
       if (this.DataRes[0].STATUS_JOB == '3'){
         this.isValid2 = false
       }
-
+      if (this.DataRes[0].STATUS_JOB == '3'){
+        this.isvalidGoNaxt = false
+      }
 
 
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
@@ -162,9 +164,13 @@ export class EstiStepComponent implements OnInit {
     }); 
   }
   save(){
+    let date: Date = new Date();
+    var date2 = date.toLocaleString()
+
       var qtest = ""
       qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-        " SET `STATUS_JOB` = '3', `STETUS_PERSON` = '" + this.Analyzer + "', `REVI_ANASEC_ANAL` = '" + this.Analyzer + "',`REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.EMAIL_CC +"' " +
+        " SET `STATUS_JOB` = '3', `STETUS_PERSON` = '" + this.Analyzer + "', `REVI_ANASEC_ANAL` = '" + this.Analyzer + "', " +
+        " `REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.EMAIL_CC +"', `REVI_PAND_CONFIRM_TIME` = '"+ date2 +"' " +
         " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
       console.log(qtest);
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -188,6 +194,9 @@ export class EstiStepComponent implements OnInit {
   }
 
   GoEstiCost(){
+    let date: Date = new Date();
+    var date2 = date.toLocaleString()
+
     console.log(this.productForm.value.quantities)
 
     var val2 = ""
@@ -199,7 +208,7 @@ export class EstiStepComponent implements OnInit {
     console.log(val2)
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `ESTI_TECHNIQUE` = '" + val2 + "', `STATUS_JOB` = '4' " +
+      " SET  `ESTI_TECHNIQUE` = '" + val2 + "',`ESTI_STEP_TIME` = '" + date2 + "', `STATUS_JOB` = '4' " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -266,6 +275,9 @@ export class EstiStepComponent implements OnInit {
   }
   GoSignup() {
     this.router.navigate(['/Signup'])
+  }
+  myFunction() {
+    window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
   }
   
 }

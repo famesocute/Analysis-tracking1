@@ -147,9 +147,12 @@ export class EstiCostComponent implements OnInit {
     }); 
   }
   GoRequeinfo(){
+    let date: Date = new Date();
+    var date2 = date.toLocaleString()
+
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `STATUS_JOB` = '5' " +
+      " SET  `STATUS_JOB` = '5', `ESTI_COST_TIME` = '"+ date2 +"' " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -179,6 +182,9 @@ export class EstiCostComponent implements OnInit {
   }
   GoSignup() {
     this.router.navigate(['/Signup'])
+  }
+  myFunction() {
+    window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
   }
 
 }

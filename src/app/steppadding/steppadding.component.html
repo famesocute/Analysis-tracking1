@@ -1,44 +1,67 @@
-<div class="container-fluid">
-  <div class="border-bottom">
+<div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
+</div>
+<ng-template #elseBlock>
+  <div class="border-bottom Toolbar">
     <div class="row">
       <div class="col-xl-1"></div>
-      <div class="col-xl-8 center" style="padding : 15px 0 ;">
+      <div class="col-xl-7 center" style="padding :15px 0 ;">
         <button mat-button>Home</button>
-        <button mat-button>Analysis request form</button>
+        <button mat-button (click)="Goanalysishome()">Analysis request form</button>
         <button mat-button>Equipment Calendar</button>
         <button mat-button>Job tracking</button>
         <button mat-button>Search previous report</button>
       </div>
-      <div class="col-xl-2 center ">
-        <button mat-raised-button color="primary">Login</button>
-        <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
+
+        <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+          <div class="row">
+          <div class="col-xl-8">
+       {{this.nameonly}}
+       ({{this.Codelocal}})
+       {{this.departmentlocal}}
       </div>
+      <div class="col-xl-4">
+       <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #other_content>
+    <div class="col-xl-4 center ">
+      <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+      <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+    </div>
+  </ng-template>
+
+
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-1">
     </div>
-
     <div class="col-sm-10">
-      <h1 style=" padding: 30px 200px; ">Job tracking</h1>
-
-      <div class="row center">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-10">
+      <div class="center">
+      <h1 style=" padding-top:50px; padding-bottom: 30px;">Job tracking <b>No.{{this.DataRes[0].REQ_NUM}}</b></h1>
+    </div>
+      <div class="center">
           <div class="row">
             <!-- Step1 -->
             <div class="col-xl  " *ngIf="isValidPic1;else other_content1">
               <div class="row">
-                <div class="col-sm-6 '">
+                <div class="col-sm-7 '">
                   <div class="card card_track">
-                    <div class="card-body center">
-                      <img src="../assets/Tracking_web/Image/add-file.png">
-                      <h2><b>ISSUE REPORT</b></h2>
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/add-file.png">  
                     </div>
                   </div>
+                  <br>
+                  <div style=" margin-left: 10px ">
+                  <h5><b>ISSUE REPORT</b></h5>
+                  <p>{{this.DataRes[0].ISSUE_DATE}}</p>
+                  </div>
                 </div>
-                <div class="col-sm-6 center'" style="padding-top:17px;">
+                <div class="col-sm-5 center'" style="padding-top:17px;">
                   <img src="../assets/Tracking_web/Image/substract_black.png">
                 </div>
               </div>
@@ -46,16 +69,19 @@
             <ng-template #other_content1>
               <div class="col-xl ">
                 <div class="row">
-                  <div class="col-sm-6 '">
+                  <div class="col-sm-7 '">
                     <div class="card card_track2">
-                      <div class="card-body center">
+                      <div class="card-body">
                         <img src="../assets/Tracking_web/Image/add-file.png">                    
                       </div>
                     </div>
                     <br>
-                    <h4  ><b>ISSUE REPORT</b></h4>
+                    <div style=" margin-left: 10px ">
+                    <h5><b>ISSUE REPORT</b></h5>
+                    <p>{{this.DataRes[0].ISSUE_DATE}}</p>
+                    </div>
                   </div>
-                  <div class="col-sm-6 center'" style="padding-top:17px;">
+                  <div class="col-sm-5 center'" style="padding-top:17px;">
                     <img src="../assets/Tracking_web/Image/substract_color.png">
                   </div>
                 </div>
@@ -64,14 +90,19 @@
             <!-- Step 2 -->
             <div class="col-xl  " *ngIf="isValidPic2;else other_content2">
               <div class="row">
-                <div class="col-sm-6 '">
+                <div class="col-sm-7 '">
                   <div class="card card_track">
-                    <div class="card-body center">
-                      <img src="../assets/Tracking_web/Image/official-documents.png">
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/official-documents.png">  
                     </div>
                   </div>
+                  <br>
+                  <div style=" margin-left: 20px ">
+                  <h5><b>APPROVED</b></h5>
+                  <p>{{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}</p>
+                  </div>
                 </div>
-                <div class="col-sm-6 center'" style="padding-top:17px;">
+                <div class="col-sm-5 center'" style="padding-top:17px;">
                   <img src="../assets/Tracking_web/Image/substract_black.png">
                 </div>
               </div>
@@ -79,14 +110,19 @@
             <ng-template #other_content2>
               <div class="col-xl ">
                 <div class="row">
-                  <div class="col-sm-6 '">
+                  <div class="col-sm-7 '">
                     <div class="card card_track2">
-                      <div class="card-body center">
-                        <img src="../assets/Tracking_web/Image/official-documents.png">
+                      <div class="card-body">
+                        <img src="../assets/Tracking_web/Image/official-documents.png">                    
                       </div>
                     </div>
+                    <br>
+                    <div style=" margin-left: 20px ">
+                    <h5><b>APPROVED</b></h5>
+                    <p>{{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}</p>
+                    </div>
                   </div>
-                  <div class="col-sm-6 center'" style="padding-top:17px;">
+                  <div class="col-sm-5 center'" style="padding-top:17px;">
                     <img src="../assets/Tracking_web/Image/substract_color.png">
                   </div>
                 </div>
@@ -95,14 +131,19 @@
             <!-- Step3 -->
             <div class="col-xl  " *ngIf="isValidPic3;else other_content3">
               <div class="row">
-                <div class="col-sm-6 '">
+                <div class="col-sm-7 '">
                   <div class="card card_track">
-                    <div class="card-body center">
-                      <img src="../assets/Tracking_web/Image/list.png">
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/list.png">  
                     </div>
                   </div>
+                  <br>
+                  <div style=" margin-left: 10px ">
+                  <h5><b>ESTIMATE STEP</b></h5>
+                  <p>{{this.DataRes[0].ESTI_STEP_TIME}}</p>
+                  </div>
                 </div>
-                <div class="col-sm-6 center'" style="padding-top:17px;">
+                <div class="col-sm-5 center'" style="padding-top:17px;">
                   <img src="../assets/Tracking_web/Image/substract_black.png">
                 </div>
               </div>
@@ -110,14 +151,19 @@
             <ng-template #other_content3>
               <div class="col-xl ">
                 <div class="row">
-                  <div class="col-sm-6 '">
+                  <div class="col-sm-7 '">
                     <div class="card card_track2">
-                      <div class="card-body center">
-                        <img src="../assets/Tracking_web/Image/list.png">
+                      <div class="card-body">
+                        <img src="../assets/Tracking_web/Image/list.png">                    
                       </div>
                     </div>
+                    <br>
+                    <div style=" margin-left: 10px ">
+                    <h5><b>ESTIMATE STEP</b></h5>
+                    <p>{{this.DataRes[0].ESTI_STEP_TIME}}</p>
+                    </div>
                   </div>
-                  <div class="col-sm-6 center'" style="padding-top:17px;">
+                  <div class="col-sm-5 center'" style="padding-top:17px;">
                     <img src="../assets/Tracking_web/Image/substract_color.png">
                   </div>
                 </div>
@@ -126,14 +172,19 @@
             <!-- Step 4 -->
             <div class="col-xl  " *ngIf="isValidPic4;else other_content4">
               <div class="row">
-                <div class="col-sm-6 '">
+                <div class="col-sm-7 '">
                   <div class="card card_track">
-                    <div class="card-body center">
-                      <img src="../assets/Tracking_web/Image/budget.png">
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/budget.png">  
                     </div>
                   </div>
+                  <br>
+                  <div style=" margin-left: 7px ">
+                  <h5><b>ESTIMATE COST</b></h5>
+                  <p>{{this.DataRes[0].ESTI_COST_TIME}}</p>
+                  </div>
                 </div>
-                <div class="col-sm-6 center'" style="padding-top:17px;">
+                <div class="col-sm-5 center'" style="padding-top:17px;">
                   <img src="../assets/Tracking_web/Image/substract_black.png">
                 </div>
               </div>
@@ -141,14 +192,19 @@
             <ng-template #other_content4>
               <div class="col-xl ">
                 <div class="row">
-                  <div class="col-sm-6 '">
+                  <div class="col-sm-7 '">
                     <div class="card card_track2">
-                      <div class="card-body center">
-                        <img src="../assets/Tracking_web/Image/budget.png">
+                      <div class="card-body">
+                        <img src="../assets/Tracking_web/Image/budget.png">                    
                       </div>
                     </div>
+                    <br>
+                    <div style=" margin-left: 7px ">
+                    <h5><b>ESTIMATE COST</b></h5>
+                    <p>{{this.DataRes[0].ESTI_COST_TIME}}</p>
+                    </div>
                   </div>
-                  <div class="col-sm-6 center'" style="padding-top:17px;">
+                  <div class="col-sm-5 center'" style="padding-top:17px;">
                     <img src="../assets/Tracking_web/Image/substract_color.png">
                   </div>
                 </div>
@@ -156,29 +212,46 @@
             </ng-template>
             <!-- Step5 -->
             <div class="col-xl  " *ngIf="isValidPic5;else other_content5">
-              <div class="card card_track">
-                <div class="card-body center">
-                  <img src="../assets/Tracking_web/Image/analysis.png">
+              <div class="row">
+                <div class="col-sm-7 '">
+                  <div class="card card_track">
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/analysis.png">  
+                    </div>
+                  </div>
+                  <br>
+                  <div style=" margin-left: 10px ">
+                  <h5><b>ISSUE REPORT</b></h5>
+                  <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+                  </div>
                 </div>
+                
               </div>
             </div>
-          </div>
-          <ng-template #other_content5>
-            <div class="col-xl ">
-              <div class="card card_track2">
-                <div class="card-body center">
-                  <img src="../assets/Tracking_web/Image/analysis.png">
+            <ng-template #other_content5>
+              <div class="col-xl ">
+                <div class="row">
+                  <div class="col-sm-7 '">
+                    <div class="card card_track2">
+                      <div class="card-body">
+                        <img src="../assets/Tracking_web/Image/analysis.png">                    
+                      </div>
+                    </div>
+                    <br>
+                    <div style=" margin-left: 10px ">
+                    <h5><b>ISSUE REPORT</b></h5>
+                    <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+                    </div>
+                  </div>
+                  
                 </div>
-
               </div>
-            </div>
-          </ng-template>
-        </div>
-      </div>
-      <div class="col-sm-1"></div>
-    </div>
+            </ng-template>
+        </div>   
+     </div>
 
-    <mat-card class="card1" style="margin-top: 60px;">
+
+    <mat-card class="card1" style="margin-top: 10px;">
       <mat-card-title-group>
         <mat-card-title>Analytical information</mat-card-title>
       </mat-card-title-group>
@@ -236,5 +309,5 @@
   </div>
   <div class="col-sm-1">
   </div>
-
 </div>
+</ng-template>
