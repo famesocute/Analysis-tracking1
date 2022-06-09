@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'
 import { ProductService } from '../api/product.service';
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-question',
@@ -26,6 +27,15 @@ RequestNo = ""
   Q_issueDate = ""
   Q_question = ""
 
+  namelocal: any
+  Codelocal: any
+  departmentlocal: any
+  nameonly : any
+
+  isValid = false
+
+  EMAIL_CC: string[] = [];
+
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
@@ -37,6 +47,9 @@ ngOnInit(): void {
   
   this.productService.currentMessage.subscribe(message => this.message = message)
   console.log(this.message)
+
+  this.EMAIL_CC[0] = ""
+      console.log(this.EMAIL_CC);
 
   var a
   a= this.message.split("||")
@@ -62,7 +75,6 @@ ngOnInit(): void {
       const myArray = dataselect.split(",");
 
       this.options = myArray
-      console.log(this.options)
   })
 }
   private _filter(value: string): string[] {
@@ -77,8 +89,8 @@ confirm(){
        this.Q_issueDate = date2.substring(0, 9)
 
   var qtest = ""
-  qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`question` (`REQ_NUM`,`QUESTIONER`, `QUESTION_DETAIL`, `QUESTION_SENT_TO`, `QUESTION_CC1_SENT_TO`, `QUESTION_CC2_SENT_TO`, `QUESTION_DATE`) " +
-    " VALUES ('" + this.RequestNo + "', '" + this.Questioner + "', '" + this.Q_question + "', '" + this.geterQution + "', '" + this.CCgeterQution1 + "', '" + this.CCgeterQution2 + "', '" + this.Q_issueDate + "' );"
+  qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`question` (`REQ_NUM`,`QUESTIONER`, `QUESTION_DETAIL`, `QUESTION_SENT_TO`, `QUESTION_CC1_SENT_TO`, `QUESTION_DATE`) " +
+    " VALUES ('" + this.RequestNo + "', '" + this.Questioner + "', '" + this.Q_question + "', '" + this.geterQution + "', '" + this.EMAIL_CC + "', '" + this.Q_issueDate + "' );"
 
   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
     console.log(data);
@@ -89,6 +101,19 @@ confirm(){
 goback(){
   this.productService.changeMessage(this.ID)
 }
-
+countrow = 0
+  addIN(){
+    console.log(this.countrow);
+    this.countrow = this.countrow + 1
+    this.EMAIL_CC[this.countrow] = ""
+    console.log(this.EMAIL_CC);
+  
+  }
+  delete(i:any){
+    this.countrow = this.countrow - 1
+    this.EMAIL_CC.splice(i, 1);
+    // delete this.EMAIL_CC[i];
+    console.log(this.EMAIL_CC)
+  }
 
 }

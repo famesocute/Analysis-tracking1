@@ -33,6 +33,8 @@ export class AnalyrequehomeComponent implements OnInit {
   constructor(public router: Router, public productService: ProductService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
+    // window.location.reload()
+
     this.productService.TRACKING_ANALYSIS_SELECT_ALL_ORDER().subscribe((data: {}) => {
       console.log(data);
       this.table = data
@@ -85,23 +87,20 @@ export class AnalyrequehomeComponent implements OnInit {
     console.log(STATUS_JOB)
 
     if (STATUS_JOB == '1') {
-      this.productService.changeMessage(ID)
-      this.router.navigate(['/Paddingreque'])
+      window.location.href ='http://localhost:4200/Paddingreque?id='+ID    
     } else if (STATUS_JOB == '2') {
-      this.productService.changeMessage(ID)
-      this.router.navigate(['/Estistep'])
+      window.location.href ='http://localhost:4200/Estistep?id='+ID   
     }
     else if (STATUS_JOB == '3') {
-      this.productService.changeMessage(ID)
-      this.router.navigate(['/Estistep'])
+      window.location.href ='http://localhost:4200/Estistep?id='+ID  
     }
     else if (STATUS_JOB == '4') {
-      this.productService.changeMessage(ID)
-      this.router.navigate(['/Esticost'])
+      window.location.href ='http://localhost:4200/Esticost?id='+ID  
     }
     else if (STATUS_JOB == '5') {
-      this.productService.changeMessage(ID)
-      this.router.navigate(['/Requestinfo'])
+      // this.productService.changeMessage(ID)
+      // this.router.navigate(['/Requestinfo'])
+      window.location.href ='http://localhost:4200/Requestinfo?id='+ID  
     }
   }
 }

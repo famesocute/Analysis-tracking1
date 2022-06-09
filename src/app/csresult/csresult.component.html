@@ -1,113 +1,17 @@
-<mat-accordion>
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Mar
-        </mat-panel-title>
-        <mat-panel-description>
-          
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            MT300
-          </mat-panel-title>
-          <mat-panel-description>
-            This is a summary of the content
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <button mat-raised-button class="block"> 
-            <div class="row">
-                <div class="col-sm-4" style="text-align: left ;">R300223001</div>
-                <div class="col-sm-4">SMT fail</div>
-                <div class="col-sm-4">Issur by Pichayapak</div>
-              </div>
-        </button>
-        <button mat-raised-button class="block"> 
-            <div class="row">
-                <div class="col-sm-4" style="text-align: left ;">R300223002</div>
-                <div class="col-sm-4">SMT fail</div>
-                <div class="col-sm-4">Issur by Pichayapak</div>
-              </div>
-        </button>
-          <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                R300223002
-              </mat-panel-title>
-              <mat-panel-description>
-                This is a summary of the content
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p>This is the primary content of the panel.</p>
-          </mat-expansion-panel>
-      </mat-expansion-panel>
-      <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            MT400
-          </mat-panel-title>
-          <mat-panel-description>
-            This is a summary of the content
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                R300224001
-              </mat-panel-title>
-              <mat-panel-description>
-                This is a summary of the content
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p>This is the primary content of the panel.</p>
-          </mat-expansion-panel>
-          <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                R300224002
-              </mat-panel-title>
-              <mat-panel-description>
-                This is a summary of the content
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p>This is the primary content of the panel.</p>
-          </mat-expansion-panel>
-      </mat-expansion-panel>
-    </mat-expansion-panel>
-    <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Apr
-          </mat-panel-title>
-          <mat-panel-description>
-            This is a summary of the content
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              This is the expansion title
-            </mat-panel-title>
-            <mat-panel-description>
-              This is a summary of the content
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-expansion-panel hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  This is the expansion title
-                </mat-panel-title>
-                <mat-panel-description>
-                  This is a summary of the content
-                </mat-panel-description>
-              </mat-expansion-panel-header>
-              <p>This is the primary content of the panel.</p>
-            </mat-expansion-panel>
-        </mat-expansion-panel>
-        
-      </mat-expansion-panel>
-    
-  </mat-accordion>
-  
+<div class="container">
+  <div class="navigator">
+    <daypilot-navigator [config]="configNavigator" [events]="events" [(date)]="date" (dateChange)="changeDate($event)" #navigator></daypilot-navigator>
+  </div>
+  <div class="content">
+    <div class="buttons">
+    <button (click)="viewDay()" [class]="this.configNavigator.selectMode == 'Day' ? 'selected' : ''">Day</button>
+    <button (click)="viewWeek()" [class]="this.configNavigator.selectMode == 'Week' ? 'selected' : ''">Week</button>
+    <button (click)="viewMonth()" [class]="this.configNavigator.selectMode == 'Month' ? 'selected' : ''">Month</button>
+    </div>
+
+    <daypilot-calendar [config]="configDay" [events]="events" #day></daypilot-calendar>
+    <daypilot-calendar [config]="configWeek" [events]="events" #week></daypilot-calendar>
+    <daypilot-month [config]="configMonth" [events]="events" #month></daypilot-month>
+  </div>
+  <button (click)="getfata()">fff</button>
+</div>

@@ -1,0 +1,70 @@
+<h1><b>Edit Estimate Step</b></h1>
+
+<table>
+    <tr *ngFor="let item of sample1 let i = index">
+        <td width="200px">         
+              <div class="row">
+                <div class="col-sm-3"><b>Step:</b></div>
+                <div class="col-sm-9"><b> {{i+1}} </b></div>
+            </div>  
+          </td>
+      <td width="300px">
+          <div style="padding-top: 20px;">
+                    <mat-form-field appearance="outline" >
+                      <mat-label>Techniques</mat-label>
+                      <mat-select  [(ngModel)]="item.equip">
+                          <mat-option value="X-ray 2D">X-ray 2D</mat-option>
+                          <mat-option value="X-ray 3D">X-ray 3D</mat-option>
+                          <mat-option value="SEM-Microscope">SEM-Microscope</mat-option>
+                          <mat-option value="Cross section">Cross section</mat-option>
+                          <mat-option value="Ion-milling">Ion-milling</mat-option>
+                          <mat-option value="VHX">VHX</mat-option>
+                          <mat-option value="Metallurgical">Metallurgical</mat-option>
+                          <mat-option value="SEM-EDX">SEM-EDX</mat-option>
+                          <mat-option value="SEM-Mapping">SEM-Mapping</mat-option>
+                          <mat-option value="EDXRF">EDXRF</mat-option>
+                          <mat-option value="ICP">ICP</mat-option>
+                          <mat-option value="CS Analyzer">CS Analyzer</mat-option>
+                          <mat-option value="FTIR">FTIR</mat-option>
+                          <mat-option value="GCMS">GCMS</mat-option>
+                          <mat-option value="DSC">DSC</mat-option>
+                          <mat-option value="TG-DTA">TG-DTA</mat-option>
+                          <mat-option value="Solderwet">Solderwet</mat-option>
+                          <mat-option value="Dust monitering">Dust monitering</mat-option>
+                          <mat-option value="Micro-probe">Micro-probe</mat-option>
+                          <mat-option value="Other">Other</mat-option> 
+                      </mat-select>
+                  </mat-form-field>  
+                </div>               
+      </td>
+      <td width="400px">
+          <div class="row">
+            <div class="col-sm-4" style="padding-top:10px ;">
+                <b>Number sample:</b>
+            </div>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="Samplenumber" [(ngModel)]="item.Sample_no">
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="padding-left:30px; padding-right:50px;  ">
+          <button mat-mini-fab color="warn" class="button3" (click)="Remove(i)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+      </div>
+      </td>
+    </tr>
+  </table>
+  <button mat-flat-button  (click)="Add()"> + Add Step </button>
+<br>
+  <div class="row center">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-4">
+      <button mat-flat-button mat-dialog-close class="button1 center" (click)="edit()">Approve edit</button>
+    </div>
+    <div class="col-sm-3">
+      <button mat-flat-button mat-dialog-close class="button1 center">cancel</button>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>

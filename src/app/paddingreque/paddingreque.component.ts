@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-paddingreque',
@@ -40,18 +40,22 @@ export class PaddingrequeComponent implements OnInit {
   EMAIL_CC: string[] = [];
 
   loading = true
+  userType : any
 
-  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog) {}
+  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.userType = this.route.snapshot.queryParamMap.get("id");
+    console.log(this.userType)
+
     this.EMAIL_CC[0] = ""
     console.log(this.EMAIL_CC);
 
-    this.productService.currentMessage.subscribe(message => this.message = message)
-    console.log(this.message)
-    // this.message = "123"
+    // this.productService.currentMessage.subscribe(message => this.message = message)
+    // console.log(this.message)
+    // this.userType = this.message
 
-    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
+    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
       this.loading = false
@@ -103,7 +107,7 @@ export class PaddingrequeComponent implements OnInit {
         const myArray = dataselect.split(",");
 
         this.options = myArray
-        console.log(this.options)
+   
     })
     
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -145,12 +149,10 @@ export class PaddingrequeComponent implements OnInit {
     this.router.navigate(['/Analyrequehome']) 
   }
   GoAswer(ID:any){
-    this.productService.changeMessage(ID + "|| " + this.message)
-    this.router.navigate(['/AnswerPage']) 
+    window.location.href ='http://localhost:4200/AnswerPage?id='+ID+'&usertype='+this.userType
   }
   GoAsweredit(ID:any){
-    this.productService.changeMessage(ID + "|| " + this.message)
-    this.router.navigate(['/AnswerEdit']) 
+    window.location.href ='http://localhost:4200/AnswerEdit?id='+ID+'&usertype='+this.userType
   }
 
   GoEstiStep(){
@@ -166,9 +168,9 @@ export class PaddingrequeComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
+      this.router.navigate(['/Analyrequehome']) 
     })
-    this.router.navigate(['/Analyrequehome']) 
-    this.productService.changeMessage(this.DataRes[0].ID)
+    // this.productService.changeMessage(this.DataRes[0].ID)
    
   }
 

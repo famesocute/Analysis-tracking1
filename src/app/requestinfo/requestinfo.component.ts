@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-requestinfo',
@@ -39,22 +40,23 @@ export class RequestinfoComponent implements OnInit {
   isValid = false
 
   loading = true
+  userType : any
 
   namelocal: any
   Codelocal: any
   departmentlocal: any
   nameonly: any
 
-  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder) { }
+  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.userType = this.route.snapshot.queryParamMap.get("id");
+    console.log(this.userType)
+
     this.EMAIL_CC[0] = ""
       console.log(this.EMAIL_CC);
 
-    this.productService.currentMessage.subscribe(message => this.message = message)
-    // this.message = "126"
-   
-    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
+    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
       this.loading = false
@@ -107,7 +109,6 @@ export class RequestinfoComponent implements OnInit {
         const myArray = dataselect.split(",");
 
         this.options = myArray
-        console.log(this.options)
     })
 
     
@@ -119,6 +120,7 @@ export class RequestinfoComponent implements OnInit {
     this.namelocal = sessionStorage.getItem("NAME");
     this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
     this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+    console.log(this.namelocal)
 
     if (this.namelocal != null) {
       this.isValid = true
@@ -131,27 +133,31 @@ export class RequestinfoComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
   onOpenDialogClick(){
-    const dialogRef = this.matDialog.open(QuestionComponent, {
-      disableClose : true,
-      width: '500px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-    console.log(result );
+    if(this.namelocal != null){
+      this.productService.changeMessage(this.DataRes[0].REQ_NUM + "||"+this.DataRes[0].ID)
+      const dialogRef = this.matDialog.open(QuestionComponent, {
+        disableClose : true,
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result );
 
-    this.ngOnInit()
-    }); 
+      this.ngOnInit()
+      });
+    }else (
+      window.alert("Please login")
+    )
+   
   }
   GoEstiCost(){
   
   }
   GoAswer(ID:any){
-    this.productService.changeMessage(ID + "|| " + this.message)
-    this.router.navigate(['/AnswerPage']) 
+    window.location.href ='http://localhost:4200/AnswerPage?id='+ID+'&usertype='+this.userType
   }
   GoAsweredit(ID:any){
-    this.productService.changeMessage(ID + "|| " + this.message)
-    this.router.navigate(['/AnswerEdit']) 
+    window.location.href ='http://localhost:4200/AnswerEdit?id='+ID+'&usertype='+this.userType
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 
@@ -169,7 +175,8 @@ export class RequestinfoComponent implements OnInit {
     this.router.navigate(['/Signup'])
   }
   GoBooking(){
-    window.location.href ='http://localhost:4200/BooingEquip?id='+this.DataRes[0].ID
+    window.open ('http://localhost:4200/BooingEquip?id='+this.DataRes[0].ID);
   }
-
+// window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
+// window.location.href ='http://localhost:4200/BooingEquip?id='+this.DataRes[0].ID
 }

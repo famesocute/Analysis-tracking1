@@ -7,6 +7,7 @@ import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
 import { ApproverStepComponent } from '../dialog/approver-step/approver-step.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-esti-step',
@@ -44,13 +45,14 @@ export class EstiStepComponent implements OnInit {
   isvalidGoNaxt = true
 
   loading = true
+  userType : any
 
   namelocal: any
   Codelocal: any
   departmentlocal: any
   nameonly: any
 
-  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder) {
+  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder,private route: ActivatedRoute) {
     this.productForm = this.fb.group({
 
       quantities: this.fb.array([]),
@@ -58,14 +60,13 @@ export class EstiStepComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.userType = this.route.snapshot.queryParamMap.get("id");
+    console.log(this.userType)
 
     this.EMAIL_CC[0] = ""
       console.log(this.EMAIL_CC);
-
-    this.productService.currentMessage.subscribe(message => this.message = message)
-    // this.message = "126"
    
-    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
+    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
       this.loading = false
@@ -213,16 +214,15 @@ export class EstiStepComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
+      this.router.navigate(['/Analyrequehome']) 
     })
-    this.router.navigate(['/Analyrequehome']) 
+    
   }
   GoAswer(ID:any){
-    this.productService.changeMessage(ID + "|| " + this.message)
-    this.router.navigate(['/AnswerPage']) 
+    window.location.href ='http://localhost:4200/AnswerPage?id='+ID+'&usertype='+this.userType
   }
   GoAsweredit(ID:any){
-    this.productService.changeMessage(ID + "|| " + this.message)
-    this.router.navigate(['/AnswerEdit']) 
+    window.location.href ='http://localhost:4200/AnswerEdit?id='+ID+'&usertype='+this.userType
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 

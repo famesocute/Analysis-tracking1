@@ -6,7 +6,9 @@ import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
-
+import { EstistepEditComponent } from '../dialog/estistep-edit/estistep-edit.component'
+import { ActivatedRoute } from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
 
 @Component({
   selector: 'app-esti-cost',
@@ -39,15 +41,17 @@ export class EstiCostComponent implements OnInit {
   EMAIL_CC: string[] = [];
 
   isValid = false
+  isvalideditstep = true
 
   loading = true
+  userType : any
 
   namelocal: any
   Codelocal: any
   departmentlocal: any
   nameonly: any
 
-  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder) { 
+  constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder,private route: ActivatedRoute) { 
    
   }
 
@@ -55,10 +59,14 @@ export class EstiCostComponent implements OnInit {
     this.EMAIL_CC[0] = ""
       console.log(this.EMAIL_CC);
 
-    this.productService.currentMessage.subscribe(message => this.message = message)
-    // this.message = "126"
+      this.productService.currentMessage.subscribe(message => this.message = message)
+    console.log(this.message)
+    // this.userType = this.message
+
+      this.userType = this.route.snapshot.queryParamMap.get("id");
+      console.log(this.userType)
    
-    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.message).subscribe((data: {}) => {
+    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
       this.loading = false
@@ -66,6 +74,13 @@ export class EstiCostComponent implements OnInit {
       this.controlcc = this.DataRes[0].REVI_ANASEC_CONTROL_CC1.split(",");
       this.ComControl = this.DataRes[0].REVI_ANASEC_CONTROL_COM
       this.Analyzer = this.DataRes[0].REVI_ANASEC_ANAL
+      console.log(this.DataRes[0].REVI_ANASEC_ANAL)
+
+      if(this.DataRes[0].STATUS_JOB == 4){
+        this.isvalideditstep = true
+      }else if(this.DataRes[0].STATUS_JOB == 3){
+        this.isvalideditstep = false
+      }
 
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
@@ -111,7 +126,6 @@ export class EstiCostComponent implements OnInit {
         const myArray = dataselect.split(",");
 
         this.options = myArray
-        console.log(this.options)
     })
 
     
@@ -128,6 +142,7 @@ export class EstiCostComponent implements OnInit {
       this.isValid = true
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
     }
+    console.log(this.namelocal)
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -135,12 +150,26 @@ export class EstiCostComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
   onOpenDialogClick(){
+    this.productService.changeMessage(this.DataRes[0].REQ_NUM + "||"+this.DataRes[0].ID)
     const dialogRef = this.matDialog.open(QuestionComponent, {
       disableClose : true,
       width: '500px',
     });
     dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
+    console.log(result );
+
+    this.ngOnInit()
+    }); 
+  }
+  onOpenDialogClickeditstep(){
+    this.productService.changeMessage(this.DataRes[0].ID)
+    // window.location.href ='http://localhost:4200/EstistepEdit?id='+this.userType
+    const dialogRef = this.matDialog.open(EstistepEditComponent, {
+      disableClose : true,
+      width: '1000px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
     console.log(result );
 
     this.ngOnInit()
@@ -157,16 +186,15 @@ export class EstiCostComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
+      this.router.navigate(['/Analyrequehome']) 
     })
-    this.router.navigate(['/Analyrequehome']) 
+ 
   }
   GoAswer(ID:any){
-    this.productService.changeMessage(ID + "|| " + this.message)
-    this.router.navigate(['/AnswerPage']) 
+    window.location.href ='http://localhost:4200/AnswerPage?id='+ID+'&usertype='+this.userType
   }
   GoAsweredit(ID:any){
-    this.productService.changeMessage(ID + "|| " + this.message)
-    this.router.navigate(['/AnswerEdit']) 
+    window.location.href ='http://localhost:4200/AnswerEdit?id='+ID+'&usertype='+this.userType
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 
@@ -186,5 +214,15 @@ export class EstiCostComponent implements OnInit {
   myFunction() {
     window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
   }
-
+  decline(){
+    this.isvalideditstep = false
+   var qtest = ""
+    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+      " SET  `STATUS_JOB` = '3' " +
+      " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
+    console.log(qtest);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+      console.log(data);
+  })
+}
 }

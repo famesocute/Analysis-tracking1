@@ -337,9 +337,25 @@
 
         <mat-card class="card1" style="margin-top: 10px;">
           <mat-card-title-group>
-              <mat-card-title>Estimate cost</mat-card-title>
+              <mat-card-title> 
+                <div *ngIf="this.namelocal == this.Analyzer;else elseBlock1">
+                <div class="row">
+                  <div class="col-sm-9" style="padding-top:10px ;">Estimate cost</div>
+                  <div class="col-sm-3">
+                      <button mat-mini-fab color="primary" class="button3" (click)="onOpenDialogClickeditstep()" >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #elseBlock1>
+                  <div style="padding-top:10px ;">Estimate cost</div>
+                </ng-template>             
+              </mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
+            
+            <br>
               <table class="table table-bordered Titlereview ">
                   <thead >
                     <tr>
@@ -381,12 +397,20 @@
                     </tr> 
                   </tbody>
                 </table>
-                <div class="row center"  >
-                  <div class="col-sm-3"></div>
-                  <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2" (click)="GoRequeinfo()">Accept</button></div>
-                  <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2" >Decline</button></div>
-                  <div class="col-sm-3"></div>
+
+                <div *ngIf="isvalideditstep;else go_next">
+                  <div class="row center"  >
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2" (click)="GoRequeinfo()">Accept</button></div>
+                    <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2" (click)="decline()">Decline</button></div>
+                    <div class="col-sm-3"></div>
+                  </div>
                 </div>
+        
+                <ng-template #go_next>
+                  <div class="center">Please analyzer revise the steps</div>
+                </ng-template>
+               
           </mat-card-content>
       </mat-card>
       

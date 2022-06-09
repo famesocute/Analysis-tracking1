@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-answer-page',
@@ -40,7 +41,7 @@ export class AnswerPageComponent implements OnInit {
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
 
-  constructor(public router: Router, public productService: ProductService) { }
+  constructor(public router: Router, public productService: ProductService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -52,12 +53,17 @@ export class AnswerPageComponent implements OnInit {
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
     }
 
-    this.productService.currentMessage.subscribe(message => this.message = message)
-    console.log(this.message)
-    var a
-    a = this.message.split("||")
-    this.ID_Q = a[0]
-    this.ID_p = a[1]
+    this.ID_p = this.route.snapshot.queryParamMap.get("usertype");
+    console.log(this.ID_p)
+    this.ID_Q = this.route.snapshot.queryParamMap.get("id");
+    console.log(this.ID_Q)
+
+    // this.productService.currentMessage.subscribe(message => this.message = message)
+    // console.log(this.message)
+    // var a
+    // a = this.message.split("||")
+    // this.ID_Q = a[0]
+    // this.ID_p = a[1]
 
     this.productService.TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID(this.ID_Q).subscribe((data: {}) => {
       console.log(data);
@@ -107,8 +113,9 @@ export class AnswerPageComponent implements OnInit {
     this.router.navigate(['/Signup'])
   }
   Gobefore() {
-    this.productService.changeMessage(this.ID_p)
+    // this.productService.changeMessage(this.ID_p)
     history.back()
+    // window.location.href ='http://localhost:4200/Paddingreque?id='+this.ID_p 
   }
 
   Logout() {
@@ -116,27 +123,6 @@ export class AnswerPageComponent implements OnInit {
     sessionStorage.removeItem("EMPLOY_CODE");
     sessionStorage.removeItem("DEPARTMENT");
     location.reload();
-  }
-
-  NavAnapadding() {
-    let date: Date = new Date();
-    var date2 = date.toLocaleString()
-    this.AnswerDate = date2
-    this.ANSWER_DATE = date2.substring(0, 9)
-
-    var qtest = ""
-    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`question` SET `ANSWER_DETAIL` = '" + this.ANSWER_DETAIL + "', " +
-      "`ANSWER_SENT_TO` = '" + this.ANSWER_SENT_TO + "', `ANSWER_CC1_SENT_TO` = '" + this.ANSWER_CC1_SENT_TO + "', " +
-      "`ANSWER_CC2_SENT_TO` = '" + this.ANSWER_CC2_SENT_TO + "', `ANSWER_DATE` = '" + this.ANSWER_DATE + "'," +
-      " `STATUS_QUESTION` = '" + this.STATUS_QUESTION + "' WHERE (`ID` = '" + this.message + "');"
-
-
-    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-      console.log(data);
-      this.isValidanswer = true
-      // this.router.navigate(['/Paddingreque'])
-    }
-    )
   }
 
 

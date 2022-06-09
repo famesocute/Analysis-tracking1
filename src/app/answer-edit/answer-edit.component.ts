@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-answer-edit',
@@ -28,20 +29,29 @@ export class AnswerEditComponent implements OnInit {
   nameonly: any
 
   table: any
+  loading = true
 
   ID_Q: any
   ID_p: any
+  userType : any
 
   isValid = false
   isValidanswer = false
+
+  EMAIL_CC: string[] = [];
 
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
 
-  constructor(public router: Router, public productService: ProductService) { }
+  constructor(public router: Router, public productService: ProductService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.ID_p = this.route.snapshot.queryParamMap.get("usertype");
+    console.log(this.ID_p)
+    this.ID_Q = this.route.snapshot.queryParamMap.get("id");
+    console.log(this.ID_Q)
+
     this.namelocal = sessionStorage.getItem("NAME");
     this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
     this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
@@ -50,14 +60,17 @@ export class AnswerEditComponent implements OnInit {
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
     }
 
-    this.productService.currentMessage.subscribe(message => this.message = message)
-    console.log(this.message)
-    var a
-    a = this.message.split("||")
-    this.ID_Q = a[0]
-    this.ID_p = a[1]
-    console.log(this.ID_Q)
-    console.log(this.ID_p)
+    this.EMAIL_CC[0] = ""
+    console.log(this.EMAIL_CC);
+
+    // this.productService.currentMessage.subscribe(message => this.message = message)
+    // console.log(this.message)
+    // var a
+    // a = this.message.split("||")
+    // this.ID_Q = a[0]
+    // this.ID_p = a[1]
+    // console.log(this.ID_Q)
+    // console.log(this.ID_p)
 
     this.productService.TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID(this.ID_Q).subscribe((data: {}) => {
       console.log(data);
@@ -66,6 +79,7 @@ export class AnswerEditComponent implements OnInit {
       this.ANSWER_SENT_TO= this.Questiondata[0].ANSWER_SENT_TO
       this.ANSWER_CC1_SENT_TO= this.Questiondata[0].ANSWER_CC1_SENT_TO
       this.ANSWER_CC2_SENT_TO= this.Questiondata[0].ANSWER_CC2_SENT_TO
+      this.loading = false
     })
 
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
@@ -78,17 +92,16 @@ export class AnswerEditComponent implements OnInit {
         dataselect = dataselect + this.table[x].DISPLAY_NAME + ' <' + this.table[x].MAIL_ADDRESS + '>,'
       }
       dataselect = dataselect.substring(0, dataselect.length - 1);
-
       const myArray = dataselect.split(",");
-
       this.options = myArray
-      console.log(this.options)
+      
     })
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
+    
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -111,6 +124,19 @@ export class AnswerEditComponent implements OnInit {
     location.reload();
   }
 
+  countrow = 0
+  addIN(){
+    console.log(this.countrow);
+    this.countrow = this.countrow + 1
+    this.EMAIL_CC[this.countrow] = ""
+    console.log(this.EMAIL_CC);
+  }
+  delete(i:any){
+    this.countrow = this.countrow - 1
+    this.EMAIL_CC.splice(i, 1);
+    // delete this.EMAIL_CC[i];
+    console.log(this.EMAIL_CC)
+  }
   NavAnapadding() {
     let date: Date = new Date();
     var date2 = date.toLocaleString()
@@ -119,14 +145,13 @@ export class AnswerEditComponent implements OnInit {
 
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`question` SET `ANSWER_DETAIL` = '" + this.ANSWER_DETAIL + "', " +
-      "`ANSWER_SENT_TO` = '" + this.ANSWER_SENT_TO + "', `ANSWER_CC1_SENT_TO` = '" + this.ANSWER_CC1_SENT_TO + "', " +
-      "`ANSWER_CC2_SENT_TO` = '" + this.ANSWER_CC2_SENT_TO + "', `ANSWER_DATE` = '" + this.ANSWER_DATE + "'," +
+      "`ANSWER_SENT_TO` = '" + this.ANSWER_SENT_TO + "', `ANSWER_CC1_SENT_TO` = '" + this.EMAIL_CC + "', " +
+      " `ANSWER_DATE` = '" + this.ANSWER_DATE + "'," +
       " `STATUS_QUESTION` = '" + this.STATUS_QUESTION + "' WHERE (`ID` = '" + this.ID_Q + "');"
       
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-      console.log(data);
-      this.productService.changeMessage(this.ID_p)
-      this.router.navigate(['/Paddingreque'])
+      history.back()
+       
     }
     )
   }

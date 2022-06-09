@@ -45,6 +45,10 @@ import { RequestinfoComponent } from './requestinfo/requestinfo.component';
 import { AnswerEditComponent } from './answer-edit/answer-edit.component';
 import { ApproverStepComponent } from './dialog/approver-step/approver-step.component';
 import { MyjobComponent } from './myjob/myjob.component';
+import { EstistepEditComponent } from './dialog/estistep-edit/estistep-edit.component';
+import {DayPilotModule} from "@daypilot/daypilot-lite-angular";
+import {DataService} from "./csresult/data.service";
+
 
 
 
@@ -69,6 +73,7 @@ import { MyjobComponent } from './myjob/myjob.component';
     AnswerEditComponent,
     ApproverStepComponent,
     MyjobComponent,
+    EstistepEditComponent,
 
   ],
   imports: [
@@ -98,9 +103,9 @@ import { MyjobComponent } from './myjob/myjob.component';
     MatExpansionModule,
     MatDialogModule,
     MatTabsModule,
-
+    DayPilotModule,
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

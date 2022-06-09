@@ -33,9 +33,20 @@ export class BooingEquipComponent implements OnInit{
   enddate = ""
   endtime = ""
   operator = ""
+  startdate1 = ""
+  enddate1 = ""
+
+  sample1 : any
+  sample2 : any
+
+  equipbook = ""
+  analyzer = ""
 
   myControl = new FormControl();
-  options: string[] = [];
+  options: string[] = ['Pornpimon Pengto', 'Soontree Chaiwut','Napapon',
+   'Parawee Tassaneekati ', 'Panudda Majan', 'Pichayapak Nantasai', 
+   'Supakan Sriwichai ', 'Suticha Pringthai ','Thanyarat Sukkay ',  
+   'Wanutsanun Hintuang' ];
   filteredOptions!: Observable<string[]>;
  
   constructor(public router: Router,private route: ActivatedRoute,public productService: ProductService) { }
@@ -47,22 +58,31 @@ export class BooingEquipComponent implements OnInit{
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
-    })
-    this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
-      console.log(data);
-      this.table = data
-      var dataselect = ""
-      var x
-      for (x in this.table) {
-        dataselect = dataselect + this.table[x].DISPLAY_NAME + ' <' + this.table[x].MAIL_ADDRESS + '>,'
 
-      }
-      dataselect = dataselect.substring(0, dataselect.length - 1);
+      this.analyzer = this.DataRes[0].REVI_ANASEC_ANAL.split("<")
 
-      const myArray = dataselect.split(",");
+      this.sample1 = this.DataRes[0].ESTI_TECHNIQUE.split("[]")
+    console.log(this.sample1)
 
-      this.options = myArray
-      console.log(this.options)
+    var x
+    var a
+    this.sample2 = "["
+
+    for(x in this.sample1)
+    {
+      a = this.sample1[x].split("||")
+      this.sample2 = this.sample2 + '{"equip":"' + a[0] + '",'
+      this.sample2 = this.sample2 + '"Sample_no":"' + a[1] + '"},'
+    }
+
+    this.sample2 =  this.sample2.substring(0,  this.sample2.length - 1);
+    this.sample2 =  this.sample2 + "]";
+    console.log( this.sample2)
+    var obj = JSON.parse( this.sample2);
+      this.sample2 = obj
+      console.log( this.sample2)
+
+      this.loading = false
     })
 
     this.namelocal = sessionStorage.getItem("NAME");
@@ -73,7 +93,7 @@ export class BooingEquipComponent implements OnInit{
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
     } else {
       window.alert("กรุณา login")
-      this.router.navigate(['/Requestinfo'])
+      window.location.href ='http://localhost:4200/Requestinfo?id='+this.userType   
     }
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -81,7 +101,6 @@ export class BooingEquipComponent implements OnInit{
       map(value => this._filter(value)),
     );
 
-    this.loading = false
   }
 
   private _filter(value: string): string[] {
@@ -107,24 +126,29 @@ export class BooingEquipComponent implements OnInit{
     this.router.navigate(['/Analyrequehome']) 
   }
   confirm(){
-    console.log(this.step)
-    console.log(this.Numsample)
-    console.log(this.startdate)
-    console.log(this.starttime)
-    console.log(this.enddate)
-    console.log(this.endtime)
-    console.log(this.operator)
+    
+    var startdate2 = this.startdate.toLocaleString()
+    this.startdate1 = startdate2.substring(0, 8)
+    console.log(this.startdate1)
 
-    // INSERT INTO `mtq10_project_tracking_analysis`.`booking_equipment` (`REQ_NUM`, `STEP_BOOKING`, `SAMPLE_NUM`, `DATE_BOOKING_START`, `TIME_BOOKING_START`, `DATE_BOOKING_END`, `TIME_BOOKING_END`, `OPERATER`) VALUES ('fd', 'dg', 'g', 'g', 'dfg', 'df', 'dg', 'dg');
+    
+    var enddate2 = this.enddate.toLocaleString()
+    this.enddate1 = enddate2.substring(0, 8)
+    console.log(this.enddate1)
 
-  //   var qtest = ""
-  // qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`booking_equipment` (`REQ_NUM`, `STEP_BOOKING`, `SAMPLE_NUM`, " +
-  // " `DATE_BOOKING_START`, `TIME_BOOKING_START`, `DATE_BOOKING_END`, `TIME_BOOKING_END`, `OPERATER`) " +
-  //   " VALUES ('"+this.DataRes[0].REQ_NUM +"', 'dg', 'g', 'g', 'dfg', 'df', 'dg', 'dg');"
-
+    var qtest = ""
+  qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`booking_equipment` (`REQ_NUM`, `STEP_BOOKING`, `SAMPLE_NUM`, " +
+  " `DATE_BOOKING_START`, `TIME_BOOKING_START`, `DATE_BOOKING_END`, `TIME_BOOKING_END`, `OPERATER`) " +
+    " VALUES ('"+this.DataRes[0].REQ_NUM +"', '"+this.step +"', '"+this.Numsample +"', '"+this.startdate1 +"', "+
+    " '"+this.starttime +"', '"+this.enddate1 +"', '"+this.endtime +"', '"+this.operator +"');"
+    console.log(qtest);
   // this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
   //   console.log(data);
-
   // })
+  }
+  onChange(deviceValue:any) {
+    console.log(deviceValue);
+    this.equipbook = deviceValue
+    
   }
 }
