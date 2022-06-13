@@ -47,9 +47,7 @@ import { ApproverStepComponent } from './dialog/approver-step/approver-step.comp
 import { MyjobComponent } from './myjob/myjob.component';
 import { EstistepEditComponent } from './dialog/estistep-edit/estistep-edit.component';
 import {DayPilotModule} from "@daypilot/daypilot-lite-angular";
-import {DataService} from "./csresult/data.service";
-
-
+import {DataService} from "./booing-equip/data.service";
 
 
 @NgModule({

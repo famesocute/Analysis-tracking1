@@ -2,16 +2,25 @@ import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
 import {DayPilot} from "@daypilot/daypilot-lite-angular";
 import {HttpClient} from "@angular/common/http";
+import { ProductService } from '../api/product.service';
 
 @Injectable()
 export class DataService {
-
+  
   events: any[] = [
     {
       id: "1",
       start: DayPilot.Date.today().addHours(10),
       end: DayPilot.Date.today().addHours(12),
-      text: "Event 1"
+      text: "Event 1",
+      
+    },
+    {
+      id: "2",
+      start: DayPilot.Date.today().addHours(13),
+      end: DayPilot.Date.today().addHours(15),
+      text: "Event 2",
+      
     }
 
 
@@ -38,10 +47,15 @@ export class DataService {
     
   ];
 
-  constructor(private http : HttpClient){
+  constructor(private http : HttpClient,public productService: ProductService){
   }
 
   getEvents(from: DayPilot.Date, to: DayPilot.Date): Observable<any[]> {
+
+
+
+    console.log(this.events)
+
 
     // simulating an HTTP request
     return new Observable(observer => {

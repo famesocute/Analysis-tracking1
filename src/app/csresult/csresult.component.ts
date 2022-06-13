@@ -5,7 +5,7 @@ import {
   DayPilotMonthComponent,
   DayPilotNavigatorComponent
 } from "@daypilot/daypilot-lite-angular";
-import {DataService} from "./data.service";
+import {DataService} from "../booing-equip/data.service";
 
 @Component({
   selector: 'app-csresult',
@@ -24,7 +24,7 @@ export class CSresultComponent implements AfterViewInit {
   date = DayPilot.Date.today();
 
   configNavigator: DayPilot.NavigatorConfig = {
-    showMonths: 3,
+    showMonths: 1,
     cellWidth: 25,
     cellHeight: 25,
     onVisibleRangeChanged: args => {
@@ -50,7 +50,9 @@ export class CSresultComponent implements AfterViewInit {
     
     viewType: "Week",
     onTimeRangeSelected: async (args) => {
-      const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
+      // show booked time
+      const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 3");
+      
       const dp = args.control;
       dp.clearSelection();
       if (!modal.result) { return; }
@@ -58,7 +60,8 @@ export class CSresultComponent implements AfterViewInit {
         start: args.start,
         end: args.end,
         id: DayPilot.guid(),
-        text: modal.result
+        text: modal.result,
+        
       }));
     }
   };

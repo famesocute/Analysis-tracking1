@@ -1,11 +1,13 @@
 .input1 {
     padding: 5px;
 }
+
 .card1 {
     max-width: 1100px;
     margin: auto;
     background-color: #FFFAF0;
-  } 
+}
+
 .center {
     display: flex;
     justify-content: center;
@@ -13,120 +15,46 @@
     height: auto;
 }
 
+.container {
+    display: flex;
+    flex-direction: row;
+}
+
+.navigator {
+    margin-right: 10px;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.buttons {
+    margin-bottom: 10px;
+}
+
+.button2 {
+    background-color: #3c78d8;
+    color: white;
+    border: 0;
+    padding: .5rem 1rem;
+    width: 80px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+button.selected {
+    background-color: #1c4587;
+}
+
 
 .input2 {
     padding: 5px;
     max-width: 150px;
 }
-body{
-    margin-top:20px;
+.font1 { 
+    font-family: 'Inter', sans-serif;
 }
-.bg-light-gray {
-    background-color: #f7f7f7;
-}
-.table-bordered thead td, .table-bordered thead th {
-    border-bottom-width: 2px;
-}
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-}
-.table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
-}
-
-
-.bg-sky.box-shadow {
-    box-shadow: 0px 5px 0px 0px #00a2a7
-}
-
-.bg-orange.box-shadow {
-    box-shadow: 0px 5px 0px 0px #af4305
-}
-
-.bg-green.box-shadow {
-    box-shadow: 0px 5px 0px 0px #4ca520
-}
-
-.bg-yellow.box-shadow {
-    box-shadow: 0px 5px 0px 0px #dcbf02
-}
-
-.bg-pink.box-shadow {
-    box-shadow: 0px 5px 0px 0px #e82d8b
-}
-
-.bg-purple.box-shadow {
-    box-shadow: 0px 5px 0px 0px #8343e8
-}
-
-.bg-lightred.box-shadow {
-    box-shadow: 0px 5px 0px 0px #d84213
-}
-
-
-.bg-sky {
-    background-color: #02c2c7
-}
-
-.bg-orange {
-    background-color: #e95601
-}
-
-.bg-green {
-    background-color: #5bbd2a
-}
-
-.bg-yellow {
-    background-color: #f0d001
-}
-
-.bg-pink {
-    background-color: #ff48a4
-}
-
-.bg-purple {
-    background-color: #9d60ff
-}
-
-.bg-lightred {
-    background-color: #ff5722
-}
-
-.padding-15px-lr {
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.padding-5px-tb {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-.margin-10px-bottom {
-    margin-bottom: 10px;
-}
-.border-radius-5 {
-    border-radius: 5px;
-}
-
-.margin-10px-top {
-    margin-top: 10px;
-}
-.font-size14 {
-    font-size: 14px;
-}
-
-.text-light-gray {
-    color: #d6d5d5;
-}
-.font-size13 {
-    font-size: 13px;
-}
-
-.table-bordered td, .table-bordered th {
-    border: 1px solid #dee2e6;
-}
-.table td, .table th {
-    padding: .75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
+.fontsize {
+    font-size: 16px;
 }
