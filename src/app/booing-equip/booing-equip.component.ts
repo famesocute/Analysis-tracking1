@@ -33,6 +33,8 @@ export class BooingEquipComponent implements OnInit{
 
   userType : any
   DataRes : any
+  DataBooking : any
+  DataResreq : any
 
   step_no =""
   step1 = ""
@@ -127,7 +129,7 @@ export class BooingEquipComponent implements OnInit{
 
     this.productService.TRACKING_ANALYSIS_SELECT_BOOKING().subscribe((data: {}) => {
       console.log(data);
-      this.DataRes = data
+      this.DataBooking = data
     })
 
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
@@ -138,6 +140,11 @@ export class BooingEquipComponent implements OnInit{
 
       this.sample1 = this.DataRes[0].ESTI_TECHNIQUE.split("[]")
     console.log(this.sample1)
+
+    this.productService.TRACKING_ANALYSIS_SELECT_BOOKING_BYREQ(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
+      console.log(data);
+      this.DataResreq = data
+    })
 
     var x
     var a

@@ -80,6 +80,21 @@ body {
 img {
     height: 80px;
 }
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table td {
+    word-wrap: break-word;         /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+}
+.widthcom {
+    width: 100%;
+}
+textarea{
+    height: 100px ;
+}
 
 
   

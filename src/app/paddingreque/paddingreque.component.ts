@@ -163,7 +163,7 @@ export class PaddingrequeComponent implements OnInit {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET `STATUS_JOB` = '2',`STETUS_PERSON` = '" + this.DataRes[0].REVI_ANASEC_CONTROL + "',`REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "', " +
-      " `REVI_PAND_CONFIRM_CC1` = '"+ this.EMAIL_CC +"', `REVI_ANASEC_CONTROL_TIME` = '"+ date2 +"' " +
+      " `REVI_PAND_CONFIRM_CC1` = '"+ this.EMAIL_CC +"', `REVI_PAND_CONFIRM_TIME` = '"+ date2 +"' " +
       "  WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {

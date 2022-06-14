@@ -35,15 +35,12 @@
       </ng-template>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10">
-      <div style=" padding-top: 60px;" class=" font1 center mat-display-3">Booking Equipment</div>
+  
+  <div style=" padding-top: 60px;" class=" font1 center mat-display-3">Booking Equipment</div>
       <div style="padding-left:260px ;">
         <h2><b>X-ray</b></h2>
       </div>
-      <div class="container" style="padding-top: 10px; padding-bottom:20px;">
+      <div class="container" style="padding-top: 10px; padding-bottom:20px; padding-right: 120px;">
         <div class="navigator">
           <daypilot-navigator [config]="configNavigator" [events]="events" [(date)]="date" (dateChange)="changeDate($event)" #navigator></daypilot-navigator>
         </div>
@@ -60,8 +57,10 @@
         </div>
       
       </div>
- 
 
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
       <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Analytical information</mat-card-title>
@@ -195,12 +194,50 @@
               </div>
             </div>
           </div>
+          <br>
+          <div class="center">
+            <button mat-raised-button color="primary" (click)="confirm()" >Issue step</button>
+          </div>
         </mat-card-content>
       </mat-card>
-      <br>
-    <div class="center">
-      <button mat-raised-button color="primary" (click)="confirm()" >Issue step</button>
-    </div>
+<br>
+      <table class="table table-bordered Titlereview">
+        <thead>
+          <tr>
+            <th width="50px" class=" Titlereview">No. step</th>
+            <th width="100px">Equipment</th>
+            <th width="50px">Number Sample</th>
+            <th width="100px" >startdate and time</th>
+            <th width="100px" >Enddate and time</th>
+            <th width="100px" >Operation by</th>
+            <th width="30px"></th>
+            <th width="30px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let item of DataResreq let i = index" >   
+            <!-- <div *ngIf="item.REQ_NUM == this.DataRes[0].REQ_NUM">  -->
+            <td width="50px">{{item.STEP_BOOKING}} </td>   
+            <td width="100px">{{item.EQUIPMENT}}</td>
+            <td width="50px">{{item.SAMPLE_NUM}}</td>
+            <td width="100px">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}}</td>
+            <td width="100px">{{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}</td>
+            <td width="100px">{{item.OPERATER}}</td>
+            <td  width="30px">
+              <button mat-mini-fab color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </td>
+            <td  width="30px">
+              <button mat-mini-fab color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          <!-- </div>      -->
+          </tr>
+        </tbody>
+      </table>
+     
     </div>
     <div class="col-sm-1"></div>
   </div>

@@ -105,7 +105,6 @@ export class RequestformfillComponent implements OnInit {
     console.log(this.EMAIL_CC);
 
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
-      console.log(data);
       this.table = data
       var dataselect = ""
       var x
@@ -118,7 +117,6 @@ export class RequestformfillComponent implements OnInit {
       const myArray = dataselect.split(",");
 
       this.options = myArray
-      console.log(this.options)
     })
 
     this.filteredOptions = this.myControl.valueChanges.pipe(

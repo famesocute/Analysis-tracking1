@@ -82,12 +82,11 @@ export class EstiStepComponent implements OnInit {
         this.isvalidGoNaxt = false
       }
 
-
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
+    
       var x
       var a
-
       this.sample2 = "["
 
       for(x in this.sample1)
@@ -114,7 +113,7 @@ export class EstiStepComponent implements OnInit {
     })
  
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
-      console.log(data);
+     
       this.table = data
       var dataselect = ""
       var x
@@ -127,7 +126,6 @@ export class EstiStepComponent implements OnInit {
         const myArray = dataselect.split(",");
 
         this.options = myArray
-        console.log(this.options)
     })
 
     
@@ -171,7 +169,7 @@ export class EstiStepComponent implements OnInit {
       var qtest = ""
       qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
         " SET `STATUS_JOB` = '3', `STETUS_PERSON` = '" + this.Analyzer + "', `REVI_ANASEC_ANAL` = '" + this.Analyzer + "', " +
-        " `REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.EMAIL_CC +"', `REVI_PAND_CONFIRM_TIME` = '"+ date2 +"' " +
+        " `REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "', `REVI_ANASEC_CONTROL_CC1` = '"+ this.EMAIL_CC +"', `REVI_ANASEC_CONTROL_TIME` = '"+ date2 +"' " +
         " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
       console.log(qtest);
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {

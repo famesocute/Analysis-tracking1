@@ -94,10 +94,10 @@ export class AnalyrequehomeComponent implements OnInit {
     else if (STATUS_JOB == '3') {
       window.location.href ='http://localhost:4200/Estistep?id='+ID  
     }
-    else if (STATUS_JOB == '4') {
+    else if (STATUS_JOB == '4'||STATUS_JOB == '0') {
       window.location.href ='http://localhost:4200/Esticost?id='+ID  
     }
-    else if (STATUS_JOB == '5') {
+    else if (STATUS_JOB == '5' ) {
       // this.productService.changeMessage(ID)
       // this.router.navigate(['/Requestinfo'])
       window.location.href ='http://localhost:4200/Requestinfo?id='+ID  

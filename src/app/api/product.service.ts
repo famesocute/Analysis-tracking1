@@ -101,14 +101,20 @@ export class ProductService {
     }
     TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID(data1:any) {
   
-      console.log("TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON Loop ")
+      console.log("TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID Loop ")
   
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/11_TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID.php?data1='+data1)
     }
     TRACKING_ANALYSIS_SELECT_BOOKING() {
   
-      console.log("TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON Loop ")
+      console.log("TRACKING_ANALYSIS_SELECT_BOOKING Loop ")
   
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/12_TRACKING_ANALYSIS_SELECT_BOOKING.php')
+    }
+    TRACKING_ANALYSIS_SELECT_BOOKING_BYREQ(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_BOOKING_BYREQ Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/13_TRACKING_ANALYSIS_SELECT_BOOKING_BYREQ.php?data1='+data1)
     }
 }

@@ -78,7 +78,7 @@ export class EstiCostComponent implements OnInit {
 
       if(this.DataRes[0].STATUS_JOB == 4){
         this.isvalideditstep = true
-      }else if(this.DataRes[0].STATUS_JOB == 3){
+      }else if(this.DataRes[0].STATUS_JOB == 0){
         this.isvalideditstep = false
       }
 
@@ -164,7 +164,6 @@ export class EstiCostComponent implements OnInit {
   }
   onOpenDialogClickeditstep(){
     this.productService.changeMessage(this.DataRes[0].ID)
-    // window.location.href ='http://localhost:4200/EstistepEdit?id='+this.userType
     const dialogRef = this.matDialog.open(EstistepEditComponent, {
       disableClose : true,
       width: '1000px',
@@ -218,7 +217,7 @@ export class EstiCostComponent implements OnInit {
     this.isvalideditstep = false
    var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `STATUS_JOB` = '3' " +
+      " SET  `STATUS_JOB` = '0' " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {

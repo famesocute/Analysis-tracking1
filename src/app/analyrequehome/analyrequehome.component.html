@@ -352,7 +352,7 @@
                     <tbody>
                       <tr *ngFor="let item of table let i = index">
 
-                        <div *ngIf="item.DEP_MENT == 'SGA'">
+                        <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
 
                           <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                             <div class="row">
@@ -697,7 +697,7 @@
                       <tr *ngFor="let item of table let i = index">
 
                         <div *ngIf="item.MONTH == 'April'">
-                          <div *ngIf="item.DEP_MENT == 'SGA'">
+                          <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
 
                             <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
@@ -1042,10 +1042,8 @@
                   <table class="table ">
                     <tbody>
                       <tr *ngFor="let item of table let i = index">
-
-                        <div *ngIf="item.MONTH == 'May'">
-                          <div *ngIf="item.DEP_MENT == 'SGA'">
-
+                          <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
+                            <div *ngIf="item.MONTH == 'May'">
                             <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
@@ -1078,6 +1076,354 @@
                       <tr *ngFor="let item of table let i = index">
 
                         <div *ngIf="item.MONTH == 'May'">
+                          <div *ngIf="item.DEP_MENT == 'MT100'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+              </mat-tab-group>
+
+            </mat-tab>
+            <!-- June  -->
+            <mat-tab label="June">
+              <mat-tab-group>
+                <mat-tab label="All">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+                        <div *ngIf="item.MONTH == 'June'">
+
+                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                            <div class="row">
+                              <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                              <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                              <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                            </div>
+                          </button>
+
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="MT300">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+                        <div *ngIf="item.MONTH == 'June'">
+                          <div *ngIf="item.DEP_MENT == 'MT300'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="MT400">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+
+                        <div *ngIf="item.DEP_MENT == 'MT400'">
+                          <div *ngIf="item.MONTH == 'June'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+
+                        </div>
+
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="MT500">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+                        <div *ngIf="item.DEP_MENT == 'MT500'">
+                          <div *ngIf="item.MONTH == 'June'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="MT600">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+                        <div *ngIf="item.DEP_MENT == 'MT600'">
+                          <div *ngIf="item.MONTH == 'June'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="MT700">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+                        <div *ngIf="item.MONTH == 'June'">
+                          <div *ngIf="item.DEP_MENT == 'MT700'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="MT800">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+                        <div *ngIf="item.MONTH == 'June'">
+                          <div *ngIf="item.DEP_MENT == 'MT800'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="MT900">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+                        <div *ngIf="item.MONTH == 'June'">
+                          <div *ngIf="item.DEP_MENT == 'MT900'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="SGA">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+                        <div *ngIf="item.MONTH == 'June'">
+                          <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
+
+                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                              <div class="row">
+                                <div class="col-sm-3" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                                <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-tab>
+                <mat-tab label="MT100">
+                  <br>
+                  <table class="table ">
+                    <thead class="table-danger">
+                      <tr>
+                        <th width="100px" style=" text-align:center">Month</th>
+                        <th width="190px">Department</th>
+                        <th width="200px">Request No.</th>
+                        <th width="300px" style=" text-align:center">Title</th>
+                        <th style=" text-align:center">Issuer</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <table class="table ">
+                    <tbody>
+                      <tr *ngFor="let item of table let i = index">
+
+                        <div *ngIf="item.MONTH == 'June'">
                           <div *ngIf="item.DEP_MENT == 'MT100'">
 
                             <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">

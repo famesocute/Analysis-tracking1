@@ -47,6 +47,15 @@ export class SteppaddingComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,private route: ActivatedRoute,public productService: ProductService,public router: Router) { }
 
   ngOnInit(): void {
+    this.namelocal = sessionStorage.getItem("NAME");
+    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+
+    if (this.namelocal != null) {
+      this.isValid = true
+      this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
+    }
+
     this.userType = this.route.snapshot.queryParamMap.get("id");
     console.log(this.userType)
 
