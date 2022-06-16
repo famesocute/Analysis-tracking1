@@ -196,16 +196,16 @@
               <form>
                 <table>
                   <tr *ngFor="let item of sample2 let i = index">
-                    <td width="200px">
+                    <td width="250px">
                       <div class="input1" style="padding: 0 10px ;">
                         <div class="row">
-                          <div class="col-sm-3"><b>Lot no:</b></div>
-                          <div class="col-sm-9"> {{ item.Lot_no }}</div>
+                          <div class="col-sm-4"><b>Lot no:</b></div>
+                          <div class="col-sm-8"> {{ item.Lot_no }}</div>
                         </div>
                       </div>
                       
                     </td>
-                    <td width="300px">
+                    <td width="400px">
                       <div class="input1" style="padding: 0 10px ;">
                         <div class="row">
                           <div class="col-sm-4"><b>Sample name:</b></div>
@@ -441,7 +441,7 @@
                 <tbody>
                   <tr>
                     <th class=" Titlereview">Pending request</th>
-                    <td class=" Titlereview">Issuer</td>
+                    <td class=" Titlereview"> Issuer</td>
                     <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
                     <td class=" Titlereview">
                       <div class = "center" style="padding-top:10px ;">
@@ -453,7 +453,7 @@
                   </tr>
                   <tr>
                     <th class=" Titlereview"></th>
-                    <td class=" Titlereview">Confirm</td>
+                    <td class=" Titlereview"> Confirm</td>
                     <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
                     <td class=" Titlereview">
                       <div class = "center" style="padding-top:10px ;">
@@ -478,11 +478,11 @@
                         {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
                       </div>
                     </td>
+                    <td class=" Titlereview"> {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}</td>
                     <td class=" Titlereview">
-                      {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
-                    </td>
-                    <td class=" Titlereview">
-                      {{this.DataRes[0].REVI_ANASEC_CONTROL_CC1}}
+                      <p *ngFor="let item of this.controlcc let i = index" >
+                        {{item}}
+                      </p>
                     </td>
                   </tr>
                   <tr>
@@ -535,7 +535,7 @@
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                   </tr>
-  
+
                 </tbody>
               </table>
             </div>

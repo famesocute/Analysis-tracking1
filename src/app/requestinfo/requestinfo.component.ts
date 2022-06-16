@@ -69,7 +69,7 @@ export class RequestinfoComponent implements OnInit {
       console.log(this.sample1)
       var x
       var a
-
+// 1||Metal Mask-Special clean Leyer 1||solid[]2||Metal Mask-Special clean Leyer 2||Gas[]3||Metal Mask-Special clean Leyer 3||solid[]4||Metal Mask-Special clean Leyer 4||Rubber[]5||Metal Mask-Normal clean 1(Clear)||solid[]6||Metal Mask-Normal clean 2(Dark)||Emulsion
       this.sample2 = "["
 
       for(x in this.sample1)

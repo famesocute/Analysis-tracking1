@@ -48,6 +48,8 @@ import { MyjobComponent } from './myjob/myjob.component';
 import { EstistepEditComponent } from './dialog/estistep-edit/estistep-edit.component';
 import {DayPilotModule} from "@daypilot/daypilot-lite-angular";
 import {DataService} from "./booing-equip/data.service";
+import { TrackingstatusComponent } from './trackingstatus/trackingstatus.component';
+import { EditBookingComponent } from './dialog/edit-booking/edit-booking.component';
 
 
 @NgModule({
@@ -72,6 +74,8 @@ import {DataService} from "./booing-equip/data.service";
     ApproverStepComponent,
     MyjobComponent,
     EstistepEditComponent,
+    TrackingstatusComponent,
+    EditBookingComponent,
 
   ],
   imports: [

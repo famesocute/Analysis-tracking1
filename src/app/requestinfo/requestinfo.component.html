@@ -504,7 +504,9 @@
                       {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
                     </td>
                     <td class=" Titlereview">
-                      {{this.DataRes[0].REVI_ANASEC_CONTROL_CC1}}
+                      <p *ngFor="let item of this.controlcc let i = index" >
+                        {{item}}
+                      </p>
                     </td>
                   </tr>
                   <tr>

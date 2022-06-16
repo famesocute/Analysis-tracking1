@@ -361,15 +361,12 @@
                           <mat-form-field appearance="outline" >
                             <mat-label>Techniques</mat-label>
                             <mat-select formControlName="Technique">
-                                <mat-option value="X-ray 2D">X-ray 2D</mat-option>
-                                <mat-option value="X-ray 3D">X-ray 3D</mat-option>
-                                <mat-option value="SEM-Microscope">SEM-Microscope</mat-option>
+                                <mat-option value="X-ray">X-ray</mat-option>
+                                <mat-option value="SEM">SEM</mat-option>
                                 <mat-option value="Cross section">Cross section</mat-option>
                                 <mat-option value="Ion-milling">Ion-milling</mat-option>
                                 <mat-option value="VHX">VHX</mat-option>
                                 <mat-option value="Metallurgical">Metallurgical</mat-option>
-                                <mat-option value="SEM-EDX">SEM-EDX</mat-option>
-                                <mat-option value="SEM-Mapping">SEM-Mapping</mat-option>
                                 <mat-option value="EDXRF">EDXRF</mat-option>
                                 <mat-option value="ICP">ICP</mat-option>
                                 <mat-option value="CS Analyzer">CS Analyzer</mat-option>
@@ -663,7 +660,9 @@
                     {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
                   </td>
                   <td class=" Titlereview">
-                    {{this.DataRes[0].REVI_ANASEC_CONTROL_CC1}}
+                    <p *ngFor="let item of this.controlcc let i = index" >
+                      {{item}}
+                    </p>
                   </td>
                 </tr>
                 <tr>

@@ -61,7 +61,6 @@ export class PaddingrequeComponent implements OnInit {
       this.loading = false
       this.ComConfirm = this.DataRes[0].REVI_PAND_CONFIRM_COM
       this.ccConfirm = this.DataRes[0].REVI_PAND_CONFIRM_CC1
-      
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
     

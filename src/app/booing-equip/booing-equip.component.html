@@ -38,7 +38,14 @@
   
   <div style=" padding-top: 60px;" class=" font1 center mat-display-3">Booking Equipment</div>
       <div style="padding-left:260px ;">
-        <h2><b>X-ray</b></h2>
+        <mat-form-field appearance="outline">
+          <mat-label>Equipment</mat-label>
+          <mat-select [(ngModel)]="this.equip"  (ngModelChange)="onChange($event)" name="sel2" >
+            <mat-option *ngFor="let item of this.sample2 let i = index" value={{item.equip}}>
+              {{item.equip}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div class="container" style="padding-top: 10px; padding-bottom:20px; padding-right: 120px;">
         <div class="navigator">
@@ -141,7 +148,55 @@
                 <div class="row " style="padding-top: 15px ;">
                   <div class="col-sm-2"><b>Time:</b></div>
                   <div class="col-sm-10">
-                    <input type="time" id="appt" name="appt" min="09:00" max="18:00" required [(ngModel)]="this.starttime">
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="this.startT1">
+                          <option selected>hours</option>
+                          <option value="01">01</option>
+                          <option value="02">02</option>
+                          <option value="03">03</option>
+                          <option value="04">04</option>
+                          <option value="05">05</option>
+                          <option value="06">06</option>
+                          <option value="07">07</option>
+                          <option value="08">08</option>
+                          <option value="09">09</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                          <option value="21">21</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-2"><p>:</p></div>
+                      <div class="col-sm-5">
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="this.startT2">
+                          <option selected>min</option>
+                          <option value="00">00</option>
+                          <option value="05">05</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                          <option value="25">25</option>
+                          <option value="30">30</option>
+                          <option value="35">35</option>
+                          <option value="40">40</option>
+                          <option value="45">45</option>
+                          <option value="50">50</option>
+                          <option value="55">55</option> 
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -158,7 +213,7 @@
             <div class="col-sm-4">
               <div class="input1">
                 <mat-form-field color="accent" appearance="outline">
-                  <mat-label>Start date</mat-label>
+                  <mat-label>End date</mat-label>
                   <input matInput [matDatepicker]="picker2" [(ngModel)]="this.enddate">
                   <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                   <mat-datepicker #picker2></mat-datepicker>
@@ -170,7 +225,56 @@
                 <div class="row" style="padding-top: 15px" >
                   <div class="col-sm-2"><b>Time:</b></div>
                   <div class="col-sm-10">
-                    <input type="time" id="appt" name="appt" min="09:00" max="18:00" required [(ngModel)]="this.endtime">
+                   
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="this.endT1">
+                          <option selected>hours</option>
+                          <option value="01">01</option>
+                          <option value="02">02</option>
+                          <option value="03">03</option>
+                          <option value="04">04</option>
+                          <option value="05">05</option>
+                          <option value="06">06</option>
+                          <option value="07">07</option>
+                          <option value="08">08</option>
+                          <option value="09">09</option>
+                          <option value="10">10</option>
+                          <option value="11">11</option>
+                          <option value="12">12</option>
+                          <option value="13">13</option>
+                          <option value="14">14</option>
+                          <option value="15">15</option>
+                          <option value="16">16</option>
+                          <option value="17">17</option>
+                          <option value="18">18</option>
+                          <option value="19">19</option>
+                          <option value="20">20</option>
+                          <option value="21">21</option>
+                          <option value="22">22</option>
+                          <option value="23">23</option>
+                          <option value="24">24</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-2"><p>:</p></div>
+                      <div class="col-sm-5">
+                        <select class="form-select" aria-label="Default select example" [(ngModel)]="this.endT2">
+                          <option selected>min</option>
+                          <option value="00">00</option>
+                          <option value="05">05</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                          <option value="20">20</option>
+                          <option value="25">25</option>
+                          <option value="30">30</option>
+                          <option value="35">35</option>
+                          <option value="40">40</option>
+                          <option value="45">45</option>
+                          <option value="50">50</option>
+                          <option value="55">55</option> 
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -210,6 +314,7 @@
             <th width="100px" >startdate and time</th>
             <th width="100px" >Enddate and time</th>
             <th width="100px" >Operation by</th>
+            <th width="100px" >Edit by</th>
             <th width="30px"></th>
             <th width="30px"></th>
           </tr>
@@ -223,17 +328,17 @@
             <td width="100px">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}}</td>
             <td width="100px">{{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}</td>
             <td width="100px">{{item.OPERATER}}</td>
+            <td width="100px">{{item.EDITER}}</td>
             <td  width="30px">
-              <button mat-mini-fab color="primary">
+              <button mat-mini-fab color="primary" (click)="onOpenDialogClick(item.ID_BOOKING)">
                 <mat-icon>edit</mat-icon>
               </button>
             </td>
             <td  width="30px">
-              <button mat-mini-fab color="warn">
+              <button mat-mini-fab color="warn" (click)="Delete(item.ID_BOOKING)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
-          <!-- </div>      -->
           </tr>
         </tbody>
       </table>
