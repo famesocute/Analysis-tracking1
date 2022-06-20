@@ -1,1 +1,304 @@
-<p>trackingstatus works!</p>
+<div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
+</div>
+<ng-template #elseBlock>
+  <div class="border-bottom Toolbar">
+    <div class="row">
+      <div class="col-xl-1"></div>
+      <div class="col-xl-7 center" style="padding :15px 0 ;">
+        <button mat-button>Home</button>
+        <button mat-button (click)="Goanalysishome()">Analysis request form</button>
+        <button mat-button>Equipment Calendar</button>
+        <button mat-button>Job tracking</button>
+        <button mat-button>Search previous report</button>
+      </div>
+
+      <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+        <div class="row">
+          <div class="col-xl-8">
+            {{this.nameonly}}
+            ({{this.Codelocal}})
+            {{this.departmentlocal}}
+          </div>
+          <div class="col-xl-4">
+            <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #other_content>
+        <div class="col-xl-4 center ">
+          <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+          <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+        </div>
+      </ng-template>
+
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
+      <div class="center">
+        <h1 style=" padding-top:50px; padding-bottom: 30px;">Job tracking <b>No.{{this.DataRes[0].REQ_NUM}}</b></h1>
+      </div>
+      <div class="center">
+        <div class="row">
+          <!-- Step1 -->
+          <div class="col-xl  " *ngIf="isValidPic1;else other_content1">
+            <div class="row">
+              <div class="col-sm-7 '">
+                <div class="card card_track">
+                  <div class="card-body">
+                    <img src="../assets/Tracking_web/Image/add-file.png">
+                  </div>
+                </div>
+                <br>
+                <div style=" margin-left: 10px ">
+                  <p class="center"><b>FACTORY APPROVED</b></p>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col-sm-5 center'" style="padding-top:17px;">
+                <img src="../assets/Tracking_web/Image/substract_black.png">
+              </div>
+            </div>
+          </div>
+          <ng-template #other_content1>
+            <div class="col-xl ">
+              <div class="row">
+                <div class="col-sm-7 '">
+                  <div class="card card_track2">
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/add-file.png">
+                    </div>
+                  </div>
+                  <br>
+                  <p class="center"><b>FACTORY APPROVED</b></p>
+                </div>
+                <div class="col-sm-5 center'" style="padding-top:17px;">
+                  <img src="../assets/Tracking_web/Image/substract_color.png">
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <div class="col-md " *ngFor="let item of sample1 let i = index">
+            <div class="col-xl">
+              <div class="row">
+                <div class="col-sm-7 '">
+                  <div class="card card_track">
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/chemist.png">
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <p class="center"><b>Step{{i+1}}</b></p>
+                    <p class="center"><b>{{item.equip}}</b></p>
+                    <p></p>
+                  </div>
+                </div>
+                <div class="col-sm-5 center'" style="padding-top:17px;">
+                  <img src="../assets/Tracking_web/Image/substract_black.png">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Issue report -->
+          <div class="col-xl  " *ngIf="isValidPic1;else other_content1">
+            <div class="row">
+              <div class="col-sm-7 '">
+                <div class="card card_track">
+                  <div class="card-body">
+                    <img src="../assets/Tracking_web/Image/contract.png">
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <p><b>ISSUE REPORT</b></p>
+                  <p></p>
+                </div>
+              </div>
+              <div class="col-sm-5 center'" style="padding-top:17px;">
+                <img src="../assets/Tracking_web/Image/substract_black.png">
+              </div>
+            </div>
+          </div>
+          <ng-template #other_content1>
+            <div class="col-xl ">
+              <div class="row">
+                <div class="col-sm-7 '">
+                  <div class="card card_track2">
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/contract.png">
+                    </div>
+                  </div>
+                  <br>
+                  <div >
+                    <p class="center"><b>ISSUE REPORT</b></p>
+                    <p></p>
+                  </div>
+                </div>
+                <div class="col-sm-5 center'" style="padding-top:17px;">
+                  <img src="../assets/Tracking_web/Image/substract_color.png">
+                </div>
+              </div>
+            </div>
+          </ng-template>
+
+          <!-- Approve report -->
+          <div class="col-xl  " *ngIf="isValidPic1;else other_content1">
+
+
+            <div class="card card_track">
+              <div class="card-body">
+                <img src="../assets/Tracking_web/Image/approved.png">
+              </div>
+            </div>
+            <br>
+            <div >
+              <p ><b>APPROVED REPORT</b></p>
+              <p></p>
+            </div>  
+
+          </div>
+          <ng-template #other_content1>
+            <div class="col-xl ">
+              <div class="card card_track2">
+                <div class="card-body">
+                  <img src="../assets/Tracking_web/Image/approved.png">
+                </div>
+              </div>
+              <br>
+              <div >
+                <p ><b>APPROVED REPORT</b></p>
+                <p></p>
+              </div>
+            </div>
+          </ng-template>
+
+
+
+        </div>
+      </div>
+
+
+      <mat-card class="card1" style="margin-top: 10px;">
+        <mat-card-title-group>
+          <mat-card-title>Analytical information</mat-card-title>
+        </mat-card-title-group>
+        <mat-card-content style="padding:10px;">
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="row">
+                <div class="col-sm-1"><b>Title:</b></div>
+                <div class="col-sm-11">{{this.DataRes[0].TITLE}}</div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-sm-3"><b>Analysis type:</b></div>
+                <div class="col-sm-9">{{this.DataRes[0].ANA_TYPE}}{{this.DataRes[0].ANA_TYPE2}}</div>
+              </div>
+            </div>
+            <div class="col-sm-5">
+              <div class="row">
+                <div class="col-sm-2"><b>Requester:</b></div>
+                <div class="col-sm-10">{{this.DataRes[0].REVI_PAND_ISSUER}}</div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-sm-3"><b>Department:</b></div>
+                <div class="col-sm-9">{{this.DataRes[0].DEP_MENT}}</div>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <div class="container Tablesize">
+        <table class="table tablestyle border">
+          <thead>
+            <tr>
+              <th class="Titlereview" width="100px">Step</th>
+              <th class="Titlereview" width="200px">Technique</th>
+              <th class="Titlereview" width="100px">Quantity</th>
+              <th class="Titlereview" width="200px">Plan time</th>
+              <th class="Titlereview" width="300px">Status</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="Titlereview">0</th>
+              <td class="Titlereview">Pending approved</td>
+              <td class="Titlereview">{{this.DataRes[0].NUM_SAMPLE}}</td>
+              <td class="Titlereview">{{this.DataRes[0].ESTI_COST_TIME}}</td>
+              <td class="Titlereview">Approved</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="container Tablesize">
+        <table class="table tablestyle table-bordered">
+          <thead>
+            <tr>
+              <th class="Titlereview" width="50px">Step</th>
+              <th class="Titlereview" width="200px">Technique</th>
+              <th class="Titlereview" width="50px">Quantity</th>
+              <th class="Titlereview" width="200px">Plan time</th>
+              <th class="Titlereview" width="450px">Status</th>
+              <th class="Titlereview" width="100px">Add time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of DataResreq let i = index">
+              <th class="Titlereview">{{i+1}}</th>
+              <td class="Titlereview">{{item.EQUIPMENT}}</td>
+              <td class="Titlereview">{{item.SAMPLE_NUM}}</td>
+              <td class="Titlereview">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}} to
+                <br>
+                {{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}
+              </td>
+              <td class="Titlereview">
+                <div class="row">
+
+                  <div *ngIf="isValidButton; ">
+                  <div class="col-sm-3">
+                    <button mat-raised-button class="button2" style="background: #8fcaca ;" (click)="starttime(item.ID_BOOKING)">Start</button>
+                  </div>
+                  </div>
+
+                  
+                  <div class="col-sm-3">
+                    <button mat-raised-button class="button2" style="background: #8fcaca ;" (click)="Endtime(item.ID_BOOKING)">End</button>
+                  </div>
+                  
+
+                  <div class="col-sm-3">
+                    <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time" [(ngModel)]="this.breaktime[i]">
+                  </div>
+                  <div class="col-sm-3">
+                    <button mat-raised-button class="button2" style="background: #f28482 ;" (click)="finish(item.ID_BOOKING,i)">Finish</button>
+                  </div>
+                </div>
+              </td>
+              <td class="Titlereview">
+                <button mat-mini-fab color="primary" class="button3">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+</ng-template>

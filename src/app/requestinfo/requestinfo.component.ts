@@ -38,6 +38,7 @@ export class RequestinfoComponent implements OnInit {
   EMAIL_CC: string[] = [];
 
   isValid = false
+  Sumresult = true
 
   loading = true
   userType : any
@@ -60,10 +61,12 @@ export class RequestinfoComponent implements OnInit {
       console.log(data);
       this.DataRes = data
       this.loading = false
-      this.confirmcc = this.DataRes[0].REVI_PAND_CONFIRM_CC1.split(",");
-      this.controlcc = this.DataRes[0].REVI_ANASEC_CONTROL_CC1.split(",");
       this.ComControl = this.DataRes[0].REVI_ANASEC_CONTROL_COM
       this.Analyzer = this.DataRes[0].REVI_ANASEC_ANAL
+
+      if(this.DataRes[0].STATUS_JOB != 5){
+        this.Sumresult = false
+      }
 
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
@@ -96,7 +99,6 @@ export class RequestinfoComponent implements OnInit {
     })
  
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
-      console.log(data);
       this.table = data
       var dataselect = ""
       var x
@@ -150,8 +152,8 @@ export class RequestinfoComponent implements OnInit {
     )
    
   }
-  GoEstiCost(){
-  
+  myFunction() {
+    window.open("http://localhost:4200/Trackingstatus?id="+this.DataRes[0].ID);
   }
   GoAswer(ID:any){
     window.location.href ='http://localhost:4200/AnswerPage?id='+ID+'&usertype='+this.userType

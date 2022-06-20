@@ -98,8 +98,9 @@ export class AnalyrequehomeComponent implements OnInit {
       window.location.href ='http://localhost:4200/Esticost?id='+ID  
     }
     else if (STATUS_JOB == '5' ) {
-      // this.productService.changeMessage(ID)
-      // this.router.navigate(['/Requestinfo'])
+      window.location.href ='http://localhost:4200/Requestinfo?id='+ID  
+    }
+    else if (STATUS_JOB == '6' ) {
       window.location.href ='http://localhost:4200/Requestinfo?id='+ID  
     }
   }

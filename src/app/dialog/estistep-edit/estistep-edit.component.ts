@@ -105,7 +105,7 @@ Remove(id:any){
     var val2 = ""
     for (var val in this.sample1) {
       console.log(val); // prints values: 10, 20, 30, 40
-      val2 = val2 + this.sample1[val].equip + "||" + this.sample1[val].Sample_no + "[]"
+      val2 = val2 + this.sample1[val].equip + "||" + this.sample1[val].Sample_no + "||" + "initial" +"[]"
     }
     val2 = val2.substring(0, val2.length - 2);
     console.log(val2)

@@ -1,220 +1,1220 @@
+<div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
+</div>
+<ng-template #elseBlock>
+<!-- Analyst -->
+<div *ngIf="isValid1">
 <div class="container-fluid">
-  <div class="border-bottom">
-    <div class="row">
-      <div class="col-xl-1"></div>
-      <div class="col-xl-8 center" style="padding : 15px 0 ;">
-        <button mat-button>Home</button>
-        <button mat-button>Analysis request form</button>
-        <button mat-button>Equipment Calendar</button>
-        <button mat-button>Job tracking</button>
-        <button mat-button>Search previous report</button>
-      </div>
-      <div class="col-xl-2 center ">
-        <button mat-raised-button color="primary">Login</button>
-        <button mat-raised-button color="primary" style="margin-left:10px;">Sign up</button>
-      </div>
-    </div>
-  </div>
-
   <div class="row">
     <div class="col-sm-1">
-
     </div>
-
     <div class="col-sm-10">
-      <h1 style=" padding: 20px 100px; ">Request Form</h1>
-      <div class="row" style="margin-bottom:5px;">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-3 ">
-          <h2>Request no.</h2>
-        </div>
-
-        <div class="col-sm-3">
-          <div class="row ">
-            <button mat-mini-fab matTooltip="Edit" matTooltipClass="example-tooltip-red"
-              aria-label="Button that shows a red tooltip" matTooltipPosition="above">
-              <mat-icon>create</mat-icon>
-            </button>
-            <button mat-mini-fab matTooltip="Save" matTooltipClass="example-tooltip-red"
-              aria-label="Button that shows a red tooltip" matTooltipPosition="above" style="margin-left:20px;">
-              <mat-icon>save</mat-icon>
-            </button>
-          </div>
-
-        </div>
-      </div>
-      <div style=" padding-bottom: 15px">
-        <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Receive sample </mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-            <div class="row">
-              <div class="col-sm-4">
-                <mat-form-field color="accent" appearance="outline">
-                  <mat-label>Send sample date:</mat-label>
-                  <input matInput [matDatepicker]="picker1">
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-8">
-                <mat-form-field color="accent" appearance="outline">
-                  <mat-label>Expected finish date:</mat-label>
-                  <input matInput [matDatepicker]="picker2">
-                  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                  <mat-datepicker #picker2 color="primary"></mat-datepicker>
-                </mat-form-field>
-              </div>
-            </div>
-
-          </mat-card-content>
-        </mat-card>
-      </div>
-
-      <div style=" padding-bottom: 15px">
-        <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Interim report</mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-            <div class="form-group input1">
-              <textarea class="form-control" rows="2" id="Background"> </textarea>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-
-      <div style=" padding-bottom: 15px">
-        <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Result file</mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-            <div class="form-group input1">
-              <textarea class="form-control" rows="2" id="Background"> </textarea>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div style=" padding-bottom: 15px">
-        <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Summary</mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-            <div class="form-group input1">
-              <textarea class="form-control" rows="6" id="Background"> </textarea>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-
       <div style=" padding-bottom: 15px">
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Review Information</mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
-
-            <table class="table tablestyle border">
-              <thead>
-                <tr>
-                  <th class="Titlereview" width="150px">Task</th>
-                  <th class="Titlereview" width="100px">Process</th>
-                  <th class="Titlereview" width="200px">Name</th>
-                  <th class="Titlereview" width="300px">Processing date&time</th>
-                  <th class="Titlereview" width="200px">Comment</th>
-                  <th class="Titlereview" width="200px">cc</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td> Pending request</td>
-                  <td>Issuer</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>
-
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Confirm</td>
-                  <td></td>
-                  <td></td>
-                  <td> </td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th>Analysis section</th>
-                  <td>Controller</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Analyst</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th>Report approval</th>
-                  <td>Check</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Confirm</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>Report approval</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th>CS Evaluation</th>
-                  <td>Issuer</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <th>Completed</th>
-                  <td>Close</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              </tbody>
-            </table>
-
+            <div>
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th width="70px" class=" Titlereview">Task</th>
+                    <th width="70px" class=" Titlereview">Process</th>
+                    <th width="120px" class=" Titlereview">Name</th>
+                    <th width="100px" class=" Titlereview">Processing date&time</th>
+                    <th width="100px" class=" Titlereview">Comment</th>
+                    <th width="120px" class=" Titlereview">cc</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class=" Titlereview">Pending request</th>
+                    <td class=" Titlereview">Issuer</td>
+                    <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+                    <td class=" Titlereview">
+                      <div class = "center" style="padding-top:10px ;">
+                        {{this.DataRes[0].ISSUE_DATE}}
+                      </div>
+                    </td>
+                    <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+                    <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+                  </tr>
+                  <tr>
+                    <th class=" Titlereview"></th>
+                    <td class=" Titlereview">Confirm</td>
+                    <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                    <td class=" Titlereview">
+                      <div class = "center" style="padding-top:10px ;">
+                        {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                      </div>
+                    </td>
+                    <td class=" Titlereview">
+                      {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+                    </td>
+                    <td class=" Titlereview">
+                      <p *ngFor="let item of this.confirmcc let i = index" >
+                        {{item}}
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class=" Titlereview">Analysis section</th>
+                    <td class=" Titlereview"> Controller</td>
+                    <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                    <td class=" Titlereview">
+                      <div class = "center" style="padding-top:10px ;">
+                        {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                      </div>
+                    </td>
+                    <td class=" Titlereview">
+                      {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+                    </td>
+                    <td class=" Titlereview">
+                      <p *ngFor="let item of this.controlcc let i = index" >
+                        {{item}}
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class=" Titlereview"></th>
+                    <td class=" Titlereview"> Analyst</td>
+                    <td class=" Titlereview" >
+                      {{this.DataRes[0].REVI_ANASEC_ANAL}}
+                    </td>
+                    <td class=" Titlereview">
+                      <div class="center" style="padding-top: 15px;">
+                        <button mat-raised-button color="primary" class="button2" (click)="AnalystApprove()">Approve
+                        </button>
+                      </div>
+                    </td>
+                    <td class=" Titlereview"> 
+                      <mat-form-field class="widthcom" appearance="outline">
+                      <mat-label>Leave a comment</mat-label>
+                      <textarea matInput [(ngModel)]="this.ComAnalyzer"></textarea>
+                    </mat-form-field>
+                  </td>
+                    <td class=" Titlereview">
+                      <mat-hint> *Click "Add" to confirm name</mat-hint>
+                  <form class="example-form">
+                      <mat-form-field class="widthcom" appearance="outline">
+                        <mat-label>Select Name</mat-label>
+                        <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                          [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </form>
+                    <div class="center">
+                      <button mat-button (click)="addIN()">Add</button>
+                    </div> 
+                    <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+                    <table>
+                      <tbody>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <div *ngIf="item != ''">
+                              <td>
+                                <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                                  <mat-icon>delete</mat-icon>
+                                </button>
+                              </td>
+                         </div>
+                        </div>
+                          <div class="col-sm-9">
+                        <td>{{item}}</td>
+                        <br>
+                      </div>
+                      
+                    </div>
+                        </tbody>
+                    </table>
+                  </tr>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class=" Titlereview">Report approval</th>
+                    <td class=" Titlereview">Check</td>
+                    <td class=" Titlereview" >
+                      <form class="example-form">
+                        <mat-form-field class="example-full-width " appearance="outline">
+                          <mat-label>Select Name</mat-label>
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                            [matAutocomplete]="auto" [(ngModel)]="this.Check">
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
+                    </td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                  </tr>
+                  <tr>
+                    <th class=" Titlereview"></th>
+                    <td class=" Titlereview">Confirm </td>
+                    <td class=" Titlereview" >
+                      <form class="example-form">
+                        <mat-form-field class="example-full-width " appearance="outline">
+                          <mat-label>Select Name</mat-label>
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                            [matAutocomplete]="auto" [(ngModel)]="this.Confirm">
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
+                    </td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                  </tr>
+                  <tr>
+                    <th class=" Titlereview"></th>
+                    <td class=" Titlereview"> Report approval</td>
+                    <td class=" Titlereview" >
+                      <form class="example-form">
+                        <mat-form-field class="example-full-width " appearance="outline">
+                          <mat-label>Select Name</mat-label>
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                            [matAutocomplete]="auto" [(ngModel)]="this.approval">
+                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
+                    </td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                  </tr>
+                  <tr>
+                    <th class=" Titlereview">CS Evaluation</th>
+                    <td class=" Titlereview">Issuer </td>
+                    <td class=" Titlereview" ></td>
+                    <td class=" Titlereview"> </td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                  </tr>
+                  <tr>
+                    <th class=" Titlereview">Completed</th>
+                    <td class=" Titlereview">Close </td>
+                    <td class=" Titlereview" ></td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                    <td class=" Titlereview"></td>
+                  </tr>
+  
+                </tbody>
+              </table>
+            </div>
           </mat-card-content>
         </mat-card>
       </div>
     </div>
-
-
     <div class="col-sm-1">
-
     </div>
   </div>
-</div>
+  </div>
+  </div>
+
+  <!-- comfirm -->
+  <div *ngIf="isValid2">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-10">
+    
+          <div style=" padding-bottom: 15px">
+            <mat-card class="card1">
+              <mat-card-title-group>
+                <mat-card-title>Review Information</mat-card-title>
+              </mat-card-title-group>
+              <mat-card-content>
+                <div>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                        <th width="70px" class=" Titlereview">Task</th>
+                        <th width="70px" class=" Titlereview">Process</th>
+                        <th width="120px" class=" Titlereview">Name</th>
+                        <th width="100px" class=" Titlereview">Processing date&time</th>
+                        <th width="100px" class=" Titlereview">Comment</th>
+                        <th width="120px" class=" Titlereview">cc</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class=" Titlereview">Pending request</th>
+                        <td class=" Titlereview">Issuer</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].ISSUE_DATE}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.confirmcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Analysis section</th>
+                        <td class=" Titlereview"> Controller</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.controlcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Analyst</td>
+                        <td class=" Titlereview" >
+                          {{this.DataRes[0].REVI_ANASEC_ANAL}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                           <p *ngFor="let item of this.Analycc let i = index" >
+                      {{item}}
+                    </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Report approval</th>
+                        <td class=" Titlereview">Check</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+                        </td>
+                        <td class=" Titlereview">
+                          <div class="center" style="padding-top: 15px;">
+                            <button mat-raised-button color="primary" class="button2" (click)="CheckerApprov()">Approve
+                            </button>
+                          </div>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <mat-form-field class="widthcom" appearance="outline">
+                          <mat-label>Leave a comment</mat-label>
+                          <textarea matInput [(ngModel)]="this.ComChack"></textarea>
+                        </mat-form-field>
+                      </td>
+                        <td class=" Titlereview">
+                          <mat-hint> *Click "Add" to confirm name</mat-hint>
+                      <form class="example-form">
+                          <mat-form-field class="widthcom" appearance="outline">
+                            <mat-label>Select Name</mat-label>
+                            <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                              [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option}}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </form>
+                        <div class="center">
+                          <button mat-button (click)="addIN()">Add</button>
+                        </div> 
+                        <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+                        <table>
+                          <tbody>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <div *ngIf="item != ''">
+                                  <td>
+                                    <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                                      <mat-icon>delete</mat-icon>
+                                    </button>
+                                  </td>
+                             </div>
+                            </div>
+                              <div class="col-sm-9">
+                            <td>{{item}}</td>
+                            <br>
+                          </div>
+                          
+                        </div>
+                            </tbody>
+                        </table>
+                      </tr>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm </td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+                        </td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Report approval</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+                        </td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">CS Evaluation</th>
+                        <td class=" Titlereview">Issuer </td>
+                        <td class=" Titlereview" ></td>
+                        <td class=" Titlereview"> </td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Completed</th>
+                        <td class=" Titlereview">Close </td>
+                        <td class=" Titlereview" ></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+      
+                    </tbody>
+                  </table>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+      </div>
+  </div>
+
+  <!-- Approval -->
+  <div *ngIf="isValid3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-10">
+    
+          <div style=" padding-bottom: 15px">
+            <mat-card class="card1">
+              <mat-card-title-group>
+                <mat-card-title>Review Information</mat-card-title>
+              </mat-card-title-group>
+              <mat-card-content>
+                <div>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                        <th width="70px" class=" Titlereview">Task</th>
+                        <th width="70px" class=" Titlereview">Process</th>
+                        <th width="120px" class=" Titlereview">Name</th>
+                        <th width="100px" class=" Titlereview">Processing date&time</th>
+                        <th width="100px" class=" Titlereview">Comment</th>
+                        <th width="120px" class=" Titlereview">cc</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class=" Titlereview">Pending request</th>
+                        <td class=" Titlereview">Issuer</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].ISSUE_DATE}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.confirmcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Analysis section</th>
+                        <td class=" Titlereview"> Controller</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.controlcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Analyst</td>
+                        <td class=" Titlereview" >
+                          {{this.DataRes[0].REVI_ANASEC_ANAL}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                           <p *ngFor="let item of this.Analycc let i = index" >
+                      {{item}}
+                    </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Report approval</th>
+                        <td class=" Titlereview">Check</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.chackcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm </td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+                        </td>
+                        <td>
+                        <div class="center" style="padding-top: 15px;">
+                          <button mat-raised-button color="primary" class="button2" (click)="ConfirmApprov()">Approve
+                          </button>
+                        </div>
+                      </td>
+                        <td class=" Titlereview"> 
+                          <mat-form-field class="widthcom" appearance="outline">
+                          <mat-label>Leave a comment</mat-label>
+                          <textarea matInput [(ngModel)]="this.comConfirm"></textarea>
+                        </mat-form-field>
+                      </td>
+                        <td class=" Titlereview">
+                          <mat-hint> *Click "Add" to confirm name</mat-hint>
+                      <form class="example-form">
+                          <mat-form-field class="widthcom" appearance="outline">
+                            <mat-label>Select Name</mat-label>
+                            <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                              [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option}}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </form>
+                        <div class="center">
+                          <button mat-button (click)="addIN()">Add</button>
+                        </div> 
+                        <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+                        <table>
+                          <tbody>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <div *ngIf="item != ''">
+                                  <td>
+                                    <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                                      <mat-icon>delete</mat-icon>
+                                    </button>
+                                  </td>
+                             </div>
+                            </div>
+                              <div class="col-sm-9">
+                            <td>{{item}}</td>
+                            <br>
+                          </div>
+                          
+                        </div>
+                            </tbody>
+                        </table>
+                      </tr>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Report approval</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+                        </td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">CS Evaluation</th>
+                        <td class=" Titlereview">Issuer </td>
+                        <td class=" Titlereview" ></td>
+                        <td class=" Titlereview"> </td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Completed</th>
+                        <td class=" Titlereview">Close </td>
+                        <td class=" Titlereview" ></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+      
+                    </tbody>
+                  </table>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+      </div>
+  </div>
+
+  <!--GoCS -->
+  <div *ngIf="isValid4">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-10">
+    
+          <div style=" padding-bottom: 15px">
+            <mat-card class="card1">
+              <mat-card-title-group>
+                <mat-card-title>Review Information</mat-card-title>
+              </mat-card-title-group>
+              <mat-card-content>
+                <div>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                        <th width="70px" class=" Titlereview">Task</th>
+                        <th width="70px" class=" Titlereview">Process</th>
+                        <th width="120px" class=" Titlereview">Name</th>
+                        <th width="100px" class=" Titlereview">Processing date&time</th>
+                        <th width="100px" class=" Titlereview">Comment</th>
+                        <th width="120px" class=" Titlereview">cc</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class=" Titlereview">Pending request</th>
+                        <td class=" Titlereview">Issuer</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].ISSUE_DATE}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.confirmcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Analysis section</th>
+                        <td class=" Titlereview"> Controller</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.controlcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Analyst</td>
+                        <td class=" Titlereview" >
+                          {{this.DataRes[0].REVI_ANASEC_ANAL}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                           <p *ngFor="let item of this.Analycc let i = index" >
+                      {{item}}
+                    </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Report approval</th>
+                        <td class=" Titlereview">Check</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.chackcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm </td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+                        </td>
+                        <td>
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_TIME}}</p>
+                      </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_CC}}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Report approval</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+                        </td>
+                        <td>
+                          <div class="center" style="padding-top: 15px;">
+                            <button mat-raised-button color="primary" class="button2" (click)="ApproverApprov()">Approve
+                            </button>
+                          </div>
+                        </td>
+                          <td class=" Titlereview"> 
+                            <mat-form-field class="widthcom" appearance="outline">
+                            <mat-label>Leave a comment</mat-label>
+                            <textarea matInput [(ngModel)]="this.comapproval"></textarea>
+                          </mat-form-field>
+                        </td>
+                          <td class=" Titlereview">
+                            <mat-hint> *Click "Add" to confirm name</mat-hint>
+                        <form class="example-form">
+                            <mat-form-field class="widthcom" appearance="outline">
+                              <mat-label>Select Name</mat-label>
+                              <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                                [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                  {{option}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </mat-form-field>
+                          </form>
+                          <div class="center">
+                            <button mat-button (click)="addIN()">Add</button>
+                          </div> 
+                          <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+                          <table>
+                            <tbody>
+                              <div class="row">
+                                <div class="col-sm-3">
+                                  <div *ngIf="item != ''">
+                                    <td>
+                                      <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                                        <mat-icon>delete</mat-icon>
+                                      </button>
+                                    </td>
+                               </div>
+                              </div>
+                                <div class="col-sm-9">
+                              <td>{{item}}</td>
+                              <br>
+                            </div>
+                            
+                          </div>
+                              </tbody>
+                          </table>
+                        </tr>
+                          </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">CS Evaluation</th>
+                        <td class=" Titlereview">Issuer </td>
+                        <td class=" Titlereview" ></td>
+                        <td class=" Titlereview"> </td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Completed</th>
+                        <td class=" Titlereview">Close </td>
+                        <td class=" Titlereview" ></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+      
+                    </tbody>
+                  </table>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+      </div>
+  </div>
+
+  <!--GoComplete -->
+  <div *ngIf="isValid5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-10">
+    
+          <div style=" padding-bottom: 15px">
+            <mat-card class="card1">
+              <mat-card-title-group>
+                <mat-card-title>Review Information</mat-card-title>
+              </mat-card-title-group>
+              <mat-card-content>
+                <div>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                        <th width="70px" class=" Titlereview">Task</th>
+                        <th width="70px" class=" Titlereview">Process</th>
+                        <th width="120px" class=" Titlereview">Name</th>
+                        <th width="100px" class=" Titlereview">Processing date&time</th>
+                        <th width="100px" class=" Titlereview">Comment</th>
+                        <th width="120px" class=" Titlereview">cc</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class=" Titlereview">Pending request</th>
+                        <td class=" Titlereview">Issuer</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].ISSUE_DATE}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.confirmcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Analysis section</th>
+                        <td class=" Titlereview"> Controller</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.controlcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Analyst</td>
+                        <td class=" Titlereview" >
+                          {{this.DataRes[0].REVI_ANASEC_ANAL}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                           <p *ngFor="let item of this.Analycc let i = index" >
+                      {{item}}
+                    </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Report approval</th>
+                        <td class=" Titlereview">Check</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.chackcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm </td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+                        </td>
+                        <td>
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_TIME}}</p>
+                      </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_CC}}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Report approval</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+                        </td>
+                        <td>
+                          <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_TIME}}</p>
+                        </td>
+                          <td class=" Titlereview"> 
+                            <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_COM}}</p>
+                        </td>
+                          <td class=" Titlereview">
+                            <p *ngFor="let item of this.approvalcc let i = index" >
+                              {{item}}
+                            </p>
+                          </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">CS Evaluation</th>
+                        <td class=" Titlereview">Issuer </td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_PAND_ISSUER}}</p>
+                        </td>
+                        <td class=" Titlereview">
+                          <div class="center" style="padding-top: 10px;">
+                          <button mat-raised-button color="primary" class="button2" (click)="CsApprove()">Approve
+                          </button>
+                        </div> 
+                      </td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Completed</th>
+                        <td class=" Titlereview">Close </td>
+                        <td class=" Titlereview" ></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+      
+                    </tbody>
+                  </table>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+      </div>
+  </div>
+
+  <!--GoComplete -->
+  <div *ngIf="isValid6">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-1">
+        </div>
+        <div class="col-sm-10">
+    
+          <div style=" padding-bottom: 15px">
+            <mat-card class="card1">
+              <mat-card-title-group>
+                <mat-card-title>Review Information</mat-card-title>
+              </mat-card-title-group>
+              <mat-card-content>
+                <div>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                        <th width="70px" class=" Titlereview">Task</th>
+                        <th width="70px" class=" Titlereview">Process</th>
+                        <th width="120px" class=" Titlereview">Name</th>
+                        <th width="100px" class=" Titlereview">Processing date&time</th>
+                        <th width="100px" class=" Titlereview">Comment</th>
+                        <th width="120px" class=" Titlereview">cc</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class=" Titlereview">Pending request</th>
+                        <td class=" Titlereview">Issuer</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].ISSUE_DATE}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+                        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.confirmcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Analysis section</th>
+                        <td class=" Titlereview"> Controller</td>
+                        <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                        <td class=" Titlereview">
+                          <div class = "center" style="padding-top:10px ;">
+                            {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                          </div>
+                        </td>
+                        <td class=" Titlereview">
+                          {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.controlcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Analyst</td>
+                        <td class=" Titlereview" >
+                          {{this.DataRes[0].REVI_ANASEC_ANAL}}
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                           <p *ngFor="let item of this.Analycc let i = index" >
+                      {{item}}
+                    </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Report approval</th>
+                        <td class=" Titlereview">Check</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_TIME}}</p>
+                        </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                          <p *ngFor="let item of this.chackcc let i = index" >
+                            {{item}}
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview">Confirm </td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+                        </td>
+                        <td>
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_TIME}}</p>
+                      </td>
+                        <td class=" Titlereview"> 
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_COM}}</p>
+                      </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_CC}}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview"></th>
+                        <td class=" Titlereview"> Report approval</td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+                        </td>
+                        <td>
+                          <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_TIME}}</p>
+                        </td>
+                          <td class=" Titlereview"> 
+                            <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_COM}}</p>
+                        </td>
+                          <td class=" Titlereview">
+                            <p *ngFor="let item of this.approvalcc let i = index" >
+                              {{item}}
+                            </p>
+                          </td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">CS Evaluation</th>
+                        <td class=" Titlereview">Issuer </td>
+                        <td class=" Titlereview" >
+                          <p>{{this.DataRes[0].REVI_PAND_ISSUER}}</p>
+                        </td>
+                        <td class=" Titlereview">
+                          <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_TIME}}</p>
+                      </td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+                      <tr>
+                        <th class=" Titlereview">Completed</th>
+                        <td class=" Titlereview">Close </td>
+                        <td class=" Titlereview" ></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                        <td class=" Titlereview"></td>
+                      </tr>
+      
+                    </tbody>
+                  </table>
+                </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        </div>
+        <div class="col-sm-1">
+        </div>
+      </div>
+  </div>
+
+</ng-template>

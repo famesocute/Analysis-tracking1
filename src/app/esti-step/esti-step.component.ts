@@ -201,7 +201,7 @@ export class EstiStepComponent implements OnInit {
     var val2 = ""
     for (var val in this.productForm.value.quantities) {
       console.log(val);
-      val2 = val2 + this.productForm.value.quantities[val].Technique + "||" + this.productForm.value.quantities[val].Samplenumber + "[]"
+      val2 = val2 + this.productForm.value.quantities[val].Technique + "||" + this.productForm.value.quantities[val].Samplenumber +"||" + "initial" +"[]"
     }
     val2 = val2.substring(0, val2.length - 2);
     console.log(val2)

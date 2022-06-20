@@ -1,0 +1,43 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+  .card1 {
+    max-width: 1100px;
+    margin-top: 8px;
+    margin: auto;
+    background-color:#FFFAF0;
+  }
+  .stepsize {
+    padding :0 130px
+  }
+  .Tablesize {
+      max-width: 1200px;
+      padding-top: 30px;
+  }
+  .Titlereview {
+    text-align: center;
+}
+img {
+  height: 65px;
+}
+.card_track{
+  border-radius: 100%;
+  width: 100px;  
+  height: 100px;
+  background-color:#A9A9A9 ;
+}
+.card_track2{
+  border-radius: 100%;
+  width: 100px;  
+  height: 100px;
+  background-color:#FF7F50 ;
+}
+.button2{
+    border-radius: 15px;   
+}
+input{
+    width: 80px;
+}
