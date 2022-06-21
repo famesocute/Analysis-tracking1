@@ -50,6 +50,8 @@ import {DayPilotModule} from "@daypilot/daypilot-lite-angular";
 import {DataService} from "./booing-equip/data.service";
 import { TrackingstatusComponent } from './trackingstatus/trackingstatus.component';
 import { EditBookingComponent } from './dialog/edit-booking/edit-booking.component';
+import { FactoryApproveComponent } from './dialog/factory-approve/factory-approve.component';
+import { EditOperationtimeComponent } from './dialog/edit-operationtime/edit-operationtime.component';
 
 
 @NgModule({
@@ -76,6 +78,8 @@ import { EditBookingComponent } from './dialog/edit-booking/edit-booking.compone
     EstistepEditComponent,
     TrackingstatusComponent,
     EditBookingComponent,
+    FactoryApproveComponent,
+    EditOperationtimeComponent,
 
   ],
   imports: [

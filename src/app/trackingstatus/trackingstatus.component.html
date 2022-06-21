@@ -47,12 +47,12 @@
       <div class="center">
         <div class="row">
           <!-- Step1 -->
-          <div class="col-xl  " *ngIf="isValidPic1;else other_content1">
+          <div class="col-xl" >
             <div class="row">
               <div class="col-sm-7 '">
-                <div class="card card_track">
+                <div class="card card_track2">
                   <div class="card-body">
-                    <img src="../assets/Tracking_web/Image/add-file.png">
+                    <img src="../assets/Tracking_web/Image/factory.png" (click)="FacDetail()">
                   </div>
                 </div>
                 <br>
@@ -62,30 +62,13 @@
                 </div>
               </div>
               <div class="col-sm-5 center'" style="padding-top:17px;">
-                <img src="../assets/Tracking_web/Image/substract_black.png">
+                <img src="../assets/Tracking_web/Image/substract_color.png">
               </div>
             </div>
-          </div>
-          <ng-template #other_content1>
-            <div class="col-xl ">
-              <div class="row">
-                <div class="col-sm-7 '">
-                  <div class="card card_track2">
-                    <div class="card-body">
-                      <img src="../assets/Tracking_web/Image/add-file.png">
-                    </div>
-                  </div>
-                  <br>
-                  <p class="center"><b>FACTORY APPROVED</b></p>
-                </div>
-                <div class="col-sm-5 center'" style="padding-top:17px;">
-                  <img src="../assets/Tracking_web/Image/substract_color.png">
-                </div>
-              </div>
             </div>
-          </ng-template>
+        
           <div class="col-md " *ngFor="let item of sample1 let i = index">
-            <div class="col-xl">
+            <div class="col-xl" *ngIf="isValid1[i];else stepanalysis">
               <div class="row">
                 <div class="col-sm-7 '">
                   <div class="card card_track">
@@ -105,6 +88,26 @@
                 </div>
               </div>
             </div>
+            <ng-template #stepanalysis>
+                <div class="row">
+                  <div class="col-sm-7 '">
+                    <div class="card card_track2">
+                      <div class="card-body">
+                        <img src="../assets/Tracking_web/Image/chemist.png">
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <p class="center"><b>Step{{i+1}}</b></p>
+                      <p class="center"><b>{{item.equip}}</b></p>
+                      <p></p>
+                    </div>
+                  </div>
+                  <div class="col-sm-5 center'" style="padding-top:17px;">
+                    <img src="../assets/Tracking_web/Image/substract_color.png">
+                  </div>
+                </div>
+            </ng-template>
           </div>
 
           <!-- Issue report -->
@@ -137,7 +140,7 @@
                     </div>
                   </div>
                   <br>
-                  <div >
+                  <div>
                     <p class="center"><b>ISSUE REPORT</b></p>
                     <p></p>
                   </div>
@@ -155,26 +158,26 @@
 
             <div class="card card_track">
               <div class="card-body">
-                <img src="../assets/Tracking_web/Image/approved.png">
+                <img src="../assets/Tracking_web/Image/ready.png">
               </div>
             </div>
             <br>
-            <div >
-              <p ><b>APPROVED REPORT</b></p>
+            <div>
+              <p><b>APPROVED REPORT</b></p>
               <p></p>
-            </div>  
+            </div>
 
           </div>
           <ng-template #other_content1>
             <div class="col-xl ">
               <div class="card card_track2">
                 <div class="card-body">
-                  <img src="../assets/Tracking_web/Image/approved.png">
+                  <img src="../assets/Tracking_web/Image/ready.png">
                 </div>
               </div>
               <br>
-              <div >
-                <p ><b>APPROVED REPORT</b></p>
+              <div>
+                <p><b>APPROVED REPORT</b></p>
                 <p></p>
               </div>
             </div>
@@ -257,7 +260,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of DataResreq let i = index">
-              <th class="Titlereview">{{i+1}}</th>
+              <th class="Titlereview">{{item.STEP_BOOKING}}</th>
               <td class="Titlereview">{{item.EQUIPMENT}}</td>
               <td class="Titlereview">{{item.SAMPLE_NUM}}</td>
               <td class="Titlereview">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}} to
@@ -265,30 +268,56 @@
                 {{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}
               </td>
               <td class="Titlereview">
+                <div *ngIf="isValidButton3[i]; else complete">
                 <div class="row">
-
-                  <div *ngIf="isValidButton; ">
-                  <div class="col-sm-3">
-                    <button mat-raised-button class="button2" style="background: #8fcaca ;" (click)="starttime(item.ID_BOOKING)">Start</button>
+                  <div class="col-sm-6">
+                    <div *ngIf="isValidButton2[i]; else timeshow">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div *ngIf="isValidButton[i]; else start_time">
+                            <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                              (click)="starttime(item.ID_BOOKING,i)">Start</button>
+                          </div>
+                          <ng-template #start_time>
+                            {{this.DataResreq[i].START_TIME}}
+                            <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                              disabled>Start</button>
+                          </ng-template>
+                        </div>
+                        <div class="col-sm-6">
+                          <div *ngIf="isValidButton[i]; else end_time">
+                            <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                              disabled>End</button>
+                          </div>
+                          <ng-template #end_time>
+                            <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                              (click)="Endtime(item.ID_BOOKING,i)">End</button>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </div>
+                    <ng-template #timeshow>
+                      {{this.DataResreq[i].START_TIME}} to {{this.DataResreq[i].END_TIME}}
+                    </ng-template>
                   </div>
-                  </div>
-
                   
-                  <div class="col-sm-3">
-                    <button mat-raised-button class="button2" style="background: #8fcaca ;" (click)="Endtime(item.ID_BOOKING)">End</button>
-                  </div>
-                  
 
                   <div class="col-sm-3">
-                    <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time" [(ngModel)]="this.breaktime[i]">
+                    <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time"
+                      [(ngModel)]="this.breaktime[i]">
                   </div>
                   <div class="col-sm-3">
-                    <button mat-raised-button class="button2" style="background: #f28482 ;" (click)="finish(item.ID_BOOKING,i)">Finish</button>
+                    <button mat-raised-button class="button2" style="background: #f28482 ;"
+                      (click)="finish(item.ID_BOOKING,i)">Finish</button>
+                  </div>
                   </div>
                 </div>
+                <ng-template #complete>
+                  
+                </ng-template>
               </td>
               <td class="Titlereview">
-                <button mat-mini-fab color="primary" class="button3">
+                <button mat-mini-fab color="primary" class="button3" (click)="edittime()">
                   <mat-icon>edit</mat-icon>
                 </button>
               </td>

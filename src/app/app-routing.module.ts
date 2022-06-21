@@ -20,6 +20,8 @@ import { MyjobComponent } from './myjob/myjob.component';
 import { EstistepEditComponent } from './dialog/estistep-edit/estistep-edit.component';
 import { EditBookingComponent } from './dialog/edit-booking/edit-booking.component';
 import { TrackingstatusComponent } from './trackingstatus/trackingstatus.component';
+import { FactoryApproveComponent } from './dialog/factory-approve/factory-approve.component';
+import { EditOperationtimeComponent } from './dialog/edit-operationtime/edit-operationtime.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
@@ -41,7 +43,9 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'Myjob', component: MyjobComponent },
 { path: 'EstistepEdit', component: EstistepEditComponent },
 { path: 'EditBooking', component: EditBookingComponent },
-{ path: 'Trackingstatus', component: TrackingstatusComponent },];
+{ path: 'Trackingstatus', component: TrackingstatusComponent },
+{ path: 'FactoryApprove', component: FactoryApproveComponent },
+{ path: 'EditOperationtime', component: EditOperationtimeComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

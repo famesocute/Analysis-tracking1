@@ -1,0 +1,41 @@
+
+<table class="table">
+    <thead>
+      <tr>
+        <th width="50px" ></th>
+        <th width="100px" class=" Titlereview">Approver</th>
+        <th width="200px" class=" Titlereview">Time</th>
+        <th width="100px" class=" Titlereview">Status</th>
+    
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th >Issue date</th>
+        <td class=" Titlereview">{{this.issuer[0]}}</td>
+        <td class=" Titlereview">{{this.DataRes[0].ISSUE_DATE}}</td>
+        <td class=" Titlereview">Approve</td>
+      </tr>
+      <tr>
+        <th >confirm</th>
+        <td class=" Titlereview">{{this.confirm[0]}}</td>
+        <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}</td>
+        <td class=" Titlereview">Approve</td>
+      </tr>
+      <tr>
+        <th >Q30 submit step</th>
+        <td class=" Titlereview">{{this.analyzer[0]}}</td>
+        <td class=" Titlereview">{{this.DataRes[0].ESTI_STEP_TIME}}</td>
+        <td class=" Titlereview">Approve</td>
+      </tr>
+      <tr>
+        <th >Approved  cost</th>
+        <td class=" Titlereview">{{this.confirm[0]}}</td>
+        <td class=" Titlereview">{{this.DataRes[0].ESTI_COST_TIME}}</td>
+        <td class=" Titlereview">Approve</td>
+      </tr>
+    </tbody>
+  </table>
+<div class=" center ">
+<button mat-flat-button mat-dialog-close class="button1 " >Close</button>
+</div>
