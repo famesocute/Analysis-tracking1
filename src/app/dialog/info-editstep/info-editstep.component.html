@@ -1,14 +1,13 @@
 <h1><b>Edit Estimate Step</b></h1>
-
 <table>
     <tr *ngFor="let item of sample1 let i = index">
-        <td width="200px">         
+        <td width="100px">         
               <div class="row">
-                <div class="col-sm-3"><b>Step:</b></div>
-                <div class="col-sm-9"><b> {{i+1}} </b></div>
+                <div class="col-sm-4"><b>Step:</b></div>
+                <div class="col-sm-8"><b> {{i+1}} </b></div>
             </div>  
           </td>
-      <td width="300px">
+      <td width="250px">
           <div style="padding-top: 20px;">
                     <mat-form-field appearance="outline" >
                       <mat-label>Techniques</mat-label>
@@ -39,15 +38,27 @@
                   </mat-form-field>  
                 </div>               
       </td>
-      <td width="400px">
+      <td width="250px">
           <div class="row">
-            <div class="col-sm-4" style="padding-top:10px ;">
+            <div class="col-sm-7" style="padding-top:10px ;">
                 <b>Number sample:</b>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-5">
                 <input type="text" class="form-control" id="Samplenumber" [(ngModel)]="item.Sample_no">
           </div>
         </div>
+      </td>
+      <td width="100px">
+        <div style="padding-top: 20px; padding-left: 10px;">
+            <mat-form-field appearance="outline" >
+              <mat-label>type of step</mat-label>
+              <mat-select [(ngModel)]="item.status_step">
+                <mat-option value="initial">initial</mat-option>
+                <mat-option value="retest">retest</mat-option>
+              </mat-select>
+          </mat-form-field>  
+        </div>
+           
       </td>
       <td>
         <div style="padding-left:30px; padding-right:50px;  ">
@@ -56,6 +67,7 @@
           </button>
       </div>
       </td>
+      
     </tr>
   </table>
   <button mat-flat-button  (click)="Add()"> + Add Step </button>

@@ -4,7 +4,6 @@ import { AnalyrequehomeComponent } from './analyrequehome/analyrequehome.compone
 import { PaddingrequeComponent } from './paddingreque/paddingreque.component';
 import { RequestformfillComponent } from './requestformfill/requestformfill.component';
 import { QuestionComponent } from './question/question.component';
-import { SummaryresultComponent } from './summaryresult/summaryresult.component';
 import { AnswerPageComponent } from './answer-page/answer-page.component';
 import { BooingEquipComponent } from './booing-equip/booing-equip.component';
 import { CSresultComponent } from './csresult/csresult.component';
@@ -22,13 +21,16 @@ import { EditBookingComponent } from './dialog/edit-booking/edit-booking.compone
 import { TrackingstatusComponent } from './trackingstatus/trackingstatus.component';
 import { FactoryApproveComponent } from './dialog/factory-approve/factory-approve.component';
 import { EditOperationtimeComponent } from './dialog/edit-operationtime/edit-operationtime.component';
+import { AnahomeNotcomComponent } from './anahome-notcom/anahome-notcom.component';
+import { AnahomeCompleteComponent } from './anahome-complete/anahome-complete.component';
+import { AddfileComponent } from './dialog/addfile/addfile.component';
+import { InfoEditstepComponent } from './dialog/info-editstep/info-editstep.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
 { path: 'Analyrequehome', component: AnalyrequehomeComponent }, 
 { path: 'Paddingreque', component: PaddingrequeComponent },
 { path: 'Question', component: QuestionComponent },
-{ path: 'Summaryresult', component: SummaryresultComponent },
 { path: 'AnswerPage', component: AnswerPageComponent },
 { path: 'BooingEquip', component: BooingEquipComponent },
 { path: 'CSresult', component: CSresultComponent },
@@ -45,7 +47,11 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'EditBooking', component: EditBookingComponent },
 { path: 'Trackingstatus', component: TrackingstatusComponent },
 { path: 'FactoryApprove', component: FactoryApproveComponent },
-{ path: 'EditOperationtime', component: EditOperationtimeComponent },];
+{ path: 'EditOperationtime', component: EditOperationtimeComponent },
+{ path: 'AnahomeNotcom', component: AnahomeNotcomComponent },
+{ path: 'AnahomeComplete', component: AnahomeCompleteComponent },
+{ path: 'Addfile', component: AddfileComponent },
+{ path: 'InfoEditstep', component: InfoEditstepComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

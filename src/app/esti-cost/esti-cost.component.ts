@@ -26,11 +26,15 @@ export class EstiCostComponent implements OnInit {
   ccControl2=""
   Analyzer=""
   DataRes : any
+  DataResAllocation : any
+ Allocation : any
 
   message = ""
 
   sample1 : any
   sample2:any
+  sam1 : any
+  sam2 : any
 
   DataResQUESTION : any
   
@@ -51,11 +55,15 @@ export class EstiCostComponent implements OnInit {
   departmentlocal: any
   nameonly: any
 
+  totalhr : any
+  Totalcost = 0
+
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder,private route: ActivatedRoute) { 
    
   }
 
   ngOnInit(): void {
+
     this.EMAIL_CC[0] = ""
       console.log(this.EMAIL_CC);
 
@@ -109,6 +117,65 @@ export class EstiCostComponent implements OnInit {
         console.log(data);
         this.DataResQUESTION = data
         console.log(this.DataResQUESTION)
+
+        this.productService.TRACKING_ANALYSIS_SELECT_ALLOCATION_ALL().subscribe((data: {}) => {
+          console.log(data);
+          this.DataResAllocation = data
+          console.log(this.DataResAllocation)
+  
+
+          this.sam1 = this.DataRes[0].PRE_ESTI_TECHNIQUE.split("[]")
+          console.log(this.sam1)
+
+          var x :any
+          var y : any
+          var a : any
+          var Operation_Charge : any
+          var Estimate_Cost:any
+          this.sam2 = "["
+          console.log( this.DataRes[0].DEP_MENT.substring(3));
+
+          for (x in this.sam1) {
+            a = this.sam1[x].split("||")
+
+            console.log( this.DataResAllocation.find((item: { EQUIPMENT: any; }) => item.EQUIPMENT === a[0]));
+            this.Allocation = this.DataResAllocation.find((item: { EQUIPMENT: any; }) => item.EQUIPMENT === a[0])
+
+            for(y in this.DataResAllocation){
+              
+              if (a[0] == this.DataResAllocation[y].EQUIPMENT){
+              
+                if(this.DataRes[0].DEP_MENT.substring(3) == "A0"){
+                  Operation_Charge = ((a[1] * this.DataResAllocation[y].TIME_PER_PIECE)/60)*this.DataResAllocation[y].MTXA0
+                }
+                else{
+                  Operation_Charge = ((a[1] * this.DataResAllocation[y].TIME_PER_PIECE)/60)*this.DataResAllocation[y].MTX00
+                }
+              }
+
+            }
+            Estimate_Cost = parseFloat(Operation_Charge) + parseFloat(this.Allocation.BASIC_CHARGE)
+            console.log(Estimate_Cost)
+            this.Totalcost =  this.Totalcost  +  Estimate_Cost
+            console.log(this.Totalcost)
+
+            x =  parseInt(x)+1
+            this.sam2 = this.sam2 + '{"step":"' + x+ '",'
+            this.sam2 = this.sam2 + '"equip":"' + a[0] + '",'
+            this.sam2 = this.sam2 + '"quantity":"' + a[1] + '",'
+            this.sam2 = this.sam2 + '"basiccharge":"' + this.Allocation.BASIC_CHARGE + '",'
+            this.sam2 = this.sam2 + '"operationcharge":"' + Operation_Charge.toFixed(2) + '",'
+            this.sam2 = this.sam2 + '"estimatecost":"' + Estimate_Cost.toFixed(2) + '"},'
+            
+          }
+    
+          this.sam2 = this.sam2.substring(0, this.sam2.length - 1);
+          this.sam2 = this.sam2 + "]";
+          console.log(this.sam2)
+          var obj = JSON.parse(this.sam2);
+          this.sam2 = obj
+          console.log(this.sam2)
+        }) 
       })
     })
  
@@ -180,7 +247,7 @@ export class EstiCostComponent implements OnInit {
 
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `STATUS_JOB` = '5', `ESTI_COST_TIME` = '"+ date2 +"' " +
+      " SET  `STATUS_JOB` = '5', `ESTI_COST_TIME` = '"+ date2 +"',`ESTI_TECHNIQUE` = '"+ this.DataRes[0].PRE_ESTI_TECHNIQUE +"'  " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -197,6 +264,9 @@ export class EstiCostComponent implements OnInit {
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 
+  }
+  GoAnaNoCom(){
+    this.router.navigate(['/AnahomeNotcom'])
   }
   Logout(){
     sessionStorage.removeItem("NAME");

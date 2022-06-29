@@ -8,7 +8,7 @@
       <div class="col-xl-1"></div>
       <div class="col-xl-7 center" style="padding :15px 0 ;">
         <button mat-button>Home</button>
-        <button mat-button (click)="Goanalysishome()">Analysis request form</button>
+        <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
         <button mat-button>Equipment Calendar</button>
         <button mat-button>Job tracking</button>
         <button mat-button>Search previous report</button>
@@ -361,21 +361,26 @@
                           <mat-form-field appearance="outline" >
                             <mat-label>Techniques</mat-label>
                             <mat-select formControlName="Technique">
-                                <mat-option value="X-ray">X-ray</mat-option>
+                                <mat-option value="X-ray2D">X-ray2D</mat-option>
+                                <mat-option value="X-ray3D">X-ray3D</mat-option>
+                                <mat-option value="X-ray reflow">X-ray reflow</mat-option>
                                 <mat-option value="SEM">SEM</mat-option>
-                                <mat-option value="Cross section">Cross section</mat-option>
+                                <mat-option value="Cutting">Cutting</mat-option>
+                                <mat-option value="Polishing">Polishing</mat-option>
                                 <mat-option value="Ion-milling">Ion-milling</mat-option>
+                                <mat-option value="Cross-milling">Cross-milling</mat-option>
                                 <mat-option value="VHX">VHX</mat-option>
                                 <mat-option value="Metallurgical">Metallurgical</mat-option>
                                 <mat-option value="EDXRF">EDXRF</mat-option>
+                                <mat-option value="EDXRF_RoHS">EDXRF_RoHS</mat-option>
                                 <mat-option value="ICP">ICP</mat-option>
+                                <mat-option value="C_SAM">C_SAM</mat-option>
                                 <mat-option value="CS Analyzer">CS Analyzer</mat-option>
                                 <mat-option value="FTIR">FTIR</mat-option>
                                 <mat-option value="GCMS">GCMS</mat-option>
                                 <mat-option value="DSC">DSC</mat-option>
                                 <mat-option value="TG-DTA">TG-DTA</mat-option>
                                 <mat-option value="Solderwet">Solderwet</mat-option>
-                                <mat-option value="Dust monitering">Dust monitering</mat-option>
                                 <mat-option value="Micro-probe">Micro-probe</mat-option>
                                 <mat-option value="Other">Other</mat-option> 
                             </mat-select>

@@ -36,7 +36,7 @@ export class EstistepEditComponent implements OnInit {
     console.log(data);
     this.DataRes = data
 
-    this.sample1 = this.DataRes[0].ESTI_TECHNIQUE.split("[]")
+    this.sample1 = this.DataRes[0].PRE_ESTI_TECHNIQUE.split("[]")
     console.log(this.sample1)
 
     var x
@@ -55,7 +55,7 @@ export class EstistepEditComponent implements OnInit {
     console.log( this.sample2)
     var obj = JSON.parse( this.sample2);
       this.sample1 = obj
-      console.log( this.sample2)
+      console.log( this.sample1)
   })
   }
 Add(){
@@ -112,7 +112,7 @@ Remove(id:any){
 
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `STATUS_JOB` = '4', `ESTI_TECHNIQUE` = '"+ val2 +"' " +
+      " SET  `STATUS_JOB` = '4', `PRE_ESTI_TECHNIQUE` = '"+ val2 +"' " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {

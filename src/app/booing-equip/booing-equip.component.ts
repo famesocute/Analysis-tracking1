@@ -65,7 +65,7 @@ export class BooingEquipComponent implements OnInit {
   newDate2: any
 
   SelectedZZZ = ""
-
+  step_before1 = ""
 
   myControl = new FormControl();
   options: string[] = ['Pornpimon Pengto', 'Soontree Chaiwut', 'Napapon',
@@ -198,11 +198,12 @@ export class BooingEquipComponent implements OnInit {
           var count = 0
           var x
           var y
-          for (y in this.DataResreq) {
+          console.log(this.sample2);
+          for (y in this.sample2) {
   
             for (x in this.DataBooking) {
-  
-              if(this.DataResreq[y].EQUIPMENT == this.DataBooking[x].EQUIPMENT){
+
+              if(this.sample2[y].equip == this.DataBooking[x].EQUIPMENT){
               // const [month, day, year] = this.DataBooking[x].DATE_BOOKING_START.split("/");
               // const newDate = `${year}-${month}-${day}T${this.DataBooking[x].TIME_BOOKING_START}`
               // console.log(newDate)
@@ -267,6 +268,89 @@ export class BooingEquipComponent implements OnInit {
     this.router.navigate(['/Analyrequehome'])
   }
   confirm() {
+  var step_before_check
+    var step_no2 = this.step_no.substring(4)
+    console.log(step_no2)
+
+    var step_before = parseInt(step_no2)-1
+    this.step_before1 = step_before.toLocaleString()
+    console.log(this.step_before1)
+    var step_before2 = "Step" + this.step_before1   
+    console.log(step_before2)
+
+    console.log( this.DataResreq.find((item: { STEP_BOOKING: any; }) => item.STEP_BOOKING === step_before2));
+    step_before_check = this.DataResreq.find((item: { STEP_BOOKING: any; }) => item.STEP_BOOKING === step_before2)
+
+    // this.DataResreq[0].STEP_BOOKING.substring(4)
+
+    if(step_no2 == "1"){
+
+      this.starttime = this.startT1 + ":" + this.startT2 + ":00"
+      console.log(this.starttime)
+      this.endtime = this.endT1 + ":" + this.endT2 + ":00"
+      console.log(this.endtime)
+  
+      var startdate2 = this.startdate.toLocaleString()
+      var startdate3 = startdate2.split(",")
+      var startdate4 = startdate3[0].split("/")
+      console.log(startdate4)
+      var sumdatestart
+      if (startdate4[0].length <= 1) {
+        sumdatestart = startdate4[2] + "-0" + startdate4[0]
+      }
+      else {
+        sumdatestart = startdate4[2] + "-" + startdate4[0]
+      }
+      if (startdate4[1].length <= 1) {
+        sumdatestart = sumdatestart + "-0" + startdate4[1]
+      }
+      else {
+        sumdatestart = sumdatestart + "-" + startdate4[1]
+      }
+      this.startdate1 = sumdatestart
+      console.log(this.startdate1)
+      // 
+      var enddate2 = this.enddate.toLocaleString()
+      console.log(this.enddate)
+      var enddate3 = enddate2.split(",")
+      var enddate4 = enddate3[0].split("/")
+      console.log(enddate4)
+      var sumdateend
+      if (enddate4[0].length <= 1) {
+        sumdateend = enddate4[2] + "-0" + enddate4[0]
+      }
+      else {
+        sumdateend = enddate4[2] + "-" + enddate4[0]
+      }
+      if (startdate4[1].length <= 1) {
+        sumdateend = sumdateend + "-0" + enddate4[1]
+      }
+      else {
+        sumdateend = sumdateend + "-" + enddate4[1]
+      }
+      this.enddate1 = sumdateend
+      console.log(this.enddate1)
+  
+      this.DataRes[0].TITLE = this.DataRes[0].TITLE.substring(0,30)
+      console.log(this.DataRes[0].TITLE)
+  
+      this.analyzer = this.DataRes[0].REVI_ANASEC_ANAL.substring(0, this.namelocal.indexOf('<'));
+  
+      var qtest = ""
+      qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`booking_equipment` (`REQ_NUM`,`TITLE`,`PIC`, `STEP_BOOKING`, `EQUIPMENT`, `SAMPLE_NUM`, " +
+        " `DATE_BOOKING_START`, `TIME_BOOKING_START`, `DATE_BOOKING_END`, `TIME_BOOKING_END`, `OPERATER`, `EDITER`) " +
+        " VALUES ('" + this.DataRes[0].REQ_NUM + "','" + this.DataRes[0].TITLE + "', '" + this.analyzer + "','" + this.step_no + "', '" + this.step1 + "', '" + this.Numsample + "', '" + this.startdate1 + "', " +
+        " '" + this.starttime + "', '" + this.enddate1 + "', '" + this.endtime + "', '" + this.operator + "', '" + this.nameonly + "');"
+      console.log(qtest);
+      console.log(this.step1);
+      console.log(this.equipbook);
+      this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+        console.log(data);
+        window.alert("บันทึกข้อมูลเรียบร้อยแล้ว")
+        window.location.reload()
+      })
+    }
+    else if(step_no2 > "1" && step_before_check != null){
 
     this.starttime = this.startT1 + ":" + this.startT2 + ":00"
     console.log(this.starttime)
@@ -332,7 +416,10 @@ export class BooingEquipComponent implements OnInit {
       window.alert("บันทึกข้อมูลเรียบร้อยแล้ว")
       window.location.reload()
     })
-
+  }
+  else{
+    window.alert("กรุณาจองเครื่องมือstepก่อนหน้านี้")
+  }
 
   }
   onChange(deviceValue: any) {
@@ -342,7 +429,7 @@ export class BooingEquipComponent implements OnInit {
     var x
     var y
       for (x in this.DataBooking) {
-
+        console.log(this.DataBooking[x].EQUIPMENT);
         if(deviceValue == this.DataBooking[x].EQUIPMENT){
         // const [month, day, year] = this.DataBooking[x].DATE_BOOKING_START.split("/");
         // const newDate = `${year}-${month}-${day}T${this.DataBooking[x].TIME_BOOKING_START}`
@@ -365,14 +452,15 @@ export class BooingEquipComponent implements OnInit {
         }
        
       }
-    booking = booking.substring(0, booking.length - 1);
-    booking = booking + "]";
-    console.log(booking)
-    var obj = JSON.parse(booking);
-    this.events = obj
-    console.log(this.events)
-
-
+      if(booking != "["){
+        booking = booking.substring(0, booking.length - 1);
+        booking = booking + "]";
+        console.log(booking)
+        var obj = JSON.parse(booking);
+        this.events = obj
+        console.log(this.events)
+      }
+   
 
     var x
     var count = 0
@@ -466,6 +554,9 @@ export class BooingEquipComponent implements OnInit {
       this.ngOnInit()
       });
 
+}
+GoAnaNoCom(){
+  this.router.navigate(['/AnahomeNotcom'])
 }
 
 }

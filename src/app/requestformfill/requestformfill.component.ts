@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms'
 import { ProductService } from '../api/product.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { AddfileComponent } from '../dialog/addfile/addfile.component'
 @Component({
   selector: 'app-requestformfill',
   templateUrl: './requestformfill.component.html',
@@ -93,7 +94,7 @@ export class RequestformfillComponent implements OnInit {
 
   productForm: FormGroup;
 
-  constructor(public router: Router, private fb: FormBuilder, public productService: ProductService) {
+  constructor(public router: Router, private fb: FormBuilder, public productService: ProductService,private matDialog: MatDialog) {
     this.productForm = this.fb.group({
       quantities: this.fb.array([]),
       quantitiesCC: this.fb.array([]),
@@ -187,6 +188,7 @@ export class RequestformfillComponent implements OnInit {
   getdataSamAf(value: any) {
     this.SamAftertest = value
   }
+ 
 
   // check box
 
@@ -256,6 +258,8 @@ export class RequestformfillComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
+      sessionStorage.setItem("RequestNo", this.RequestNo);
+    this.router.navigate(['/Addfile'])
     })
 
   }
@@ -399,7 +403,7 @@ export class RequestformfillComponent implements OnInit {
       }
     })
 
-    this.router.navigate(['/Analyrequehome'])
+    
   }
 
   Gologin() {
@@ -416,6 +420,9 @@ export class RequestformfillComponent implements OnInit {
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 
+  }
+  GoAnaNoCom(){
+    this.router.navigate(['/AnahomeNotcom'])
   }
 
 }

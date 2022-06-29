@@ -1,46 +1,52 @@
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-  }
-  .cardAT {
-    text-align: center;
-    background: rgb(255, 185, 185);
-    max-width: 250px;
-}
-.mat-form-field + .mat-form-field {
-  margin-left: 8px;
-}
-.font1 { 
-  font-family: 'Inter', sans-serif;
-}
-.Toolbar{
-  background-color: #F5F5F5;
-}
-.card1{
-  background-color: #8fcaca;
-  height : 1000px;
-}
-.button3 {
-  padding: 14px 40px;
-  background-color: #8fcaca;
-}
-.WText {
-  color:#ffffff;
-}
-img {
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: auto;
 }
-.block {
-  display: block;
-  width: 100%;
-  border: none;
-  // background-color: #bbe8d7;
-  padding: 5px 28px;
-  font-size: 14px;
-  cursor: pointer;
-
- 
+.cardAT {
+  text-align: center;
+  background: rgb(255, 185, 185);
+  max-width: 250px;
 }
+.mat-form-field + .mat-form-field {
+margin-left: 8px;
+}
+.font1 { 
+font-family: 'Inter', sans-serif;
+}
+.Toolbar{
+background-color: #F5F5F5;
+}
+.card1{
+background-color: #8fcaca;
+height : 1000px;
+}
+.button3 {
+padding: 20px 0;
+background-color: #8fcaca;
+}
+.WText {
+color:#ffffff;
+}
+img {
+width: 100%;
+height: auto;
+}
+.block {
+display: block;
+width: 100%;
+border: none;
+// background-color: #bbe8d7;
+padding: 5px 28px;
+font-size: 14px;
+cursor: pointer;
+}
+div{
+  font-size: 0.9em;
+}
+th {
+font-size: 15px;
+}
+
+

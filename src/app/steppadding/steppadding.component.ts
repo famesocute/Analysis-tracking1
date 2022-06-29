@@ -134,5 +134,8 @@ export class SteppaddingComponent implements OnInit {
   GoSignup() {
     this.router.navigate(['/Signup'])
   }
+  GoAnaNoCom(){
+    this.router.navigate(['/AnahomeNotcom'])
+  }
 
 }

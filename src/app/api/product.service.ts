@@ -123,4 +123,26 @@ export class ProductService {
   
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/14_TRACKING_ANALYSIS_SELECT_BOOKING_ID.php?data1='+data1)
     }
+
+    TRACKING_ANALYSIS_SELECT_BOOKING_STEP(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_BOOKING_STEP Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/16_TRACKING_ANALYSIS_SELECT_BOOKING_STEP.php?data1='+data1)
+    }
+    TRACKING_ANALYSIS_SELECT_ALLOCATION_ALL() {
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/17_TRACKING_ANALYSIS_SELECT_ALLOCATION_ALL.php')
+    }
+    TRACKING_ANALYSIS_SELECT_ADDFILE_BY_REQ(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_ADDFILE_BY_REQ Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/19_TRACKING_ANALYSIS_SELECT_ADDFILE_BY_REQ.php?data1='+data1)
+    }
+    TRACKING_ANALYSIS_SELECT_TIMEISSUE_REPORT_BYREQ(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_TIMEISSUE_REPORT_BYREQ Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/20_TRACKING_ANALYSIS_SELECT_TIMEISSUE_REPORT_BYREQ.php?data1='+data1)
+    }
 }

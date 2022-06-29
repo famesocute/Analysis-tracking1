@@ -4,11 +4,11 @@ import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-analyrequehome',
-  templateUrl: './analyrequehome.component.html',
-  styleUrls: ['./analyrequehome.component.scss']
+  selector: 'app-anahome-notcom',
+  templateUrl: './anahome-notcom.component.html',
+  styleUrls: ['./anahome-notcom.component.scss']
 })
-export class AnalyrequehomeComponent implements OnInit {
+export class AnahomeNotcomComponent implements OnInit {
   namelocal: any
   Codelocal: any
   departmentlocal: any
@@ -32,8 +32,6 @@ export class AnalyrequehomeComponent implements OnInit {
   constructor(public router: Router, public productService: ProductService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
-    // window.location.reload()
-
     this.productService.TRACKING_ANALYSIS_SELECT_ALL_ORDER().subscribe((data: {}) => {
       console.log(data);
       this.table = data
@@ -64,9 +62,7 @@ export class AnalyrequehomeComponent implements OnInit {
       }
       this.loading = false
     })
-
   }
-
   Gologin() {
     this.router.navigate(['/Login'])
   }
@@ -90,13 +86,16 @@ export class AnalyrequehomeComponent implements OnInit {
   Gonotcom(){
     this.router.navigate(['/AnahomeNotcom'])
   }
+  padding(){
+    this.router.navigate(['/Analyrequehome'])
+  }
   Gocomplete(){
     this.router.navigate(['/AnahomeComplete'])
   }
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
   }
-  
+
   Opennextpage(ID: any, STATUS_JOB: any) {
     console.log(STATUS_JOB)
 

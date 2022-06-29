@@ -203,6 +203,9 @@ export class PaddingrequeComponent implements OnInit {
   GoSignup() {
     this.router.navigate(['/Signup'])
   }
+  GoAnaNoCom(){
+    this.router.navigate(['/AnahomeNotcom'])
+  }
   
 }
 

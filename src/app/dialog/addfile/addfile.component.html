@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="center" style="padding-top:30px;">
+            <h1>Add file and photo</h1>
+            </div>
+            <mat-dialog-content>
+            
+                <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
+            
+            
+            
+                    <!-- <input type="text" name="QCC_group_name" value="{{this.QCC_group_name}}" disabled>
+            
+                    <input type="text" name="Register_no" value="{{this.Register_no}}" disabled> -->
+            
+                    <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
+            
+                    <!-- <input type="submit" value="Upload Image" name="submit"> -->
+            
+            
+            
+                    <div class="mb-3">
+            
+                        <label for="formGroupExampleInput" class="form-label">Register no.</label>
+            
+                        <input class="form-control" type="text" name="Register_no" value="{{this.Requestno}}" >
+            
+                        <br>
+            
+                    </div>
+            
+                    <th>Select file to upload:</th> <br>
+            
+                    <div class="input-group mb-3">
+            
+                        <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+            
+                        <input class="btn btn-dark" type="submit" value="Upload" name="submit">
+            
+                    </div>
+            
+                </form>
+            
+            </mat-dialog-content>  
+
+            <div>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th width="100px" class=" Titlereview">No.</th>
+                        <th width="500px">File Name</th>
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr  *ngFor="let item of DataResFlie let i = index" >
+                        <th class=" Titlereview">{{i+1}}:</th>
+                        <td>{{item.FILENAME}} </td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <br>
+            <div class="center">
+              <button mat-flat-button class="Buttonaddquetion" (click)="GoAnahome()"> finish </button>
+            </div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("NAME", this.table[0].NAME);
         sessionStorage.setItem("EMPLOY_CODE", this.table[0].EMPLOY_CODE);
         sessionStorage.setItem("DEPARTMENT", this.table[0].DEPARTMENT);
-        this.router.navigate(['/Analyrequehome'])
+        this.router.navigate(['/AnahomeNotcom'])
       } else {
         window.alert("Wrong enployee code or password.")
       }

@@ -31,7 +31,6 @@ import { RequestformfillComponent } from './requestformfill/requestformfill.comp
 import { AnalyrequehomeComponent } from './analyrequehome/analyrequehome.component';
 import { PaddingrequeComponent } from './paddingreque/paddingreque.component';
 import { QuestionComponent } from './question/question.component';
-import { SummaryresultComponent } from './summaryresult/summaryresult.component';
 import { AnswerPageComponent } from './answer-page/answer-page.component';
 import { BooingEquipComponent } from './booing-equip/booing-equip.component';
 import { CSresultComponent } from './csresult/csresult.component';
@@ -52,6 +51,11 @@ import { TrackingstatusComponent } from './trackingstatus/trackingstatus.compone
 import { EditBookingComponent } from './dialog/edit-booking/edit-booking.component';
 import { FactoryApproveComponent } from './dialog/factory-approve/factory-approve.component';
 import { EditOperationtimeComponent } from './dialog/edit-operationtime/edit-operationtime.component';
+import { AnahomeNotcomComponent } from './anahome-notcom/anahome-notcom.component';
+import { AnahomeCompleteComponent } from './anahome-complete/anahome-complete.component';
+import { AddfileComponent } from './dialog/addfile/addfile.component';
+import { InfoEditstepComponent } from './dialog/info-editstep/info-editstep.component';
+
 
 
 @NgModule({
@@ -61,7 +65,6 @@ import { EditOperationtimeComponent } from './dialog/edit-operationtime/edit-ope
     AnalyrequehomeComponent,
     PaddingrequeComponent,
     QuestionComponent,
-    SummaryresultComponent,
     AnswerPageComponent,
     BooingEquipComponent,
     CSresultComponent,
@@ -80,6 +83,11 @@ import { EditOperationtimeComponent } from './dialog/edit-operationtime/edit-ope
     EditBookingComponent,
     FactoryApproveComponent,
     EditOperationtimeComponent,
+    AnahomeNotcomComponent,
+    AnahomeCompleteComponent,
+    AddfileComponent,
+    InfoEditstepComponent,
+
 
   ],
   imports: [

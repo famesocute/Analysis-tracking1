@@ -1,9 +1,24 @@
 <div class="row">
-    <div class="col-sm-2" style="padding-top: 10px;"><b>Operatione time:</b></div>
-    <div class="col-sm-3">
-        <input class="form-control" type="text" placeholder="hh:mm:00" >
+    <div class="col-sm-3" style="padding-top: 10px;"><b>Operatione time:</b></div>
+    <div class="col-sm-4">
+        <input class="form-control" type="text" placeholder="hh:mm:00" [(ngModel)]="this.time">
     </div>
-    <div class="col-sm-7" style="padding-top: 5px;">
-        <button mat-flat-button mat-dialog-close class="button1 " >Close</button>
-    </div>
+    <div class="col-sm-5" style="padding-top: 10px;">(hh:mm:ss)</div>
   </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-4">
+        <div class="center " style="padding-top: 5px;">
+            <button mat-flat-button mat-dialog-close class="button1 " (click)="Edittime()" >Edit</button>
+        </div>
+        
+    </div>
+    <div class="col-sm-4">
+        <div class="center " style="padding-top: 5px;">
+            <button mat-flat-button mat-dialog-close class="button1 " >Close</button>
+        </div> 
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+  

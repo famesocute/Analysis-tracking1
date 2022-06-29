@@ -5,7 +5,7 @@
         <div class="col-xl-1"></div>
         <div class="col-xl-7 center" style="padding :15px 0 ;">
           <button mat-button>Home</button>
-          <button mat-button (click)="Goanalysishome()">Analysis request form</button>
+          <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
           <button mat-button>Equipment Calendar</button>
           <button mat-button>Job tracking</button>
           <button mat-button>Search previous report</button>
@@ -64,7 +64,6 @@
                   <label for="Hypothesis"><b>Hypothesis:</b></label>
                   <textarea class="form-control" rows="3" id="Hypothesis" [(ngModel)]="this.Hypothesis"></textarea>
                 </div>
-
                 <label for="comment" class="font-weight-bold"><b> Analysis type</b></label>
                 <div style=" padding: 10px; ">
                   <div class="row">
@@ -196,14 +195,14 @@
                     <mat-option value="Other">Other</mat-option>
                   </mat-select>
                 </mat-form-field>
-                <mat-card class="cardAT">
+                <!-- <mat-card class="cardAT">
                   <mat-card-title>Attached file</mat-card-title>
                   <mat-card-subtitle>(Specific experiment design/photo/concerned information)
                   </mat-card-subtitle>
                   <mat-card-actions>
                     <button mat-button>CLICK</button>
                   </mat-card-actions>
-                </mat-card>
+                </mat-card> -->
               </div>
             </div>
           </mat-card-content>
@@ -908,10 +907,10 @@
           </mat-card-content>
         </mat-card>
       <div class="center">
-          <button mat-raised-button color="primary" (click)="NewregisterNum()">Issue</button>
+          <button mat-raised-button color="primary" (click)="NewregisterNum()">Issue and Attach file</button>
         </div>
+        <br>
       </div>
-
 
       <div class="col-sm-1">
 

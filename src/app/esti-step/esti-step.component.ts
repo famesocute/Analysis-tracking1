@@ -207,7 +207,7 @@ export class EstiStepComponent implements OnInit {
     console.log(val2)
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `ESTI_TECHNIQUE` = '" + val2 + "',`ESTI_STEP_TIME` = '" + date2 + "', `STATUS_JOB` = '4' " +
+      " SET  `PRE_ESTI_TECHNIQUE` = '" + val2 + "',`ESTI_STEP_TIME` = '" + date2 + "', `STATUS_JOB` = '4' " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -224,6 +224,9 @@ export class EstiStepComponent implements OnInit {
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 
+  }
+  GoAnaNoCom(){
+    this.router.navigate(['/AnahomeNotcom'])
   }
 
   countrow = 0

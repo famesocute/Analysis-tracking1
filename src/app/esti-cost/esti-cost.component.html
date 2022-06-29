@@ -8,7 +8,7 @@
       <div class="col-xl-1"></div>
       <div class="col-xl-7 center" style="padding :15px 0 ;">
         <button mat-button>Home</button>
-        <button mat-button (click)="Goanalysishome()">Analysis request form</button>
+        <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
         <button mat-button>Equipment Calendar</button>
         <button mat-button>Job tracking</button>
         <button mat-button>Search previous report</button>
@@ -359,45 +359,40 @@
               <table class="table table-bordered Titlereview ">
                   <thead >
                     <tr>
-                      <th >Step</th>
+                      <th width="70px" >Step</th>
                       <th >Technique</th>
-                      <th >Quantity</th>
-                      <th >Technique cost/1pc.</th>
-                      <th >Estimate cost</th>
+                      <th width="150px">Quantity</th>
+                      <th >Basic Charge (THB/Request)</th>
+                      <th>Operation Charge (THB)</th>
+                      <th>Estimate Cost (THB)</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th>Step 1</th>
-                      <td>VHX</td>
-                      <td>5 pcs</td>
-                      <td>200 Baht/pc</td>
-                      <td>1000 Baht</td>
-                    </tr>
-                    <tr>
-                      <th>Step2</th>
-                      <td>X-ray3D</td>
-                      <td>5 pcs</td>
-                      <td>500 Baht/pc</td>
-                      <td>2500 Bath</td>
-                    </tr>
-                    <tr>
-                      <th>Step3</th>
-                      <td>SEM</td>
-                      <td>5 pcs</td>
-                      <td>600 Baht/pc</td>
-                      <td>3000 Bat</td>
-                    </tr>
-                    <tr>
-                      <th>Total</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>65XX Bath</td>
-                    </tr> 
+                    <tr *ngFor="let item of sam2 let i = index">
+                      <th>{{item.step}}</th>
+                      <td>{{item.equip}}</td>
+                      <td>{{item.quantity}}</td>
+                      <td>{{item.basiccharge}}</td>
+                      <td>{{item.operationcharge}}</td>
+                      <td>{{item.estimatecost}}</td>
+                    </tr>                   
                   </tbody>
                 </table>
 
+                <div class="row">
+                  <div class="col-sm-9"></div>
+                  <div class="col-sm-3">
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <b>Total cost :</b>
+                      </div>
+                      <div class="col-sm-7">
+                        {{this.Totalcost.toFixed(2)}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
                 <div *ngIf="isvalideditstep;else go_next">
                   <div class="row center"  >
                     <div class="col-sm-3"></div>

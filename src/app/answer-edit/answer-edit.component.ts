@@ -115,6 +115,9 @@ export class AnswerEditComponent implements OnInit {
   GoSignup() {
     this.router.navigate(['/Signup'])
   }
+  GoAnaNoCom(){
+    this.router.navigate(['/AnahomeNotcom'])
+  }
 
 
   Logout() {

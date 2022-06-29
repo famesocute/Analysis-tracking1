@@ -1,102 +1,252 @@
-<div class="container-fluid">
-    <div class="border-bottom Toolbar">
+<div class="border-bottom Toolbar">
+  <div class="row">
+    <div class="col-xl-1"></div>
+    <div class="col-xl-7 center" style="padding :15px 0 ;">
+      <button mat-button>Home</button>
+      <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
+      <button mat-button>Equipment Calendar</button>
+      <button mat-button>Job tracking</button>
+      <button mat-button>Search previous report</button>
+    </div>
+
+    <div class="col-xl-4 center " *ngIf="isValid;else other_content">
       <div class="row">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-7 center" style="padding :15px 0 ;">
-          <button mat-button>Home</button>
-          <button mat-button>Analysis request form</button>
-          <button mat-button>Equipment Calendar</button>
-          <button mat-button>Job tracking</button>
-          <button mat-button>Search previous report</button>
-        </div>
-  
-          <div class="col-xl-4 center " *ngIf="isValid;else other_content">
-            <div class="row">
-            <div class="col-xl-8">
-         {{this.nameonly}}
-         ({{this.Codelocal}})
-         {{this.departmentlocal}}
+        <div class="col-xl-8" style="font-size: 1.2em;">
+          {{this.nameonly}}
+          ({{this.Codelocal}})
+          {{this.departmentlocal}}
         </div>
         <div class="col-xl-4">
-         <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
-          </div>
+          <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
         </div>
       </div>
-  
-      <ng-template #other_content>
+    </div>
+
+    <ng-template #other_content>
       <div class="col-xl-4 center ">
         <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
         <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
       </div>
     </ng-template>
-  
-  
-      </div>
-    </div>
-  
-    <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm-10">
-  
-        <div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
-          <span class="sr-only"></span>
-        </div>
-  
-        <ng-template #elseBlock>
-          <div class="row">
-            <div class="col-sm-2">
-              <mat-card class="card1">
-                <mat-card-content>
-                  <img src="../assets/Tracking_web/Image/702867-removebg-preview.png">
-                  <div class="row" style="padding-top : 30px;">
-                    <h1 class="center WText ">Status</h1>
-                    <button class="button button3 border border-light WText">Pending Request</button>
-                    <button class="button button3 border border-light WText">Not Complete Request</button>
-                    <button class="button button3 border border-white WText">Complete Request</button>
-                    <button class="button button3 border border-white WText">My Request and Job</button>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-  
-            </div>
+  </div>
+</div>
 
-            <div class="col-sm-10" style="padding: 40px; ">
-              <div style=" padding-top: 30px;" class=" font1 center mat-display-3">Analysis request</div>
+<div class="row">
+
+  <div class="col-sm-11">
+    <div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+      <span class="sr-only"></span>
+    </div>
+
+    <ng-template #elseBlock>
+      <div class="row">
+        <div class="col-sm-2">
+          <mat-card class="card1">
+            <mat-card-content>
+              <img src="../assets/Tracking_web/Image/702867-removebg-preview.png">
+              <div class="row" style="padding-top : 30px;">
+                <h1 class="center WText ">Status</h1>
+                <button class="button button3 border border-light WText"(click)="padding()">Pending Request</button>
+                <button class="button button3 border border-light WText" (click)="Gonotcom()">Not Complete Request</button>
+                <button class="button button3 border border-white WText" (click)="Gocomplete()" >Complete Request</button>
+                <button class="button button3 border border-white WText" (click)="Gomyjob()">My Request and Job</button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+
+        <div class="col-sm-10" style="padding: 40px; ">
+          <div style=" padding-top: 30px;" class=" font1 center mat-display-3">Analysis request</div>
+          <br>
+          <h2>You is next person</h2>
+          <br>
+          <table class="table ">
+            <thead class="table-danger">
+              <tr>
+                <th width="80px" style=" text-align:center">Month</th>
+                <th width="120px">Department</th>
+                <th width="130px">Next person</th>
+                <th width="200px">Request No.</th>
+                <th width="200px" style=" text-align:center">Title</th>
+                <th style=" text-align:center">Issuer</th>
+              </tr>
+            </thead>
+          </table>
+          <table class="table ">
+            <tbody>
+              <tr *ngFor="let item of table let i = index">
+                <div *ngIf="item.STETUS_PERSON == nameonly">
+                 
+                  <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                    <div class="row">
+                      <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                      <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                      <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
+                      <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                      <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                      <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
+                    </div>
+                  </button>
+
+                </div>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <h2>Your request</h2>
+          <br>
+          <!-- April -->
+          <mat-tab-group>
+            <mat-tab label="April">
               <table class="table ">
-                <thead>
+                <thead class="table-danger">
                   <tr>
-                    <th width="100px">Month</th>
-                    <th width="170px">Department</th>
-                    <th width="270px">Request No.</th>
-                    <th width="300px">Title</th>
-                    <th>Issuer</th>
+                    <th width="80px" style=" text-align:center">Month</th>
+                    <th width="120px">Department</th>
+                    <th width="130px">Next person</th>
+                    <th width="200px">Request No.</th>
+                    <th width="200px" style=" text-align:center">Title</th>
+                    <th style=" text-align:center">Issuer</th>
                   </tr>
                 </thead>
               </table>
               <table class="table ">
                 <tbody>
-                  <!-- <tr *ngFor="let item of table let i = index">
-
-                    <button mat-raised-button class="block" (click)="onOpenpading(item.ID)">
-                      <div class="row">
-                        <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                        <div class="col-sm-2" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                        <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                        <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                        <div class="col-sm-3">Issur by {{ item.REVI_PAND_ISSUER}}</div>
-                      </div>
-                    </button>
-                  </tr> -->
+                  <tr *ngFor="let item of table let i = index">
+                      <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                        <div *ngIf="item.MONTH == 'April'">
+                      <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                        <div class="row">
+                          <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                          <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                          <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                          <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
+                        </div>
+                      </button>
+                    </div>
+                    </div>
+                  </tr>
                 </tbody>
               </table>
-             
-  
-            </div>
-  
-            <div class="col-sm-1"></div>
-  
-          </div>
-        </ng-template>
+        </mat-tab>
+
+            <!-- May -->
+            <mat-tab label="May">
+             <table class="table ">
+                <thead class="table-danger">
+                  <tr>
+                    <th width="80px" style=" text-align:center">Month</th>
+                    <th width="120px">Department</th>
+                    <th width="130px">Next person</th>
+                    <th width="200px">Request No.</th>
+                    <th width="200px" style=" text-align:center">Title</th>
+                    <th style=" text-align:center">Issuer</th>
+                  </tr>
+                </thead>
+              </table>
+              <table class="table ">
+                <tbody>
+                  <tr *ngFor="let item of table let i = index">
+                      <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                        <div *ngIf="item.MONTH == 'May'">
+                      <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                        <div class="row">
+                          <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                          <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                          <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                          <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
+                        </div>
+                      </button>
+                    </div>
+                    </div>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-tab>
+            <!-- June  -->
+            <mat-tab label="June">
+              <table class="table ">
+                <thead class="table-danger">
+                  <tr>
+                    <th width="80px" style=" text-align:center">Month</th>
+                    <th width="120px">Department</th>
+                    <th width="130px">Next person</th>
+                    <th width="200px">Request No.</th>
+                    <th width="200px" style=" text-align:center">Title</th>
+                    <th style=" text-align:center">Issuer</th>
+                  </tr>
+                </thead>
+              </table>
+              <table class="table ">
+                <tbody>
+                  <tr *ngFor="let item of table let i = index">
+                    <div *ngIf="item.MONTH == 'June'">
+                      <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                      <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                        <div class="row">
+                          <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                          <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                          <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                          <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
+                        </div>
+                      </button>
+                    </div>
+                    </div>
+                  </tr>
+                </tbody>
+              </table>
+
+            </mat-tab>
+            <!-- July  -->
+            <mat-tab label="July">
+              <table class="table ">
+                <thead class="table-danger">
+                  <tr>
+                    <th width="80px" style=" text-align:center">Month</th>
+                    <th width="120px">Department</th>
+                    <th width="130px">Next person</th>
+                    <th width="200px">Request No.</th>
+                    <th width="200px" style=" text-align:center">Title</th>
+                    <th style=" text-align:center">Issuer</th>
+                  </tr>
+                </thead>
+              </table>
+              <table class="table ">
+                <tbody>
+                  <tr *ngFor="let item of table let i = index">
+                    <div *ngIf="item.MONTH == 'July'">
+                      <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                      <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                        <div class="row">
+                          <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                          <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                          <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                          <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
+                        </div>
+                      </button>
+                    </div>
+                    </div>
+                  </tr>
+                </tbody>
+              </table>
+
+            </mat-tab>
+          </mat-tab-group>
+
+        </div>
+
+        <div class="col-sm-1"></div>
+
       </div>
-    </div>
+    </ng-template>
   </div>
+</div>

@@ -9,7 +9,7 @@
         <div class="col-xl-1"></div>
         <div class="col-xl-7 center" style="padding :15px 0 ;">
           <button mat-button>Home</button>
-          <button mat-button (click)="Goanalysishome()">Analysis request form</button>
+          <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
           <button mat-button>Equipment Calendar</button>
           <button mat-button>Job tracking</button>
           <button mat-button>Search previous report</button>
@@ -338,95 +338,92 @@
 
         <mat-card class="card1" style="margin-top: 10px;">
           <mat-card-title-group>
-            <mat-card-title>Estimate cost</mat-card-title>
+            <mat-card-title>
+              Estimate Cost
+            </mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
             <table class="table table-bordered Titlereview ">
-              <thead>
+              <thead >
                 <tr>
-                  <th>Step</th>
-                  <th>Technique</th>
-                  <th>Quantity</th>
-                  <th>Technique cost/1pc.</th>
-                  <th>Estimate cost</th>
+                  <th width="70px" >Step</th>
+                  <th >Technique</th>
+                  <th width="150px">Quantity</th>
+                  <th >Basic Charge (THB/Request)</th>
+                  <th>Operation Charge (THB)</th>
+                  <th>Estimate Cost (THB)</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>Step 1</th>
-                  <td>VHX</td>
-                  <td>5 pcs</td>
-                  <td>200 Baht/pc</td>
-                  <td>1000 Baht</td>
-                </tr>
-                <tr>
-                  <th>Step2</th>
-                  <td>X-ray3D</td>
-                  <td>5 pcs</td>
-                  <td>500 Baht/pc</td>
-                  <td>2500 Bath</td>
-                </tr>
-                <tr>
-                  <th>Step3</th>
-                  <td>SEM</td>
-                  <td>5 pcs</td>
-                  <td>600 Baht/pc</td>
-                  <td>3000 Bat</td>
-                </tr>
-                <tr>
-                  <th>Total</th>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>65XX Bath</td>
-                </tr>
+                <tr *ngFor="let item of sam2 let i = index">
+                  <th>{{item.step}}</th>
+                  <td>{{item.equip}}</td>
+                  <td>{{item.quantity}}</td>
+                  <td>{{item.basiccharge}}</td>
+                  <td>{{item.operationcharge}}</td>
+                  <td>{{item.estimatecost}}</td>
+                </tr>                   
               </tbody>
             </table>
+
+            <div class="row">
+              <div class="col-sm-8"></div>
+              <div class="col-sm-1">
+                <div style="color: red;">Approved</div>
+              </div>
+              <div class="col-sm-3">
+                <div class="row">
+                  <div class="col-sm-5">
+                    <b>Total cost :</b>
+                  </div>
+                  <div class="col-sm-7">
+                    {{this.Totalcost.toFixed(2)}} THB
+                  </div>
+                </div>
+              </div>
+            </div>
           </mat-card-content>
         </mat-card>
 
         <mat-card class="card1" style="margin-top: 10px;">
           <mat-card-title-group>
-            <mat-card-title>Booking Techniques</mat-card-title>
+            <mat-card-title>
+              <div *ngIf="this.namelocal == this.Analyzer;else elseBlock1">
+                <div class="row">
+                  <div class="col-sm-10" style="padding-top:10px ;">Booking Techniques</div>
+                  <div class="col-sm-2">
+                      <button mat-mini-fab color="primary" class="button3" (click)="Goedit()" >
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #elseBlock1>
+                  <div style="padding-top:10px ;">Booking Techniques</div>
+                </ng-template>  
+            </mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
             <table class="table table-bordered Titlereview ">
-              <thead>
+              <thead >
                 <tr>
-                  <th>Step</th>
-                  <th>Technique</th>
-                  <th>Quantity</th>
-                  <th>Standard time/1pc.</th>
+                  <th width="70px" >Step</th>
+                  <th >Technique</th>
+                  <th width="150px">Quantity</th>
+                  <th >Standard time/1pc.</th>
                   <th>Standard time</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>Step 1</th>
-                  <td>VHX</td>
-                  <td>5 pcs</td>
-                  <td>30 min/pc</td>
-                  <td>150 min</td>
-                  <td>inital</td>
-                </tr>
-                <tr>
-                  <th>Step2</th>
-                  <td>X-ray3D</td>
-                  <td>5 pcs</td>
-                  <td>30 min/pc</td>
-                  <td>150 min</td>
-                  <td>inital</td>
-                </tr>
-                <tr>
-                  <th>Step3</th>
-                  <td>SEM</td>
-                  <td>5 pcs</td>
-                  <td>30 min/pc</td>
-                  <td>150 min</td>
-                  <td>inital</td>
-                </tr>
-
+                <tr *ngFor="let item of time2 let i = index">
+                  <th>{{item.step}}</th>
+                  <td>{{item.equip}}</td>
+                  <td>{{item.quantity}}</td>
+                  <td>{{item.timeperpicec}}</td>
+                  <td>{{item.standardtime}}</td>
+                  <td>{{item.statusstep}}</td>
+                </tr>                   
               </tbody>
             </table>
             <div class="center">
@@ -575,10 +572,1550 @@
             </mat-card>
           </div>
         </ng-template>
+
+          <div style=" padding-bottom: 15px">
+            <mat-card class="card1">
+              <mat-card-title-group>
+                <mat-card-title>Customer Satisfaction Evaluation  </mat-card-title>
+                <mat-card-subtitle>ประเมินความพึงพอใจและประสิทธิภาพของงานบริการ หลังจากเสร็จสินงานนี้</mat-card-subtitle>
+              </mat-card-title-group>
+              <mat-card-content>
+
+                <div class="row">
+                  <div class="col-sm-2" style="padding-left: 70px;">
+                    <b>Criteria</b>
+                  </div>
+                  <div class="col-sm-4">
+                    <div>1 = ควรปรับปรุง / ไม่เห็นด้วยอย่างยิ่ง</div>
+                    <div>2 = น้อย / ไม่เห็นด้วย</div>
+                    <div>3 = พอใช้ / ปานกลาง</div>
+                    <div>4 = ดี / เห็นด้วย</div>
+                    <div>5 = ดีมาก / เห็นด้วยเป็นอย่างยิ่ง</div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div>1= Bad / very delay and can't not use result.</div>
+                    <div>2= Poor / delay and can't not use result.</div>
+                    <div>3= Fair / Meet target and understand, can solve problem.</div>
+                    <div>4 = Good / Meet target, Standard derivery</div>
+                    <div>5 = Excellent / Get more benefit, fast speed, easy understand.</div>
+                  </div>
+                </div>
+
+                <div  *ngIf="this.csvalid; else completeCS">
+                  
+                  <div style="padding-top: 10px;">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class= "Titlereview" width="400px">Satisfaction item</th>
+                          <th class= "Titlereview" width="600px">Performance</th>
+                   
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Delivery on time</td>
+                          <td>
+                          <div class="row">
+                            <div class="col-sm-2">
+                              <div class="form-check-inline">
+                                <label class="form-check-label" for="radio2">
+                                  <input type="radio" class="form-check-input" id="radio2" name="score1" value="option2"
+                                  (click)="getdatascore1('1')"> 1 points
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-check-inline">
+                                <label class="form-check-label" for="radio3">
+                                  <input type="radio" class="form-check-input" id="radio3" name="score1" value="option3"
+                                  (click)="getdatascore1('2')"> 2 points
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-check-inline">
+                                <label class="form-check-label" for="radio3">
+                                  <input type="radio" class="form-check-input" id="radio3" name="score1" value="option3"
+                                  (click)="getdatascore1('3')"> 3 points
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-check-inline">
+                                <label class="form-check-label" for="radio3">
+                                  <input type="radio" class="form-check-input" id="radio3" name="score1" value="option3"
+                                  (click)="getdatascore1('4')"> 4 points
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-sm-2">
+                              <div class="form-check-inline">
+                                <label class="form-check-label" for="radio3">
+                                  <input type="radio" class="form-check-input" id="radio3" name="score1" value="option3"
+                                  (click)="getdatascore1('5')"> 5 points
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-sm-2">  
+                              {{this.reason1 }}                      
+                            </div>
+                          </div>     
+                          </td>
+                      
+                        </tr>
+                        <tr>
+                          <td>Analysis result is clear and meet target</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio2">
+                                    <input type="radio" class="form-check-input" id="radio2" name="score2" value="option2"
+                                    (click)="getdatascore2('1')"> 1 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score2" value="option3"
+                                    (click)="getdatascore2('2')"> 2 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score2" value="option3"
+                                    (click)="getdatascore2('3')"> 3 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score2" value="option3"
+                                    (click)="getdatascore2('4')"> 4 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score2" value="option3"
+                                    (click)="getdatascore2('5')"> 5 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2"> 
+                                {{this.reason2 }}                          
+                              </div>
+                            </div> 
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>The analysis equipment has enough ability to detect the required analysis point</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio2">
+                                    <input type="radio" class="form-check-input" id="radio2" name="score3" value="option2"
+                                    (click)="getdatascore3('1')"> 1 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score3" value="option3"
+                                    (click)="getdatascore3('2')"> 2 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score3" value="option3"
+                                    (click)="getdatascore3('3')"> 3 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score3" value="option3"
+                                    (click)="getdatascore3('4')"> 4 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score3" value="option3"
+                                    (click)="getdatascore3('5')"> 5 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                {{this.reason3 }}                           
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>The service mind communication and cooperation</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio2">
+                                    <input type="radio" class="form-check-input" id="radio2" name="score4" value="option2"
+                                    (click)="getdatascore4('1')"> 1 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score4" value="option3"
+                                    (click)="getdatascore4('2')"> 2 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score4" value="option3"
+                                    (click)="getdatascore4('3')"> 3 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score4" value="option3"
+                                    (click)="getdatascore4('4')"> 4 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score4" value="option3"
+                                    (click)="getdatascore4('5')"> 5 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2"> 
+                                {{this.reason4 }}                          
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Analyzer can guide and suggest analysis method, sample preparation, or data interpretation,etc.</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio2">
+                                    <input type="radio" class="form-check-input" id="radio2" name="score5" value="option2"
+                                    (click)="getdatascore5('1')"> 1 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score5" value="option3"
+                                    (click)="getdatascore5('2')"> 2 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score5" value="option3"
+                                    (click)="getdatascore5('3')"> 3 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score5" value="option3"
+                                    (click)="getdatascore5('4')"> 4 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">
+                                <div class="form-check-inline">
+                                  <label class="form-check-label" for="radio3">
+                                    <input type="radio" class="form-check-input" id="radio3" name="score5" value="option3"
+                                    (click)="getdatascore5('5')"> 5 points
+                                  </label>
+                                </div>
+                              </div>
+                              <div class="col-sm-2">    
+                                {{this.reason5 }}                       
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <ng-template #completeCS>
+                  <div style="padding-top: 10px;">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th class= "Titlereview" width="400px">Satisfaction item</th>
+                          <th class= "Titlereview" width="600px">Performance</th>
+                   
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Delivery on time</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <b>{{this.outputCS2[0].score}}  point</b>
+                              </div>
+                              <div class="col-sm-10">
+                                : {{this.outputCS2[0].reason}}
+                              </div>
+                             </div>
+                          </td>
+                      
+                        </tr>
+                        <tr>
+                          <td>Analysis result is clear and meet target</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <b>{{this.outputCS2[1].score}}  point</b>
+                              </div>
+                              <div class="col-sm-10">
+                                : {{this.outputCS2[1].reason}}
+                              </div>
+                             </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>The analysis equipment has enough ability to detect the required analysis point</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <b>{{this.outputCS2[2].score}}  point</b>
+                              </div>
+                              <div class="col-sm-10">
+                                : {{this.outputCS2[2].reason}}
+                              </div>
+                             </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>The service mind communication and cooperation</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <b>{{this.outputCS2[3].score}}  point</b>
+                              </div>
+                              <div class="col-sm-10">
+                                : {{this.outputCS2[3].reason}}
+                              </div>
+                             </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Analyzer can guide and suggest analysis method, sample preparation, or data interpretation,etc.</td>
+                          <td>
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <b>{{this.outputCS2[4].score}}  point</b>
+                              </div>
+                              <div class="col-sm-10">
+                                : {{this.outputCS2[4].reason}}
+                              </div>
+                             </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  </ng-template>
+                  
+              </mat-card-content>
+            </mat-card>
+          </div>
       </div>
       <div class="col-sm-1">
       </div>
     </div>
   </div>
 </ng-template>
-<app-summaryresult></app-summaryresult>
+
+<div *ngIf="isValid1">
+<div style=" padding-bottom: 15px">
+  <mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Review Information</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div>
+        <table class="table ">
+          <thead>
+            <tr>
+              <th width="70px" class=" Titlereview">Task</th>
+              <th width="70px" class=" Titlereview">Process</th>
+              <th width="120px" class=" Titlereview">Name</th>
+              <th width="100px" class=" Titlereview">Processing date&time</th>
+              <th width="100px" class=" Titlereview">Comment</th>
+              <th width="120px" class=" Titlereview">cc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class=" Titlereview">Pending request</th>
+              <td class=" Titlereview">Issuer</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].ISSUE_DATE}}
+                </div>
+              </td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.confirmcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Analysis section</th>
+              <td class=" Titlereview"> Controller</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.controlcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Analyst</td>
+              <td class=" Titlereview" >
+                {{this.DataRes[0].REVI_ANASEC_ANAL}}
+              </td>
+              <td class=" Titlereview">
+                <div class="center" style="padding-top: 15px;">
+                  <button mat-raised-button color="primary" class="button2" (click)="AnalystApprove()">Approve
+                  </button>
+                </div>
+              </td>
+              <td class=" Titlereview"> 
+                <mat-form-field class="widthcom" appearance="outline">
+                <mat-label>Leave a comment</mat-label>
+                <textarea matInput [(ngModel)]="this.ComAnalyzer"></textarea>
+              </mat-form-field>
+            </td>
+              <td class=" Titlereview">
+                <mat-hint> *Click "Add" to confirm name</mat-hint>
+            <form class="example-form">
+                <mat-form-field class="widthcom" appearance="outline">
+                  <mat-label>Select Name</mat-label>
+                  <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+              <div class="center">
+                <button mat-button (click)="addIN()">Add</button>
+              </div> 
+              <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+              <table>
+                <tbody>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div *ngIf="item != ''">
+                        <td>
+                          <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                   </div>
+                  </div>
+                    <div class="col-sm-9">
+                  <td>{{item}}</td>
+                  <br>
+                </div>
+                
+              </div>
+                  </tbody>
+              </table>
+            </tr>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Report approval</th>
+              <td class=" Titlereview">Check</td>
+              <td class=" Titlereview" >
+                <form class="example-form">
+                  <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.Check">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm </td>
+              <td class=" Titlereview" >
+                <form class="example-form">
+                  <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.Confirm">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Report approval</td>
+              <td class=" Titlereview" >
+                <form class="example-form">
+                  <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.approval">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">CS Evaluation</th>
+              <td class=" Titlereview">Issuer </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"> </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Completed</th>
+              <td class=" Titlereview">Close </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+<div *ngIf="isValid2">
+<div style=" padding-bottom: 15px">
+  <mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Review Information</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div>
+        <table class="table ">
+          <thead>
+            <tr>
+              <th width="70px" class=" Titlereview">Task</th>
+              <th width="70px" class=" Titlereview">Process</th>
+              <th width="120px" class=" Titlereview">Name</th>
+              <th width="100px" class=" Titlereview">Processing date&time</th>
+              <th width="100px" class=" Titlereview">Comment</th>
+              <th width="120px" class=" Titlereview">cc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class=" Titlereview">Pending request</th>
+              <td class=" Titlereview">Issuer</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].ISSUE_DATE}}
+                </div>
+              </td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.issuercc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.confirmcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Analysis section</th>
+              <td class=" Titlereview"> Controller</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.controlcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Analyst</td>
+              <td class=" Titlereview" >
+                {{this.DataRes[0].REVI_ANASEC_ANAL}}
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                 <p *ngFor="let item of this.Analycc let i = index" >
+            {{item}}
+          </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Report approval</th>
+              <td class=" Titlereview">Check</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+              </td>
+              <td class=" Titlereview">
+                <div class="center" style="padding-top: 15px;">
+                  <button mat-raised-button color="primary" class="button2" (click)="CheckerApprov()">Approve
+                  </button>
+                </div>
+                <div class="center" style="padding-top: 15px;">
+                  <button mat-raised-button color="primary" class="button4" (click)="CheckerApprov()">Revise
+                  </button>
+                </div>
+              </td>
+              <td class=" Titlereview"> 
+                <mat-form-field class="widthcom" appearance="outline">
+                <mat-label>Leave a comment</mat-label>
+                <textarea matInput [(ngModel)]="this.ComChack"></textarea>
+              </mat-form-field>
+            </td>
+              <td class=" Titlereview">
+                <mat-hint> *Click "Add" to confirm name</mat-hint>
+            <form class="example-form">
+                <mat-form-field class="widthcom" appearance="outline">
+                  <mat-label>Select Name</mat-label>
+                  <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+              <div class="center">
+                <button mat-button (click)="addIN()">Add</button>
+              </div> 
+              <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+              <table>
+                <tbody>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div *ngIf="item != ''">
+                        <td>
+                          <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                   </div>
+                  </div>
+                    <div class="col-sm-9">
+                  <td>{{item}}</td>
+                  <br>
+                </div>
+                
+              </div>
+                  </tbody>
+              </table>
+            </tr>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm </td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Report approval</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">CS Evaluation</th>
+              <td class=" Titlereview">Issuer </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"> </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Completed</th>
+              <td class=" Titlereview">Close </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+<div *ngIf="isValid3">
+<div style=" padding-bottom: 15px">
+  <mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Review Information</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div>
+        <table class="table ">
+          <thead>
+            <tr>
+              <th width="70px" class=" Titlereview">Task</th>
+              <th width="70px" class=" Titlereview">Process</th>
+              <th width="120px" class=" Titlereview">Name</th>
+              <th width="100px" class=" Titlereview">Processing date&time</th>
+              <th width="100px" class=" Titlereview">Comment</th>
+              <th width="120px" class=" Titlereview">cc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class=" Titlereview">Pending request</th>
+              <td class=" Titlereview">Issuer</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].ISSUE_DATE}}
+                </div>
+              </td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.confirmcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Analysis section</th>
+              <td class=" Titlereview"> Controller</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.controlcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Analyst</td>
+              <td class=" Titlereview" >
+                {{this.DataRes[0].REVI_ANASEC_ANAL}}
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                 <p *ngFor="let item of this.Analycc let i = index" >
+            {{item}}
+          </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Report approval</th>
+              <td class=" Titlereview">Check</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.chackcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm </td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+              </td>
+              <td>
+              <div class="center" style="padding-top: 15px;">
+                <button mat-raised-button color="primary" class="button2" (click)="ConfirmApprov()">Approve
+                </button>
+              </div>
+              <div class="center" style="padding-top: 15px;">
+                <button mat-raised-button color="primary" class="button4" (click)="ConfirmApprov()">Revise
+                </button>
+              </div>
+            </td>
+              <td class=" Titlereview"> 
+                <mat-form-field class="widthcom" appearance="outline">
+                <mat-label>Leave a comment</mat-label>
+                <textarea matInput [(ngModel)]="this.comConfirm"></textarea>
+              </mat-form-field>
+            </td>
+              <td class=" Titlereview">
+                <mat-hint> *Click "Add" to confirm name</mat-hint>
+            <form class="example-form">
+                <mat-form-field class="widthcom" appearance="outline">
+                  <mat-label>Select Name</mat-label>
+                  <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+              <div class="center">
+                <button mat-button (click)="addIN()">Add</button>
+              </div> 
+              <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+              <table>
+                <tbody>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div *ngIf="item != ''">
+                        <td>
+                          <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                   </div>
+                  </div>
+                    <div class="col-sm-9">
+                  <td>{{item}}</td>
+                  <br>
+                </div>
+                
+              </div>
+                  </tbody>
+              </table>
+            </tr>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Report approval</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">CS Evaluation</th>
+              <td class=" Titlereview">Issuer </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"> </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Completed</th>
+              <td class=" Titlereview">Close </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+<div *ngIf="isValid4">
+<div style=" padding-bottom: 15px">
+  <mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Review Information</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div>
+        <table class="table ">
+          <thead>
+            <tr>
+              <th width="70px" class=" Titlereview">Task</th>
+              <th width="70px" class=" Titlereview">Process</th>
+              <th width="120px" class=" Titlereview">Name</th>
+              <th width="100px" class=" Titlereview">Processing date&time</th>
+              <th width="100px" class=" Titlereview">Comment</th>
+              <th width="120px" class=" Titlereview">cc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class=" Titlereview">Pending request</th>
+              <td class=" Titlereview">Issuer</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].ISSUE_DATE}}
+                </div>
+              </td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.confirmcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Analysis section</th>
+              <td class=" Titlereview"> Controller</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.controlcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Analyst</td>
+              <td class=" Titlereview" >
+                {{this.DataRes[0].REVI_ANASEC_ANAL}}
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                 <p *ngFor="let item of this.Analycc let i = index" >
+            {{item}}
+          </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Report approval</th>
+              <td class=" Titlereview">Check</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.chackcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm </td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+              </td>
+              <td>
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_TIME}}</p>
+            </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_CC}}</p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Report approval</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+              </td>
+              <td>
+                <div class="center" style="padding-top: 15px;">
+                  <button mat-raised-button color="primary" class="button2" (click)="ApproverApprov()">Approve
+                  </button>
+                </div>
+                <div class="center" style="padding-top: 15px;">
+                  <button mat-raised-button color="primary" class="button4" (click)="ApproverApprov()">Revise
+                  </button>
+                </div>
+              </td>
+                <td class=" Titlereview"> 
+                  <mat-form-field class="widthcom" appearance="outline">
+                  <mat-label>Leave a comment</mat-label>
+                  <textarea matInput [(ngModel)]="this.comapproval"></textarea>
+                </mat-form-field>
+              </td>
+                <td class=" Titlereview">
+                  <mat-hint> *Click "Add" to confirm name</mat-hint>
+              <form class="example-form">
+                  <mat-form-field class="widthcom" appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+                <div class="center">
+                  <button mat-button (click)="addIN()">Add</button>
+                </div> 
+                <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+                <table>
+                  <tbody>
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div *ngIf="item != ''">
+                          <td>
+                            <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                              <mat-icon>delete</mat-icon>
+                            </button>
+                          </td>
+                     </div>
+                    </div>
+                      <div class="col-sm-9">
+                    <td>{{item}}</td>
+                    <br>
+                  </div>
+                  
+                </div>
+                    </tbody>
+                </table>
+              </tr>
+                </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">CS Evaluation</th>
+              <td class=" Titlereview">Issuer </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"> </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Completed</th>
+              <td class=" Titlereview">Close </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+<div *ngIf="isValid5">
+<div style=" padding-bottom: 15px">
+  <mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Review Information</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div>
+        <table class="table ">
+          <thead>
+            <tr>
+              <th width="70px" class=" Titlereview">Task</th>
+              <th width="70px" class=" Titlereview">Process</th>
+              <th width="120px" class=" Titlereview">Name</th>
+              <th width="100px" class=" Titlereview">Processing date&time</th>
+              <th width="100px" class=" Titlereview">Comment</th>
+              <th width="120px" class=" Titlereview">cc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class=" Titlereview">Pending request</th>
+              <td class=" Titlereview">Issuer</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].ISSUE_DATE}}
+                </div>
+              </td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.confirmcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Analysis section</th>
+              <td class=" Titlereview"> Controller</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.controlcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Analyst</td>
+              <td class=" Titlereview" >
+                {{this.DataRes[0].REVI_ANASEC_ANAL}}
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                 <p *ngFor="let item of this.Analycc let i = index" >
+            {{item}}
+          </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Report approval</th>
+              <td class=" Titlereview">Check</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.chackcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm </td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+              </td>
+              <td>
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_TIME}}</p>
+            </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_CC}}</p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Report approval</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+              </td>
+              <td>
+                <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_TIME}}</p>
+              </td>
+                <td class=" Titlereview"> 
+                  <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_COM}}</p>
+              </td>
+                <td class=" Titlereview">
+                  <p *ngFor="let item of this.approvalcc let i = index" >
+                    {{item}}
+                  </p>
+                </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">CS Evaluation</th>
+              <td class=" Titlereview">Issuer </td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_PAND_ISSUER}}</p>
+              </td>
+              <td class=" Titlereview">
+                <div class="center" style="padding-top: 10px;">
+                <button mat-raised-button color="primary" class="button2" (click)="CsApprove()">Save
+                </button>
+              </div> 
+            </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Completed</th>
+              <td class=" Titlereview">Close </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+
+<div *ngIf="isValid6">
+<div style=" padding-bottom: 15px">
+  <mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Review Information</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div>
+        <table class="table ">
+          <thead>
+            <tr>
+              <th width="70px" class=" Titlereview">Task</th>
+              <th width="70px" class=" Titlereview">Process</th>
+              <th width="120px" class=" Titlereview">Name</th>
+              <th width="100px" class=" Titlereview">Processing date&time</th>
+              <th width="100px" class=" Titlereview">Comment</th>
+              <th width="120px" class=" Titlereview">cc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class=" Titlereview">Pending request</th>
+              <td class=" Titlereview">Issuer</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].ISSUE_DATE}}
+                </div>
+              </td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.confirmcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Analysis section</th>
+              <td class=" Titlereview"> Controller</td>
+              <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+              <td class=" Titlereview">
+                <div class = "center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.controlcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Analyst</td>
+              <td class=" Titlereview" >
+                {{this.DataRes[0].REVI_ANASEC_ANAL}}
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_ANASEC_ANAL_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                 <p *ngFor="let item of this.Analycc let i = index" >
+            {{item}}
+          </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Report approval</th>
+              <td class=" Titlereview">Check</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK}}</p>
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_TIME}}</p>
+              </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_REAPPROV_CHECK_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.chackcc let i = index" >
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm </td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM}}</p>
+              </td>
+              <td>
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_TIME}}</p>
+            </td>
+              <td class=" Titlereview"> 
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_COM}}</p>
+            </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_REAPPROV_CONFIRM_CC}}</p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Report approval</td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_REAPPROV_APPROV}}</p>
+              </td>
+              <td>
+                <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_TIME}}</p>
+              </td>
+                <td class=" Titlereview"> 
+                  <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_COM}}</p>
+              </td>
+                <td class=" Titlereview">
+                  <p *ngFor="let item of this.approvalcc let i = index" >
+                    {{item}}
+                  </p>
+                </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">CS Evaluation</th>
+              <td class=" Titlereview">Issuer </td>
+              <td class=" Titlereview" >
+                <p>{{this.DataRes[0].REVI_PAND_ISSUER}}</p>
+              </td>
+              <td class=" Titlereview">
+                <p>{{this.DataRes[0].REVI_REAPPROV_APPROV_TIME}}</p>
+            </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Completed</th>
+              <td class=" Titlereview">Close </td>
+              <td class=" Titlereview" ></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
