@@ -37,13 +37,19 @@ export class TrackingstatusComponent implements OnInit {
   operationtime = ""
   operationtime2: any
   operationtime3: any
+  operationtimere2: any
+  operationtimere3: any
   DataIssue : any
 
   isValidIssueRe = true
+  isValidshowIssueRe = true
+  isValidstatusre = true
 
   breaktime = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   breaktime2: any
   breaktime3: any
+  breaktimere2 : any
+  breaktimere3 : any
 
   breaktimereport = 0
 
@@ -149,6 +155,15 @@ export class TrackingstatusComponent implements OnInit {
           if (this.DataIssue[0].START_TIME != null) {
             this.isValidIssueRe = false
           }
+
+          if(this.DataIssue[0].REQ_NUM != null){
+            if(this.DataIssue[0].OPERATION_TIME != null){
+              this.isValidshowIssueRe = true
+              this.isValidstatusre = false
+            }else {
+              this.isValidshowIssueRe = false
+            }
+          }
         })
       })
     })
@@ -178,23 +193,303 @@ export class TrackingstatusComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
-      this.isValidIssueRe = false
+     
+      this.isValidshowIssueRe = false
       location.reload();
     })
   }
   calreporttime(){
+    console.log(this.DataIssue[0].START_TIME.split(" "))
+    var timecalStart = this.DataIssue[0].START_TIME.split(" ")
 
+    if (timecalStart[2] == "PM") {
+      const [hoursEND, minutesEND, secondsEND] = timecalStart[1].split(':');
+      if(hoursEND == 12){
+        hoursEND2 = 12
+        timecalStart[1] = hoursEND2+":"+minutesEND+":"+secondsEND
+        console.log(timecalStart[1])
+      }else{
+        console.log(this.dateto24(timecalStart[1]))
+        timecalStart[1] = this.dateto24(timecalStart[1])
+      }
+    }
+    timecalStart[0] = timecalStart[0].substring(0, timecalStart[0].length - 1);
+   
+    const [month, day, year] = timecalStart[0].split('/');
+    const [hours, minutes, seconds] = timecalStart[1].split(':');
+
+    const date3 = new Date(+year, +month, +day, +hours, +minutes, +seconds);
+    console.log(date3); // 👉️ Fri Jun 24 2022 09:30:05
+
+    // End
+    console.log(this.DataIssue[0].END_TIME.split(" "))
+    var timecalEND = this.DataIssue[0].END_TIME.split(" ")
+    var hoursEND2
+    if (timecalEND[2] == "PM") {
+      const [hoursEND, minutesEND, secondsEND] = timecalEND[1].split(':');
+      if(hoursEND == 12){
+        hoursEND2 = 12
+        timecalEND[1] = hoursEND2+":"+minutesEND+":"+secondsEND
+        console.log(timecalEND[1])
+      }else{
+        console.log(this.dateto24(timecalEND[1]))
+        timecalEND[1] = this.dateto24(timecalEND[1])
+      }
+    }
+    timecalEND[0] = timecalEND[0].substring(0, timecalEND[0].length - 1);
+
+    const [monthEND, dayEND, yearEND] = timecalEND[0].split('/');
+    const [hoursEND, minutesEND, secondsEND] = timecalEND[1].split(':');
+
+    const date4 = new Date(+yearEND, +monthEND, +dayEND, +hoursEND, +minutesEND, +secondsEND);
+    console.log(date4); // 👉️ Fri Jun 24 2022 09:30:05
+    // calculate
+    var numDate = new Date(date4.getTime() - date3.getTime());
+    console.log(numDate)
+    // 3600000 ms
+    this.operationtime = this.msToTime(numDate)
+    console.log(this.operationtime)
+    this.operationtimere2 = this.operationtime.split(':');
+    console.log(this.operationtimere2[0])
+
+    this.breaktimere2 = this.breaktimereport / 60
+    console.log(this.breaktimere2)
+    // 1.88
+    this.breaktimere2 = this.breaktimere2.toString();
+    this.breaktimere2 = this.breaktimere2.split('.');
+    console.log(this.breaktimere2[0])
+    // 1 houre
+    this.breaktimere3 = this.breaktimereport % 60
+    console.log(this.breaktimere3)
+    // 50 min
+    var min
+    var houre
+    if(this.operationtimere2[0] == 0){
+      if (this.operationtimere2[1] - this.breaktimere3 < 0){
+        alert("Hello! I am an alert box!");
+      }else{
+        min = this.operationtimere2[1] - this.breaktimere3
+      houre = this.operationtimere2[0] - this.breaktimere2[0]
+
+      min = min.toString();
+      if (min.length == 1) {
+        min = "0" + min
+        this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+        console.log(this.operationtimere3)
+      } else {
+        this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+        console.log(this.operationtimere3)
+      }
+  
+      var qtest = ""
+      qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`issue_report` " +
+        " SET  `BREAK_TIME` = '" + this.breaktimereport + "', `OPERATION_TIME` = '" + this.operationtimere3 + "' " +
+        " WHERE (`ID_ISSUEREPORT` = '" + this.DataIssue[0].ID_ISSUEREPORT + "')  ; "
+      console.log(qtest);
+      this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+        console.log(data);
+        location.reload();
+      })
+
+      }
+    }else{
+      if (this.operationtimere2[1] - this.breaktimere3 < 0) {
+        min = this.breaktimere3 - this.operationtimere2[1]
+        console.log(min)
+        min = 60 - min
+        houre = this.operationtimere2[0] - 1
+        console.log(min)
+        houre = this.operationtimere2[0] - this.breaktimere2[0]
+        console.log(houre)
+  
+        min = min.toString();
+        if (min.length == 1) {
+          min = "0" + min
+          this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+          console.log(this.operationtimere3)
+        } else {
+          this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+          console.log(this.operationtimere3)
+        }
+  
+      } else {
+        min = this.operationtimere2[1] - this.breaktimere3
+        houre = this.operationtimere2[0] - this.breaktimere2[0]
+  
+        min = min.toString();
+        if (min.length == 1) {
+          min = "0" + min
+          this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+          console.log(this.operationtimere3)
+        } else {
+          this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+          console.log(this.operationtimere3)
+        }
+      }
+      var qtest = ""
+      qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`issue_report` " +
+        " SET  `BREAK_TIME` = '" + this.breaktimereport + "', `OPERATION_TIME` = '" + this.operationtimere3 + "' " +
+        " WHERE (`ID_ISSUEREPORT` = '" + this.DataIssue[0].ID_ISSUEREPORT + "')  ; "
+      console.log(qtest);
+      this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+        console.log(data);
+        location.reload();
+      })
+    }
  
-    var qtest = ""
-    qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`issue_report` " +
+    var qtest2 = ""
+    qtest2 = qtest2 + "INSERT INTO `mtq10_project_tracking_analysis`.`issue_report` " +
       " (`REQ_NUM`) VALUES ('" + this.DataRes[0].REQ_NUM + "'); " 
-    console.log(qtest);
-    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest2).subscribe((data: {}) => {
       console.log(data);
       this.isValidIssueRe = false
       location.reload();
     })
   }
+
+  finishreport(){
+    console.log(this.DataIssue[0].START_TIME.split(" "))
+    var timecalStart = this.DataIssue[0].START_TIME.split(" ")
+
+    if (timecalStart[2] == "PM") {
+      const [hoursEND, minutesEND, secondsEND] = timecalStart[1].split(':');
+      if(hoursEND == 12){
+        hoursEND2 = 12
+        timecalStart[1] = hoursEND2+":"+minutesEND+":"+secondsEND
+        console.log(timecalStart[1])
+      }else{
+        console.log(this.dateto24(timecalStart[1]))
+        timecalStart[1] = this.dateto24(timecalStart[1])
+      }
+    }
+    timecalStart[0] = timecalStart[0].substring(0, timecalStart[0].length - 1);
+   
+    const [month, day, year] = timecalStart[0].split('/');
+    const [hours, minutes, seconds] = timecalStart[1].split(':');
+
+    const date3 = new Date(+year, +month, +day, +hours, +minutes, +seconds);
+    console.log(date3); // 👉️ Fri Jun 24 2022 09:30:05
+
+    // End
+    console.log(this.DataIssue[0].END_TIME.split(" "))
+    var timecalEND = this.DataIssue[0].END_TIME.split(" ")
+    var hoursEND2
+    if (timecalEND[2] == "PM") {
+      const [hoursEND, minutesEND, secondsEND] = timecalEND[1].split(':');
+      if(hoursEND == 12){
+        hoursEND2 = 12
+        timecalEND[1] = hoursEND2+":"+minutesEND+":"+secondsEND
+        console.log(timecalEND[1])
+      }else{
+        console.log(this.dateto24(timecalEND[1]))
+        timecalEND[1] = this.dateto24(timecalEND[1])
+      }
+    }
+    timecalEND[0] = timecalEND[0].substring(0, timecalEND[0].length - 1);
+
+    const [monthEND, dayEND, yearEND] = timecalEND[0].split('/');
+    const [hoursEND, minutesEND, secondsEND] = timecalEND[1].split(':');
+
+    const date4 = new Date(+yearEND, +monthEND, +dayEND, +hoursEND, +minutesEND, +secondsEND);
+    console.log(date4); // 👉️ Fri Jun 24 2022 09:30:05
+    // calculate
+    var numDate = new Date(date4.getTime() - date3.getTime());
+    console.log(numDate)
+    // 3600000 ms
+    this.operationtime = this.msToTime(numDate)
+    console.log(this.operationtime)
+    this.operationtimere2 = this.operationtime.split(':');
+    console.log(this.operationtimere2[0])
+
+    this.breaktimere2 = this.breaktimereport / 60
+    console.log(this.breaktimere2)
+    // 1.88
+    this.breaktimere2 = this.breaktimere2.toString();
+    this.breaktimere2 = this.breaktimere2.split('.');
+    console.log(this.breaktimere2[0])
+    // 1 houre
+    this.breaktimere3 = this.breaktimereport % 60
+    console.log(this.breaktimere3)
+    // 50 min
+    var min
+    var houre
+    if(this.operationtimere2[0] == 0){
+      if (this.operationtimere2[1] - this.breaktimere3 < 0){
+        alert("Hello! I am an alert box!");
+      }else{
+        min = this.operationtimere2[1] - this.breaktimere3
+      houre = this.operationtimere2[0] - this.breaktimere2[0]
+
+      min = min.toString();
+      if (min.length == 1) {
+        min = "0" + min
+        this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+        console.log(this.operationtimere3)
+      } else {
+        this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+        console.log(this.operationtimere3)
+      }
+  
+      var qtest = ""
+      qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`issue_report` " +
+        " SET  `BREAK_TIME` = '" + this.breaktimereport + "', `OPERATION_TIME` = '" + this.operationtimere3 + "' " +
+        " WHERE (`ID_ISSUEREPORT` = '" + this.DataIssue[0].ID_ISSUEREPORT + "')  ; "
+      console.log(qtest);
+      this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+        console.log(data);
+        window.location.href ='http://localhost:4200/Requestinfo?id='+this.DataRes[0].ID
+      })
+
+      }
+    }else{
+      if (this.operationtimere2[1] - this.breaktimere3 < 0) {
+        min = this.breaktimere3 - this.operationtimere2[1]
+        console.log(min)
+        min = 60 - min
+        houre = this.operationtimere2[0] - 1
+        console.log(min)
+        houre = this.operationtimere2[0] - this.breaktimere2[0]
+        console.log(houre)
+  
+        min = min.toString();
+        if (min.length == 1) {
+          min = "0" + min
+          this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+          console.log(this.operationtimere3)
+        } else {
+          this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+          console.log(this.operationtimere3)
+        }
+  
+      } else {
+        min = this.operationtimere2[1] - this.breaktimere3
+        houre = this.operationtimere2[0] - this.breaktimere2[0]
+  
+        min = min.toString();
+        if (min.length == 1) {
+          min = "0" + min
+          this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+          console.log(this.operationtimere3)
+        } else {
+          this.operationtimere3 = houre + ":" + min + ":" + this.operationtimere2[2]
+          console.log(this.operationtimere3)
+        }
+      }
+      var qtest = ""
+      qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`issue_report` " +
+        " SET  `BREAK_TIME` = '" + this.breaktimereport + "', `OPERATION_TIME` = '" + this.operationtimere3 + "' " +
+        " WHERE (`ID_ISSUEREPORT` = '" + this.DataIssue[0].ID_ISSUEREPORT + "')  ; "
+      console.log(qtest);
+      this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+        console.log(data);
+        window.location.href ='http://localhost:4200/Requestinfo?id='+this.DataRes[0].ID
+        location.reload();
+      })
+    }
+ 
+  }
+
   starttime(id: any, Array: any) {
     let date: Date = new Date();
     var date2 = date.toLocaleString()

@@ -1,0 +1,35 @@
+<div class="center" style="padding-top: 70px;">
+    <mat-form-field color="accent" appearance="outline">
+        <mat-label>Expected finish date:</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="this.Datechoose">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="onChangedate()">Find</button>
+<table style="width:1000px ;" class="table table-bordered Titlereview ">
+    <thead>
+      <tr>
+        <th width="70px">NO.</th>
+        <th>Item</th>
+        <th width="150px">PIC</th>
+        <th>Technique</th>
+        <th>Sample Q'ty</th>
+        <th>Operated by</th>
+        <th>Time</th>
+        <th>Result / Actual</th>
+        <th>Remark</th>
+      </tr>
+    </thead>
+    <tbody>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tbody>
+  </table>
+</div>

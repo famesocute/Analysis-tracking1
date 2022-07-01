@@ -7,25 +7,13 @@
             <mat-dialog-content>
             
                 <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
-            
-            
-            
-                    <!-- <input type="text" name="QCC_group_name" value="{{this.QCC_group_name}}" disabled>
-            
-                    <input type="text" name="Register_no" value="{{this.Register_no}}" disabled> -->
-            
-                    <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
-            
-                    <!-- <input type="submit" value="Upload Image" name="submit"> -->
-            
-            
-            
+
                     <div class="mb-3">
             
                         <label for="formGroupExampleInput" class="form-label">Register no.</label>
             
                         <input class="form-control" type="text" name="Register_no" value="{{this.Requestno}}" >
-            
+                        <input class="form-control" type="text" name="section" value="{{this.section}}" hidden>
                         <br>
             
                     </div>
@@ -55,8 +43,10 @@
                     </thead>
                     <tbody>
                       <tr  *ngFor="let item of DataResFlie let i = index" >
+                        <div *ngIf="item.SECTION == 'Fill_inital'">
                         <th class=" Titlereview">{{i+1}}:</th>
                         <td>{{item.FILENAME}} </td>
+                        </div>
                       </tr>
                     </tbody>
                   </table>

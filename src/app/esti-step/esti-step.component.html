@@ -1,48 +1,48 @@
-<div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+<div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
   <span class="sr-only"></span>
 </div>
 <ng-template #elseBlock>
-<div class="container-fluid">
-  <div class="border-bottom Toolbar">
-    <div class="row">
-      <div class="col-xl-1"></div>
-      <div class="col-xl-7 center" style="padding :15px 0 ;">
-        <button mat-button>Home</button>
-        <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
-        <button mat-button>Equipment Calendar</button>
-        <button mat-button>Job tracking</button>
-        <button mat-button>Search previous report</button>
-      </div>
+  <div class="container-fluid">
+    <div class="border-bottom Toolbar">
+      <div class="row">
+        <div class="col-xl-1"></div>
+        <div class="col-xl-7 center" style="padding :15px 0 ;">
+          <button mat-button>Home</button>
+          <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
+          <button mat-button>Equipment Calendar</button>
+          <button mat-button>Job tracking</button>
+          <button mat-button>Search previous report</button>
+        </div>
 
         <div class="col-xl-4 center " *ngIf="isValid;else other_content">
           <div class="row">
-          <div class="col-xl-8">
-       {{this.nameonly}}
-       ({{this.Codelocal}})
-       {{this.departmentlocal}}
-      </div>
-      <div class="col-xl-4">
-       <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+            <div class="col-xl-8">
+              {{this.nameonly}}
+              ({{this.Codelocal}})
+              {{this.departmentlocal}}
+            </div>
+            <div class="col-xl-4">
+              <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+            </div>
+          </div>
         </div>
+
+        <ng-template #other_content>
+          <div class="col-xl-4 center ">
+            <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+            <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+          </div>
+        </ng-template>
+
+
       </div>
     </div>
 
-    <ng-template #other_content>
-    <div class="col-xl-4 center ">
-      <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
-      <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
-    </div>
-  </ng-template>
-
-
-    </div>
-  </div>
-  
     <div class="row">
       <div class="col-sm-1">
-  
+
       </div>
-  
+
       <div class="col-sm-10">
         <div class="row">
           <div class="col-sm-9">
@@ -99,42 +99,65 @@
                 </div>
               </div>
               <div class="col-sm-4">
-               
-                  <div class="row" style=" padding-top : 30px;">
-                    <div class="col-sm-4"><b>Issue Date:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].ISSUE_DATE}}</div>
-                  </div>
-                
-                
-                  <div class="row" style=" padding-top : 10px;">
-                    <div class="col-sm-4"><b>Requester:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
-                  </div>
-               
-               
-                  <div class="row" style=" padding-top : 10px;">
-                    <div class="col-sm-4"><b>Phone:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
-                  </div>
-                
-                
-                  <div class="row" style=" padding-top : 10px;">
-                    <div class="col-sm-4"><b>Department:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
-                  </div>
-                
-              
-                  <div class="row" style=" padding-top : 10px;">
-                    <div class="col-sm-4"><b>Product:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].PRODUCT}}</div>
-                  </div>
-               
-  
+
+                <div class="row" style=" padding-top : 30px;">
+                  <div class="col-sm-4"><b>Issue Date:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].ISSUE_DATE}}</div>
+                </div>
+
+
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Requester:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
+                </div>
+
+
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Phone:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
+                </div>
+
+
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Department:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
+                </div>
+
+
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Product:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].PRODUCT}}</div>
+                </div>
+
+
                 <mat-card class="cardAT">
-  
                 </mat-card>
               </div>
             </div>
+            <div>
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th width="100px" class=" Titlereview">No.</th>
+                      <th width="500px">File Name</th>
+                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of Fill_inital let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td *ngIf="item.FILENAME != '';else other_content">
+                          <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
+                      </td>
+                      <ng-template #other_content>
+  
+                          <td> <img [src]="item.LINK" width="300" height="auto"></td>
+  
+                      </ng-template>
+                  </tr>
+                  </tbody>
+                </table>
+          </div>
           </mat-card-content>
         </mat-card>
         <mat-card class="card1">
@@ -145,7 +168,7 @@
             <h4> <b>{{this.DataRes[0].REQ_ANA_TECHNI}}{{this.DataRes[0].REQ_ANA_TECHNI2}} </b> </h4>
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Sample Information</mat-card-title>
@@ -173,7 +196,7 @@
                     <div class="col-sm-10">{{this.DataRes[0].PIORITY}}</div>
                   </div>
                 </div>
-  
+
               </div>
               <div class="col-sm-5">
                 <div class="input1">
@@ -188,10 +211,10 @@
                     <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
                   </div>
                 </div>
-                
+
               </div>
             </div>
-  
+
             <div class="container">
               <form>
                 <table>
@@ -203,7 +226,7 @@
                           <div class="col-sm-9"> {{ item.Lot_no }}</div>
                         </div>
                       </div>
-                      
+
                     </td>
                     <td width="300px">
                       <div class="input1" style="padding: 0 10px ;">
@@ -212,7 +235,7 @@
                           <div class="col-sm-8">{{ item.Sample_name }}</div>
                         </div>
                       </div>
-  
+
                     </td>
                     <td width="200px">
                       <div class="input1" style="padding: 0 10px ;">
@@ -228,7 +251,7 @@
             </div>
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
@@ -237,7 +260,7 @@
             {{this.DataRes[0].COMM_SAM_INFOR}}
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Attention: Are dangerous or ESD substance included?</mat-card-title>
@@ -248,15 +271,15 @@
               {{this.DataRes[0].DANGER}}
             </div>
             <!-- Sample after tested -->
-            
-              <div class="row">
-                <div class="col-sm-2"><b>Sample after tested:</b></div>
-                <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
-              </div>
-  
+
+            <div class="row">
+              <div class="col-sm-2"><b>Sample after tested:</b></div>
+              <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
+            </div>
+
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Keywords for searching</mat-card-title>
@@ -270,7 +293,7 @@
                     <div class="col-sm-8">{{this.DataRes[0].KEY_CHARA}}</div>
                   </div>
                 </div>
-  
+
               </div>
               <div class="col-sm-4">
                 <div class="input1">
@@ -279,7 +302,7 @@
                     <div class="col-sm-10">{{this.DataRes[0].KEY_STATE}}</div>
                   </div>
                 </div>
-  
+
               </div>
               <div class="col-sm-4">
                 <div class="input1">
@@ -292,7 +315,7 @@
             </div>
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Question and Answer form</mat-card-title>
@@ -310,16 +333,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr  *ngFor="let item of DataResQUESTION let i = index" >
+                  <tr *ngFor="let item of DataResQUESTION let i = index">
                     <th class=" Titlereview">Question no.{{i+1}}:</th>
                     <td>{{item.QUESTION_DETAIL}} </td>
                     <td class=" Titlereview">
-                      <button mat-mini-fab color="primary" class="button4" (click)="GoAswer(item.ID)" >
+                      <button mat-mini-fab color="primary" class="button4" (click)="GoAswer(item.ID)">
                         <mat-icon>import_contacts</mat-icon>
                       </button>
-                     </td>
+                    </td>
                     <td class=" Titlereview">
-                      <button mat-mini-fab color="primary" class="button3" (click)="GoAsweredit(item.ID)" >
+                      <button mat-mini-fab color="primary" class="button3" (click)="GoAsweredit(item.ID)">
                         <mat-icon>edit</mat-icon>
                       </button>
                     </td>
@@ -328,7 +351,7 @@
                 </tbody>
               </table>
               <div class=" container-fluid center">
-              
+
                 <button mat-flat-button class="Buttonaddquetion" (click)="onOpenDialogClick()"> + Add question </button>
               </div>
             </div>
@@ -336,97 +359,97 @@
         </mat-card>
 
         <div class="center" style="padding-bottom: 20px;">
-          <button mat-flat-button class="Buttonaddquetion3 rounded-circle" (click)="myFunction()">         
-              <p>Status tracking</p>
-              <img src="../assets/Tracking_web/Image/tracking.png">
+          <button mat-flat-button class="Buttonaddquetion3 rounded-circle" (click)="myFunction()">
+            <p>Status tracking</p>
+            <img style="height: 50px;" src="../assets/Tracking_web/Image/tracking.png">
           </button>
-          </div>
+        </div>
 
         <mat-card class="card1" style="margin-top: 10px;">
-            <mat-card-title-group>
-                <mat-card-title>Analysis technique steps</mat-card-title>
-            </mat-card-title-group>
-            <mat-card-content>
-                <div class="container">
-                  <form [formGroup]="productForm">
-                    
-                    <table formArrayName="quantities">
-                      <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
-                        <td style="padding: 10px 20px">
-                          <h4><b> Step {{i+1}} </b></h4>
-                        </td>
+          <mat-card-title-group>
+            <mat-card-title>Analysis technique steps</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="container">
+              <form [formGroup]="productForm">
 
-                        <td>
-                          <div style="padding-top: 10px; padding-right: 50px;">
-                          <mat-form-field appearance="outline" >
-                            <mat-label>Techniques</mat-label>
-                            <mat-select formControlName="Technique">
-                                <mat-option value="X-ray2D">X-ray2D</mat-option>
-                                <mat-option value="X-ray3D">X-ray3D</mat-option>
-                                <mat-option value="X-ray reflow">X-ray reflow</mat-option>
-                                <mat-option value="SEM">SEM</mat-option>
-                                <mat-option value="Cutting">Cutting</mat-option>
-                                <mat-option value="Polishing">Polishing</mat-option>
-                                <mat-option value="Ion-milling">Ion-milling</mat-option>
-                                <mat-option value="Cross-milling">Cross-milling</mat-option>
-                                <mat-option value="VHX">VHX</mat-option>
-                                <mat-option value="Metallurgical">Metallurgical</mat-option>
-                                <mat-option value="EDXRF">EDXRF</mat-option>
-                                <mat-option value="EDXRF_RoHS">EDXRF_RoHS</mat-option>
-                                <mat-option value="ICP">ICP</mat-option>
-                                <mat-option value="C_SAM">C_SAM</mat-option>
-                                <mat-option value="CS Analyzer">CS Analyzer</mat-option>
-                                <mat-option value="FTIR">FTIR</mat-option>
-                                <mat-option value="GCMS">GCMS</mat-option>
-                                <mat-option value="DSC">DSC</mat-option>
-                                <mat-option value="TG-DTA">TG-DTA</mat-option>
-                                <mat-option value="Solderwet">Solderwet</mat-option>
-                                <mat-option value="Micro-probe">Micro-probe</mat-option>
-                                <mat-option value="Other">Other</mat-option> 
-                            </mat-select>
+                <table formArrayName="quantities">
+                  <tr *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+                    <td style="padding: 10px 20px">
+                      <h4><b> Step {{i+1}} </b></h4>
+                    </td>
+
+                    <td>
+                      <div style="padding-top: 10px; padding-right: 50px;">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Techniques</mat-label>
+                          <mat-select formControlName="Technique">
+                            <mat-option value="X-ray2D">X-ray2D</mat-option>
+                            <mat-option value="X-ray3D">X-ray3D</mat-option>
+                            <mat-option value="X-ray reflow">X-ray reflow</mat-option>
+                            <mat-option value="SEM">SEM</mat-option>
+                            <mat-option value="Cutting">Cutting</mat-option>
+                            <mat-option value="Polishing">Polishing</mat-option>
+                            <mat-option value="Ion-milling">Ion-milling</mat-option>
+                            <mat-option value="Cross-milling">Cross-milling</mat-option>
+                            <mat-option value="VHX">VHX</mat-option>
+                            <mat-option value="Metallurgical">Metallurgical</mat-option>
+                            <mat-option value="EDXRF">EDXRF</mat-option>
+                            <mat-option value="EDXRF_RoHS">EDXRF_RoHS</mat-option>
+                            <mat-option value="ICP">ICP</mat-option>
+                            <mat-option value="C_SAM">C_SAM</mat-option>
+                            <mat-option value="CS Analyzer">CS Analyzer</mat-option>
+                            <mat-option value="FTIR">FTIR</mat-option>
+                            <mat-option value="GCMS">GCMS</mat-option>
+                            <mat-option value="DSC">DSC</mat-option>
+                            <mat-option value="TG-DTA">TG-DTA</mat-option>
+                            <mat-option value="Solderwet">Solderwet</mat-option>
+                            <mat-option value="Micro-probe">Micro-probe</mat-option>
+                            <mat-option value="Other">Other</mat-option>
+                          </mat-select>
                         </mat-form-field>
                       </div>
-                        </td>
-                        <td>
-                          <div class="row">
-                            <div class="col-sm-5">
-                              <h4 ><b>Sample number</b></h4>
-                            </div>
-                            <div class="col-sm-7">
-                              <div class="form-group" >
-                                <input type="text" class="form-control" id="Samplenumber" formControlName="Samplenumber">
-                              </div>
-                            </div>
+                    </td>
+                    <td>
+                      <div class="row">
+                        <div class="col-sm-5">
+                          <h4><b>Sample number</b></h4>
+                        </div>
+                        <div class="col-sm-7">
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="Samplenumber" formControlName="Samplenumber">
                           </div>
-                        </td>
-                        <td style="padding-left:20px; padding-bottom:10px;">
-                          <button (click)="removeQuantity(i)" class="btn btn-danger" >Remove</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td></td>
-                        <td style="padding: 10px 0px">
-                          <button mat-flat-button class="Buttonaddsam" (click)="addQuantity()"> + Add Step </button>
-                        </td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                    </table>
-                  </form>
-                    </div>
-            </mat-card-content>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="padding-left:20px; padding-bottom:10px;">
+                      <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td style="padding: 10px 0px">
+                      <button mat-flat-button class="Buttonaddsam" (click)="addQuantity()"> + Add Step </button>
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </table>
+              </form>
+            </div>
+          </mat-card-content>
         </mat-card>
 
         <div *ngIf="isvalidGoNaxt;else go_next">
-       
+
         </div>
 
         <ng-template #go_next>
           <div class="center" style="padding-bottom: 20px;">
-            <button mat-raised-button color="primary" (click)="GoEstiCost()" >Issue step</button>
+            <button mat-raised-button color="primary" (click)="GoEstiCost()">Issue step</button>
           </div>
         </ng-template>
-  <!-- Review person -->
+        <!-- Review person -->
         <div *ngIf="isValid2;else review_next">
           <mat-card class="card1">
             <mat-card-title-group>
@@ -451,7 +474,7 @@
                       <td class=" Titlereview"> Issuer</td>
                       <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
                       <td class=" Titlereview">
-                        <div class = "center" style="padding-top:10px ;">
+                        <div class="center" style="padding-top:10px ;">
                           {{this.DataRes[0].ISSUE_DATE}}
                         </div>
                       </td>
@@ -461,9 +484,9 @@
                     <tr>
                       <th class=" Titlereview"></th>
                       <td class=" Titlereview"> Confirm</td>
-                      <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                      <td class=" Titlereview"> {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
                       <td class=" Titlereview">
-                        <div class = "center" style="padding-top:10px ;">
+                        <div class="center" style="padding-top:10px ;">
                           {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
                         </div>
                       </td>
@@ -471,7 +494,7 @@
                         {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
                       </td>
                       <td class=" Titlereview">
-                        <p *ngFor="let item of this.confirmcc let i = index" >
+                        <p *ngFor="let item of this.confirmcc let i = index">
                           {{item}}
                         </p>
                       </td>
@@ -479,7 +502,7 @@
                     <tr>
                       <th class=" Titlereview">Analysis section</th>
                       <td class=" Titlereview"> Controller</td>
-                      <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                      <td class=" Titlereview"> {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
                       <td class=" Titlereview">
                         <div class="center" style="padding-top: 15px;">
                           <button mat-raised-button color="primary" class="button2" (click)="save()">Approve
@@ -494,54 +517,55 @@
                       </td>
                       <td class=" Titlereview">
                         <mat-hint> *Click "Add" to confirm name</mat-hint>
-                  <form class="example-form">
-                      <mat-form-field class="widthcom" appearance="outline">
-                        <mat-label>Select Name</mat-label>
-                        <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                          [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
-                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
-                          </mat-option>
-                        </mat-autocomplete>
-                      </mat-form-field>
-                    </form>
-                    <div class="center">
-                      <button mat-button (click)="addIN()">Add</button>
-                    </div> 
-                    <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
-                    <table>
-                      <tbody>
-                        <div class="row">
-                          <div class="col-sm-3">
-                            <div *ngIf="item != ''">
-                              <td>
-                                <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
-                                  <mat-icon>delete</mat-icon>
-                                </button>
-                              </td>
-                         </div>
+                        <form class="example-form">
+                          <mat-form-field class="widthcom" appearance="outline">
+                            <mat-label>Select Name</mat-label>
+                            <input type="text" placeholder="Pick one" aria-label="Name" matInput
+                              [formControl]="myControl" [matAutocomplete]="auto"
+                              [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option}}
+                              </mat-option>
+                            </mat-autocomplete>
+                          </mat-form-field>
+                        </form>
+                        <div class="center">
+                          <button mat-button (click)="addIN()">Add</button>
                         </div>
-                          <div class="col-sm-9">
-                        <td>{{item}}</td>
-                        <br>
-                      </div>
-                      
-                    </div>
+                    <tr *ngFor="let item of this.EMAIL_CC let i = index">
+                      <table>
+                        <tbody>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <div *ngIf="item != ''">
+                                <td>
+                                  <button mat-mini-fab color="primary" class="button3" (click)="delete(i)">
+                                    <mat-icon>delete</mat-icon>
+                                  </button>
+                                </td>
+                              </div>
+                            </div>
+                            <div class="col-sm-9">
+                              <td>{{item}}</td>
+                              <br>
+                            </div>
+
+                          </div>
                         </tbody>
-                    </table>
-                  </tr>
-                      </td>
+                      </table>
+                    </tr>
+                    </td>
                     </tr>
                     <tr>
                       <th class=" Titlereview"></th>
                       <td class=" Titlereview"> Analyst</td>
-                      <td class=" Titlereview" >
+                      <td class=" Titlereview">
                         <form class="example-form">
                           <mat-form-field class="example-full-width " appearance="outline">
                             <mat-label>Select Name</mat-label>
-                            <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                              [matAutocomplete]="auto" [(ngModel)]="this.Analyzer">
+                            <input type="text" placeholder="Pick one" aria-label="Name" matInput
+                              [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="this.Analyzer">
                             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                               <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                 {{option}}
@@ -557,7 +581,7 @@
                     <tr>
                       <th class=" Titlereview">Report approval</th>
                       <td class=" Titlereview">Check</td>
-                      <td class=" Titlereview" ></td>
+                      <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
@@ -565,7 +589,7 @@
                     <tr>
                       <th class=" Titlereview"></th>
                       <td class=" Titlereview">Confirm </td>
-                      <td class=" Titlereview" ></td>
+                      <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
@@ -573,7 +597,7 @@
                     <tr>
                       <th class=" Titlereview"></th>
                       <td class=" Titlereview"> Report approval</td>
-                      <td class=" Titlereview" ></td>
+                      <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
@@ -581,7 +605,7 @@
                     <tr>
                       <th class=" Titlereview">CS Evaluation</th>
                       <td class=" Titlereview">Issuer </td>
-                      <td class=" Titlereview" ></td>
+                      <td class=" Titlereview"></td>
                       <td class=" Titlereview"> </td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
@@ -589,146 +613,146 @@
                     <tr>
                       <th class=" Titlereview">Completed</th>
                       <td class=" Titlereview">Close </td>
-                      <td class=" Titlereview" ></td>
+                      <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                       <td class=" Titlereview"></td>
                     </tr>
-  
+
                   </tbody>
                 </table>
               </div>
             </mat-card-content>
           </mat-card>
 
-    </div>
+        </div>
 
-    <ng-template #review_next>
-      <mat-card class="card1">
-        <mat-card-title-group>
-          <mat-card-title>Review Information</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-          <div>
-            <table class="table ">
-              <thead>
-                <tr>
-                  <th width="70px" class=" Titlereview">Task</th>
-                  <th width="70px" class=" Titlereview">Process</th>
-                  <th width="120px" class=" Titlereview">Name</th>
-                  <th width="100px" class=" Titlereview">Processing date&time</th>
-                  <th width="100px" class=" Titlereview">Comment</th>
-                  <th width="120px" class=" Titlereview">cc</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th class=" Titlereview">Pending request</th>
-                  <td class=" Titlereview">Issuer</td>
-                  <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
-                  <td class=" Titlereview">
-                    <div class = "center" style="padding-top:10px ;">
-                      {{this.DataRes[0].ISSUE_DATE}}
-                    </div>
-                  </td>
-                  <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
-                  <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
-                </tr>
-                <tr>
-                  <th class=" Titlereview"></th>
-                  <td class=" Titlereview">Confirm</td>
-                  <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
-                  <td class=" Titlereview">
-                    <div class = "center" style="padding-top:10px ;">
-                      {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
-                    </div>
-                  </td>
-                  <td class=" Titlereview">
-                    {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
-                  </td>
-                  <td class=" Titlereview">
-                    <p *ngFor="let item of this.confirmcc let i = index" >
-                      {{item}}
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <th class=" Titlereview">Analysis section</th>
-                  <td class=" Titlereview"> Controller</td>
-                  <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
-                  <td class=" Titlereview">
-                    <div class = "center" style="padding-top:10px ;">
-                      {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
-                    </div>
-                  </td>
-                  <td class=" Titlereview">
-                    {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
-                  </td>
-                  <td class=" Titlereview">
-                    <p *ngFor="let item of this.controlcc let i = index" >
-                      {{item}}
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <th class=" Titlereview"></th>
-                  <td class=" Titlereview"> Analyst</td>
-                  <td class=" Titlereview" >
-                    {{this.DataRes[0].REVI_ANASEC_ANAL}}
-                  </td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                </tr>
-                <tr>
-                  <th class=" Titlereview">Report approval</th>
-                  <td class=" Titlereview">Check</td>
-                  <td class=" Titlereview" ></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                </tr>
-                <tr>
-                  <th class=" Titlereview"></th>
-                  <td class=" Titlereview">Confirm </td>
-                  <td class=" Titlereview" ></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                </tr>
-                <tr>
-                  <th class=" Titlereview"></th>
-                  <td class=" Titlereview"> Report approval</td>
-                  <td class=" Titlereview" ></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                </tr>
-                <tr>
-                  <th class=" Titlereview">CS Evaluation</th>
-                  <td class=" Titlereview">Issuer </td>
-                  <td class=" Titlereview" ></td>
-                  <td class=" Titlereview"> </td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                </tr>
-                <tr>
-                  <th class=" Titlereview">Completed</th>
-                  <td class=" Titlereview">Close </td>
-                  <td class=" Titlereview" ></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                  <td class=" Titlereview"></td>
-                </tr>
+        <ng-template #review_next>
+          <mat-card class="card1">
+            <mat-card-title-group>
+              <mat-card-title>Review Information</mat-card-title>
+            </mat-card-title-group>
+            <mat-card-content>
+              <div>
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <th width="70px" class=" Titlereview">Task</th>
+                      <th width="70px" class=" Titlereview">Process</th>
+                      <th width="120px" class=" Titlereview">Name</th>
+                      <th width="100px" class=" Titlereview">Processing date&time</th>
+                      <th width="100px" class=" Titlereview">Comment</th>
+                      <th width="120px" class=" Titlereview">cc</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class=" Titlereview">Pending request</th>
+                      <td class=" Titlereview">Issuer</td>
+                      <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+                      <td class=" Titlereview">
+                        <div class="center" style="padding-top:10px ;">
+                          {{this.DataRes[0].ISSUE_DATE}}
+                        </div>
+                      </td>
+                      <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+                      <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+                    </tr>
+                    <tr>
+                      <th class=" Titlereview"></th>
+                      <td class=" Titlereview">Confirm</td>
+                      <td class=" Titlereview"> {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                      <td class=" Titlereview">
+                        <div class="center" style="padding-top:10px ;">
+                          {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                        </div>
+                      </td>
+                      <td class=" Titlereview">
+                        {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+                      </td>
+                      <td class=" Titlereview">
+                        <p *ngFor="let item of this.confirmcc let i = index">
+                          {{item}}
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class=" Titlereview">Analysis section</th>
+                      <td class=" Titlereview"> Controller</td>
+                      <td class=" Titlereview"> {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                      <td class=" Titlereview">
+                        <div class="center" style="padding-top:10px ;">
+                          {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                        </div>
+                      </td>
+                      <td class=" Titlereview">
+                        {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+                      </td>
+                      <td class=" Titlereview">
+                        <p *ngFor="let item of this.controlcc let i = index">
+                          {{item}}
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class=" Titlereview"></th>
+                      <td class=" Titlereview"> Analyst</td>
+                      <td class=" Titlereview">
+                        {{this.DataRes[0].REVI_ANASEC_ANAL}}
+                      </td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                    </tr>
+                    <tr>
+                      <th class=" Titlereview">Report approval</th>
+                      <td class=" Titlereview">Check</td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                    </tr>
+                    <tr>
+                      <th class=" Titlereview"></th>
+                      <td class=" Titlereview">Confirm </td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                    </tr>
+                    <tr>
+                      <th class=" Titlereview"></th>
+                      <td class=" Titlereview"> Report approval</td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                    </tr>
+                    <tr>
+                      <th class=" Titlereview">CS Evaluation</th>
+                      <td class=" Titlereview">Issuer </td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"> </td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                    </tr>
+                    <tr>
+                      <th class=" Titlereview">Completed</th>
+                      <td class=" Titlereview">Close </td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                      <td class=" Titlereview"></td>
+                    </tr>
 
-              </tbody>
-            </table>
-          </div>
-        </mat-card-content>
-      </mat-card>
+                  </tbody>
+                </table>
+              </div>
+            </mat-card-content>
+          </mat-card>
 
-      
-  </ng-template>     
+
+        </ng-template>
       </div>
       <div class="col-sm-1">
       </div>

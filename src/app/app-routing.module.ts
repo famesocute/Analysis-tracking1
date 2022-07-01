@@ -25,6 +25,7 @@ import { AnahomeNotcomComponent } from './anahome-notcom/anahome-notcom.componen
 import { AnahomeCompleteComponent } from './anahome-complete/anahome-complete.component';
 import { AddfileComponent } from './dialog/addfile/addfile.component';
 import { InfoEditstepComponent } from './dialog/info-editstep/info-editstep.component';
+import { DailyjobComponent } from './dailyjob/dailyjob.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
@@ -51,7 +52,8 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'AnahomeNotcom', component: AnahomeNotcomComponent },
 { path: 'AnahomeComplete', component: AnahomeCompleteComponent },
 { path: 'Addfile', component: AddfileComponent },
-{ path: 'InfoEditstep', component: InfoEditstepComponent },];
+{ path: 'InfoEditstep', component: InfoEditstepComponent },
+{ path: 'Dailyjob', component: DailyjobComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

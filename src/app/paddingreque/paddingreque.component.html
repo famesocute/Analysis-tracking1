@@ -1,42 +1,42 @@
-<div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+<div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
   <span class="sr-only"></span>
 </div>
 <ng-template #elseBlock>
 
-    <div class="border-bottom Toolbar">
-      <div class="row">
-        <div class="col-xl-1"></div>
-        <div class="col-xl-7 center" style="padding :15px 0 ;">
-          <button mat-button>Home</button>
-          <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
-          <button mat-button>Equipment Calendar</button>
-          <button mat-button>Job tracking</button>
-          <button mat-button>Search previous report</button>
-        </div>
-  
-          <div class="col-xl-4 center " *ngIf="isValid;else other_content">
-            <div class="row">
-            <div class="col-xl-8">
-         {{this.nameonly}}
-         ({{this.Codelocal}})
-         {{this.departmentlocal}}
-        </div>
-        <div class="col-xl-4">
-         <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+  <div class="border-bottom Toolbar">
+    <div class="row">
+      <div class="col-xl-1"></div>
+      <div class="col-xl-7 center" style="padding :15px 0 ;">
+        <button mat-button>Home</button>
+        <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
+        <button mat-button>Equipment Calendar</button>
+        <button mat-button>Job tracking</button>
+        <button mat-button>Search previous report</button>
+      </div>
+
+      <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+        <div class="row">
+          <div class="col-xl-8">
+            {{this.nameonly}}
+            ({{this.Codelocal}})
+            {{this.departmentlocal}}
+          </div>
+          <div class="col-xl-4">
+            <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
           </div>
         </div>
       </div>
-  
+
       <ng-template #other_content>
-      <div class="col-xl-4 center ">
-        <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
-        <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
-      </div>
-    </ng-template>
-  
-  
-      </div>
+        <div class="col-xl-4 center ">
+          <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+          <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+        </div>
+      </ng-template>
+
+
     </div>
+  </div>
 
   <div class="row">
     <div class="col-sm-1">
@@ -97,42 +97,66 @@
               </div>
             </div>
             <div class="col-sm-4">
-             
-                <div class="row">
-                  <div class="col-sm-4"><b>Issue Date:</b></div>
-                  <div class="col-sm-8">{{this.DataRes[0].ISSUE_DATE}}</div>
-                </div>
-              
-              
-                <div class="row" style=" padding-top : 10px;">
-                  <div class="col-sm-4"><b>Requester:</b></div>
-                  <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
-                </div>
-             
-             
-                <div class="row" style=" padding-top : 10px;">
-                  <div class="col-sm-4"><b>Phone:</b></div>
-                  <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
-                </div>
-              
-              
-                <div class="row" style=" padding-top : 10px;">
-                  <div class="col-sm-4"><b>Department:</b></div>
-                  <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
-                </div>
-              
-            
-                <div class="row" style=" padding-top : 10px;">
-                  <div class="col-sm-4"><b>Product:</b></div>
-                  <div class="col-sm-8">{{this.DataRes[0].PRODUCT}}</div>
-                </div>
-             
+
+              <div class="row">
+                <div class="col-sm-4"><b>Issue Date:</b></div>
+                <div class="col-sm-8">{{this.DataRes[0].ISSUE_DATE}}</div>
+              </div>
+
+
+              <div class="row" style=" padding-top : 10px;">
+                <div class="col-sm-4"><b>Requester:</b></div>
+                <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
+              </div>
+
+
+              <div class="row" style=" padding-top : 10px;">
+                <div class="col-sm-4"><b>Phone:</b></div>
+                <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
+              </div>
+
+
+              <div class="row" style=" padding-top : 10px;">
+                <div class="col-sm-4"><b>Department:</b></div>
+                <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
+              </div>
+
+
+              <div class="row" style=" padding-top : 10px;">
+                <div class="col-sm-4"><b>Product:</b></div>
+                <div class="col-sm-8">{{this.DataRes[0].PRODUCT}}</div>
+              </div>
+
 
               <mat-card class="cardAT">
 
               </mat-card>
             </div>
           </div>
+          <div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th width="100px" class=" Titlereview">No.</th>
+                    <th width="500px">File Name</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of Fill_inital let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td *ngIf="item.FILENAME != '';else other_content">
+                        <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
+                    </td>
+                    <ng-template #other_content>
+
+                        <td> <img [src]="item.LINK" width="300" height="auto"></td>
+
+                    </ng-template>
+                </tr>
+                </tbody>
+              </table>
+        </div>
         </mat-card-content>
       </mat-card>
       <mat-card class="card1">
@@ -186,7 +210,7 @@
                   <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
                 </div>
               </div>
-              
+
             </div>
           </div>
 
@@ -201,7 +225,7 @@
                         <div class="col-sm-9"> {{ item.Lot_no }}</div>
                       </div>
                     </div>
-                    
+
                   </td>
                   <td width="300px">
                     <div class="input1" style="padding: 0 10px ;">
@@ -246,11 +270,11 @@
             {{this.DataRes[0].DANGER}}
           </div>
           <!-- Sample after tested -->
-          
-            <div class="row">
-              <div class="col-sm-2"><b>Sample after tested:</b></div>
-              <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
-            </div>
+
+          <div class="row">
+            <div class="col-sm-2"><b>Sample after tested:</b></div>
+            <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
+          </div>
 
         </mat-card-content>
       </mat-card>
@@ -345,16 +369,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr  *ngFor="let item of DataResQUESTION let i = index" >
+                <tr *ngFor="let item of DataResQUESTION let i = index">
                   <th class=" Titlereview">Question no.{{i+1}}:</th>
                   <td>{{item.QUESTION_DETAIL}} </td>
                   <td class=" Titlereview">
-                    <button mat-mini-fab color="primary" class="button2" (click)="GoAswer(item.ID)" >
+                    <button mat-mini-fab color="primary" class="button2" (click)="GoAswer(item.ID)">
                       <mat-icon>import_contacts</mat-icon>
                     </button>
-                   </td>
+                  </td>
                   <td class=" Titlereview">
-                    <button mat-mini-fab color="primary" class="button3" (click)="GoAsweredit(item.ID)" >
+                    <button mat-mini-fab color="primary" class="button3" (click)="GoAsweredit(item.ID)">
                       <mat-icon>edit</mat-icon>
                     </button>
                   </td>
@@ -363,13 +387,13 @@
               </tbody>
             </table>
             <div class=" container-fluid center">
-            
+
               <button mat-flat-button class="Buttonaddquetion" (click)="onOpenDialogClick()"> + Add question </button>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
-      
+
 
       <mat-card class="card1">
         <mat-card-title-group>
@@ -387,162 +411,162 @@
       </mat-card>
 
       <div class="center" style="padding-bottom: 20px;">
-        <button mat-flat-button class="Buttonaddquetion3 rounded-circle" (click)="myFunction()">         
-            <p>Status tracking</p>
-            <img src="../assets/Tracking_web/Image/tracking.png">
+        <button mat-flat-button class="Buttonaddquetion3 rounded-circle" (click)="myFunction()">
+          <p>Status tracking</p>
+          <img style="height: 50px;" src="../assets/Tracking_web/Image/tracking.png">
         </button>
-        </div>
+      </div>
 
-        <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Review Information</mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-            <div>
-              <table class="table ">
-                <thead>
-                  <tr>
-                    <th width="70px" class=" Titlereview">Task</th>
-                    <th width="70px" class=" Titlereview">Process</th>
-                    <th width="120px" class=" Titlereview">Name</th>
-                    <th width="100px" class=" Titlereview">Processing date&time</th>
-                    <th width="100px" class=" Titlereview">Comment</th>
-                    <th width="120px" class=" Titlereview">cc</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th class=" Titlereview">Pending request</th>
-                    <td class=" Titlereview"> Issuer</td>
-                    <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
-                    <td class=" Titlereview">
-                      <div class = "center" style="padding-top:10px ;">
-                        {{this.DataRes[0].ISSUE_DATE}}
-                      </div>
-                    </td>
-                    <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
-                    <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
-                  </tr>
-                  <tr>
-                    <th class=" Titlereview"></th>
-                    <td class=" Titlereview"> Confirm</td>
-                    <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
-                    <td class=" Titlereview">
-                      <div class="center" style="padding-top: 15px;">
-                        <button mat-raised-button color="primary" class="button4" (click)="GoEstiStep()">Approve
-                        </button>
-                      </div>
-                    </td>
-                    <td class=" Titlereview">
-                     <mat-form-field class="widthcom" appearance="outline">
-                    <mat-label>Leave a comment</mat-label>
-                    <textarea matInput [(ngModel)]="this.ComConfirm"></textarea>
-                  </mat-form-field>
-                    </td>
-                    <td class=" Titlereview">
-                      <mat-hint> *Click "Add" to confirm name</mat-hint>
-                <form class="example-form">
-                    <mat-form-field class="widthcom " appearance="outline">
-                      <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                          {{option}}
-                        </mat-option>
-                      </mat-autocomplete>
+      <mat-card class="card1">
+        <mat-card-title-group>
+          <mat-card-title>Review Information</mat-card-title>
+        </mat-card-title-group>
+        <mat-card-content>
+          <div>
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th width="70px" class=" Titlereview">Task</th>
+                  <th width="70px" class=" Titlereview">Process</th>
+                  <th width="120px" class=" Titlereview">Name</th>
+                  <th width="100px" class=" Titlereview">Processing date&time</th>
+                  <th width="100px" class=" Titlereview">Comment</th>
+                  <th width="120px" class=" Titlereview">cc</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class=" Titlereview">Pending request</th>
+                  <td class=" Titlereview"> Issuer</td>
+                  <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+                  <td class=" Titlereview">
+                    <div class="center" style="padding-top:10px ;">
+                      {{this.DataRes[0].ISSUE_DATE}}
+                    </div>
+                  </td>
+                  <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+                  <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+                </tr>
+                <tr>
+                  <th class=" Titlereview"></th>
+                  <td class=" Titlereview"> Confirm</td>
+                  <td class=" Titlereview"> {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                  <td class=" Titlereview">
+                    <div class="center" style="padding-top: 15px;">
+                      <button mat-raised-button color="primary" class="button4" (click)="GoEstiStep()">Approve
+                      </button>
+                    </div>
+                  </td>
+                  <td class=" Titlereview">
+                    <mat-form-field class="widthcom" appearance="outline">
+                      <mat-label>Leave a comment</mat-label>
+                      <textarea matInput [(ngModel)]="this.ComConfirm"></textarea>
                     </mat-form-field>
-                  </form>
-                  <div class="center">
-                    <button mat-button (click)="addIN()">Add</button>
-                  </div>
+                  </td>
+                  <td class=" Titlereview">
+                    <mat-hint> *Click "Add" to confirm name</mat-hint>
+                    <form class="example-form">
+                      <mat-form-field class="widthcom " appearance="outline">
+                        <mat-label>Select Name</mat-label>
+                        <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                          [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </form>
+                    <div class="center">
+                      <button mat-button (click)="addIN()">Add</button>
+                    </div>
 
-                  <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
+                <tr *ngFor="let item of this.EMAIL_CC let i = index">
                   <table>
                     <tbody>
                       <div class="row">
                         <div class="col-sm-3">
                           <div *ngIf="item != ''">
                             <td>
-                              <button mat-mini-fab color="primary" class="button3" (click)="delete(i)" >
+                              <button mat-mini-fab color="primary" class="button3" (click)="delete(i)">
                                 <mat-icon>delete</mat-icon>
                               </button>
                             </td>
-                       </div>
-                      </div>
+                          </div>
+                        </div>
                         <div class="col-sm-9">
-                      <td>{{item}}</td>
-                      <br>
-                    </div>
-                    
-                  </div>
-                      </tbody>
+                          <td>{{item}}</td>
+                          <br>
+                        </div>
+
+                      </div>
+                    </tbody>
                   </table>
                 </tr>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th class=" Titlereview">Analysis section</th>
-                    <td class=" Titlereview"> Controller</td>
-                    <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                  </tr>
-                  <tr>
-                    <th class=" Titlereview"></th>
-                    <td class=" Titlereview"> Analyst</td>
-                    <td class=" Titlereview" ></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                  </tr>
-                  <tr>
-                    <th class=" Titlereview">Report approval</th>
-                    <td class=" Titlereview">Check</td>
-                    <td class=" Titlereview" ></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                  </tr>
-                  <tr>
-                    <th class=" Titlereview"></th>
-                    <td class=" Titlereview">Confirm </td>
-                    <td class=" Titlereview" ></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                  </tr>
-                  <tr>
-                    <th class=" Titlereview"></th>
-                    <td class=" Titlereview"> Report approval</td>
-                    <td class=" Titlereview" ></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                  </tr>
-                  <tr>
-                    <th class=" Titlereview">CS Evaluation</th>
-                    <td class=" Titlereview">Issuer </td>
-                    <td class=" Titlereview" ></td>
-                    <td class=" Titlereview"> </td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                  </tr>
-                  <tr>
-                    <th class=" Titlereview">Completed</th>
-                    <td class=" Titlereview">Close </td>
-                    <td class=" Titlereview" ></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                    <td class=" Titlereview"></td>
-                  </tr>
+                </td>
+                </tr>
+                <tr>
+                  <th class=" Titlereview">Analysis section</th>
+                  <td class=" Titlereview"> Controller</td>
+                  <td class=" Titlereview"> {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                </tr>
+                <tr>
+                  <th class=" Titlereview"></th>
+                  <td class=" Titlereview"> Analyst</td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                </tr>
+                <tr>
+                  <th class=" Titlereview">Report approval</th>
+                  <td class=" Titlereview">Check</td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                </tr>
+                <tr>
+                  <th class=" Titlereview"></th>
+                  <td class=" Titlereview">Confirm </td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                </tr>
+                <tr>
+                  <th class=" Titlereview"></th>
+                  <td class=" Titlereview"> Report approval</td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                </tr>
+                <tr>
+                  <th class=" Titlereview">CS Evaluation</th>
+                  <td class=" Titlereview">Issuer </td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"> </td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                </tr>
+                <tr>
+                  <th class=" Titlereview">Completed</th>
+                  <td class=" Titlereview">Close </td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                  <td class=" Titlereview"></td>
+                </tr>
 
-                </tbody>
-              </table>
-            </div>
-          </mat-card-content>
-        </mat-card>
+              </tbody>
+            </table>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
 
 

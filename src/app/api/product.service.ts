@@ -145,4 +145,11 @@ export class ProductService {
   
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/20_TRACKING_ANALYSIS_SELECT_TIMEISSUE_REPORT_BYREQ.php?data1='+data1)
     }
+    TRACKING_ANALYSIS_SELECT_UPLOAD_LIST_BY_REQ(data1: any) {
+
+      console.log("TRACKING_ANALYSIS_SELECT_UPLOAD_LIST_BY_REQ Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/21_TRACKING_ANALYSIS_SELECT_UPLOAD_LIST_BY_REQ.php?data1=' + data1)
+  
+    }
 }

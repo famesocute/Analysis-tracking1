@@ -55,6 +55,7 @@ import { AnahomeNotcomComponent } from './anahome-notcom/anahome-notcom.componen
 import { AnahomeCompleteComponent } from './anahome-complete/anahome-complete.component';
 import { AddfileComponent } from './dialog/addfile/addfile.component';
 import { InfoEditstepComponent } from './dialog/info-editstep/info-editstep.component';
+import { DailyjobComponent } from './dailyjob/dailyjob.component';
 
 
 
@@ -87,6 +88,7 @@ import { InfoEditstepComponent } from './dialog/info-editstep/info-editstep.comp
     AnahomeCompleteComponent,
     AddfileComponent,
     InfoEditstepComponent,
+    DailyjobComponent,
 
 
   ],

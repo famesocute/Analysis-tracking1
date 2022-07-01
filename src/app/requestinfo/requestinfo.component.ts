@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
 import { InfoEditstepComponent } from '../dialog/info-editstep/info-editstep.component';
 import { ActivatedRoute } from '@angular/router';
-
+import { IfStmt } from '@angular/compiler';
 @Component({
   selector: 'app-requestinfo',
   templateUrl: './requestinfo.component.html',
@@ -60,6 +60,9 @@ export class RequestinfoComponent implements OnInit {
   approval = ""
   comapproval = ""
   approvalcc = ""
+  summarydetail = ""
+  SendDate = ""
+  finishDate = ""
 
   isValid1 = false
   isValid2 = false
@@ -102,6 +105,20 @@ export class RequestinfoComponent implements OnInit {
   Allocation: any
 
   csvalid = true
+  Statusrevise = ""
+
+  dataUpload : any
+  dataUploadSETdata : any
+  DataResFlie : any
+
+  Interim :any = "["
+  Fill_inital :any = "["
+  Report :any = "["
+  Summary :any = "["
+
+  section1 = "Interim"
+  section2 = "Report"
+  section3 = "Summary"
 
   constructor(public router: Router, public productService: ProductService, private matDialog: MatDialog, private fb: FormBuilder, private route: ActivatedRoute) { }
 
@@ -115,7 +132,129 @@ export class RequestinfoComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
-      this.ComControl = this.DataRes[0].REVI_ANASEC_CONTROL_COM
+
+      this.productService.TRACKING_ANALYSIS_SELECT_UPLOAD_LIST_BY_REQ(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
+        console.log(this.DataRes[0].REQ_NUM)
+        console.log(data);
+        this.dataUpload = data
+        console.log(this.dataUpload);
+        var i
+        var newdata = "["
+        for (i in this.dataUpload) {
+          newdata = newdata + '{"SEQ_CONTENT":"' + (parseInt(i)+1) + '",'
+          if((this.dataUpload[i].FILENAME).substring(this.dataUpload[i].FILENAME.length - 3) == "PNG" || (this.dataUpload[i].FILENAME).substring(this.dataUpload[i].FILENAME.length - 3) == "png"){
+            newdata = newdata + '"PROCESS_NAME":"",'  
+          }
+          else{  
+            newdata = newdata + '"PROCESS_NAME":"' + this.dataUpload[i].FILENAME + '",'
+          }
+          console.log((this.dataUpload[i].FILENAME).substring(this.dataUpload[i].FILENAME.length - 3))
+          newdata = newdata + '"LINK":"http://163.50.57.95:84/' + this.dataUpload[i].LINK + '"},'
+        }
+        newdata = newdata.substring(0, newdata.length - 1);
+        newdata = newdata + "]";
+      console.log(newdata)
+  
+      var obj = JSON.parse(newdata);
+  
+      console.log(obj)
+  
+      this.dataUploadSETdata = obj
+  
+      })
+      this.productService.TRACKING_ANALYSIS_SELECT_ADDFILE_BY_REQ(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
+        console.log(data);
+        this.DataResFlie = data
+        var x 
+        for(x in this.DataResFlie){
+          if(this.DataResFlie[x].SECTION == "Interim"){
+            
+            // this.Interim = this.Interim + '"FILENAME":"' + this.DataResFlie[x].FILENAME + '"},'
+
+            if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
+              this.Interim = this.Interim + '{"FILENAME":"",'  
+            }
+            else{  
+              this.Interim = this.Interim + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
+            }
+            console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Interim = this.Interim + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
+
+          }else if(this.DataResFlie[x].SECTION == "Fill_inital"){
+
+            if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
+              this.Fill_inital = this.Fill_inital + '{"FILENAME":"",'  
+            }
+            else{  
+              this.Fill_inital = this.Fill_inital + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
+            }
+            console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Fill_inital = this.Fill_inital + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
+
+          }else if(this.DataResFlie[x].SECTION == "Report"){
+
+            if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
+              this.Report = this.Report + '{"FILENAME":"",'  
+            }
+            else{  
+              this.Report = this.Report + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
+            }
+            console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Report = this.Report + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
+
+          }else if(this.DataResFlie[x].SECTION == "Summary"){
+
+            if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
+              this.Summary = this.Summary + '{"FILENAME":"",'  
+            }
+            else{  
+              this.Summary = this.Summary + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
+            }
+            console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Summary = this.Summary + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
+          }
+        }
+        if(this.Interim.Fill_inital != 1){
+        this.Interim = this.Interim.substring(0, this.Interim.length - 1);
+        this.Interim = this.Interim + "]";
+         console.log(this.Interim)
+          var obj = JSON.parse(this.Interim);
+          console.log(obj)
+          this.Interim = obj
+        }
+          if(this.Report.Fill_inital != 1){
+      this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
+      this.Fill_inital = this.Fill_inital + "]";
+     console.log(this.Fill_inital)
+     var obj = JSON.parse(this.Fill_inital);
+      console.log(obj)
+      this.Fill_inital = obj
+          }
+      if(this.Report.length != 1){
+        this.Report = this.Report.substring(0, this.Report.length - 1);
+        this.Report = this.Report + "]";
+        console.log(this.Report)
+        var obj = JSON.parse(this.Report);
+         console.log(obj)
+         this.Report = obj
+      }
+      if(this.Summary.length != 1){
+        this.Summary = this.Summary.substring(0, this.Summary.length - 1);
+        this.Summary = this.Summary + "]";
+        console.log(this.Summary)
+        var obj = JSON.parse(this.Summary);
+         console.log(obj)
+         this.Summary = obj
+      }
+    
+     
+
+      })
+
+      if (this.DataRes[0].REVI_ANASEC_CONTROL_COM != null) {
+        this.ComControl = this.DataRes[0].REVI_ANASEC_CONTROL_COM
+      }
+      
       this.Analyzer = this.DataRes[0].REVI_ANASEC_ANAL
 
 
@@ -138,6 +277,11 @@ export class RequestinfoComponent implements OnInit {
       this.Check = this.DataRes[0].REVI_REAPPROV_CHECK
       this.Confirm = this.DataRes[0].REVI_REAPPROV_CONFIRM
       this.approval = this.DataRes[0].REVI_REAPPROV_APPROV
+
+      if(this.DataRes[0].REVISE_STATUS == 1){
+        this.Statusrevise = "Revising!"
+        console.log(this.Statusrevise)
+      }
 
       this.loading = false
 
@@ -181,13 +325,16 @@ export class RequestinfoComponent implements OnInit {
 
       } else {
         this.isValid1 = true
+        this.Sumresult = true
         console.log("hii1")
       }
 
+      if (this.DataRes[0].CS_SCORE != null){
       this.outputCS1 = this.DataRes[0].CS_SCORE.split("[]")
       console.log(this.outputCS1)
       var x
       var a
+
 
       this.outputCS2 = "["
 
@@ -204,6 +351,7 @@ export class RequestinfoComponent implements OnInit {
       var obj = JSON.parse(this.outputCS2);
       this.outputCS2 = obj
       console.log(this.outputCS2)
+    }
 
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
@@ -321,6 +469,7 @@ export class RequestinfoComponent implements OnInit {
         console.log(this.time2)
 
       })
+
     })
 
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
@@ -421,7 +570,7 @@ export class RequestinfoComponent implements OnInit {
     this.router.navigate(['/AnahomeNotcom'])
   }
   Goedit() {
-    this.productService.changeMessage(this.DataRes[0].ID)
+    this.productService.changeMessage(this.DataRes[0].ID+"||"+this.DataRes[0].REQ_NUM)
     const dialogRef = this.matDialog.open(InfoEditstepComponent, {
       disableClose: true,
       width: '1000px',
@@ -535,10 +684,21 @@ export class RequestinfoComponent implements OnInit {
     let date: Date = new Date();
     var date2 = date.toLocaleString()
 
+    var SendDate1 = this.SendDate.toLocaleString()
+    var SendDate2 = SendDate1.split(",");
+    console.log(SendDate2[0])
+    var finishDate1 = this.finishDate.toLocaleString()
+    var finishDate2 = finishDate1.split(",");
+    console.log(finishDate2[0])
+
+    console.log(this.summarydetail)
+
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET `STATUS_JOB` = '6', `REVI_REAPPROV_CHECK` = '" + this.Check + "', `REVI_REAPPROV_CONFIRM` = '" + this.Confirm + "', " +
-      " `REVI_REAPPROV_APPROV` = '" + this.approval + "', `REVI_ANASEC_ANAL_COM` = '" + this.ComAnalyzer + "', `REVI_ANASEC_ANAL_CC` = '" + this.EMAIL_CC + "', `REVI_ANASEC_ANAL_TIME` = '" + date2 + "' " +
+      " `REVI_REAPPROV_APPROV` = '" + this.approval + "', `REVI_ANASEC_ANAL_COM` = '" + this.ComAnalyzer + "',"+
+      " `REVI_ANASEC_ANAL_CC` = '" + this.EMAIL_CC + "', `REVI_ANASEC_ANAL_TIME` = '" + date2 + "',"+
+      " `SUMMARY_SEND` = '" + SendDate2[0] + "', `SUMMARY_FINISH` = '" + finishDate2[0] + "', `SUMMARY_DETAIL` = '" + this.summarydetail + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -564,7 +724,18 @@ export class RequestinfoComponent implements OnInit {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET `STATUS_JOB` = '7', `REVI_REAPPROV_CHECK_COM` = '" + this.ComChack + "', `REVI_REAPPROV_CHECK_CC` = '" + this.EMAIL_CC + "', " +
-      " `REVI_REAPPROV_CHECK_TIME` = '" + date2 + "' " +
+      " `REVI_REAPPROV_CHECK_TIME` = '" + date2 + "', `REVISE_STATUS` = '2' " +
+      " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
+    console.log(qtest);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+      console.log(data);
+      location.reload();
+    })
+  }
+  CheckerRevise(){
+    var qtest = ""
+    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+      " SET `REVISE_STATUS` = '1' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -592,11 +763,23 @@ export class RequestinfoComponent implements OnInit {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET `STATUS_JOB` = '8', `REVI_REAPPROV_CONFIRM_COM` = '" + this.comConfirm + "', `REVI_REAPPROV_CONFIRM_CC` = '" + this.EMAIL_CC + "', " +
-      " `REVI_REAPPROV_CONFIRM_TIME` = '" + date2 + "' " +
+      " `REVI_REAPPROV_CONFIRM_TIME` = '" + date2 + "', `REVISE_STATUS` = '2' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
+      location.reload();
+    })
+  }
+
+  ConfirmRevise(){
+    var qtest = ""
+    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+      " SET `REVISE_STATUS` = '1' " +
+      " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
+    console.log(qtest);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+      console.log(data);
       location.reload();
     })
   }
@@ -619,7 +802,7 @@ export class RequestinfoComponent implements OnInit {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET `STATUS_JOB` = '9', `REVI_REAPPROV_APPROV_COM` = '" + this.comapproval + "', `REVI_REAPPROV_APPROV_CC` = '" + this.EMAIL_CC + "', " +
-      " `REVI_REAPPROV_APPROV_TIME` = '" + date2 + "' " +
+      " `REVI_REAPPROV_APPROV_TIME` = '" + date2 + "', `REVISE_STATUS` = '2' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -627,6 +810,19 @@ export class RequestinfoComponent implements OnInit {
       location.reload();
     })
   }
+
+  ApproverRevise(){
+    var qtest = ""
+    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+      " SET `REVISE_STATUS` = '1' " +
+      " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
+    console.log(qtest);
+    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+      console.log(data);
+      location.reload();
+    })
+  }
+
   CsApprove() {
 var total_score = this.score1+"||"+this.reason1+"[]"+this.score2+"||"+this.reason2+"[]"+this.score3+"||"+this.reason3+"[]"+this.score4+"||"+this.reason4+"[]"+this.score5+"||"+this.reason5
 console.log(total_score)

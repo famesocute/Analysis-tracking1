@@ -58,6 +58,12 @@ export class EstiCostComponent implements OnInit {
   totalhr : any
   Totalcost = 0
 
+  dataUpload : any
+  dataUploadSETdata : any
+  DataResFlie : any
+
+  Fill_inital :any = "["
+
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder,private route: ActivatedRoute) { 
    
   }
@@ -77,12 +83,19 @@ export class EstiCostComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
-      this.loading = false
-      this.confirmcc = this.DataRes[0].REVI_PAND_CONFIRM_CC1.split(",");
-      this.controlcc = this.DataRes[0].REVI_ANASEC_CONTROL_CC1.split(",");
-      this.ComControl = this.DataRes[0].REVI_ANASEC_CONTROL_COM
-      this.Analyzer = this.DataRes[0].REVI_ANASEC_ANAL
-      console.log(this.DataRes[0].REVI_ANASEC_ANAL)
+      
+      if (this.DataRes[0].REVI_PAND_CONFIRM_CC1 != null) {
+        this.confirmcc = this.DataRes[0].REVI_PAND_CONFIRM_CC1.split(",");
+        }
+      if (this.DataRes[0].REVI_ANASEC_CONTROL_CC1 != null) {
+        this.controlcc = this.DataRes[0].REVI_ANASEC_CONTROL_CC1.split(",");
+       }
+       if (this.DataRes[0].REVI_ANASEC_CONTROL_COM != null) {
+        this.ComControl = this.DataRes[0].REVI_ANASEC_CONTROL_COM
+       }
+       if (this.DataRes[0].REVI_ANASEC_ANAL != null) {
+        this.Analyzer = this.DataRes[0].REVI_ANASEC_ANAL
+       }
 
       if(this.DataRes[0].STATUS_JOB == 4){
         this.isvalideditstep = true
@@ -177,6 +190,37 @@ export class EstiCostComponent implements OnInit {
           console.log(this.sam2)
         }) 
       })
+      this.productService.TRACKING_ANALYSIS_SELECT_ADDFILE_BY_REQ(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
+        console.log(data);
+        this.DataResFlie = data
+        var x 
+        for(x in this.DataResFlie){
+          if(this.DataResFlie[x].SECTION == "Fill_inital"){
+            // this.Interim = this.Interim + '"FILENAME":"' + this.DataResFlie[x].FILENAME + '"},'
+            var name = (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3)
+            
+            if(name == "PNG" || name == "png"|| name == "jpg")
+            {
+              this.Fill_inital = this.Fill_inital + '{"FILENAME":"",'  
+            }
+            else{
+              this.Fill_inital = this.Fill_inital + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
+            }
+           
+            this.Fill_inital = this.Fill_inital + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
+          }
+        }
+        this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
+        this.Fill_inital = this.Fill_inital + "]";
+      console.log(this.Fill_inital)
+  
+      var obj = JSON.parse(this.Fill_inital);
+
+      console.log(obj)
+  
+      this.Fill_inital = obj
+      this.loading = false
+      })
     })
  
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
@@ -210,6 +254,9 @@ export class EstiCostComponent implements OnInit {
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
     }
     console.log(this.namelocal)
+
+
+    
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -294,4 +341,5 @@ export class EstiCostComponent implements OnInit {
       console.log(data);
   })
 }
+
 }

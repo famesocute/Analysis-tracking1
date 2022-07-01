@@ -1,48 +1,48 @@
-<div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+<div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
   <span class="sr-only"></span>
 </div>
 <ng-template #elseBlock>
-<div class="container-fluid">
-  <div class="border-bottom Toolbar">
-    <div class="row">
-      <div class="col-xl-1"></div>
-      <div class="col-xl-7 center" style="padding :15px 0 ;">
-        <button mat-button>Home</button>
-        <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
-        <button mat-button>Equipment Calendar</button>
-        <button mat-button>Job tracking</button>
-        <button mat-button>Search previous report</button>
-      </div>
+  <div class="container-fluid">
+    <div class="border-bottom Toolbar">
+      <div class="row">
+        <div class="col-xl-1"></div>
+        <div class="col-xl-7 center" style="padding :15px 0 ;">
+          <button mat-button>Home</button>
+          <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
+          <button mat-button>Equipment Calendar</button>
+          <button mat-button>Job tracking</button>
+          <button mat-button>Search previous report</button>
+        </div>
 
         <div class="col-xl-4 center " *ngIf="isValid;else other_content">
           <div class="row">
-          <div class="col-xl-8">
-       {{this.nameonly}}
-       ({{this.Codelocal}})
-       {{this.departmentlocal}}
-      </div>
-      <div class="col-xl-4">
-       <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+            <div class="col-xl-8">
+              {{this.nameonly}}
+              ({{this.Codelocal}})
+              {{this.departmentlocal}}
+            </div>
+            <div class="col-xl-4">
+              <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+            </div>
+          </div>
         </div>
+
+        <ng-template #other_content>
+          <div class="col-xl-4 center ">
+            <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+            <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+          </div>
+        </ng-template>
+
+
       </div>
     </div>
 
-    <ng-template #other_content>
-    <div class="col-xl-4 center ">
-      <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
-      <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
-    </div>
-  </ng-template>
-
-
-    </div>
-  </div>
-  
     <div class="row">
       <div class="col-sm-1">
-  
+
       </div>
-  
+
       <div class="col-sm-10">
         <div class="row">
           <div class="col-sm-9">
@@ -99,42 +99,66 @@
                 </div>
               </div>
               <div class="col-sm-4">
-               
-                  <div class="row" style=" padding-top : 30px;">
-                    <div class="col-sm-4"><b>Issue Date:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].ISSUE_DATE}}</div>
-                  </div>
-                
-                
-                  <div class="row" style=" padding-top : 10px;">
-                    <div class="col-sm-4"><b>Requester:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
-                  </div>
-               
-               
-                  <div class="row" style=" padding-top : 10px;">
-                    <div class="col-sm-4"><b>Phone:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
-                  </div>
-                
-                
-                  <div class="row" style=" padding-top : 10px;">
-                    <div class="col-sm-4"><b>Department:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
-                  </div>
-                
-              
-                  <div class="row" style=" padding-top : 10px;">
-                    <div class="col-sm-4"><b>Product:</b></div>
-                    <div class="col-sm-8">{{this.DataRes[0].PRODUCT}}</div>
-                  </div>
-               
-  
+
+                <div class="row" style=" padding-top : 30px;">
+                  <div class="col-sm-4"><b>Issue Date:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].ISSUE_DATE}}</div>
+                </div>
+
+
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Requester:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
+                </div>
+
+
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Phone:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
+                </div>
+
+
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Department:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
+                </div>
+
+
+                <div class="row" style=" padding-top : 10px;">
+                  <div class="col-sm-4"><b>Product:</b></div>
+                  <div class="col-sm-8">{{this.DataRes[0].PRODUCT}}</div>
+                </div>
+
+
                 <mat-card class="cardAT">
-  
+
                 </mat-card>
               </div>
             </div>
+            <div>
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th width="100px" class=" Titlereview">No.</th>
+                      <th width="500px">File Name</th>
+                     
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of Fill_inital let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td *ngIf="item.FILENAME != '';else other_content">
+                          <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
+                      </td>
+                      <ng-template #other_content>
+  
+                          <td> <img [src]="item.LINK" width="300" height="auto"></td>
+  
+                      </ng-template>
+                  </tr>
+                  </tbody>
+                </table>
+          </div>
           </mat-card-content>
         </mat-card>
         <mat-card class="card1">
@@ -142,10 +166,10 @@
             <mat-card-title>Request Analysis Techniques</mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
-            <h4> <b>{{this.DataRes[0].REQ_ANA_TECHNI}}{{this.DataRes[0].REQ_ANA_TECHNI2}} </b> </h4>
+            <h4> <b>{{this.DataRes[0].REQ_ANA_TECHNI}} {{this.DataRes[0].REQ_ANA_TECHNI2}} </b> </h4>
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Sample Information</mat-card-title>
@@ -173,7 +197,7 @@
                     <div class="col-sm-10">{{this.DataRes[0].PIORITY}}</div>
                   </div>
                 </div>
-  
+
               </div>
               <div class="col-sm-5">
                 <div class="input1">
@@ -188,10 +212,10 @@
                     <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
                   </div>
                 </div>
-                
+
               </div>
             </div>
-  
+
             <div class="container">
               <form>
                 <table>
@@ -203,7 +227,7 @@
                           <div class="col-sm-8"> {{ item.Lot_no }}</div>
                         </div>
                       </div>
-                      
+
                     </td>
                     <td width="400px">
                       <div class="input1" style="padding: 0 10px ;">
@@ -212,7 +236,7 @@
                           <div class="col-sm-8">{{ item.Sample_name }}</div>
                         </div>
                       </div>
-  
+
                     </td>
                     <td width="200px">
                       <div class="input1" style="padding: 0 10px ;">
@@ -228,7 +252,7 @@
             </div>
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
@@ -237,7 +261,7 @@
             {{this.DataRes[0].COMM_SAM_INFOR}}
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Attention: Are dangerous or ESD substance included?</mat-card-title>
@@ -248,15 +272,15 @@
               {{this.DataRes[0].DANGER}}
             </div>
             <!-- Sample after tested -->
-            
-              <div class="row">
-                <div class="col-sm-2"><b>Sample after tested:</b></div>
-                <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
-              </div>
-  
+
+            <div class="row">
+              <div class="col-sm-2"><b>Sample after tested:</b></div>
+              <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
+            </div>
+
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Keywords for searching</mat-card-title>
@@ -270,7 +294,7 @@
                     <div class="col-sm-8">{{this.DataRes[0].KEY_CHARA}}</div>
                   </div>
                 </div>
-  
+
               </div>
               <div class="col-sm-4">
                 <div class="input1">
@@ -279,7 +303,7 @@
                     <div class="col-sm-10">{{this.DataRes[0].KEY_STATE}}</div>
                   </div>
                 </div>
-  
+
               </div>
               <div class="col-sm-4">
                 <div class="input1">
@@ -292,7 +316,7 @@
             </div>
           </mat-card-content>
         </mat-card>
-  
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Question and Answer form</mat-card-title>
@@ -310,16 +334,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr  *ngFor="let item of DataResQUESTION let i = index" >
+                  <tr *ngFor="let item of DataResQUESTION let i = index">
                     <th class=" Titlereview">Question no.{{i+1}}:</th>
                     <td>{{item.QUESTION_DETAIL}} </td>
                     <td class=" Titlereview">
-                      <button mat-mini-fab color="primary" class="button4" (click)="GoAswer(item.ID)" >
+                      <button mat-mini-fab color="primary" class="button4" (click)="GoAswer(item.ID)">
                         <mat-icon>import_contacts</mat-icon>
                       </button>
-                     </td>
+                    </td>
                     <td class=" Titlereview">
-                      <button mat-mini-fab color="primary" class="button3" (click)="GoAsweredit(item.ID)" >
+                      <button mat-mini-fab color="primary" class="button3" (click)="GoAsweredit(item.ID)">
                         <mat-icon>edit</mat-icon>
                       </button>
                     </td>
@@ -328,7 +352,7 @@
                 </tbody>
               </table>
               <div class=" container-fluid center">
-              
+
                 <button mat-flat-button class="Buttonaddquetion" (click)="onOpenDialogClick()"> + Add question </button>
               </div>
             </div>
@@ -337,83 +361,85 @@
 
         <mat-card class="card1" style="margin-top: 10px;">
           <mat-card-title-group>
-              <mat-card-title> 
-                <div *ngIf="this.namelocal == this.Analyzer;else elseBlock1">
+            <mat-card-title>
+              <div *ngIf="this.namelocal == this.Analyzer;else elseBlock1">
                 <div class="row">
                   <div class="col-sm-9" style="padding-top:10px ;">Estimate cost</div>
                   <div class="col-sm-3">
-                      <button mat-mini-fab color="primary" class="button3" (click)="onOpenDialogClickeditstep()" >
-                        <mat-icon>edit</mat-icon>
-                      </button>
-                    </div>
+                    <button mat-mini-fab color="primary" class="button3" (click)="onOpenDialogClickeditstep()">
+                      <mat-icon>edit</mat-icon>
+                    </button>
                   </div>
                 </div>
-                <ng-template #elseBlock1>
-                  <div style="padding-top:10px ;">Estimate cost</div>
-                </ng-template>             
-              </mat-card-title>
+              </div>
+              <ng-template #elseBlock1>
+                <div style="padding-top:10px ;">Estimate cost</div>
+              </ng-template>
+            </mat-card-title>
           </mat-card-title-group>
           <mat-card-content>
-            
-            <br>
-              <table class="table table-bordered Titlereview ">
-                  <thead >
-                    <tr>
-                      <th width="70px" >Step</th>
-                      <th >Technique</th>
-                      <th width="150px">Quantity</th>
-                      <th >Basic Charge (THB/Request)</th>
-                      <th>Operation Charge (THB)</th>
-                      <th>Estimate Cost (THB)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of sam2 let i = index">
-                      <th>{{item.step}}</th>
-                      <td>{{item.equip}}</td>
-                      <td>{{item.quantity}}</td>
-                      <td>{{item.basiccharge}}</td>
-                      <td>{{item.operationcharge}}</td>
-                      <td>{{item.estimatecost}}</td>
-                    </tr>                   
-                  </tbody>
-                </table>
 
+            <br>
+            <table class="table table-bordered Titlereview ">
+              <thead>
+                <tr>
+                  <th width="70px">Step</th>
+                  <th>Technique</th>
+                  <th width="150px">Quantity</th>
+                  <th>Basic Charge (THB/Request)</th>
+                  <th>Operation Charge (THB)</th>
+                  <th>Estimate Cost (THB)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of sam2 let i = index">
+                  <th>{{item.step}}</th>
+                  <td>{{item.equip}}</td>
+                  <td>{{item.quantity}}</td>
+                  <td>{{item.basiccharge}}</td>
+                  <td>{{item.operationcharge}}</td>
+                  <td>{{item.estimatecost}}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="row">
+              <div class="col-sm-9"></div>
+              <div class="col-sm-3">
                 <div class="row">
-                  <div class="col-sm-9"></div>
-                  <div class="col-sm-3">
-                    <div class="row">
-                      <div class="col-sm-5">
-                        <b>Total cost :</b>
-                      </div>
-                      <div class="col-sm-7">
-                        {{this.Totalcost.toFixed(2)}}
-                      </div>
-                    </div>
+                  <div class="col-sm-5">
+                    <b>Total cost :</b>
+                  </div>
+                  <div class="col-sm-7">
+                    {{this.Totalcost.toFixed(2)}}
                   </div>
                 </div>
-            
-                <div *ngIf="isvalideditstep;else go_next">
-                  <div class="row center"  >
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2" (click)="GoRequeinfo()">Accept</button></div>
-                    <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2" (click)="decline()">Decline</button></div>
-                    <div class="col-sm-3"></div>
-                  </div>
-                </div>
-        
-                <ng-template #go_next>
-                  <div class="center">Please analyzer revise the steps</div>
-                </ng-template>
-               
+              </div>
+            </div>
+
+            <div *ngIf="isvalideditstep;else go_next">
+              <div class="row center">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2"
+                    (click)="GoRequeinfo()">Accept</button></div>
+                <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2"
+                    (click)="decline()">Decline</button></div>
+                <div class="col-sm-3"></div>
+              </div>
+            </div>
+
+            <ng-template #go_next>
+              <div class="center">Please analyzer revise the steps</div>
+            </ng-template>
+
           </mat-card-content>
-      </mat-card>
-      
-      <div class="center" style="padding-bottom: 20px;">
-        <button mat-flat-button class="Buttonaddquetion3 rounded-circle" (click)="myFunction()">         
+        </mat-card>
+
+        <div class="center" style="padding-bottom: 20px;">
+          <button mat-flat-button class="Buttonaddquetion3 rounded-circle" (click)="myFunction()">
             <p>Status tracking</p>
-            <img src="../assets/Tracking_web/Image/tracking.png">
-        </button>
+            <img style="height: 50px;" src="../assets/Tracking_web/Image/tracking.png">
+          </button>
         </div>
 
         <mat-card class="card1">
@@ -439,7 +465,7 @@
                     <td class=" Titlereview"> Issuer</td>
                     <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
                     <td class=" Titlereview">
-                      <div class = "center" style="padding-top:10px ;">
+                      <div class="center" style="padding-top:10px ;">
                         {{this.DataRes[0].ISSUE_DATE}}
                       </div>
                     </td>
@@ -449,9 +475,9 @@
                   <tr>
                     <th class=" Titlereview"></th>
                     <td class=" Titlereview"> Confirm</td>
-                    <td class=" Titlereview" > {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+                    <td class=" Titlereview"> {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
                     <td class=" Titlereview">
-                      <div class = "center" style="padding-top:10px ;">
+                      <div class="center" style="padding-top:10px ;">
                         {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
                       </div>
                     </td>
@@ -459,7 +485,7 @@
                       {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
                     </td>
                     <td class=" Titlereview">
-                      <p *ngFor="let item of this.confirmcc let i = index" >
+                      <p *ngFor="let item of this.confirmcc let i = index">
                         {{item}}
                       </p>
                     </td>
@@ -467,15 +493,15 @@
                   <tr>
                     <th class=" Titlereview">Analysis section</th>
                     <td class=" Titlereview"> Controller</td>
-                    <td class=" Titlereview" > {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+                    <td class=" Titlereview"> {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
                     <td class=" Titlereview">
-                      <div class = "center" style="padding-top:10px ;">
+                      <div class="center" style="padding-top:10px ;">
                         {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
                       </div>
                     </td>
                     <td class=" Titlereview"> {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}</td>
                     <td class=" Titlereview">
-                      <p *ngFor="let item of this.controlcc let i = index" >
+                      <p *ngFor="let item of this.controlcc let i = index">
                         {{item}}
                       </p>
                     </td>
@@ -483,7 +509,7 @@
                   <tr>
                     <th class=" Titlereview"></th>
                     <td class=" Titlereview"> Analyst</td>
-                    <td class=" Titlereview" >
+                    <td class=" Titlereview">
                       {{this.DataRes[0].REVI_ANASEC_ANAL}}
                     </td>
                     <td class=" Titlereview"></td>
@@ -493,7 +519,7 @@
                   <tr>
                     <th class=" Titlereview">Report approval</th>
                     <td class=" Titlereview">Check</td>
-                    <td class=" Titlereview" ></td>
+                    <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
@@ -501,7 +527,7 @@
                   <tr>
                     <th class=" Titlereview"></th>
                     <td class=" Titlereview">Confirm </td>
-                    <td class=" Titlereview" ></td>
+                    <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
@@ -509,7 +535,7 @@
                   <tr>
                     <th class=" Titlereview"></th>
                     <td class=" Titlereview"> Report approval</td>
-                    <td class=" Titlereview" ></td>
+                    <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
@@ -517,7 +543,7 @@
                   <tr>
                     <th class=" Titlereview">CS Evaluation</th>
                     <td class=" Titlereview">Issuer </td>
-                    <td class=" Titlereview" ></td>
+                    <td class=" Titlereview"></td>
                     <td class=" Titlereview"> </td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
@@ -525,7 +551,7 @@
                   <tr>
                     <th class=" Titlereview">Completed</th>
                     <td class=" Titlereview">Close </td>
-                    <td class=" Titlereview" ></td>
+                    <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>

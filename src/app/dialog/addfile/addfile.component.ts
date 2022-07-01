@@ -12,6 +12,8 @@ export class AddfileComponent implements OnInit {
 
   DataResFlie : any
 
+  section = "Fill_inital"
+
   constructor(public productService: ProductService,public router: Router) { }
 
   ngOnInit(): void {

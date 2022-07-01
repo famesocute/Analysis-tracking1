@@ -46,7 +46,7 @@
       </div>
       <div class="center">
         <div class="row">
-          <!-- Step1 -->
+          <!-- FACTORY APPROVED -->
           <div class="col-xl" >
             <div class="row">
               <div class="col-sm-7 '">
@@ -66,7 +66,7 @@
               </div>
             </div>
             </div>
-        
+        <!-- Step -->
           <div class="col-md " *ngFor="let item of sample1 let i = index">
             <div class="col-xl" *ngIf="isValid1[i];else stepanalysis">
               <div class="row">
@@ -111,7 +111,7 @@
           </div>
 
           <!-- Issue report -->
-          <div class="col-xl  " *ngIf="isValidPic1;else other_content1">
+          <div class="col-xl  " *ngIf="isValidstatusre;else other_content1">
             <div class="row">
               <div class="col-sm-7 '">
                 <div class="card card_track">
@@ -153,9 +153,7 @@
           </ng-template>
 
           <!-- Approve report -->
-          <div class="col-xl  " *ngIf="isValidPic1;else other_content1">
-
-
+          <div class="col-xl  " *ngIf="this.DataRes[0].REVISE_STATUS == 0 ;else other_con1">
             <div class="card card_track">
               <div class="card-body">
                 <img src="../assets/Tracking_web/Image/ready.png">
@@ -166,9 +164,23 @@
               <p><b>APPROVED REPORT</b></p>
               <p></p>
             </div>
-
           </div>
-          <ng-template #other_content1>
+          <ng-template #other_con1>
+            <div class="col-xl  " *ngIf="this.DataRes[0].REVISE_STATUS == 1 ;else other_con2">
+              <div class="card card_track">
+                <div class="card-body">
+                  <img src="../assets/Tracking_web/Image/ready.png">
+                </div>
+              </div>
+              <br>
+              <div>
+                <p><b>Revising REPORT</b></p>
+                <p></p>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template #other_con2>
+          
             <div class="col-xl ">
               <div class="card card_track2">
                 <div class="card-body">
@@ -360,53 +372,76 @@
               <td class="Titlereview">Issue report</td>
               <td class="Titlereview"></td>
               <td class="Titlereview">
-                <div class="row">
-                <div div class="col-sm-2">
-                  <div *ngIf="isValidIssueRe; else start_time2">
-                  <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                    (click)="starttimereport()">Start</button>
+                <div *ngIf="isValidshowIssueRe; else show1">
+                  <button mat-mini-fab color="primary" class="button3" style="background: #8fcaca ;"(click)="addreporttime()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                <ng-template #show1>
+                  <div class="row">
+                    <div div class="col-sm-2">
+                      <div *ngIf="isValidIssueRe; else start_time2">
+                      <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                        (click)="starttimereport()">Start</button>
+                      </div>
+              
+                    <ng-template #start_time2>
+                      {{this.DataIssue[0].START_TIME}}
+                      <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                        disabled>Start</button>
+                    </ng-template>
                   </div>
-          
-                <ng-template #start_time2>
-                  <!-- {{this.DataResreq[i].START_TIME}} -->
-                  {{this.DataIssue[0].START_TIME}}
-                  <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                    disabled>Start</button>
-                </ng-template>
-              </div>
-       
-              <div class="col-sm-2">
-                <div *ngIf="isValidIssueRe; else end_time2">
-                  <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                    disabled>End</button>
-                </div>  
-                <ng-template #end_time2>
-                  {{this.DataIssue[0].END_TIME}}
-                  <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                  (click)="endtimereport()">End</button>
-                </ng-template>
-              </div>
-              <div class="col-sm-4">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <p><b>Break time (min)</b></p>
+           
+                  <div class="col-sm-2">
+                    <div *ngIf="isValidIssueRe; else end_time2">
+                      <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                        disabled>End</button>
+                    </div>  
+                    <ng-template #end_time2>
+                      {{this.DataIssue[0].END_TIME}}
+                      <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                      (click)="endtimereport()">End</button>
+                    </ng-template>
                   </div>
-                  <div class="col-sm-6">
-                    <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time"
-                    [(ngModel)]="this.breaktimereport">
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <p><b>Break time (min)</b></p>
+                      </div>
+                      <div class="col-sm-6">
+                        <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time"
+                        [(ngModel)]="this.breaktimereport">
+                      </div>
                   </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <button mat-mini-fab color="primary" class="button3" style="background: #8fcaca ;"(click)="calreporttime()">
-                <mat-icon>add</mat-icon>
-              </button>
-            </div>
-            <div class="col-sm-2">
-              <button mat-raised-button class="button2" style="background: #f28482 ;"
-              >Finish</button>
-            </div>
-            </div>
+                </div>
+                <div class="col-sm-2">
+                  <button mat-mini-fab color="primary" class="button3" style="background: #8fcaca ;"(click)="calreporttime()">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                <div class="col-sm-2">
+                  <button mat-raised-button class="button2" style="background: #f28482 ;"
+                  (click)="finishreport()">Finish</button>
+                </div>
+                </div>
+                  </ng-template>
+                  <div>
+                    <table>
+                      <tr *ngFor="let item of this.DataIssue let i = index">
+                        <div *ngIf="item.OPERATION_TIME != null">
+                          <td width="200px">
+                            {{item.START_TIME}}
+                          </td>
+                          <td width="200px">
+                            to {{item.END_TIME}}
+                          </td>
+                          <td width="200px">
+                            <b>Operation time :</b>{{item.OPERATION_TIME}}
+                          </td>
+                        </div>
+                        </tr>
+                      </table>
+                  </div>
               </td>
             </tr>
 

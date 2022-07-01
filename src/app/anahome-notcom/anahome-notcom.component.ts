@@ -50,8 +50,10 @@ export class AnahomeNotcomComponent implements OnInit {
       var nameData2
 
       for (x in this.table) {
+        if (this.table[0].REVI_PAND_ISSUER != null) {
         nameData = this.table[x].REVI_PAND_ISSUER.split("<");
         this.table[x].REVI_PAND_ISSUER = nameData[0]
+      }
 
         nameData = this.table[x].STETUS_PERSON.split("<");
         this.table[x].STETUS_PERSON = nameData[0]
