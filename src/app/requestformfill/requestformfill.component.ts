@@ -60,6 +60,7 @@ export class RequestformfillComponent implements OnInit {
   NameConfirm = ""
   NameControl = "Wanutsanun Hintuang <wanutsanun.hin@murata.com>"
   month = ""
+  holiday = ""
 
   isValid = false
 
@@ -68,6 +69,7 @@ export class RequestformfillComponent implements OnInit {
   EMAIL_CC: string[] = [];
 
   activate: boolean = false
+  years = ""
 
   Tech =
 
@@ -245,14 +247,14 @@ export class RequestformfillComponent implements OnInit {
     qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`data_all` " +
       "(`STATUS_JOB`,`STETUS_PERSON`,`REQ_NUM`,`MONTH`, `TITLE`, `BACKGRUD`, `PURPOSE`, `HYPO`, `ANA_TYPE`,`ANA_TYPE2`, `ISSUE_DATE`, " +
       "`REQ_TER`, `PHONE`, `DEP_MENT`, `PRODUCT`, `ATTACH_FILE`, `REQ_ANA_TECHNI`,`REQ_ANA_TECHNI2`, `NUM_SAMPLE`" +
-      ", `SEND_SAM_DATE`, `FINISH_DATE`, `PIORITY`, `REASON`,  `SAM_NAME`, " +
+      ", `SEND_SAM_DATE`, `FINISH_DATE`, `HOLIDAY`, `PIORITY`, `REASON`,  `SAM_NAME`, " +
       "`COMM_SAM_INFOR`, `DANGER`, `SAM_AF_TEST`, `RELATE_MAT`, `KEY_CHARA`, `KEY_STATE`, " +
       "`KEY_PHENO`, `QUESTION`, `REVI_PAND_ISSUER`, `REVI_PAND_CONFIRM`, `REVI_ANASEC_CONTROL`, " +
       "`REVI_ANASEC_ANAL`, `REVI_REAPPROV_CHECK`, `REVI_REAPPROV_CONFIRM`, `REVI_REAPPROV_APPROV`," +
       "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " +
       " VALUES ('1','" + this.NameConfirm + "','" + this.RequestNo + "', '" + this.month + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
       " '" + this.Analysistype2 + "', '" + this.IssueDate + "', '" + this.namelocal + "', '" + this.Phone + "', '" + this.departmentlocal + "', '" + this.Product + "','1', '" + this.RequestTech + "', '" + this.RequestTech2 + "'," +
-      " '" + this.Numsample + "', '" + DatereceiveSam + "', '" + DateEepectSam + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
+      " '" + this.Numsample + "', '" + DatereceiveSam + "', '" + DateEepectSam + "', '" + this.holiday + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
       " '" + this.AnaComment + "', '" + this.Dangerous + "', '" + this.SamAftertest + "', '" + this.Relatedmatters + "', '" + this.KeywordCharact + "', '" + this.KeywordState + "', '" + this.KeywordPheno + "', " +
       " '', '" + this.namelocal + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.EMAIL_CC + "'  );"
     console.log(qtest);
@@ -261,7 +263,6 @@ export class RequestformfillComponent implements OnInit {
       sessionStorage.setItem("RequestNo", this.RequestNo);
     this.router.navigate(['/Addfile'])
     })
-
   }
 
   NewregisterNum() {
@@ -281,8 +282,20 @@ export class RequestformfillComponent implements OnInit {
 
       var date2 = date.toLocaleString()
       this.IssueDate = date2
+
+      var datesep = date2.split(",")
+      console.log(datesep[0])
+      // this.sample2.length
+
       
-      var years = date2.substring(7, 9)
+      if(datesep[0].length == 8 ){
+        this.years = date2.substring(6, 8)
+      }else if(datesep[0].length == 9 ){
+        this.years = date2.substring(7, 9)
+      }else if(datesep[0].length == 10 ){
+        this.years = date2.substring(8, 10)
+      }
+      
 
       const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -290,7 +303,7 @@ export class RequestformfillComponent implements OnInit {
       this.month = months[d.getMonth()];
 
       console.log(date2);
-      console.log(years);
+      console.log(this.years);
 
       var date3: any
 
@@ -354,7 +367,7 @@ export class RequestformfillComponent implements OnInit {
 
           Department2 = this.departmentlocal.substring(2, 5)
           console.log(Department2)
-          runnumberNew = "R" + Department2 + years + date3 + runnumber
+          runnumberNew = "R" + Department2 + this.years + date3 + runnumber
 
           //R300224001
 
@@ -384,7 +397,7 @@ export class RequestformfillComponent implements OnInit {
 
         Department2 = this.departmentlocal.substring(2, 5)
         console.log(Department2)
-        runnumberNew = "R" + Department2 + years + date3 + runnumber
+        runnumberNew = "R" + Department2 + this.years + date3 + runnumber
 
         //R300224001
 

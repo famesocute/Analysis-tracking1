@@ -1,0 +1,222 @@
+<div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
+</div>
+<ng-template #elseBlock>
+<mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Review Information</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div>
+        <table class="table ">
+          <thead>
+            <tr>
+              <th width="70px" class=" Titlereview">Task</th>
+              <th width="70px" class=" Titlereview">Process</th>
+              <th width="120px" class=" Titlereview">Name</th>
+              <th width="100px" class=" Titlereview">Processing date&time</th>
+              <th width="100px" class=" Titlereview">Comment</th>
+              <th width="120px" class=" Titlereview">cc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class=" Titlereview">Pending request</th>
+              <td class=" Titlereview">Issuer</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
+              <td class=" Titlereview">
+                <div class="center" style="padding-top:10px ;">
+                  {{this.DataRes[0].ISSUE_DATE}}
+                </div>
+              </td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_COM}}</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUE_CC}}</td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm</td>
+              <td class=" Titlereview"> {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
+              <td class=" Titlereview">
+                <div class="center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.confirmcc let i = index">
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Analysis section</th>
+              <td class=" Titlereview"> Controller</td>
+              <td class=" Titlereview"> {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+              <td class=" Titlereview">
+                <div class="center" style="padding-top:10px ;">
+                  {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                </div>
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_CONTROL_COM}}
+              </td>
+              <td class=" Titlereview">
+                <p *ngFor="let item of this.controlcc let i = index">
+                  {{item}}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Analyst</td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_ANAL}}
+              </td>
+              <td class=" Titlereview">
+                {{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}
+              </td>
+              <td class=" Titlereview">
+                <mat-form-field class="widthcom" appearance="outline">
+                  <mat-label>Leave a comment</mat-label>
+                  <textarea matInput [(ngModel)]="this.ComAnalyzer"></textarea>
+                </mat-form-field>
+              </td>
+              <td class=" Titlereview">
+                <mat-hint> *Click "Add" to confirm name</mat-hint>
+                <form class="example-form">
+                  <mat-form-field class="widthcom" appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+                <div class="center">
+                  <button mat-button (click)="addIN()">Add</button>
+                </div>
+            <tr *ngFor="let item of this.EMAIL_CC let i = index">
+              <table>
+                <tbody>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <div *ngIf="item != ''">
+                        <td>
+                          <button mat-mini-fab color="primary" class="button3" (click)="delete(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                      </div>
+                    </div>
+                    <div class="col-sm-9">
+                      <td>{{item}}</td>
+                      <br>
+                    </div>
+
+                  </div>
+                </tbody>
+              </table>
+            </tr>
+            </td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Report approval</th>
+              <td class=" Titlereview">Check</td>
+              <td class=" Titlereview">
+                <form class="example-form">
+                  <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.Check">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview">Confirm </td>
+              <td class=" Titlereview">
+                <form class="example-form">
+                  <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.Confirm">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview"></th>
+              <td class=" Titlereview"> Report approval</td>
+              <td class=" Titlereview">
+                <form class="example-form">
+                  <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
+                      [matAutocomplete]="auto" [(ngModel)]="this.approval">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+              </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">CS Evaluation</th>
+              <td class=" Titlereview">Issuer </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"> </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+            <tr>
+              <th class=" Titlereview">Completed</th>
+              <td class=" Titlereview">Close </td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+              <td class=" Titlereview"></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-3 center">
+      <button mat-raised-button color="primary" mat-dialog-close class="center" (click)="edit()">Issue edit</button>
+    </div>
+    <div class="col-sm-3 center">
+      <button mat-raised-button mat-dialog-close color="primary" class="center" >Back</button>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+  </ng-template>

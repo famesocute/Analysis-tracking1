@@ -26,6 +26,11 @@ import { AnahomeCompleteComponent } from './anahome-complete/anahome-complete.co
 import { AddfileComponent } from './dialog/addfile/addfile.component';
 import { InfoEditstepComponent } from './dialog/info-editstep/info-editstep.component';
 import { DailyjobComponent } from './dailyjob/dailyjob.component';
+import { EditinfoComponent } from './dialog/editinfo/editinfo.component';
+import { PenddingComponent } from './dialog/edit_reviewer/pendding/pendding.component'
+import { ReEstiStepComponent } from './dialog/edit_reviewer/re-esti-step/re-esti-step.component';
+import { Re2EstiStepComponent } from './dialog/edit_reviewer/re2-esti-step/re2-esti-step.component';
+import { InfoComponent } from './dialog/edit_reviewer/info/info.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
@@ -53,7 +58,12 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'AnahomeComplete', component: AnahomeCompleteComponent },
 { path: 'Addfile', component: AddfileComponent },
 { path: 'InfoEditstep', component: InfoEditstepComponent },
-{ path: 'Dailyjob', component: DailyjobComponent },];
+{ path: 'Dailyjob', component: DailyjobComponent },
+{ path: 'Editinfo', component: EditinfoComponent },
+{ path: 'Pendding', component: PenddingComponent },
+{ path: 'ReEstiStep', component: ReEstiStepComponent },
+{ path: 'Re2EstiStep', component: Re2EstiStepComponent },
+{ path: 'Info', component: InfoComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

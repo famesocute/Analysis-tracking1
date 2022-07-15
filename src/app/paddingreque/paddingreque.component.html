@@ -42,22 +42,21 @@
     <div class="col-sm-1">
     </div>
     <div class="col-sm-10">
-      <div class="row">
-        <div class="col-sm-9">
-          <h1 style="padding:40px 0px; padding-left:150px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
+        <div>
+          <h1 style="padding-top: 40px; padding-left:150px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
         </div>
-        <div class="col-sm-3" style="padding:40px 0px; padding-left: 90px;">
-          <div class="row ">
-            <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above">
-              <mat-icon>create</mat-icon>
-            </button>
-            <button mat-mini-fab matTooltip="Save" matTooltipClass="example-tooltip-red"
-              aria-label="Button that shows a red tooltip" matTooltipPosition="above" style="margin-left:20px;">
-              <mat-icon>save</mat-icon>
-            </button>
-          </div>
+        <div class="row">
+          <div class="col-sm-10"></div>
+          <div class="col-sm-1"> 
+            <div style="padding-bottom: 10px;">
+            <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above" (click)="editinfo()">
+            <mat-icon>create</mat-icon>
+          </button>
         </div>
-      </div>
+        </div>
+          <div class="col-sm-1"></div>
+        </div>
+
       <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Analysis request form</mat-card-title>
@@ -180,6 +179,12 @@
                   <div class="col-sm-7"><b>Number of sample:</b></div>
                   <div class="col-sm-5">{{this.DataRes[0].NUM_SAMPLE}} </div>
                 </div>
+                <div class="input1">
+                  <div class="row">
+                    <div class="col-sm-3"><b>Piority:</b></div>
+                    <div class="col-sm-9">{{this.DataRes[0].PIORITY}}</div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-sm-4">
@@ -191,8 +196,8 @@
               </div>
               <div class="input1">
                 <div class="row">
-                  <div class="col-sm-2"><b>Piority:</b></div>
-                  <div class="col-sm-10">{{this.DataRes[0].PIORITY}}</div>
+                  <div class="col-sm-2"><b>Reason:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
                 </div>
               </div>
 
@@ -206,11 +211,10 @@
               </div>
               <div class="input1">
                 <div class="row">
-                  <div class="col-sm-2"><b>Reason:</b></div>
-                  <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
+                  <div class="col-sm-2"><b>Holiday:</b></div>
+                  <div class="col-sm-10">{{this.DataRes[0].HOLIDAY}}</div>
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -394,7 +398,6 @@
         </mat-card-content>
       </mat-card>
 
-
       <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Label of Samples</mat-card-title>
@@ -415,6 +418,18 @@
           <p>Status tracking</p>
           <img style="height: 50px;" src="../assets/Tracking_web/Image/tracking.png">
         </button>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-10"></div>
+        <div class="col-sm-1"> 
+          <div style="padding-bottom: 10px;">
+          <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above" (click)="editreviewer()">
+          <mat-icon>create</mat-icon>
+        </button>
+      </div>
+      </div>
+        <div class="col-sm-1"></div>
       </div>
 
       <mat-card class="card1">

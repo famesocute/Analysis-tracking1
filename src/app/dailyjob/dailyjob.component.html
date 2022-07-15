@@ -1,35 +1,107 @@
 <div class="center" style="padding-top: 70px;">
-    <mat-form-field color="accent" appearance="outline">
-        <mat-label>Expected finish date:</mat-label>
-        <input matInput [matDatepicker]="picker2" [(ngModel)]="this.Datechoose">
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2 color="primary"></mat-datepicker>
-      </mat-form-field>
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Expected finish date:</mat-label>
+    <input matInput [matDatepicker]="picker2" [(ngModel)]="this.Datechoose">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+  </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="onChangedate()">Find</button>
-<table style="width:1000px ;" class="table table-bordered Titlereview ">
+  <button mat-raised-button color="primary" (click)="onChangedate()">Find</button>
+</div>
+<br>
+<div class="center">
+  <table style="width:1000px ;" class="table table-bordered Titlereview ">
     <thead>
       <tr>
-        <th width="70px">NO.</th>
-        <th>Item</th>
-        <th width="150px">PIC</th>
-        <th>Technique</th>
-        <th>Sample Q'ty</th>
-        <th>Operated by</th>
-        <th>Time</th>
-        <th>Result / Actual</th>
-        <th>Remark</th>
+        <th width="70px" class="Titlereview1">NO.</th>
+        <th class="Titlereview1">Item</th>
+        <th width="150px" class="Titlereview1">PIC</th>
+        <th class="Titlereview1">Technique</th>
+        <th class="Titlereview1">Sample Q'ty</th>
+        <th class="Titlereview1">Operated by</th>
+        <th class="Titlereview1">Time start</th>
+        <th class="Titlereview1">Time end</th>
+        <th class="Titlereview1">Result / Actual</th>
       </tr>
     </thead>
     <tbody>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <tr *ngFor="let item of DataEquip let i = index">
+        <td class="Titlereview1">{{i+1}}</td>
+        <td class="Titlereview1">{{item.TITLE}}</td>
+        <td class="Titlereview1">{{item.PIC}}</td>
+        <td class="Titlereview1">{{item.EQUIPMENT}}</td>
+        <td class="Titlereview1">{{item.SAMPLE_NUM}}</td>
+        <td class="Titlereview1">{{item.OPERATER}}</td>
+        <td class="Titlereview1">{{item.DATE_BOOKING_START}}
+          <br>
+          time {{item.TIME_BOOKING_START}}
+        </td>
+        <td class="Titlereview1">{{item.DATE_BOOKING_END}}
+          <br>
+          time {{item.TIME_BOOKING_END}}
+        </td>
+        <td class="Titlereview1">
+          <div *ngIf="item.OPERATION_TIME != 0">
+            finish
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div class="center" style="padding-top: 70px;">
+  <mat-form-field color="accent" appearance="outline">
+    <mat-label>Expected finish date:</mat-label>
+    <input matInput [matDatepicker]="picker2" [(ngModel)]="this.Datechoose">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="onChangedate2()">Find</button>
+</div>
+<br>
+<div class="center">
+  <table class="table table-bordered Titlereview ">
+    <thead>
+      <tr>
+        <th width="70px" class="Titlereview1">Received date</th>
+        <th class="Titlereview1">Priority</th>
+        <th class="Titlereview1">Type</th>
+        <th class="Titlereview1">Dept.</th>
+        <th class="Titlereview1">Product</th>
+        <th class="Titlereview1" width="200px">Theme</th>
+        <th class="Titlereview1">Due</th>
+        <th class="Titlereview1">PIC</th>
+        <th class="Titlereview1">No. of sample</th>
+        <th class="Titlereview1">Standard OP time</th>
+        <th class="Titlereview1">Actual OP time</th>
+        <th class="Titlereview1">Current status</th>
+        <th class="Titlereview1">Approver</th>
+        <th class="Titlereview1">Submit report date</th>
+        <th class="Titlereview1">Approve report date</th>
+        <th class="Titlereview1">Holiday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of jobtoday let i = index">
+        <td class="Titlereview1">{{item.receiveddate}}</td>
+        <td class="Titlereview1">{{item.priority}}</td>
+        <td class="Titlereview1">{{item.type}}</td>
+        <td class="Titlereview1">{{item.department}}</td>
+        <td class="Titlereview1">{{item.product}}</td>
+        <td class="Titlereview1" width="200px">{{item.theme}}</td>
+        <td class="Titlereview1">{{item.due}}</td>
+        <td class="Titlereview1">{{item.pic}}</td>
+        <td class="Titlereview1">{{item.numsam}}</td>
+        <td class="Titlereview1">{{item.standardtime}}</td>
+        <td class="Titlereview1">{{item.real}}</td>
+        <td class="Titlereview1">{{item.Currentstatus}}</td>
+        <td class="Titlereview1">{{item.Approver}}</td>
+        <td class="Titlereview1">{{item.submitreport}}</td>
+        <td class="Titlereview1">{{item.approvereport}}</td>
+        <td class="Titlereview1">{{item.holiday}}</td>
+      </tr>
     </tbody>
   </table>
 </div>

@@ -45,22 +45,21 @@
       </div>
 
       <div class="col-sm-10">
-        <div class="row">
-          <div class="col-sm-9">
-            <h1 style="padding:40px 0px; padding-left:150px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
-          </div>
-          <div class="col-sm-3" style="padding:40px 0px; padding-left: 90px;">
-            <div class="row ">
-              <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above">
-                <mat-icon>create</mat-icon>
-              </button>
-              <button mat-mini-fab matTooltip="Save" matTooltipClass="example-tooltip-red"
-                aria-label="Button that shows a red tooltip" matTooltipPosition="above" style="margin-left:20px;">
-                <mat-icon>save</mat-icon>
-              </button>
-            </div>
-          </div>
+        <div>
+          <h1 style="padding-top: 40px; padding-left:150px;">Request no.{{this.DataRes[0].REQ_NUM}}</h1>
         </div>
+        <div class="row">
+          <div class="col-sm-10"></div>
+          <div class="col-sm-1"> 
+            <div style="padding-bottom: 10px;">
+            <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above" (click)="editinfo()">
+            <mat-icon>create</mat-icon>
+          </button>
+        </div>
+        </div>
+          <div class="col-sm-1"></div>
+        </div>
+        
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Analysis request form</mat-card-title>
@@ -180,6 +179,12 @@
                     <div class="col-sm-7"><b>Number of sample:</b></div>
                     <div class="col-sm-5">{{this.DataRes[0].NUM_SAMPLE}} </div>
                   </div>
+                  <div class="input1">
+                    <div class="row">
+                      <div class="col-sm-3"><b>Piority:</b></div>
+                      <div class="col-sm-9">{{this.DataRes[0].PIORITY}}</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="col-sm-4">
@@ -191,26 +196,35 @@
                 </div>
                 <div class="input1">
                   <div class="row">
-                    <div class="col-sm-2"><b>Piority:</b></div>
-                    <div class="col-sm-10">{{this.DataRes[0].PIORITY}}</div>
+                    <div class="col-sm-2"><b>Reason:</b></div>
+                    <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
                   </div>
                 </div>
-
+  
               </div>
               <div class="col-sm-5">
                 <div class="input1">
                   <div class="row">
                     <div class="col-sm-5"><b>Expected finish date:</b></div>
-                    <div class="col-sm-7">{{this.DataRes[0].FINISH_DATE}}</div>
+                    <div class="col-sm-4">{{this.DataRes[0].FINISH_DATE}}</div>
+                    <div class="col-sm-3">
+                      <div *ngIf="this.DataRes[0].DATE_RECEIVE_SAM_REAL != null ; else received" >                    
+                      </div>
+
+                      <ng-template #received>
+                        <button mat-mini-fab color="primary" matTooltip="Receive sample" (click)="recordreceived()">
+                          <mat-icon>save_alt</mat-icon>
+                        </button>
+                        </ng-template>
+                    </div>
                   </div>
                 </div>
                 <div class="input1">
                   <div class="row">
-                    <div class="col-sm-2"><b>Reason:</b></div>
-                    <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
+                    <div class="col-sm-2"><b>Holiday:</b></div>
+                    <div class="col-sm-10">{{this.DataRes[0].HOLIDAY}}</div>
                   </div>
                 </div>
-
               </div>
             </div>
 
@@ -549,6 +563,7 @@
             </mat-card>
           </div>
 
+          <div *ngIf="this.validprivate; else private">
           <div style=" padding-bottom: 15px">
             <mat-card class="card1">
               <mat-card-title-group>
@@ -602,6 +617,7 @@
               </mat-card-content>
             </mat-card>
           </div>
+
           <div style=" padding-bottom: 15px">
             <mat-card class="card1">
               <mat-card-title-group>
@@ -658,6 +674,12 @@
               </mat-card-content>
             </mat-card>
           </div>
+          </div>
+
+          <ng-template #private>
+
+          </ng-template>
+
         </div>
         <ng-template #Sumresult2>
           <h1 style=" padding: 20px 150px; ">Summary Result</h1>
@@ -687,6 +709,26 @@
               </mat-card-title-group>
               <mat-card-content>
           
+                <mat-dialog-content>
+            
+                  <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
+  
+                      <div class="mb-3">
+              
+                          <input class="form-control" type="text" name="Register_no" value="{{this.DataRes[0].REQ_NUM}}" hidden>
+                          <input class="form-control" type="text" name="section" value="{{section1}}" hidden>
+                          <br>            
+                      </div>            
+                      <th>Select file to upload:</th> <br>
+              
+                      <div class="input-group mb-3">
+              
+                          <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+              
+                          <input class="btn btn-dark" type="submit" value="Upload" name="submit">             
+                     </div>            
+                  </form>              
+              </mat-dialog-content>
               <div>
                 <table class="table">
                     <thead>
@@ -715,13 +757,33 @@
             </mat-card>
           </div>
 
+          <div *ngIf="this.validprivate; else private">
           <div style=" padding-bottom: 15px">
             <mat-card class="card1">
               <mat-card-title-group>
                 <mat-card-title>Result file</mat-card-title>
               </mat-card-title-group>
               <mat-card-content>
-               
+                <mat-dialog-content>
+            
+                  <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
+  
+                      <div class="mb-3">
+              
+                          <input class="form-control" type="text" name="Register_no" value="{{this.DataRes[0].REQ_NUM}}" hidden>
+                          <input class="form-control" type="text" name="section" value="{{section2}}" hidden>
+                          <br>            
+                      </div>            
+                      <th>Select file to upload:</th> <br>
+              
+                      <div class="input-group mb-3">
+              
+                          <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+              
+                          <input class="btn btn-dark" type="submit" value="Upload" name="submit">             
+                     </div>            
+                  </form>              
+              </mat-dialog-content>
               <div>
                 <table class="table">
                   <thead>
@@ -746,6 +808,7 @@
                   </tbody>
                 </table> 
             </div>
+              
               </mat-card-content>
             </mat-card>
           </div>
@@ -755,8 +818,33 @@
                 <mat-card-title>Summary</mat-card-title>
               </mat-card-title-group>
               <mat-card-content>
-                {{this.DataRes[0].SUMMARY_DETAIL}}
-               
+                <div class="form-group input1">
+                  <textarea class="form-control" rows="6" id="Background" [(ngModel)]="summarydetail"> </textarea>
+                </div>
+                <div style="padding-top: 10px;" class="center">
+                  <button mat-raised-button color="primary" class="button2" (click)="savesummary()">update</button>
+                </div>
+                <mat-dialog-content>
+            
+                  <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
+  
+                      <div class="mb-3">
+              
+                          <input class="form-control" type="text" name="Register_no" value="{{this.DataRes[0].REQ_NUM}}" hidden>
+                          <input class="form-control" type="text" name="section" value="{{section3}}" hidden>
+                          <br>            
+                      </div>            
+                      <th>Select file to upload:</th> <br>
+              
+                      <div class="input-group mb-3">
+              
+                          <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+              
+                          <input class="btn btn-dark" type="submit" value="Upload" name="submit">             
+                     </div>            
+                  </form>              
+              </mat-dialog-content>
+            
                   <table class="table">
                     <thead>
                       <tr>
@@ -778,10 +866,15 @@
                         </ng-template>
                     </tr>
                     </tbody>
-                  </table>  
+                  </table> 
+                
               </mat-card-content>
             </mat-card>
           </div>
+          </div>
+          <ng-template #private>
+
+          </ng-template>
         </ng-template>
 
         <div style=" padding-bottom: 15px">
@@ -1392,6 +1485,17 @@
 <!-- CheckerApprov -->
 <div *ngIf="isValid2">
   <div style=" padding-bottom: 15px">
+    <div class="row">
+      <div class="col-sm-10"></div>
+      <div class="col-sm-1"> 
+        <div style="padding-bottom: 10px;">
+        <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above" (click)="editreviewer(1)">
+        <mat-icon>create</mat-icon>
+      </button>
+    </div>
+    </div>
+      <div class="col-sm-1"></div>
+    </div>
     <mat-card class="card1">
       <mat-card-title-group>
         <mat-card-title>Review Information</mat-card-title>
@@ -1594,6 +1698,17 @@
 <!-- ConfirmApprov -->
 <div *ngIf="isValid3">
   <div style=" padding-bottom: 15px">
+    <div class="row">
+      <div class="col-sm-10"></div>
+      <div class="col-sm-1"> 
+        <div style="padding-bottom: 10px;">
+        <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above" (click)="editreviewer(2)">
+        <mat-icon>create</mat-icon>
+      </button>
+    </div>
+    </div>
+      <div class="col-sm-1"></div>
+    </div>
     <mat-card class="card1">
       <mat-card-title-group>
         <mat-card-title>Review Information</mat-card-title>
@@ -1800,6 +1915,17 @@
 <!-- ApproverApprov -->
 <div *ngIf="isValid4">
   <div style=" padding-bottom: 15px">
+    <div class="row">
+      <div class="col-sm-10"></div>
+      <div class="col-sm-1"> 
+        <div style="padding-bottom: 10px;">
+        <button mat-mini-fab matTooltip="Edit" class="button3" matTooltipPosition="above" (click)="editreviewer(3)">
+        <mat-icon>create</mat-icon>
+      </button>
+    </div>
+    </div>
+      <div class="col-sm-1"></div>
+    </div>
     <mat-card class="card1">
       <mat-card-title-group>
         <mat-card-title>Review Information</mat-card-title>

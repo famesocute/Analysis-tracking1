@@ -8,6 +8,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
 import { ApproverStepComponent } from '../dialog/approver-step/approver-step.component';
 import { ActivatedRoute } from '@angular/router';
+import { EditinfoComponent } from '../dialog/editinfo/editinfo.component'
+import { ReEstiStepComponent } from '../dialog/edit_reviewer/re-esti-step/re-esti-step.component'
+import { Re2EstiStepComponent } from '../dialog/edit_reviewer/re2-esti-step/re2-esti-step.component'
 
 @Component({
   selector: 'app-esti-step',
@@ -222,6 +225,12 @@ export class EstiStepComponent implements OnInit {
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
         console.log(data); 
       }) 
+      
+      var qtest2 = " "+this.Analyzer+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+      console.log(data); 
+    })
 
       this.productService.changeMessage(this.DataRes[0].ID)
       const dialogRef = this.matDialog.open(ApproverStepComponent, {
@@ -252,6 +261,7 @@ export class EstiStepComponent implements OnInit {
     }
     val2 = val2.substring(0, val2.length - 2);
     console.log(val2)
+
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET  `PRE_ESTI_TECHNIQUE` = '" + val2 + "',`ESTI_STEP_TIME` = '" + date2 + "', `STATUS_JOB` = '4' " +
@@ -260,6 +270,12 @@ export class EstiStepComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
       this.router.navigate(['/Analyrequehome']) 
+    })
+
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+      console.log(data); 
     })
     
   }
@@ -327,5 +343,48 @@ export class EstiStepComponent implements OnInit {
   myFunction() {
     window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
   }
+  editinfo(){
   
+    this.productService.changeMessage(this.DataRes[0].ID)
+      const dialogRef = this.matDialog.open(EditinfoComponent, {
+        disableClose : true,
+        width: '1500px',
+        height: '700px'
+      });
+      dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result );
+
+      this.ngOnInit()
+      });
+    
+}
+editreviewer1(){
+  this.productService.changeMessage(this.DataRes[0].ID)
+  const dialogRef = this.matDialog.open(ReEstiStepComponent, {
+    disableClose : true,
+    width: '1500px',
+    height: '700px'
+  });
+  dialogRef.afterClosed().subscribe(result => {
+  console.log('The dialog was closed');
+  console.log(result );
+
+  location.reload();
+  });
+}
+editreviewer2(){
+  this.productService.changeMessage(this.DataRes[0].ID)
+  const dialogRef = this.matDialog.open(Re2EstiStepComponent, {
+    disableClose : true,
+    width: '1500px',
+    height: '700px'
+  });
+  dialogRef.afterClosed().subscribe(result => {
+  console.log('The dialog was closed');
+  console.log(result );
+
+  location.reload();
+  });
+}
 }

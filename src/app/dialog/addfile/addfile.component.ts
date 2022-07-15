@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AddfileComponent implements OnInit {
   Requestno : any
+  DataRes : any
 
   DataResFlie : any
 
@@ -20,6 +21,11 @@ export class AddfileComponent implements OnInit {
     this.Requestno = sessionStorage.getItem("RequestNo");
     console.log(this.Requestno)
 
+    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_REQ(this.Requestno).subscribe((data: {}) => {
+      console.log(data);
+      this.DataRes = data
+    })
+
     this.productService.TRACKING_ANALYSIS_SELECT_ADDFILE_BY_REQ(this.Requestno).subscribe((data: {}) => {
       console.log(data);
       this.DataResFlie = data
@@ -28,5 +34,12 @@ export class AddfileComponent implements OnInit {
   GoAnahome(){
     sessionStorage.removeItem("RequestNo");
     this.router.navigate(['/AnahomeNotcom'])
+
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.DataRes[0].REVI_PAND_ISSUE_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+      console.log(data); 
+    })
+//(to)panusorn.pin@murata.com;asasas@murata.com;||CC||Subject||data link
   }
 }

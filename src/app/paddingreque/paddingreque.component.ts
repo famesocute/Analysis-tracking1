@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
+import { EditinfoComponent } from '../dialog/editinfo/editinfo.component'
+import { PenddingComponent } from '../dialog/edit_reviewer/pendding/pendding.component'
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -28,7 +30,7 @@ export class PaddingrequeComponent implements OnInit {
   DataRes : any
   DataResQUESTION : any
   message = ""
-
+  holiday = ""
 
   sample1 : any
   sample2 : any
@@ -65,6 +67,7 @@ export class PaddingrequeComponent implements OnInit {
       console.log(data);
       this.DataRes = data
       this.loading = false
+
       this.ComConfirm = this.DataRes[0].REVI_PAND_CONFIRM_COM
       this.ccConfirm = this.DataRes[0].REVI_PAND_CONFIRM_CC1
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
@@ -207,8 +210,12 @@ export class PaddingrequeComponent implements OnInit {
       console.log(data); 
       this.router.navigate(['/Analyrequehome']) 
     })
-    // this.productService.changeMessage(this.DataRes[0].ID)
-   
+    
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_CONTROL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+      console.log(data); 
+    })
   }
 
   countrow = 0
@@ -244,6 +251,33 @@ export class PaddingrequeComponent implements OnInit {
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
   }
+  editinfo(){
+      this.productService.changeMessage(this.DataRes[0].ID)
+        const dialogRef = this.matDialog.open(EditinfoComponent, {
+          disableClose : true,
+          width: '1500px',
+          height: '700px'
+        });
+        dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result );
   
+        location.reload();
+        });
+  }
+  editreviewer(){
+    this.productService.changeMessage(this.DataRes[0].ID)
+    const dialogRef = this.matDialog.open(PenddingComponent, {
+      disableClose : true,
+      width: '1500px',
+      height: '700px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    console.log(result );
+
+    location.reload();
+    });
+  }
 }
 

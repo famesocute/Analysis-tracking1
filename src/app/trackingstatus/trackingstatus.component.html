@@ -153,8 +153,8 @@
           </ng-template>
 
           <!-- Approve report -->
-          <div class="col-xl  " *ngIf="this.DataRes[0].REVISE_STATUS == 0 ;else other_con1">
-            <div class="card card_track">
+          <div class="col-xl  " *ngIf="this.DataRes[0].STATUS_JOB == 9 ;else other_con1">
+            <div class="card card_track2">
               <div class="card-body">
                 <img src="../assets/Tracking_web/Image/ready.png">
               </div>
@@ -164,6 +164,7 @@
               <p><b>APPROVED REPORT</b></p>
               <p></p>
             </div>
+            
           </div>
           <ng-template #other_con1>
             <div class="col-xl  " *ngIf="this.DataRes[0].REVISE_STATUS == 1 ;else other_con2">
@@ -182,7 +183,7 @@
           <ng-template #other_con2>
           
             <div class="col-xl ">
-              <div class="card card_track2">
+              <div class="card card_track">
                 <div class="card-body">
                   <img src="../assets/Tracking_web/Image/ready.png">
                 </div>
@@ -194,8 +195,6 @@
               </div>
             </div>
           </ng-template>
-
-
 
         </div>
       </div>
@@ -233,7 +232,8 @@
         </mat-card-content>
       </mat-card>
 
-      <div  *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+      <div *ngIf="this.departmentlocal  == 'MTQ00'; else facsee">
+      
         <div class="container Tablesize">
           <table class="table tablestyle border">
             <thead>
@@ -257,13 +257,7 @@
   
             </tbody>
           </table>
-        </div>
-
-      </div>
-      <ng-template #elseBlock>
-
-      </ng-template>
-      
+        </div>     
 
       <div class="container Tablesize">
         <table class="table tablestyle table-bordered">
@@ -448,7 +442,105 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <ng-template  #facsee>
+      <div class="container Tablesize">
+        <table class="table tablestyle border">
+          <thead>
+            <tr>
+              <th class="Titlereview" width="100px">Step</th>
+              <th class="Titlereview" width="200px">Technique</th>
+              <th class="Titlereview" width="100px">Quantity</th>
+              <th class="Titlereview" width="200px">Plan time</th>
+              <th class="Titlereview" width="300px">Status</th>
 
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="Titlereview">0</th>
+              <td class="Titlereview">Pending approved</td>
+              <td class="Titlereview">{{this.DataRes[0].NUM_SAMPLE}}</td>
+              <td class="Titlereview">{{this.DataRes[0].ESTI_COST_TIME}}</td>
+              <td class="Titlereview">Approved</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div> 
+
+      <div class="container Tablesize">
+        <table class="table tablestyle table-bordered">
+          <thead>
+            <tr>
+              <th class="Titlereview" width="50px">Step</th>
+              <th class="Titlereview" width="100px">Technique</th>
+              <th class="Titlereview" width="50px">Quantity</th>
+              <th class="Titlereview" width="200px">Plan time</th>
+              <th class="Titlereview" width="550px">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of DataResreq let i = index">
+              <th class="Titlereview">{{item.STEP_BOOKING}}</th>
+              <td class="Titlereview">{{item.EQUIPMENT}}</td>
+              <td class="Titlereview">{{item.SAMPLE_NUM}}</td>
+              <td class="Titlereview">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}} to
+                <br>
+                {{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}
+              </td>
+              <td>
+                <div *ngIf="item.OPERATION_TIME != 0 ; else notfinish">
+                  <div class="center">Finished</div>
+                </div>
+                <ng-template #notfinish>
+                  <div *ngIf="item.START_TIME != null ; else notstart">
+                    <div class="center">Analysing</div>
+                  </div>
+                  </ng-template>
+                <ng-template #notstart>
+                  <div class="center">Not start</div>
+                </ng-template>
+              </td>
+              </tr>
+              </tbody>
+              </table>
+              </div>
+              <div class="container Tablesize">
+                <table class="table tablestyle border">
+                  <thead>
+                    <tr>
+                      <th class="Titlereview" width="50px">Step</th>
+                      <th class="Titlereview" width="200px">Technique</th>
+                      <th class="Titlereview" width="100px">Quantity</th>
+                      <th class="Titlereview" width="500px">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th class="Titlereview"></th>
+                      <td class="Titlereview">Issue report</td>
+                      <td class="Titlereview"></td>
+                      <td class="Titlereview">
+                        
+                        <div *ngIf="this.DataIssue[0].OPERATION_TIME != null ; else reporting">
+                          <div>Finished</div>   
+                        </div>
+                        <ng-template #reporting>
+                          <div *ngIf="this.DataIssue[0].START_TIME != null ; else notfinish">
+                            <div>In process</div>
+                          </div>
+                          </ng-template>
+                          <ng-template #notfinish>
+                            <div>No Finished</div>
+                            {{this.DataIssue[0].OPERATION_TIME}}
+                          </ng-template>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+    </ng-template>
     </div>
     <div class="col-sm-1">
     </div>

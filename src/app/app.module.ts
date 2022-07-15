@@ -56,8 +56,11 @@ import { AnahomeCompleteComponent } from './anahome-complete/anahome-complete.co
 import { AddfileComponent } from './dialog/addfile/addfile.component';
 import { InfoEditstepComponent } from './dialog/info-editstep/info-editstep.component';
 import { DailyjobComponent } from './dailyjob/dailyjob.component';
-
-
+import { EditinfoComponent } from './dialog/editinfo/editinfo.component';
+import { PenddingComponent } from './dialog/edit_reviewer/pendding/pendding.component';
+import { ReEstiStepComponent } from './dialog/edit_reviewer/re-esti-step/re-esti-step.component';
+import { Re2EstiStepComponent } from './dialog/edit_reviewer/re2-esti-step/re2-esti-step.component';
+import { InfoComponent } from './dialog/edit_reviewer/info/info.component';
 
 @NgModule({
   declarations: [
@@ -89,8 +92,11 @@ import { DailyjobComponent } from './dailyjob/dailyjob.component';
     AddfileComponent,
     InfoEditstepComponent,
     DailyjobComponent,
-
-
+    EditinfoComponent,
+    PenddingComponent,
+    ReEstiStepComponent,
+    Re2EstiStepComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

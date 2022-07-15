@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
 import { EstistepEditComponent } from '../dialog/estistep-edit/estistep-edit.component'
 import { ActivatedRoute } from '@angular/router';
-import { ThisReceiver } from '@angular/compiler';
+import { EditinfoComponent } from '../dialog/editinfo/editinfo.component'
 
 @Component({
   selector: 'app-esti-cost',
@@ -285,7 +285,13 @@ export class EstiCostComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     console.log(result );
 
-    this.ngOnInit()
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+      console.log(data); 
+    })
+
+    location.reload()
     }); 
   }
   GoRequeinfo(){
@@ -302,6 +308,11 @@ export class EstiCostComponent implements OnInit {
       this.router.navigate(['/Analyrequehome']) 
     })
  
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+      console.log(data); 
+    })
   }
   GoAswer(ID:any){
     window.location.href ='http://localhost:4200/AnswerPage?id='+ID+'&usertype='+this.userType
@@ -340,6 +351,27 @@ export class EstiCostComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
   })
-}
 
+  var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+  console.log(qtest2);
+  this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+    console.log(data); 
+  })
+}
+editinfo(){
+  
+  this.productService.changeMessage(this.DataRes[0].ID)
+    const dialogRef = this.matDialog.open(EditinfoComponent, {
+      disableClose : true,
+      width: '1500px',
+      height: '700px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    console.log(result );
+
+    this.ngOnInit()
+    });
+  
+}
 }
