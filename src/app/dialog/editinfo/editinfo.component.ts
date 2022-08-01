@@ -44,6 +44,7 @@ export class EditinfoComponent implements OnInit {
   sample2 : any
 
   loading = true
+  checklotno = true
 
   activate: boolean = false
 
@@ -270,8 +271,31 @@ export class EditinfoComponent implements OnInit {
    
   }
   sendapprove(){
+    if(this.Piority == 'Urgent' && this.Reason == '' ){
+      window.alert("Please fill reason of urgent piority")
+  
+        console.log('1')
+ 
+    }else if(this.Piority == 'Normal'){
+      this.sentinfo()
+      console.log('2')
+    }else{
+      this.sentinfo()
+    }
+  }
+
+  sentinfo(){
     var val2 = ""
     for (var val in this.sample1) {
+
+      if(this.sample1[val].lotno == ''){
+        window.alert("Please fill lot number every sample")
+        this.checklotno = false
+        break;
+      }else{
+        this.checklotno = true
+      }
+
       console.log(val); // prints values: 10, 20, 30, 40
       val2 = val2 + this.sample1[val].lotno + "||" + this.sample1[val].name + "||" + this.sample1[val].remake +"[]"
     }
@@ -292,9 +316,11 @@ export class EditinfoComponent implements OnInit {
       " `KEY_STATE` = '" + this.KeywordState + "', `KEY_PHENO` = '" + this.KeywordPheno + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
+    if(this.checklotno == true){
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       location.reload();
     })
+  }
   }
 }

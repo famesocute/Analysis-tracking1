@@ -14,6 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class AnswerEditComponent implements OnInit {
   message = ""
   Questiondata: any
+  DataRes : any
 
   ANSWER_SENT_TO = ""
   ANSWER_DETAIL = ""
@@ -41,8 +42,10 @@ export class AnswerEditComponent implements OnInit {
   EMAIL_CC: string[] = [];
 
   myControl = new FormControl();
+  myControl2 = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
+  filteredOptions2!: Observable<string[]>;
 
   constructor(public router: Router, public productService: ProductService,private route: ActivatedRoute) { }
 
@@ -52,9 +55,9 @@ export class AnswerEditComponent implements OnInit {
     this.ID_Q = this.route.snapshot.queryParamMap.get("id");
     console.log(this.ID_Q)
 
-    this.namelocal = sessionStorage.getItem("NAME");
-    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
     if (this.namelocal != null) {
       this.isValid = true
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
@@ -63,14 +66,10 @@ export class AnswerEditComponent implements OnInit {
     this.EMAIL_CC[0] = ""
     console.log(this.EMAIL_CC);
 
-    // this.productService.currentMessage.subscribe(message => this.message = message)
-    // console.log(this.message)
-    // var a
-    // a = this.message.split("||")
-    // this.ID_Q = a[0]
-    // this.ID_p = a[1]
-    // console.log(this.ID_Q)
-    // console.log(this.ID_p)
+    this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.ID_p).subscribe((data: {}) => {
+      console.log(data);
+      this.DataRes = data
+    })
 
     this.productService.TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID(this.ID_Q).subscribe((data: {}) => {
       console.log(data);
@@ -101,9 +100,18 @@ export class AnswerEditComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
+    this.filteredOptions2 = this.myControl2.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter2(value)),
+    );
     
   }
   private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter2(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
@@ -121,9 +129,9 @@ export class AnswerEditComponent implements OnInit {
 
 
   Logout() {
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
 
@@ -153,10 +161,16 @@ export class AnswerEditComponent implements OnInit {
       " `STATUS_QUESTION` = '" + this.STATUS_QUESTION + "' WHERE (`ID` = '" + this.ID_Q + "');"
       
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-      history.back()
+
+      window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnahomeNotcom'
        
-    }
-    )
+    var qtest2 = " "+this.ANSWER_SENT_TO+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/AnswerPage?id="+this.Questiondata[0].ID+"&usertype="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+    console.log(data);    
+    
+    })
+    })
   }
 
 }

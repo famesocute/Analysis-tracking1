@@ -1,0 +1,14 @@
+<div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+    <span class="sr-only"></span>
+  </div>
+  <ng-template #elseBlock>
+<div><b>Send email to</b></div>
+<div>{{this.sendto}}</div>
+<br>
+<div><b>CC to</b></div>
+<div>{{this.CC}}</div>
+<br>
+<div class="center">
+    <button mat-flat-button mat-dialog-close class="button1 center" (click)="sendmail()">OK!</button>
+</div>
+</ng-template>

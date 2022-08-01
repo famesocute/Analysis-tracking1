@@ -44,6 +44,7 @@ export class TrackingstatusComponent implements OnInit {
   isValidIssueRe = true
   isValidshowIssueRe = true
   isValidstatusre = true
+  validissue = false
 
   breaktime = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   breaktime2: any
@@ -57,9 +58,9 @@ export class TrackingstatusComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.namelocal = sessionStorage.getItem("NAME");
-    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
 
     if (this.namelocal != null) {
       this.isValid = true
@@ -93,6 +94,7 @@ export class TrackingstatusComponent implements OnInit {
         this.sample2 = this.sample2 + '"Sample_no":"' + a[1] + '"},'
 
       }
+      var lastSTEP :any
       this.sample2 = this.sample2.substring(0, this.sample2.length - 1);
       this.sample2 = this.sample2 + "]";
       console.log(this.sample2)
@@ -113,12 +115,16 @@ export class TrackingstatusComponent implements OnInit {
           for (i in this.DataResreq) {
             this.breaktime[i] = this.DataResreq[i].BREAK_TIME
             console.log((this.DataResreq[i].START_TIME));
-            if (this.DataResreq[i].START_TIME != null) {
-              this.isValidButton[i] = false
-              this.isValidButton2[i] = true
+            if (this.DataResreq[i].START_TIME != null ) {
+              if(this.DataResreq[i].START_TIME != 'null'){
+                this.isValidButton[i] = false
+                this.isValidButton2[i] = true
+              }
 
               if (this.DataResreq[i].END_TIME != null) {
-                this.isValidButton2[i] = false
+                if (this.DataResreq[i].END_TIME != 'null') { 
+                  this.isValidButton2[i] = false
+                }
                 if (this.DataResreq[i].OPERATION_TIME != "0") {
                   this.isValidButton3[i] = false
                 }
@@ -126,43 +132,70 @@ export class TrackingstatusComponent implements OnInit {
             }
             else {
               this.isValidButton2[i] = true
-              console.log("data");
+              
             }
             
             for (x in this.DataResreq2) {
-              // console.log(this.DataResreq2[x].STEP_BOOKING)
-              // console.log(this.DataResreq[x].STEP_BOOKING)
+              // console.log("DataResreq2" +this.DataResreq2[x].STEP_BOOKING)
+              // console.log("DataResreq" +this.DataResreq[x].STEP_BOOKING)
+              
+
               if (this.DataResreq2[x].STEP_BOOKING == this.DataResreq[i].STEP_BOOKING) {
-                // console.log(this.DataResreq[i].OPERATION_TIME.length);
-                // console.log(this.DataResreq[i].OPERATION_TIME);
-                if (this.DataResreq[i].OPERATION_TIME.length == 1) {
-                  this.isValid1[x] = true
-                  console.log("true" + i)
+                console.log("nowSTEP : " +this.DataResreq2[x].STEP_BOOKING)
+                console.log("lastSTEP : " +lastSTEP)
+
+              
+                console.log(this.DataResreq[i].OPERATION_TIME);
+                if (lastSTEP == this.DataResreq2[x].STEP_BOOKING)
+                {
+                  if ( (this.isValid1[x-1] == false && this.DataResreq[i].OPERATION_TIME.length == 1) || this.DataResreq[i].OPERATION_TIME == 0){
+                    this.isValid1[x] = true
+                    break
+                  }
+                  else if( (this.isValid1[x-1] == true && this.DataResreq[i].OPERATION_TIME.length == 1) || this.DataResreq[i].OPERATION_TIME == 0){
+                    this.isValid1[x] = true
+                    break
+                  }
                 }
                 else{
-                  this.isValid1[x] = false
-                  console.log("false" + i)
+                  if (this.DataResreq[i].OPERATION_TIME.length == 1) {
+                    this.isValid1[x] = true
+                    console.log("true" + i)
+                  }
+                  else{
+                    this.isValid1[x] = false
+                    console.log("false" + i)
+                  }
                 }
+                
+                lastSTEP = this.DataResreq2[x].STEP_BOOKING
               }
+              
             }
           }
          
         })
-
+        console.log(this.DataRes)
         this.productService.TRACKING_ANALYSIS_SELECT_TIMEISSUE_REPORT_BYREQ(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
           console.log(data);
           this.DataIssue = data
-          if (this.DataIssue[0].START_TIME != null) {
-            this.isValidIssueRe = false
-          }
+          console.log(this.DataIssue.length)
 
-          if(this.DataIssue[0].REQ_NUM != null){
-            if(this.DataIssue[0].OPERATION_TIME != null){
-              this.isValidshowIssueRe = true
-              this.isValidstatusre = false
-            }else {
-              this.isValidshowIssueRe = false
+          if(this.DataIssue.length != 0){
+            this.validissue = true
+            if (this.DataIssue[0].START_TIME != null) {
+              this.isValidIssueRe = false
             }
+            if(this.DataIssue[0].REQ_NUM != null){
+              if(this.DataIssue[0].OPERATION_TIME != null){
+                this.isValidshowIssueRe = true
+                this.isValidstatusre = false
+              }else {
+                this.isValidshowIssueRe = false
+              }
+            }
+          }else{
+            this.validissue = false
           }
         })
       })
@@ -172,9 +205,9 @@ export class TrackingstatusComponent implements OnInit {
     this.router.navigate(['/Analyrequehome'])
   }
   Logout() {
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Gologin() {
@@ -266,7 +299,7 @@ export class TrackingstatusComponent implements OnInit {
     var houre
     if(this.operationtimere2[0] == 0){
       if (this.operationtimere2[1] - this.breaktimere3 < 0){
-        alert("Hello! I am an alert box!");
+        alert("Over break times");
       }else{
         min = this.operationtimere2[1] - this.breaktimere3
       houre = this.operationtimere2[0] - this.breaktimere2[0]
@@ -438,7 +471,7 @@ export class TrackingstatusComponent implements OnInit {
       console.log(qtest);
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
         console.log(data);
-        window.location.href ='http://localhost:4200/Requestinfo?id='+this.DataRes[0].ID
+        window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id='+this.DataRes[0].ID
       })
 
       }
@@ -483,7 +516,7 @@ export class TrackingstatusComponent implements OnInit {
       console.log(qtest);
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
         console.log(data);
-        window.location.href ='http://localhost:4200/Requestinfo?id='+this.DataRes[0].ID
+        window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id='+this.DataRes[0].ID
         location.reload();
       })
     }

@@ -37,9 +37,9 @@ export class MyjobComponent implements OnInit {
       this.table = data
       this.productService.currentMessage.subscribe(message => this.message = message)
 
-      this.namelocal = sessionStorage.getItem("NAME");
-      this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-      this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+      this.namelocal = localStorage.getItem("NAME");
+      this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+      this.departmentlocal = localStorage.getItem("DEPARTMENT");
 
       if (this.namelocal != null) {
         this.isValid = true
@@ -92,9 +92,9 @@ export class MyjobComponent implements OnInit {
     this.router.navigate(['/Requestformfill'])
   }
   Logout() {
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
 
@@ -106,21 +106,21 @@ export class MyjobComponent implements OnInit {
     console.log(STATUS_JOB)
 
     if (STATUS_JOB == '1') {
-      window.location.href ='http://localhost:4200/Paddingreque?id='+ID    
+      window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Paddingreque?id='+ID    
     } else if (STATUS_JOB == '2') {
-      window.location.href ='http://localhost:4200/Estistep?id='+ID   
+      window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Estistep?id='+ID   
     }
     else if (STATUS_JOB == '3') {
-      window.location.href ='http://localhost:4200/Estistep?id='+ID  
+      window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Estistep?id='+ID  
     }
     else if (STATUS_JOB == '4'||STATUS_JOB == '0') {
-      window.location.href ='http://localhost:4200/Esticost?id='+ID  
+      window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Esticost?id='+ID  
     }
     else if (STATUS_JOB == '5' ) {
-      window.location.href ='http://localhost:4200/Requestinfo?id='+ID  
+      window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id='+ID  
     }
     else if (STATUS_JOB == '6'||STATUS_JOB == '7'||STATUS_JOB == '8'||STATUS_JOB == '9'||STATUS_JOB == '10' ) {
-      window.location.href ='http://localhost:4200/Requestinfo?id='+ID  
+      window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id='+ID  
     }
   }
 }

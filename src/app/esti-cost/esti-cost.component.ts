@@ -20,6 +20,7 @@ export class EstiCostComponent implements OnInit {
   table : any
   confirmcc = ""
   controlcc = ""
+  reasondecline : any
 
   ComControl=""
   ccControl1=""
@@ -46,6 +47,7 @@ export class EstiCostComponent implements OnInit {
 
   isValid = false
   isvalideditstep = true
+  open = false
 
   loading = true
   userType : any
@@ -63,6 +65,8 @@ export class EstiCostComponent implements OnInit {
   DataResFlie : any
 
   Fill_inital :any = "["
+  section3 = "Fill_inital"
+  Fill_initalchk = false
 
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder,private route: ActivatedRoute) { 
    
@@ -83,6 +87,12 @@ export class EstiCostComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
+
+      if(this.DataRes[0].STATUS_JOB == 4 || this.DataRes[0].STATUS_JOB == 0){
+        this.open = true
+      }else{
+        window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnahomeNotcom'
+      }
       
       if (this.DataRes[0].REVI_PAND_CONFIRM_CC1 != null) {
         this.confirmcc = this.DataRes[0].REVI_PAND_CONFIRM_CC1.split(",");
@@ -196,30 +206,34 @@ export class EstiCostComponent implements OnInit {
         var x 
         for(x in this.DataResFlie){
           if(this.DataResFlie[x].SECTION == "Fill_inital"){
-            // this.Interim = this.Interim + '"FILENAME":"' + this.DataResFlie[x].FILENAME + '"},'
-            var name = (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3)
-            
-            if(name == "PNG" || name == "png"|| name == "jpg")
-            {
+
+            if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
               this.Fill_inital = this.Fill_inital + '{"FILENAME":"",'  
             }
-            else{
+            else{  
               this.Fill_inital = this.Fill_inital + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
             }
-           
+            console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Fill_inital = this.Fill_inital + '"idupload_list":"' + this.DataResFlie[x].idupload_list + '",' 
             this.Fill_inital = this.Fill_inital + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
           }
         }
-        this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
-        this.Fill_inital = this.Fill_inital + "]";
-      console.log(this.Fill_inital)
-  
-      var obj = JSON.parse(this.Fill_inital);
+        if(this.Fill_inital.length != 1){
+          this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
+          this.Fill_inital = this.Fill_inital + "]";
+          console.log(this.Fill_inital)
 
-      console.log(obj)
-  
-      this.Fill_inital = obj
-      this.loading = false
+          if(this.Fill_inital != "]"){
+          var obj = JSON.parse(this.Fill_inital);
+           console.log(obj)
+           this.Fill_inital = obj
+
+          if(this.Fill_inital != "]"){
+            this.Fill_initalchk = true
+          }
+        }
+        }
+        this.loading = false
       })
     })
  
@@ -245,9 +259,9 @@ export class EstiCostComponent implements OnInit {
       map(value => this._filter(value)),
     );
 
-    this.namelocal = sessionStorage.getItem("NAME");
-    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
 
     if (this.namelocal != null) {
       this.isValid = true
@@ -264,17 +278,20 @@ export class EstiCostComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
   onOpenDialogClick(){
-    this.productService.changeMessage(this.DataRes[0].REQ_NUM + "||"+this.DataRes[0].ID)
-    const dialogRef = this.matDialog.open(QuestionComponent, {
-      disableClose : true,
-      width: '500px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-    console.log(result );
+    if (this.namelocal != null) {
+      this.productService.changeMessage(this.DataRes[0].REQ_NUM + "||" + this.DataRes[0].ID)
+      const dialogRef = this.matDialog.open(QuestionComponent, {
+        disableClose: true,
+        width: '500px',
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log(result);
 
-    this.ngOnInit()
-    }); 
+      });
+    } else (
+      window.alert("Please login")
+    )
   }
   onOpenDialogClickeditstep(){
     this.productService.changeMessage(this.DataRes[0].ID)
@@ -285,7 +302,7 @@ export class EstiCostComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     console.log(result );
 
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
@@ -295,12 +312,13 @@ export class EstiCostComponent implements OnInit {
     }); 
   }
   GoRequeinfo(){
+    if(this.namelocal == this.DataRes[0].REVI_PAND_CONFIRM){
     let date: Date = new Date();
     var date2 = date.toLocaleString()
 
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `STATUS_JOB` = '5', `ESTI_COST_TIME` = '"+ date2 +"',`ESTI_TECHNIQUE` = '"+ this.DataRes[0].PRE_ESTI_TECHNIQUE +"'  " +
+      " SET  `STATUS_JOB` = '5', `ESTI_COST_TIME` = '"+ date2 +"',`ESTI_TECHNIQUE` = '"+ this.DataRes[0].PRE_ESTI_TECHNIQUE +"',`STETUS_PERSON` = '"+ this.DataRes[0].REVI_ANASEC_ANAL +"'  " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -308,17 +326,20 @@ export class EstiCostComponent implements OnInit {
       this.router.navigate(['/Analyrequehome']) 
     })
  
-    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else(
+    alert('Only Confirm Approve')
+  )
   }
   GoAswer(ID:any){
-    window.location.href ='http://localhost:4200/AnswerPage?id='+ID+'&usertype='+this.userType
+    window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnswerPage?id='+ID+'&usertype='+this.userType
   }
   GoAsweredit(ID:any){
-    window.location.href ='http://localhost:4200/AnswerEdit?id='+ID+'&usertype='+this.userType
+    window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnswerEdit?id='+ID+'&usertype='+this.userType
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 
@@ -327,9 +348,9 @@ export class EstiCostComponent implements OnInit {
     this.router.navigate(['/AnahomeNotcom'])
   }
   Logout(){
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Gologin() {
@@ -339,24 +360,38 @@ export class EstiCostComponent implements OnInit {
     this.router.navigate(['/Signup'])
   }
   myFunction() {
-    window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
+    window.open("http://163.50.57.95:82/Tracking_Analysis/Steppadding?id="+this.DataRes[0].ID);
   }
   decline(){
-    this.isvalideditstep = false
-   var qtest = ""
-    qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `STATUS_JOB` = '0' " +
-      " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
-    console.log(qtest);
-    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-      console.log(data);
-  })
+    if(this.namelocal == this.DataRes[0].REVI_PAND_CONFIRM){ 
 
-  var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
-  console.log(qtest2);
-  this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
-    console.log(data); 
-  })
+    this.reasondecline = prompt('Why are you deline? ');
+      console.log(this.reasondecline);
+      if(this.reasondecline == null || this.reasondecline == ""){
+        window.alert("Please give a reason")
+      }else{
+        this.isvalideditstep = false
+        var qtest = ""
+         qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+           " SET  `STATUS_JOB` = '0',`STETUS_PERSON` = '"+ this.DataRes[0].REVI_ANASEC_ANAL +"',`REASON_DELINE` = '"+ this.reasondecline +"' " +
+           " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
+         console.log(qtest);
+         this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+           console.log(data);
+           location.reload();
+       })
+     
+       var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
+       console.log(qtest2);
+       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+         console.log(data);
+
+       })
+      }
+      }else{
+        window.alert("Only Confirm Decline")
+      }
+    
 }
 editinfo(){
   
@@ -372,6 +407,11 @@ editinfo(){
 
     this.ngOnInit()
     });
-  
+}
+deletefile(x:any){
+  this.productService.TRACKING_ANALYSIS_DELETE_FILE(x).subscribe((data: {}) => {
+    console.log(data);
+    location.reload();
+  })
 }
 }

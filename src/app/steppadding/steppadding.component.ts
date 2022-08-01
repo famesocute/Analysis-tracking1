@@ -47,9 +47,9 @@ export class SteppaddingComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,private route: ActivatedRoute,public productService: ProductService,public router: Router) { }
 
   ngOnInit(): void {
-    this.namelocal = sessionStorage.getItem("NAME");
-    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
 
     if (this.namelocal != null) {
       this.isValid = true
@@ -123,9 +123,9 @@ export class SteppaddingComponent implements OnInit {
     this.router.navigate(['/Analyrequehome']) 
   }
   Logout(){
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Gologin() {

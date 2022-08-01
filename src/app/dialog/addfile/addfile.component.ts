@@ -14,6 +14,8 @@ export class AddfileComponent implements OnInit {
   DataResFlie : any
 
   section = "Fill_inital"
+  Fill_inital :any = "["
+  Fill_initalchk = false
 
   constructor(public productService: ProductService,public router: Router) { }
 
@@ -29,17 +31,53 @@ export class AddfileComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_SELECT_ADDFILE_BY_REQ(this.Requestno).subscribe((data: {}) => {
       console.log(data);
       this.DataResFlie = data
+      var x 
+      for(x in this.DataResFlie){
+        if(this.DataResFlie[x].SECTION == "Fill_inital"){
+
+          if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
+            this.Fill_inital = this.Fill_inital + '{"FILENAME":"",'  
+          }
+          else{  
+            this.Fill_inital = this.Fill_inital + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
+          }
+          console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+          this.Fill_inital = this.Fill_inital + '"idupload_list":"' + this.DataResFlie[x].idupload_list + '",' 
+          this.Fill_inital = this.Fill_inital + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
+        }
+      }
+      if(this.Fill_inital.length != 1){
+        this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
+        this.Fill_inital = this.Fill_inital + "]";
+        console.log(this.Fill_inital)
+
+        if(this.Fill_inital != "]"){
+        var obj = JSON.parse(this.Fill_inital);
+         console.log(obj)
+         this.Fill_inital = obj
+
+        if(this.Fill_inital != "]"){
+          this.Fill_initalchk = true
+        }
+      }
+      }
     })
+    
   }
   GoAnahome(){
-    sessionStorage.removeItem("RequestNo");
-    this.router.navigate(['/AnahomeNotcom'])
-
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.DataRes[0].REVI_PAND_ISSUE_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.DataRes[0].REVI_PAND_ISSUE_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Paddingreque?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
+     
+      sessionStorage.removeItem("RequestNo");
     })
-//(to)panusorn.pin@murata.com;asasas@murata.com;||CC||Subject||data link
+    this.router.navigate(['/AnahomeNotcom'])
+  }
+  deletefile(x:any){
+    this.productService.TRACKING_ANALYSIS_DELETE_FILE(x).subscribe((data: {}) => {
+      console.log(data);
+      location.reload();
+    })
   }
 }

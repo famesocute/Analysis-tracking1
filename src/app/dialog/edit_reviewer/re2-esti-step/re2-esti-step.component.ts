@@ -21,8 +21,10 @@ export class Re2EstiStepComponent implements OnInit {
   Analyzer = ""
 
   myControl = new FormControl();
+  myControl2 = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
+  filteredOptions2!: Observable<string[]>;
   EMAIL_CC: string[] = [];
 
   constructor(public productService: ProductService) { }
@@ -64,10 +66,19 @@ export class Re2EstiStepComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
+    this.filteredOptions2 = this.myControl2.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter2(value)),
+    );
 
     this.loading = false
   }
   private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter2(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
@@ -90,14 +101,15 @@ export class Re2EstiStepComponent implements OnInit {
   edit(){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "',`REVI_ANASEC_CONTROL_CC1` = '" + this.EMAIL_CC + "',`REVI_ANASEC_ANAL` = '" + this.Analyzer + "' " +
+      " SET `REVI_ANASEC_CONTROL_COM` = '" + this.ComControl + "',`REVI_ANASEC_CONTROL_CC1` = '" + this.EMAIL_CC + "' " + 
+      " ,`REVI_ANASEC_ANAL` = '" + this.Analyzer + "',`STETUS_PERSON` = '" + this.DataRes[0].REVI_ANASEC_CONTROL + "' "+
       "  WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
     })
 
-    var qtest2 = " "+this.Analyzer+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.Analyzer+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Estistep?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 

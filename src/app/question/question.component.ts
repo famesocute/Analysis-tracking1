@@ -6,7 +6,9 @@ import { map, startWith } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'
 import { ProductService } from '../api/product.service';
+import { MatDialog } from '@angular/material/dialog';
 import {FormsModule} from "@angular/forms";
+import { SendmailQuestionComponent } from "../dialog/sendmail-question/sendmail-question.component"
 
 @Component({
   selector: 'app-question',
@@ -31,19 +33,22 @@ RequestNo = ""
   Codelocal: any
   departmentlocal: any
   nameonly : any
+  DataRes : any
 
   isValid = false
 
   EMAIL_CC: string[] = [];
 
   myControl = new FormControl();
+  myControl2 = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
+  filteredOptions2!: Observable<string[]>;
 
-  constructor( private fb: FormBuilder, public router: Router, private location: Location, public productService: ProductService ) { }
+  constructor( private fb: FormBuilder, public router: Router, private location: Location, public productService: ProductService,private matDialog: MatDialog ) { }
   
 ngOnInit(): void {
-  this.Questioner = sessionStorage.getItem("NAME");
+  this.Questioner = localStorage.getItem("NAME");
   
   this.productService.currentMessage.subscribe(message => this.message = message)
   console.log(this.message)
@@ -56,9 +61,18 @@ ngOnInit(): void {
   this.RequestNo = a[0]
   this.ID = a[1]
 
+  this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(a[1]).subscribe((data: {}) => {
+    console.log(data);
+    this.DataRes = data
+  })
+
   this.filteredOptions = this.myControl.valueChanges.pipe(
     startWith(''),
     map(value => this._filter(value)),
+  );
+  this.filteredOptions2 = this.myControl2.valueChanges.pipe(
+    startWith(''),
+    map(value => this._filter2(value)),
   );
 
   this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
@@ -82,6 +96,11 @@ ngOnInit(): void {
 
   return this.options.filter(option => option.toLowerCase().includes(filterValue));
 }
+private _filter2(value: string): string[] {
+  const filterValue = value.toLowerCase();
+
+  return this.options.filter(option => option.toLowerCase().includes(filterValue));
+}
 
 confirm(){
   let date: Date = new Date();
@@ -94,12 +113,23 @@ confirm(){
 
   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
     console.log(data);
+    
+    this.productService.changeMessage(this.geterQution+'||'+this.EMAIL_CC+'||'+this.DataRes[0].TITLE+'||'+this.DataRes[0].ID)
+    const dialogRef = this.matDialog.open(SendmailQuestionComponent, {
+      disableClose : true,
+      width: '500px',
+      height: '200px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    console.log(result );
 
+    location.reload();
+    });
   })
-  this.productService.changeMessage(this.ID)
 }
 goback(){
-  this.productService.changeMessage(this.ID)
+  
 }
 countrow = 0
   addIN(){

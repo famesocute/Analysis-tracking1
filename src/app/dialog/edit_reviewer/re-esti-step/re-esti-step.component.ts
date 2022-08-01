@@ -56,7 +56,7 @@ export class ReEstiStepComponent implements OnInit {
             const myArray = dataselect.split(",");
     
             this.options = myArray
-            this.loading = false
+           
         })    
     })
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -90,14 +90,14 @@ export class ReEstiStepComponent implements OnInit {
   edit(){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "',`REVI_PAND_CONFIRM_CC1` = '" + this.EMAIL_CC + "' " +
+      " SET `REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "',`REVI_PAND_CONFIRM_CC1` = '" + this.EMAIL_CC + "',`STETUS_PERSON` = '" + this.ComConfirm + "' " +
       "  WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
     })
 
-    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_CONTROL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Estistep?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 

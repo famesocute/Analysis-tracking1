@@ -19,21 +19,20 @@
       <label for="Title"><b>CC question to:</b></label>
     </div>
     <div class="col-sm-8" style="padding-top: 10px;">
-      <mat-hint> *Click "Add" to confirm name</mat-hint>
       <form class="example-form">
           <mat-form-field class="example-full-width " appearance="outline">
             <mat-label>Select Name</mat-label>
-            <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-              [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl2"
+              [matAutocomplete]="auto2" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+            <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
                 {{option}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
         </form>
         <div >
-          <button mat-button (click)="addIN()">Add</button>
+          <button mat-button class="Buttonadd" (click)="addIN()">Confirm name</button>
         </div> 
         <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
         <table>

@@ -32,25 +32,35 @@
             
             </mat-dialog-content>  
 
-            <div>
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th width="100px" class=" Titlereview">No.</th>
-                        <th width="500px">File Name</th>
-                       
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr  *ngFor="let item of DataResFlie let i = index" >
-                        <div *ngIf="item.SECTION == 'Fill_inital'">
-                        <th class=" Titlereview">{{i+1}}:</th>
-                        <td>{{item.FILENAME}} </td>
-                        </div>
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th width="100px" class=" Titlereview">No.</th>
+                  <th width="500px">File Name</th>
+                  <th width="100px">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <div *ngIf="this.Fill_initalchk" >
+                <tr *ngFor="let item of Fill_inital let i = index">
+                  <th scope="row">{{i+1}}</th>
+                  <td *ngIf="item.FILENAME != '';else other_content">
+                      <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
+                  </td>
+                  <ng-template #other_content>
+  
+                      <td> <img [src]="item.LINK" width="300" height="auto"></td>
+  
+                  </ng-template>
+                  <td>
+                    <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </td>
+              </tr>
+              </div>
+              </tbody>
+            </table> 
             <br>
             <div class="center">
               <button mat-flat-button class="Buttonaddquetion" (click)="GoAnahome()"> finish </button>

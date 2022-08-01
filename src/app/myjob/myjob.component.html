@@ -221,8 +221,8 @@
               <table class="table ">
                 <tbody>
                   <tr *ngFor="let item of table let i = index">
-                    <div *ngIf="item.MONTH == 'July'">
                       <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                        <div *ngIf="item.MONTH == 'July'">
                       <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                         <div class="row">
                           <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>

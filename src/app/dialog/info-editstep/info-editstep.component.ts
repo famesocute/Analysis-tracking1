@@ -229,7 +229,7 @@ export class InfoEditstepComponent implements OnInit {
       var qtest = ""
 
       qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-        " SET  `STATUS_JOB` = '4', `ESTI_TECHNIQUE` = '" + val2 + "' " +
+        " SET  `ESTI_TECHNIQUE` = '" + val2 + "' " +
         " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
       console.log(qtest);
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {

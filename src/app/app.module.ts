@@ -61,6 +61,10 @@ import { PenddingComponent } from './dialog/edit_reviewer/pendding/pendding.comp
 import { ReEstiStepComponent } from './dialog/edit_reviewer/re-esti-step/re-esti-step.component';
 import { Re2EstiStepComponent } from './dialog/edit_reviewer/re2-esti-step/re2-esti-step.component';
 import { InfoComponent } from './dialog/edit_reviewer/info/info.component';
+import {NgxPrintModule} from 'ngx-print';
+import { PrintComponent } from './dialog/print/print.component';
+import { SendmailQuestionComponent } from './dialog/sendmail-question/sendmail-question.component';
+import { EquipmentComponent } from './equipment/equipment.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +101,9 @@ import { InfoComponent } from './dialog/edit_reviewer/info/info.component';
     ReEstiStepComponent,
     Re2EstiStepComponent,
     InfoComponent,
+    PrintComponent,
+    SendmailQuestionComponent,
+    EquipmentComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,6 +133,7 @@ import { InfoComponent } from './dialog/edit_reviewer/info/info.component';
     MatDialogModule,
     MatTabsModule,
     DayPilotModule,
+    NgxPrintModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

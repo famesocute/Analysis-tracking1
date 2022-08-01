@@ -109,9 +109,7 @@
       </mat-card-title-group>
       <mat-card-content>
         <textarea class="form-control" rows="3" id="Background" [(ngModel)]="this.ANSWER_DETAIL"></textarea>
-        <div class="center" style="padding: 15px 0;">
-          <button mat-flat-button class="button1" (click)="NavAnapadding()">Attach answer</button>
-        </div>
+        
         <div class="form-group row ">
           <div class="col-sm-2 center"><label for="Title"><b>Sand answer to:</b></label></div>
           <div class="col-sm-10">
@@ -132,21 +130,20 @@
             <label for="Title"><b>CC answer to:</b></label>
           </div>
           <div class="col-sm-10">
-            <mat-hint> *Click "Add" to confirm name</mat-hint>
         <form class="example-form">
             <mat-form-field class="example-full-width " appearance="outline">
               <mat-label>Select Name</mat-label>
-              <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                [matAutocomplete]="auto" [(ngModel)]="this.EMAIL_CC[this.countrow]">
-              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl2"
+                [matAutocomplete]="auto2" [(ngModel)]="this.EMAIL_CC[this.countrow]">
+              <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
                   {{option}}
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
           </form>
           <div >
-            <button mat-button (click)="addIN()">Add</button>
+            <button mat-button class="Buttonadd" (click)="addIN()">Confirm name</button>
           </div>
 
           <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
@@ -174,7 +171,9 @@
           </div>
   
         </div>
-        
+        <div class="center" style="padding: 15px 0;">
+          <button mat-flat-button class="button1" (click)="NavAnapadding()">Attach answer</button>
+        </div>
           
         <div style="margin-top: 10px;"><b>Issue Date:</b></div>
       </mat-card-content>

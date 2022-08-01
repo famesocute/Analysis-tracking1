@@ -7,12 +7,12 @@
         </div>
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Employee code</mat-label>
-                <input matInput placeholder="Ex. 91360"  [(ngModel)]="this.Employcode">
+                <input matInput placeholder="Ex. 91360" id="fname" name="fname" autofocus [(ngModel)]="this.Employcode">
             </mat-form-field>
             <br>
             <mat-form-field class="example-full-width" appearance="outline" >
                 <mat-label>password</mat-label>
-                <input type="password" matInput [(ngModel)]="this.Password" >
+                <input type="password" matInput id="lname" name="lname" [(ngModel)]="this.Password" >
             </mat-form-field>
 
         <div class="center">

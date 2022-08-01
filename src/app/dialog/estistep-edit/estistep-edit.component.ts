@@ -112,12 +112,18 @@ Remove(id:any){
 
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `STATUS_JOB` = '4', `PRE_ESTI_TECHNIQUE` = '"+ val2 +"' " +
+      " SET  `STATUS_JOB` = '4', `PRE_ESTI_TECHNIQUE` = '"+ val2 +"', `STETUS_PERSON` = '"+ this.DataRes[0].REVI_PAND_CONFIRM +"' " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
   })
+
+  var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+      console.log(data); 
+    })
   }
 
 }

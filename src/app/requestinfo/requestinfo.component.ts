@@ -35,8 +35,17 @@ export class RequestinfoComponent implements OnInit {
   DataResQUESTION: any
 
   myControl = new FormControl();
+  myControl2 = new FormControl();
+  myControl3 = new FormControl();
+  myControl4 = new FormControl();
+  myControl5 = new FormControl();
+  myControl6 = new FormControl();
+  myControl7 = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
+  filteredOptions2!: Observable<string[]>;
+  filteredOptions3!: Observable<string[]>;
+  filteredOptions4!: Observable<string[]>;
 
   EMAIL_CC: string[] = [];
 
@@ -65,6 +74,7 @@ export class RequestinfoComponent implements OnInit {
   summarydetail = ""
   SendDate = ""
   finishDate = ""
+  Totalcostfinish = 0
 
   isValid1 = false
   isValid2 = false
@@ -73,11 +83,15 @@ export class RequestinfoComponent implements OnInit {
   isValid5 = false
   isValid6 = false
   validprivate = false
+  open = false
 
   sam1: any
   sam2: any
   time1: any
   time2: any
+  time3: any
+  time4: any
+  timefinish2:any
 
   score1 =""
   score2 =""
@@ -104,8 +118,12 @@ export class RequestinfoComponent implements OnInit {
   Totalcost = 0
   timeofstep: any
 
+  timesum = 0
+
   DataResAllocation: any
   Allocation: any
+  Allocation2: any
+  DataResbooking : any
 
   csvalid = true
   Statusrevise = ""
@@ -119,11 +137,15 @@ export class RequestinfoComponent implements OnInit {
   Report :any = "["
   Summary :any = "["
 
+  section = "Fill_inital"
   section1 = "Interim"
   section2 = "Report"
   section3 = "Summary"
 
-
+  Reportchk = false
+  Fill_initalchk = false
+  Interimchk = false
+  Summarychk = false
   constructor(public router: Router, public productService: ProductService, private matDialog: MatDialog, private fb: FormBuilder, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -136,6 +158,12 @@ export class RequestinfoComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
+
+      if(this.DataRes[0].STATUS_JOB == 5 || this.DataRes[0].STATUS_JOB == 6 || this.DataRes[0].STATUS_JOB == 7 || this.DataRes[0].STATUS_JOB == 8 || this.DataRes[0].STATUS_JOB == 9 || this.DataRes[0].STATUS_JOB == 10){
+        this.open = true
+      }else{
+        window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnahomeNotcom'
+      }
 
       if(this.DataRes[0].STATUS_JOB == 9){
         this.validprivate = true
@@ -175,17 +203,20 @@ export class RequestinfoComponent implements OnInit {
         this.DataResFlie = data
         var x 
         for(x in this.DataResFlie){
+          
+          
           if(this.DataResFlie[x].SECTION == "Interim"){
             
             // this.Interim = this.Interim + '"FILENAME":"' + this.DataResFlie[x].FILENAME + '"},'
 
             if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
-              this.Interim = this.Interim + '{"FILENAME":"",'  
+              this.Interim = this.Interim + '{"FILENAME":"",'    
             }
             else{  
               this.Interim = this.Interim + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
             }
             console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Interim = this.Interim + '"idupload_list":"' + this.DataResFlie[x].idupload_list + '",' 
             this.Interim = this.Interim + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
 
           }else if(this.DataResFlie[x].SECTION == "Fill_inital"){
@@ -197,8 +228,8 @@ export class RequestinfoComponent implements OnInit {
               this.Fill_inital = this.Fill_inital + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
             }
             console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Fill_inital = this.Fill_inital + '"idupload_list":"' + this.DataResFlie[x].idupload_list + '",' 
             this.Fill_inital = this.Fill_inital + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
-
           }else if(this.DataResFlie[x].SECTION == "Report"){
 
             if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
@@ -208,6 +239,7 @@ export class RequestinfoComponent implements OnInit {
               this.Report = this.Report + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
             }
             console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Report = this.Report + '"idupload_list":"' + this.DataResFlie[x].idupload_list + '",' 
             this.Report = this.Report + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
 
           }else if(this.DataResFlie[x].SECTION == "Summary"){
@@ -219,44 +251,66 @@ export class RequestinfoComponent implements OnInit {
               this.Summary = this.Summary + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
             }
             console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Summary = this.Summary + '"idupload_list":"' + this.DataResFlie[x].idupload_list + '",' 
             this.Summary = this.Summary + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
           }
         }
-        if(this.Interim.Fill_inital != 1){
+        if(this.Interim.length != 1){
         this.Interim = this.Interim.substring(0, this.Interim.length - 1);
         this.Interim = this.Interim + "]";
          console.log(this.Interim)
+         if(this.Interim != "]"){
           var obj = JSON.parse(this.Interim);
           console.log(obj)
           this.Interim = obj
-        }
-          if(this.Report.Fill_inital != 1){
-      this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
-      this.Fill_inital = this.Fill_inital + "]";
-     console.log(this.Fill_inital)
-     var obj = JSON.parse(this.Fill_inital);
-      console.log(obj)
-      this.Fill_inital = obj
+          if(this.Interim != "]"){
+            this.Interimchk = true
           }
+         }
+         
+        }
+        if(this.Fill_inital.length != 1){
+          this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
+          this.Fill_inital = this.Fill_inital + "]";
+          console.log(this.Fill_inital)
+
+          if(this.Fill_inital != "]"){
+          var obj = JSON.parse(this.Fill_inital);
+           console.log(obj)
+           this.Fill_inital = obj
+
+          if(this.Fill_inital != "]"){
+            this.Fill_initalchk = true
+          }
+        }
+        }
       if(this.Report.length != 1){
         this.Report = this.Report.substring(0, this.Report.length - 1);
         this.Report = this.Report + "]";
         console.log(this.Report)
+        if(this.Report != "]"){
         var obj = JSON.parse(this.Report);
          console.log(obj)
          this.Report = obj
+         if(this.Report != "]"){
+          this.Reportchk = true
+        }
+      }
       }
       if(this.Summary.length != 1){
         this.Summary = this.Summary.substring(0, this.Summary.length - 1);
         this.Summary = this.Summary + "]";
         console.log(this.Summary)
+        if(this.Summary != "]"){
         var obj = JSON.parse(this.Summary);
          console.log(obj)
          this.Summary = obj
+        if(this.Summary != "]"){
+          this.Summarychk = true
+        }
       }
-    
-     
-
+      }
+   
       })
 
       if (this.DataRes[0].REVI_ANASEC_CONTROL_COM != null) {
@@ -291,8 +345,6 @@ export class RequestinfoComponent implements OnInit {
         this.Statusrevise = "Revising!"
         console.log(this.Statusrevise)
       }
-
-      this.loading = false
 
       if (this.DataRes[0].STATUS_JOB != 5) {
         this.Sumresult = false
@@ -361,6 +413,7 @@ export class RequestinfoComponent implements OnInit {
       this.outputCS2 = obj
       console.log(this.outputCS2)
     }
+ 
 
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
       console.log(this.sample1)
@@ -388,7 +441,7 @@ export class RequestinfoComponent implements OnInit {
         console.log(data);
         this.DataResQUESTION = data
         console.log(this.DataResQUESTION)
-
+        this.loading = false
       })
       this.productService.TRACKING_ANALYSIS_SELECT_ALLOCATION_ALL().subscribe((data: {}) => {
         console.log(data);
@@ -470,15 +523,91 @@ export class RequestinfoComponent implements OnInit {
           this.time2 = this.time2 + '"statusstep":"' + a[2] + '"},'
 
         }
-        this.time2 = this.time2.substring(0, this.time2.length - 1);
-        this.time2 = this.time2 + "]";
-        console.log(this.time2)
-        var obj = JSON.parse(this.time2);
-        this.time2 = obj
-        console.log(this.time2)
+        this.time3 = this.time2.substring(0, this.time2.length - 1);
+        this.time4 = this.time3 + "]";
+        console.log(this.time4)
+        var obj = JSON.parse(this.time4);
+        this.time4 = obj
+        console.log(this.time4)
+
+        this.productService.TRACKING_ANALYSIS_SELECT_BOOKING_BYREQ(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
+          console.log(data);
+          this.DataResbooking = data
+          console.log(this.DataResbooking)
+
+          var z
+          var hourschange
+          var secchange
+          var real_Cost
+
+          this.timefinish2 = "["
+          for (x in this.DataResbooking) {
+
+            console.log(this.DataResAllocation.find((item: { EQUIPMENT: any; }) => item.EQUIPMENT === this.DataResbooking[x].EQUIPMENT));
+          this.Allocation2 = this.DataResAllocation.find((item: { EQUIPMENT: any; }) => item.EQUIPMENT === this.DataResbooking[x].EQUIPMENT)
+
+          const [hours, minutes, seconds] = this.DataResbooking[x].OPERATION_TIME.split(':'); 
+          console.log(hours)
+          console.log(minutes)
+          console.log(seconds)
+          var minutes2 = parseInt(minutes)
+       
+          hourschange = hours*60
+          secchange = seconds/60
+          console.log(hourschange)
+          console.log(secchange)
+
+          this.timesum = this.timesum + hourschange + secchange + minutes2
+          console.log(this.timesum)
+
+          for (z in this.DataResAllocation) {
+
+            if (this.DataResbooking[x].EQUIPMENT == this.DataResAllocation[z].EQUIPMENT) {
+
+              if (this.DataRes[0].DEP_MENT.substring(3) == "A0") {
+                Operation_Charge = (this.timesum / 60) * this.DataResAllocation[z].MTXA0
+              }
+              else {
+                Operation_Charge = (this.timesum / 60) * this.DataResAllocation[z].MTX00
+              }
+            }
+          }
+          real_Cost = parseFloat(Operation_Charge) + parseFloat(this.Allocation2.BASIC_CHARGE)
+          console.log(real_Cost)
+          var real_cost2 = real_Cost.toFixed(2)
+
+          var real_cost3
+
+       if(real_cost2 != 'NaN'){
+          this.Totalcostfinish = this.Totalcostfinish + parseInt(real_cost2)
+          console.log(this.Totalcostfinish)
+          real_cost3 = real_cost2
+        }else{
+          real_cost3 = "0"
+        }
+
+            this.timefinish2 = this.timefinish2 + '{"step":"' + this.DataResbooking[x].STEP_BOOKING + '",'
+            this.timefinish2 = this.timefinish2 + '"equip":"' + this.DataResbooking[x].EQUIPMENT + '",'
+            this.timefinish2 = this.timefinish2 + '"operationtime":"' + this.DataResbooking[x].OPERATION_TIME + '",'
+            this.timefinish2 = this.timefinish2 + '"cost":"' + real_cost3 + '",'
+            this.timefinish2 = this.timefinish2 + '"quantity":"' + this.DataResbooking[x].SAMPLE_NUM + '"},'
+  
+          }
+          this.timefinish2 = this.timefinish2.substring(0, this.timefinish2.length - 1);
+          this.timefinish2 = this.timefinish2 + "]";
+          console.log(this.timefinish2)
+       
+          if(this.timefinish2 != "]"){
+          var obj = JSON.parse(this.timefinish2);
+          this.timefinish2 = obj
+          console.log(this.timefinish2)
+         
+          }
+         
+        })
 
       })
-
+  
     })
 
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
@@ -496,14 +625,34 @@ export class RequestinfoComponent implements OnInit {
       this.options = myArray
     })
 
+
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value)),
     );
+    this.filteredOptions2 = this.myControl2.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter2(value)),
+    );
+    this.filteredOptions3 = this.myControl3.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter3(value)),
+    );
+    this.filteredOptions4 = this.myControl3.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter3(value)),
+    );
+    this.filteredOptions4 = this.myControl4.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter3(value)),
+    );
 
-    this.namelocal = sessionStorage.getItem("NAME");
-    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+
+
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
     console.log(this.departmentlocal)
 
     if (this.namelocal != null) {
@@ -520,6 +669,17 @@ export class RequestinfoComponent implements OnInit {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+  private _filter2(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter3(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
   countrow = 0
   addIN() {
     console.log(this.countrow);
@@ -545,7 +705,6 @@ export class RequestinfoComponent implements OnInit {
         console.log('The dialog was closed');
         console.log(result);
 
-        this.ngOnInit()
       });
     } else (
       window.alert("Please login")
@@ -553,21 +712,21 @@ export class RequestinfoComponent implements OnInit {
 
   }
   myFunction() {
-    window.open("http://localhost:4200/Trackingstatus?id=" + this.DataRes[0].ID);
+    window.open("http://163.50.57.95:82/Tracking_Analysis/Trackingstatus?id=" + this.DataRes[0].ID);
   }
   GoAswer(ID: any) {
-    window.location.href = 'http://localhost:4200/AnswerPage?id=' + ID + '&usertype=' + this.userType
+    window.location.href = 'http://163.50.57.95:82/Tracking_Analysis/AnswerPage?id=' + ID + '&usertype=' + this.userType
   }
   GoAsweredit(ID: any) {
-    window.location.href = 'http://localhost:4200/AnswerEdit?id=' + ID + '&usertype=' + this.userType
+    window.location.href = 'http://163.50.57.95:82/Tracking_Analysis/AnswerEdit?id=' + ID + '&usertype=' + this.userType
   }
   Goanalysishome() {
     this.router.navigate(['/Analyrequehome'])
   }
   Logout() {
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Gologin() {
@@ -577,7 +736,7 @@ export class RequestinfoComponent implements OnInit {
     this.router.navigate(['/Signup'])
   }
   GoBooking() {
-    window.open('http://localhost:4200/BooingEquip?id=' + this.DataRes[0].ID);
+    window.open('http://163.50.57.95:82/Tracking_Analysis/BooingEquip?id=' + this.DataRes[0].ID);
   }
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
@@ -603,7 +762,7 @@ export class RequestinfoComponent implements OnInit {
 
       if(this.reason1 == null || this.reason1 == ""){
         this.check1 = false
-          window.alert("คะแนนจะไม่ถูกบันทึก กรุณณากรอกเหตุผล")
+          window.alert("คะแนนจะไม่ถูกบันทึก กรุณากรอกเหตุผล")
       }else{
         this.check1 = true
         this.score1=value
@@ -621,7 +780,7 @@ export class RequestinfoComponent implements OnInit {
 
       if(this.reason2 == null || this.reason2 == ""){
         this.check2 = false
-          window.alert("คะแนนจะไม่ถูกบันทึก กรุณณากรอกเหตุผล")
+          window.alert("คะแนนจะไม่ถูกบันทึก กรุณากรอกเหตุผล")
       }else{
         this.check2 = true
         this.score2 = value
@@ -639,7 +798,7 @@ export class RequestinfoComponent implements OnInit {
 
       if(this.reason3 == null || this.reason3 == ""){
         this.check3 = false
-          window.alert("คะแนนจะไม่ถูกบันทึก กรุณณากรอกเหตุผล")
+          window.alert("คะแนนจะไม่ถูกบันทึก กรุณากรอกเหตุผล")
       }else{
         this.check3 = true
         this.score3 = value
@@ -657,7 +816,7 @@ export class RequestinfoComponent implements OnInit {
 
       if(this.reason4 == null || this.reason4 == ""){
         this.check4 = false
-          window.alert("คะแนนจะไม่ถูกบันทึก กรุณณากรอกเหตุผล")
+          window.alert("คะแนนจะไม่ถูกบันทึก กรุณากรอกเหตุผล")
       }else{
         this.check4 = true
         this.score4 = value
@@ -675,7 +834,7 @@ export class RequestinfoComponent implements OnInit {
 
       if(this.reason5 == null || this.reason5 == ""){
         this.check5 = false
-          window.alert("คะแนนจะไม่ถูกบันทึก กรุณณากรอกเหตุผล")
+          window.alert("คะแนนจะไม่ถูกบันทึก กรุณากรอกเหตุผล")
       }else{
         this.check5 = true
         this.score5 = value
@@ -686,15 +845,55 @@ export class RequestinfoComponent implements OnInit {
     }
   }
   savesummary(){
+    if(this.DataRes[0].STATUS_JOB == 6){
+      var qtest = ""
+      qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+        " SET `SUMMARY_DETAIL` = '" + this.summarydetail + "', `STETUS_PERSON` = '" + this.DataRes[0].REVI_REAPPROV_CHECK + "' " +
+        " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
+      console.log(qtest);
+      this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+        console.log(data);
+        location.reload();
+      })
+      
+      var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_CHECK+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+      console.log(qtest2);
+      this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+        console.log(data);
+    })
+  }else if(this.DataRes[0].STATUS_JOB == 7){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `SUMMARY_DETAIL` = '" + this.summarydetail + "' " +
+      " SET `SUMMARY_DETAIL` = '" + this.summarydetail + "', `STETUS_PERSON` = '" + this.DataRes[0].REVI_REAPPROV_CONFIRM + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       location.reload();
     })
+    
+    var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_CONFIRM+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+    console.log(qtest2);
+    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+      console.log(data);
+  })
+}else if(this.DataRes[0].STATUS_JOB == 9){
+  var qtest = ""
+  qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
+    " SET `SUMMARY_DETAIL` = '" + this.summarydetail + "', `STETUS_PERSON` = '" + this.DataRes[0].REVI_REAPPROV_APPROV + "' " +
+    " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
+  console.log(qtest);
+  this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+    console.log(data);
+    location.reload();
+  })
+  
+  var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_APPROV+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+  console.log(qtest2);
+  this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+    console.log(data);
+})
+}
   }
 
   AnalystApprove() {
@@ -714,34 +913,41 @@ export class RequestinfoComponent implements OnInit {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET `STATUS_JOB` = '6', `REVI_REAPPROV_CHECK` = '" + this.Check + "', `REVI_REAPPROV_CONFIRM` = '" + this.Confirm + "', " +
-      " `REVI_REAPPROV_APPROV` = '" + this.approval + "', `REVI_ANASEC_ANAL_COM` = '" + this.ComAnalyzer + "',"+
+      " `REVI_REAPPROV_APPROV` = '" + this.approval + "', `REVI_ANASEC_ANAL_COM` = '" + this.ComAnalyzer + "', `STETUS_PERSON` = '" + this.Check + "',"+
       " `REVI_ANASEC_ANAL_CC` = '" + this.EMAIL_CC + "', `REVI_ANASEC_ANAL_TIME` = '" + date2 + "',"+
       " `SUMMARY_SEND` = '" + SendDate2[0] + "', `SUMMARY_FINISH` = '" + finishDate2[0] + "', `SUMMARY_DETAIL` = '" + this.summarydetail + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
-      location.reload();
+      
+      var qtest2 = " "+this.Check+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+      console.log(qtest2);
+      this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
+        console.log(data); 
+  
     })
-
-    var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_CHECK+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
-    console.log(qtest2);
-    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
-      console.log(data); 
+    window.alert("Already approve")
+    location.reload();
+      
     })
+   
+    
+  }else{
+    window.alert("Only Analyzer Approve")
   }
   }
   NoCheckerApprov() {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `STATUS_JOB` = '7' " +
+      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_CONFIRM+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_ISSUER+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
@@ -755,50 +961,55 @@ export class RequestinfoComponent implements OnInit {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET `STATUS_JOB` = '7', `REVI_REAPPROV_CHECK_COM` = '" + this.ComChack + "', `REVI_REAPPROV_CHECK_CC` = '" + this.EMAIL_CC + "', " +
-      " `REVI_REAPPROV_CHECK_TIME` = '" + date2 + "', `REVISE_STATUS` = '2', `SUMMARY_DETAIL` = '" + this.summarydetail + "' " +
+      " `REVI_REAPPROV_CHECK_TIME` = '" + date2 + "', `REVISE_STATUS` = '2', `STETUS_PERSON` = '" + this.DataRes[0].REVI_REAPPROV_CONFIRM + "', `SUMMARY_DETAIL` = '" + this.summarydetail + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
+      window.alert("Already approve")
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_CONFIRM+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_CONFIRM+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else{
+    alert('Only Checker Approve')
   }
   }
   CheckerRevise(){
     if(this.namelocal == this.DataRes[0].REVI_REAPPROV_CHECK){ 
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVISE_STATUS` = '1' " +
+      " SET `REVISE_STATUS` = '1', `STETUS_PERSON` = '" + this.DataRes[0].REVI_ANASEC_ANAL + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else{
+    alert('Only Checker Approve')
   }
   }
 
   NoConfirmApprov() {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `STATUS_JOB` = '8' " +
+      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_APPROV+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_ISSUER+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
@@ -818,13 +1029,16 @@ export class RequestinfoComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
+      window.alert("Already approve")
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_APPROV+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_REAPPROV_APPROV+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else{
+    alert('Only Confirm Approve')
   }
   }
 
@@ -832,32 +1046,34 @@ export class RequestinfoComponent implements OnInit {
     if(this.namelocal == this.DataRes[0].REVI_REAPPROV_CONFIRM){ 
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVISE_STATUS` = '1' " +
+      " SET `REVISE_STATUS` = '1', `STETUS_PERSON` = '" + this.DataRes[0].REVI_ANASEC_ANAL + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else{
+    alert('Only Confirm Approve')
   }
   }
 
   NoApproverApprov() {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `STATUS_JOB` = '9' " +
+      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_ISSUER+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_ISSUER+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
@@ -876,13 +1092,16 @@ export class RequestinfoComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
+      window.alert("Already approve")
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_ISSUER+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_ISSUER+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else{
+    alert('Only Approver Approve')
   }
   }
 
@@ -890,18 +1109,20 @@ export class RequestinfoComponent implements OnInit {
     if(this.namelocal == this.DataRes[0].REVI_REAPPROV_APPROV){ 
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVISE_STATUS` = '1' " +
+      " SET `REVISE_STATUS` = '1', `STETUS_PERSON` = '" + this.DataRes[0].REVI_ANASEC_ANAL + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
       location.reload();
     })
-    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else{
+    alert('Only Approver Approve')
   }
   }
 
@@ -933,11 +1154,13 @@ let date: Date = new Date();
     }else{
       window.alert("กรุณณากรอกคะแนนให้ครบ หรือกรอกเหตุผลหากให้คะแนนต่ำกว่า4")
     }
-    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else{
+    alert('Only Issuer Approve')
   }
   }
   editinfo(){
@@ -970,6 +1193,8 @@ editreviewer(x:any){
   });
 }
 recordreceived(){
+  if(this.namelocal == this.DataRes[0].REVI_ANASEC_ANAL){ 
+
   let text = "Would you confirm received sample? ";
   if (confirm(text) == true) {
     let date: Date = new Date();
@@ -988,7 +1213,17 @@ recordreceived(){
     })
   } else {
   }
+}else{
+  alert('Only Analyzer Approve')
+}
 
+}
+
+deletefile(x:any){
+  this.productService.TRACKING_ANALYSIS_DELETE_FILE(x).subscribe((data: {}) => {
+    console.log(data);
+    location.reload();
+  })
 }
 }
 

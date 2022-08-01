@@ -135,7 +135,7 @@
                         <div *ngIf="activate">
                           <div class="input3">
                             <input type="text" id="disabledTextInput" class="form-control"
-                              [(ngModel)]="this.Analysistype2" (keyup)="display()">
+                              [(ngModel)]="this.Analysistype2">
                           </div>
                         </div>
                       </div>
@@ -148,15 +148,6 @@
               <div class="col-sm-4">
                 <h4 style=" margin-top:30px "><b>Issue Date :</b></h4>
                 <h4 style=" margin-top:30px "><b>Requester : </b> {{this.namelocal}}</h4>
-              
-                <div class="row">
-                  <div class=" col-sm-2">
-                    <p class="centercolumn"><b>Phone:</b></p>
-                  </div>
-                  <div class="input2 col-sm-10">
-                    <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Phone">
-                  </div>
-                </div>
                 <h4 style=" margin-top:30px "><b>Department : </b> {{this.departmentlocal}}</h4>
 
                 <mat-form-field appearance="outline">
@@ -189,6 +180,7 @@
                     <mat-option value="TKANTB">TKANTB</mat-option>
                     <mat-option value="TKANTC">TKANTC</mat-option>
                     <mat-option value="MONOBK">MONOBK</mat-option>
+                    <mat-option value="Piezo unit">Piezo unit</mat-option>
                     <mat-option value="PSiP">PSiP</mat-option>
                     <mat-option value="PS-MOD">PS-MOD</mat-option>
                     <mat-option value="MME671">MME671</mat-option>
@@ -448,6 +440,16 @@
                 </div>
                 <br>
                 <div style="padding-left: 30px;">
+                  <mat-form-field color="accent" appearance="outline">
+                    <mat-label>Send sample date:</mat-label>
+                    <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+              </div>
+              </div>
+            
+              <div class="col-sm-4">
                 <mat-form-field appearance="outline">
                   <mat-label>Piority:</mat-label>
                   <mat-select [(ngModel)]="this.Piority">
@@ -455,22 +457,6 @@
                     <mat-option value="Normal">Normal</mat-option>
                   </mat-select>
                 </mat-form-field>
-              </div>
-              </div>
-            
-              <div class="col-sm-4">
-                <mat-form-field color="accent" appearance="outline">
-                  <mat-label>Send sample date:</mat-label>
-                  <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
-                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                  <mat-datepicker #picker1></mat-datepicker>
-                </mat-form-field>
-                <div class="form-group" style="margin-left: 10px; ">
-                  <label for="Title"><b>Reason of urgent:</b></label>
-                  <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason">
-                </div>
-              </div>
-              <div class="col-sm-4">
                 <mat-form-field color="accent" appearance="outline">
                   <mat-label>Expected finish date:</mat-label>
                   <input matInput [matDatepicker]="picker2" [(ngModel)]="this.EepectedDate">
@@ -478,6 +464,13 @@
                   <mat-datepicker #picker2 color="primary"></mat-datepicker>
                 </mat-form-field>
                 
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group" style="margin-left: 10px; ">
+                  <label for="Title"><b>Reason of urgent:</b></label>
+                  <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason">
+                </div>
+                <br>
                 <div class="form-group" style="margin-left: 10px; ">
                   <label for="Title"><b>Holiday:</b></label>
                   <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.holiday">
@@ -494,6 +487,7 @@
                       <div class="form-group input1" style="padding: 0 20px ;">
                         <label for="Lotno"><b>Lot no:</b></label>
                         <input type="text" class="form-control " id="Lotno" formControlName="Lotno">
+                        <mat-hint><p style="color: #880808 ;">*lot number requested</p></mat-hint>
                       </div>
                     </td>
                     <td>
@@ -505,7 +499,7 @@
                     </td>
                     <td>
                       <div class="form-group input1" style="padding: 0 20px ;">
-                        <label for="Samplename"><b>Remarks:</b></label>
+                        <label for="Samplename"><b>No.sample /remarks:</b></label>
                         <input type="Samplename" class="form-control" id="Samplename" formControlName="Remarks">
                       </div>
                     </td>
@@ -781,7 +775,6 @@
                       </mat-form-field>
                     </td>
                     <td class=" Titlereview">
-                      <mat-hint> *Click "Add" to confirm name</mat-hint>
                 <form class="example-form">
                     <mat-form-field class="widthcom " appearance="outline">
                       <mat-label>Select Name</mat-label>
@@ -795,7 +788,7 @@
                     </mat-form-field>
                   </form>
                   <div class="center">
-                    <button mat-button (click)="addIN()">Add</button>
+                    <button mat-button class="Buttonadd" (click)="addIN()">Confirm name</button>
                   </div>
 
                   <tr  *ngFor="let item of this.EMAIL_CC let i = index" >
@@ -824,15 +817,18 @@
                   </tr>
                   <tr>
                     <th class=" Titlereview"></th>
-                    <td class=" Titlereview"> Confirm</td>
+                    <td class=" Titlereview">
+                       <p>Confirm</p>
+                       <p>(Supervisor)</p>
+                      </td>
                     <td class=" Titlereview" > 
                       <form class="example-form">
                         <mat-form-field class="widthcom" appearance="outline">
                           <mat-label>Select Name</mat-label>
-                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                            [matAutocomplete]="auto" [(ngModel)]="this.NameConfirm">
-                          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl2"
+                            [matAutocomplete]="auto2" [(ngModel)]="this.NameConfirm">
+                          <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
                               {{option}}
                             </mat-option>
                           </mat-autocomplete>

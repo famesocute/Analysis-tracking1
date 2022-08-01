@@ -45,9 +45,9 @@ export class AnswerPageComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.namelocal = sessionStorage.getItem("NAME");
-    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
     if (this.namelocal != null) {
       this.isValid = true
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
@@ -57,13 +57,6 @@ export class AnswerPageComponent implements OnInit {
     console.log(this.ID_p)
     this.ID_Q = this.route.snapshot.queryParamMap.get("id");
     console.log(this.ID_Q)
-
-    // this.productService.currentMessage.subscribe(message => this.message = message)
-    // console.log(this.message)
-    // var a
-    // a = this.message.split("||")
-    // this.ID_Q = a[0]
-    // this.ID_p = a[1]
 
     this.productService.TRACKING_ANALYSIS_SELECT_QUESTION_BY_ID(this.ID_Q).subscribe((data: {}) => {
       console.log(data);
@@ -113,17 +106,17 @@ export class AnswerPageComponent implements OnInit {
     this.router.navigate(['/Signup'])
   }
   Gobefore() {
-    // this.productService.changeMessage(this.ID_p)
     history.back()
-    // window.location.href ='http://localhost:4200/Paddingreque?id='+this.ID_p 
   }
 
   Logout() {
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
-
+  GoAnaNoCom(){
+    this.router.navigate(['/AnahomeNotcom'])
+  }
 
 }

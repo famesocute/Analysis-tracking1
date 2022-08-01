@@ -16,8 +16,10 @@ export class RequestformfillComponent implements OnInit {
   table: any
 
   myControl = new FormControl();
+  myControl2 = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
+  filteredOptions2!: Observable<string[]>;
 
   namelocal: any
   Codelocal: any
@@ -38,7 +40,7 @@ export class RequestformfillComponent implements OnInit {
   Product = ""
   RequestTech = ""
   RequestTech2 = ""
-  Numsample = 0
+  Numsample = ""
   Sendsampledate = ""
   EepectedDate = ""
   Piority = ""
@@ -61,6 +63,7 @@ export class RequestformfillComponent implements OnInit {
   NameControl = "Wanutsanun Hintuang <wanutsanun.hin@murata.com>"
   month = ""
   holiday = ""
+  checklotno = true
 
   isValid = false
 
@@ -126,12 +129,16 @@ export class RequestformfillComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
+    this.filteredOptions2 = this.myControl2.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter2(value)),
+    );
     
     this.quantities().push(this.newQuantity());
 
-    this.namelocal = sessionStorage.getItem("NAME");
-    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
     if (this.departmentlocal != null) {
       this.isValid = true
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
@@ -172,6 +179,11 @@ export class RequestformfillComponent implements OnInit {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
 
+  }
+  private _filter2(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   // seach controler
@@ -226,6 +238,21 @@ export class RequestformfillComponent implements OnInit {
     console.log(this.EMAIL_CC)
   }
   display() {
+    if(this.Piority == 'Urgent' && this.Reason == '' ){
+      window.alert("Please fill reason of urgent piority")
+  
+        console.log('1')
+ 
+    }else if(this.Piority == 'Normal'){
+      this.sentinfo()
+      console.log('2')
+    }else{
+      this.sentinfo()
+    }
+    
+  }
+
+  sentinfo(){
     var DatereceiveSam = ""
     var Sendsampledate2 = this.Sendsampledate.toLocaleString()
     DatereceiveSam = Sendsampledate2.substring(0, 9)
@@ -237,7 +264,17 @@ export class RequestformfillComponent implements OnInit {
     console.log(DateEepectSam)
 
     var val2 = ""
+
     for (var val in this.productForm.value.quantities) {
+
+      if(this.productForm.value.quantities[val].Lotno == ''){
+        window.alert("Please fill lot number every sample")
+        this.checklotno = false
+        break;
+      }else{
+        this.checklotno = true
+      }
+
       console.log(val); // prints values: 10, 20, 30, 40
       val2 = val2 + this.productForm.value.quantities[val].Lotno + "||" + this.productForm.value.quantities[val].Samplename + "||" + this.productForm.value.quantities[val].Remarks + "[]"
     }
@@ -258,11 +295,20 @@ export class RequestformfillComponent implements OnInit {
       " '" + this.AnaComment + "', '" + this.Dangerous + "', '" + this.SamAftertest + "', '" + this.Relatedmatters + "', '" + this.KeywordCharact + "', '" + this.KeywordState + "', '" + this.KeywordPheno + "', " +
       " '', '" + this.namelocal + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.EMAIL_CC + "'  );"
     console.log(qtest);
-    this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
-      console.log(data);
-      sessionStorage.setItem("RequestNo", this.RequestNo);
-    this.router.navigate(['/Addfile'])
-    })
+
+if(this.checklotno == true){
+  if(this.NameConfirm != ""){
+
+  this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
+    console.log(data);
+    sessionStorage.setItem("RequestNo", this.RequestNo);
+  this.router.navigate(['/Addfile'])
+  })
+  }else{
+    window.alert("Please fill confirm name(Supervisor)")
+  }
+}
+    
   }
 
   NewregisterNum() {
@@ -426,9 +472,9 @@ export class RequestformfillComponent implements OnInit {
     this.router.navigate(['/Signup'])
   }
   Logout(){
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Goanalysishome(){

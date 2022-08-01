@@ -63,9 +63,10 @@ display(){
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data);
+      window.alert("Sign up complete")
+      this.router.navigate(['/Login'])
     })
 
-    this.router.navigate(['/Login'])
   }
   }
   

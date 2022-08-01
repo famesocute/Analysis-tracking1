@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
       console.log(data);
       this.table = data
       if (this.table[0].ID != 0) {
-        sessionStorage.setItem("NAME", this.table[0].NAME);
-        sessionStorage.setItem("EMPLOY_CODE", this.table[0].EMPLOY_CODE);
-        sessionStorage.setItem("DEPARTMENT", this.table[0].DEPARTMENT);
+        localStorage.setItem("NAME", this.table[0].NAME);
+        localStorage.setItem("EMPLOY_CODE", this.table[0].EMPLOY_CODE);
+        localStorage.setItem("DEPARTMENT", this.table[0].DEPARTMENT);
         this.router.navigate(['/AnahomeNotcom'])
       } else {
         window.alert("Wrong enployee code or password.")

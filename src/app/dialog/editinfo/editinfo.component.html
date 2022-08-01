@@ -110,14 +110,6 @@
           <h4 style=" margin-top:30px "><b>Issue Date :</b></h4>
           <h4 style=" margin-top:30px "><b>Requester : </b> </h4>
         
-          <div class="row">
-            <div class=" col-sm-2">
-              <p class="centercolumn"><b>Phone:</b></p>
-            </div>
-            <div class="input2 col-sm-10">
-              <input type="text" id="disabledTextInput" class="form-control" [(ngModel)]="this.Phone">
-            </div>
-          </div>
           <h4 style=" margin-top:30px "><b>Department : </b></h4>
 
           <mat-form-field appearance="outline">
@@ -150,6 +142,7 @@
               <mat-option value="TKANTB">TKANTB</mat-option>
               <mat-option value="TKANTC">TKANTC</mat-option>
               <mat-option value="MONOBK">MONOBK</mat-option>
+              <mat-option value="Piezo unit">Piezo unit</mat-option>
               <mat-option value="PSiP">PSiP</mat-option>
               <mat-option value="PS-MOD">PS-MOD</mat-option>
               <mat-option value="MME671">MME671</mat-option>
@@ -410,6 +403,16 @@
           </div>
           <br>
           <div style="padding-left: 30px;">
+            <mat-form-field color="accent" appearance="outline">
+              <mat-label>Send sample date:</mat-label>
+              <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+        </div>
+      
+        <div class="col-sm-4">
           <mat-form-field appearance="outline">
             <mat-label>Piority:</mat-label>
             <mat-select [(ngModel)]="this.Piority">
@@ -417,22 +420,6 @@
               <mat-option value="Normal">Normal</mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        </div>
-      
-        <div class="col-sm-4">
-          <mat-form-field color="accent" appearance="outline">
-            <mat-label>Send sample date:</mat-label>
-            <input matInput [matDatepicker]="picker1" [(ngModel)]="this.Sendsampledate">
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1></mat-datepicker>
-          </mat-form-field>
-          <div class="form-group" style="margin-left: 10px; ">
-            <label for="Title"><b>Reason of urgent:</b></label>
-            <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason">
-          </div>
-        </div>
-        <div class="col-sm-4">
           <mat-form-field color="accent" appearance="outline">
             <mat-label>Expected finish date:</mat-label>
             <input matInput [matDatepicker]="picker2" [(ngModel)]="this.EepectedDate">
@@ -440,6 +427,13 @@
             <mat-datepicker #picker2 color="primary"></mat-datepicker>
           </mat-form-field>
           
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group" style="margin-left: 10px; ">
+            <label for="Title"><b>Reason of urgent:</b></label>
+            <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Reason">
+          </div>
+          <br>
           <div class="form-group" style="margin-left: 10px; ">
             <label for="Title"><b>Holiday:</b></label>
             <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.holiday">
@@ -453,6 +447,7 @@
                 <div class="form-group input1" style="padding: 0 20px ;">
                   <label for="Lotno"><b>Lot no:</b></label>
                   <input type="text" class="form-control " id="Lotno" [(ngModel)]="item.lotno">
+                  <mat-hint><p style="color: #880808 ;">*lot number requested</p></mat-hint>
                 </div>
               </td>
               <td>
@@ -464,7 +459,7 @@
               </td>
               <td>
                 <div class="form-group input1" style="padding: 0 20px ;">
-                  <label for="Samplename"><b>Remarks:</b></label>
+                  <label for="Samplename"><b>No.sample /remarks:</b></label>
                   <input type="Samplename" class="form-control" id="Samplename" [(ngModel)]="item.remake">
                 </div>
               </td>

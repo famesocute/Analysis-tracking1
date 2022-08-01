@@ -46,7 +46,7 @@ export class EditBookingComponent implements OnInit {
     this.productService.currentMessage.subscribe(message => this.message = message)
     console.log(this.message)
 
-    this.namelocal = sessionStorage.getItem("NAME");
+    this.namelocal = localStorage.getItem("NAME");
     this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
 
     this.productService.TRACKING_ANALYSIS_SELECT_BOOKING_ID(this.message).subscribe((data: {}) => {

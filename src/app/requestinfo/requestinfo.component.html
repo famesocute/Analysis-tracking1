@@ -1,3 +1,4 @@
+<div *ngIf="this.open">
 <div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
   <span class="sr-only"></span>
 </div>
@@ -111,13 +112,6 @@
                   <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
                 </div>
 
-
-                <div class="row" style=" padding-top : 10px;">
-                  <div class="col-sm-4"><b>Phone:</b></div>
-                  <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
-                </div>
-
-
                 <div class="row" style=" padding-top : 10px;">
                   <div class="col-sm-4"><b>Department:</b></div>
                   <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
@@ -132,30 +126,55 @@
                 </mat-card>
               </div>
             </div>
-            <div>
-              <table class="table">
-                  <thead>
-                    <tr>
-                      <th width="100px" class=" Titlereview">No.</th>
-                      <th width="500px">File Name</th>
-                     
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of Fill_inital let i = index">
-                      <th scope="row">{{i+1}}</th>
-                      <td *ngIf="item.FILENAME != '';else other_content">
-                          <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
-                      </td>
-                      <ng-template #other_content>
-  
-                          <td> <img [src]="item.LINK" width="300" height="auto"></td>
-  
-                      </ng-template>
-                  </tr>
-                  </tbody>
-                </table>
+            <mat-dialog-content>
+        
+              <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
+
+                  <div class="mb-3">
+          
+                      <input class="form-control" type="text" name="Register_no" value="{{this.DataRes[0].REQ_NUM}}" hidden>
+                      <input class="form-control" type="text" name="section" value="{{section}}" hidden>
+                      <br>            
+                  </div>            
+                  <th>Select file to upload:</th> <br>
+          
+                  <div class="input-group mb-3">
+          
+                      <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+          
+                      <input class="btn btn-dark" type="submit" value="Upload" name="submit">             
+                 </div>            
+              </form>              
+          </mat-dialog-content>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="100px" class=" Titlereview">No.</th>
+                <th width="500px">File Name</th>
+                <th width="100px">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <div *ngIf="this.Fill_initalchk" >
+              <tr *ngFor="let item of Fill_inital let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td *ngIf="item.FILENAME != '';else other_content">
+                    <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
+                </td>
+                <ng-template #other_content>
+
+                    <td> <img [src]="item.LINK" width="300" height="auto"></td>
+
+                </ng-template>
+                <td>
+                  <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+            </tr>
           </div>
+            </tbody>
+          </table> 
           </mat-card-content>
         </mat-card>
         <mat-card class="card1">
@@ -173,7 +192,7 @@
           </mat-card-title-group>
           <mat-card-content>
             <div class="row">
-              <div class="col-sm-3">
+              <div class="col-sm-4">
                 <div class="input1">
                   <div class="row">
                     <div class="col-sm-7"><b>Number of sample:</b></div>
@@ -181,8 +200,8 @@
                   </div>
                   <div class="input1">
                     <div class="row">
-                      <div class="col-sm-3"><b>Piority:</b></div>
-                      <div class="col-sm-9">{{this.DataRes[0].PIORITY}}</div>
+                      <div class="col-sm-5"><b>Send sample date:</b></div>
+                      <div class="col-sm-7">{{this.DataRes[0].SEND_SAM_DATE}}</div>
                     </div>
                   </div>
                 </div>
@@ -190,44 +209,38 @@
               <div class="col-sm-4">
                 <div class="input1">
                   <div class="row">
-                    <div class="col-sm-5"><b>Send sample date:</b></div>
-                    <div class="col-sm-7">{{this.DataRes[0].SEND_SAM_DATE}}</div>
+                    <div class="col-sm-3"><b>Piority:</b></div>
+                    <div class="col-sm-9">{{this.DataRes[0].PIORITY}}</div>
                   </div>
                 </div>
+                <div class="input1">
+                  <div class="row">
+                    <div class="col-sm-6"><b>Expected finish date:</b></div>
+                    <div class="col-sm-6">{{this.DataRes[0].FINISH_DATE}}</div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col-sm-4">
                 <div class="input1">
                   <div class="row">
                     <div class="col-sm-2"><b>Reason:</b></div>
                     <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
                   </div>
                 </div>
-  
-              </div>
-              <div class="col-sm-5">
-                <div class="input1">
-                  <div class="row">
-                    <div class="col-sm-5"><b>Expected finish date:</b></div>
-                    <div class="col-sm-4">{{this.DataRes[0].FINISH_DATE}}</div>
-                    <div class="col-sm-3">
-                      <div *ngIf="this.DataRes[0].DATE_RECEIVE_SAM_REAL != null ; else received" >                    
-                      </div>
-
-                      <ng-template #received>
-                        <button mat-mini-fab color="primary" matTooltip="Receive sample" (click)="recordreceived()">
-                          <mat-icon>save_alt</mat-icon>
-                        </button>
-                        </ng-template>
-                    </div>
-                  </div>
-                </div>
+                
                 <div class="input1">
                   <div class="row">
                     <div class="col-sm-2"><b>Holiday:</b></div>
                     <div class="col-sm-10">{{this.DataRes[0].HOLIDAY}}</div>
+                   
                   </div>
+                  
                 </div>
               </div>
             </div>
-
+            <br>
+  
             <div class="container">
               <form>
                 <table>
@@ -235,11 +248,11 @@
                     <td width="200px">
                       <div class="input1" style="padding: 0 10px ;">
                         <div class="row">
-                          <div class="col-sm-3"><b>Lot no:</b></div>
-                          <div class="col-sm-9"> {{ item.Lot_no }}</div>
+                          <div class="col-sm-4"><b>Lot no:</b></div>
+                          <div class="col-sm-8"> {{ item.Lot_no }}</div>
                         </div>
                       </div>
-
+  
                     </td>
                     <td width="300px">
                       <div class="input1" style="padding: 0 10px ;">
@@ -248,13 +261,13 @@
                           <div class="col-sm-8">{{ item.Sample_name }}</div>
                         </div>
                       </div>
-
+  
                     </td>
-                    <td width="200px">
+                    <td width="300px">
                       <div class="input1" style="padding: 0 10px ;">
                         <div class="row">
-                          <div class="col-sm-4"><b>Remarks:</b></div>
-                          <div class="col-sm-8">{{ item.Remarks }}</div>
+                          <div class="col-sm-6"><b>No.sample /remarks:</b></div>
+                          <div class="col-sm-6">{{ item.Remarks }}</div>
                         </div>
                       </div>
                     </td>
@@ -451,7 +464,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let item of time2 let i = index">
+                <tr *ngFor="let item of time4 let i = index">
                   <th>{{item.step}}</th>
                   <td>{{item.equip}}</td>
                   <td>{{item.quantity}}</td>
@@ -462,7 +475,16 @@
               </tbody>
             </table>
             <div class="center">
-              <button mat-raised-button color="primary" class="button2" (click)="GoBooking()">Book Equipment</button>
+              <div *ngIf="this.DataRes[0].DATE_RECEIVE_SAM_REAL == null ; else Havesample" >
+              <button mat-button class="Buttonadd" (click)="recordreceived()">Receive sample</button>
+              </div>
+              <ng-template #Havesample>
+                
+              </ng-template>
+            </div>
+            <br>
+            <div class="center">
+              <button mat-raised-button color="primary"  (click)="GoBooking()">Book Equipment</button>
             </div>
           </mat-card-content>
         </mat-card>
@@ -475,8 +497,9 @@
         </div>
 
         <div *ngIf="this.Sumresult; else Sumresult2">
-          <h1 style=" padding: 20px 150px; ">Summary Result</h1>
-
+          <div class="center">
+            <h1>Summary Result</h1>
+          </div>
           <div style=" padding-bottom: 15px">
             <mat-card class="card1">
               <mat-card-title-group>
@@ -541,10 +564,11 @@
                         <tr>
                           <th width="100px" class=" Titlereview">No.</th>
                           <th width="500px">File Name</th>
-                         
+                          <th width="100px">Delete</th>
                         </tr>
                       </thead>
                       <tbody>
+                        <div *ngIf="this.Interimchk" >
                         <tr *ngFor="let item of Interim let i = index">
                           <th scope="row">{{i+1}}</th>
                           <td *ngIf="item.FILENAME != '';else other_content">
@@ -555,7 +579,13 @@
                               <td> <img [src]="item.LINK" width="300" height="auto"></td>
   
                           </ng-template>
+                          <td>
+                            <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                              <mat-icon>delete</mat-icon>
+                            </button>
+                          </td>
                       </tr>
+                    </div>
                       </tbody>
                     </table>
               </div>
@@ -596,21 +626,31 @@
                     <tr>
                       <th width="100px" class=" Titlereview">No.</th>
                       <th width="500px">File Name</th>
-                     
+                      <th width="100px">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of Report let i = index">
-                      <th scope="row">{{i+1}}</th>
-                      <td *ngIf="item.FILENAME != '';else other_content">
-                          <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
-                      </td>
-                      <ng-template #other_content>
-
-                          <td> <img [src]="item.LINK" width="300" height="auto"></td>
-
-                      </ng-template>
-                  </tr>
+                    <div *ngIf="this.Reportchk" >
+                                     
+                      <tr *ngFor="let item of Report let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td *ngIf="item.FILENAME != '';else other_content">
+                            <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
+                        </td>
+                       
+                        <ng-template #other_content>
+  
+                            <td> <img [src]="item.LINK" width="300" height="auto"></td>
+  
+                        </ng-template>
+                        <td>
+                          <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
+                    </tr>
+                    </div>
+                   
                   </tbody>
                 </table> 
             </div>
@@ -653,10 +693,12 @@
                       <tr>
                         <th width="100px" class=" Titlereview">No.</th>
                         <th width="500px">File Name</th>
-                       
+                        <th width="100px">Delete</th>
                       </tr>
                     </thead>
                     <tbody>
+                    <div *ngIf="this.Summarychk" >
+
                       <tr *ngFor="let item of Summary let i = index">
                         <th scope="row">{{i+1}}</th>
                         <td *ngIf="item.FILENAME != '';else other_content">
@@ -667,7 +709,13 @@
                             <td> <img [src]="item.LINK" width="300" height="auto"></td>
 
                         </ng-template>
+                        <td>
+                          <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
                     </tr>
+                  </div>
                     </tbody>
                   </table>        
            
@@ -682,7 +730,9 @@
 
         </div>
         <ng-template #Sumresult2>
-          <h1 style=" padding: 20px 150px; ">Summary Result</h1>
+          <div class="center">
+            <h1>Summary Result</h1>
+          </div>
           <div style=" padding-bottom: 15px">
             <mat-card class="card1">
               <mat-card-title-group>
@@ -735,10 +785,11 @@
                       <tr>
                         <th width="100px" class=" Titlereview">No.</th>
                         <th width="500px">File Name</th>
-                       
+                        <th width="100px">Delete</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <div *ngIf="this.Interimchk">
                       <tr *ngFor="let item of Interim let i = index">
                         <th scope="row">{{i+1}}</th>
                         <td *ngIf="item.FILENAME != '';else other_content">
@@ -749,7 +800,13 @@
                             <td> <img [src]="item.LINK" width="300" height="auto"></td>
 
                         </ng-template>
+                        <td>
+                          <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
                     </tr>
+                    </div>
                     </tbody>
                   </table>
             </div>
@@ -790,10 +847,11 @@
                     <tr>
                       <th width="100px" class=" Titlereview">No.</th>
                       <th width="500px">File Name</th>
-                     
+                      <th width="100px">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
+                    <div *ngIf="this.Reportchk" >
                     <tr *ngFor="let item of Report let i = index">
                       <th scope="row">{{i+1}}</th>
                       <td *ngIf="item.FILENAME != '';else other_content">
@@ -804,7 +862,13 @@
                           <td> <img [src]="item.LINK" width="300" height="auto"></td>
 
                       </ng-template>
+                      <td>
+                        <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
                   </tr>
+                  </div>
                   </tbody>
                 </table> 
             </div>
@@ -850,10 +914,11 @@
                       <tr>
                         <th width="100px" class=" Titlereview">No.</th>
                         <th width="500px">File Name</th>
-                       
+                        <th width="100px">Delete</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <div *ngIf="this.Summarychk" >
                       <tr *ngFor="let item of Summary let i = index">
                         <th scope="row">{{i+1}}</th>
                         <td *ngIf="item.FILENAME != '';else other_content">
@@ -864,7 +929,13 @@
                             <td> <img [src]="item.LINK" width="300" height="auto"></td>
 
                         </ng-template>
+                        <td>
+                          <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                        </td>
                     </tr>
+                    </div>
                     </tbody>
                   </table> 
                 
@@ -876,6 +947,50 @@
 
           </ng-template>
         </ng-template>
+
+        <div *ngIf="this.DataRes[0].STATUS_JOB == 9 || this.DataRes[0].STATUS_JOB == 10">
+          <mat-card class="card1">
+            <mat-card-title-group>
+              <mat-card-title>Summary cost</mat-card-title>
+            </mat-card-title-group>
+            <mat-card-content>
+                <table class="table table-bordered Titlereview ">
+                  <thead>
+                    <tr>
+                      <th width="70px">Step</th>
+                      <th>Technique</th>
+                      <th>Operation time (hh:mm:ss) </th>
+                      <th width="150px">Quantity</th>
+                      <th>Cost</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of timefinish2 let i = index">
+                      <th>{{item.step}}</th>
+                      <td>{{item.equip}}</td>
+                      <td>{{item.operationtime}}</td>
+                      <td>{{item.quantity}}</td>
+                      <td>{{item.cost}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+    
+                <div class="row">
+                  <div class="col-sm-9"></div>
+                  <div class="col-sm-3">
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <b>Total cost :</b>
+                      </div>
+                      <div class="col-sm-7">
+                        {{this.Totalcostfinish}} THB
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+          </mat-card>
+        </div>
 
         <div style=" padding-bottom: 15px">
           <mat-card class="card1">
@@ -924,7 +1039,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio2">
-                                  <input type="radio" class="form-check-input" id="radio2" name="score1" value="option2"
+                                  <input type="radio" class="form-check-input" id="radio1_1" name="score1" 
                                     (click)="getdatascore1('1')"> 1 points
                                 </label>
                               </div>
@@ -932,7 +1047,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score1" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio1_2" name="score1" 
                                     (click)="getdatascore1('2')"> 2 points
                                 </label>
                               </div>
@@ -940,7 +1055,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score1" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio1_3" name="score1" 
                                     (click)="getdatascore1('3')"> 3 points
                                 </label>
                               </div>
@@ -948,7 +1063,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score1" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio1_4" name="score1" 
                                     (click)="getdatascore1('4')"> 4 points
                                 </label>
                               </div>
@@ -956,8 +1071,8 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score1" value="option3"
-                                    (click)="getdatascore1('5')"> 5 points
+                                  <input type="radio" class="form-check-input" id="radio1_5" name="score1"                                     
+                                  (click)="getdatascore1('5')"> 5 points
                                 </label>
                               </div>
                             </div>
@@ -975,7 +1090,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio2">
-                                  <input type="radio" class="form-check-input" id="radio2" name="score2" value="option2"
+                                  <input type="radio" class="form-check-input" id="radio2_1" name="score2"
                                     (click)="getdatascore2('1')"> 1 points
                                 </label>
                               </div>
@@ -983,7 +1098,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score2" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio2_2" name="score2"
                                     (click)="getdatascore2('2')"> 2 points
                                 </label>
                               </div>
@@ -991,7 +1106,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score2" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio2_3" name="score2"
                                     (click)="getdatascore2('3')"> 3 points
                                 </label>
                               </div>
@@ -999,7 +1114,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score2" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio2_4" name="score2"
                                     (click)="getdatascore2('4')"> 4 points
                                 </label>
                               </div>
@@ -1007,7 +1122,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score2" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio2_5" name="score2"
                                     (click)="getdatascore2('5')"> 5 points
                                 </label>
                               </div>
@@ -1025,7 +1140,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio2">
-                                  <input type="radio" class="form-check-input" id="radio2" name="score3" value="option2"
+                                  <input type="radio" class="form-check-input" id="radio3_1" name="score3" 
                                     (click)="getdatascore3('1')"> 1 points
                                 </label>
                               </div>
@@ -1033,7 +1148,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score3" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio3_2" name="score3" 
                                     (click)="getdatascore3('2')"> 2 points
                                 </label>
                               </div>
@@ -1041,7 +1156,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score3" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio3_3" name="score3" 
                                     (click)="getdatascore3('3')"> 3 points
                                 </label>
                               </div>
@@ -1049,7 +1164,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score3" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio3_4" name="score3" 
                                     (click)="getdatascore3('4')"> 4 points
                                 </label>
                               </div>
@@ -1057,7 +1172,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score3" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio3_5" name="score3" 
                                     (click)="getdatascore3('5')"> 5 points
                                 </label>
                               </div>
@@ -1075,7 +1190,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio2">
-                                  <input type="radio" class="form-check-input" id="radio2" name="score4" value="option2"
+                                  <input type="radio" class="form-check-input" id="radio4_1" name="score4" 
                                     (click)="getdatascore4('1')"> 1 points
                                 </label>
                               </div>
@@ -1083,7 +1198,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score4" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio4_2" name="score4" 
                                     (click)="getdatascore4('2')"> 2 points
                                 </label>
                               </div>
@@ -1091,7 +1206,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score4" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio4_3" name="score4" 
                                     (click)="getdatascore4('3')"> 3 points
                                 </label>
                               </div>
@@ -1099,7 +1214,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score4" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio4_4" name="score4" 
                                     (click)="getdatascore4('4')"> 4 points
                                 </label>
                               </div>
@@ -1107,7 +1222,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score4" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio4_5" name="score4" 
                                     (click)="getdatascore4('5')"> 5 points
                                 </label>
                               </div>
@@ -1126,7 +1241,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio2">
-                                  <input type="radio" class="form-check-input" id="radio2" name="score5" value="option2"
+                                  <input type="radio" class="form-check-input" id="radio5_1" name="score5" value="option2"
                                     (click)="getdatascore5('1')"> 1 points
                                 </label>
                               </div>
@@ -1134,7 +1249,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score5" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio5_2" name="score5" value="option3"
                                     (click)="getdatascore5('2')"> 2 points
                                 </label>
                               </div>
@@ -1142,7 +1257,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score5" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio5_3" name="score5" value="option3"
                                     (click)="getdatascore5('3')"> 3 points
                                 </label>
                               </div>
@@ -1150,7 +1265,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score5" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio5_4" name="score5" value="option3"
                                     (click)="getdatascore5('4')"> 4 points
                                 </label>
                               </div>
@@ -1158,7 +1273,7 @@
                             <div class="col-sm-2">
                               <div class="form-check-inline">
                                 <label class="form-check-label" for="radio3">
-                                  <input type="radio" class="form-check-input" id="radio3" name="score5" value="option3"
+                                  <input type="radio" class="form-check-input" id="radio5_5" name="score5" value="option3"
                                     (click)="getdatascore5('5')"> 5 points
                                 </label>
                               </div>
@@ -1354,7 +1469,6 @@
                   </mat-form-field>
                 </td>
                 <td class=" Titlereview">
-                  <mat-hint> *Click "Add" to confirm name</mat-hint>
                   <form class="example-form">
                     <mat-form-field class="widthcom" appearance="outline">
                       <mat-label>Select Name</mat-label>
@@ -1368,7 +1482,7 @@
                     </mat-form-field>
                   </form>
                   <div class="center">
-                    <button mat-button (click)="addIN()">Add</button>
+                    <button mat-button class="Buttonadd" (click)="addIN()">Confirm name</button>
                   </div>
               <tr *ngFor="let item of this.EMAIL_CC let i = index">
                 <table>
@@ -1401,10 +1515,11 @@
                   <form class="example-form">
                     <mat-form-field class="example-full-width " appearance="outline">
                       <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.Check">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl2"
+                        [matAutocomplete]="auto2" [(ngModel)]="this.Check">
+
+                      <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
                           {{option}}
                         </mat-option>
                       </mat-autocomplete>
@@ -1417,15 +1532,15 @@
               </tr>
               <tr>
                 <th class=" Titlereview"></th>
-                <td class=" Titlereview">Confirm </td>
+                <td class=" Titlereview">Confirm</td>
                 <td class=" Titlereview">
                   <form class="example-form">
                     <mat-form-field class="example-full-width " appearance="outline">
                       <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.Confirm">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl3"
+                        [matAutocomplete]="auto3" [(ngModel)]="this.Confirm">
+                      <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions3 | async" [value]="option">
                           {{option}}
                         </mat-option>
                       </mat-autocomplete>
@@ -1443,10 +1558,10 @@
                   <form class="example-form">
                     <mat-form-field class="example-full-width " appearance="outline">
                       <mat-label>Select Name</mat-label>
-                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                        [matAutocomplete]="auto" [(ngModel)]="this.approval">
-                      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl4"
+                        [matAutocomplete]="auto4" [(ngModel)]="this.approval">
+                      <mat-autocomplete autoActiveFirstOption #auto4="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions4 | async" [value]="option">
                           {{option}}
                         </mat-option>
                       </mat-autocomplete>
@@ -1610,7 +1725,6 @@
                   </mat-form-field>
                 </td>
                 <td class=" Titlereview">
-                  <mat-hint> *Click "Add" to confirm name</mat-hint>
                   <form class="example-form">
                     <mat-form-field class="widthcom" appearance="outline">
                       <mat-label>Select Name</mat-label>
@@ -1624,7 +1738,7 @@
                     </mat-form-field>
                   </form>
                   <div class="center">
-                    <button mat-button (click)="addIN()">Add</button>
+                    <button mat-button class="Buttonadd" (click)="addIN()">Confirm name</button>
                   </div>
               <tr *ngFor="let item of this.EMAIL_CC let i = index">
                 <table>
@@ -1837,7 +1951,6 @@
                   </mat-form-field>
                 </td>
                 <td class=" Titlereview">
-                  <mat-hint> *Click "Add" to confirm name</mat-hint>
                   <form class="example-form">
                     <mat-form-field class="widthcom" appearance="outline">
                       <mat-label>Select Name</mat-label>
@@ -1851,7 +1964,7 @@
                     </mat-form-field>
                   </form>
                   <div class="center">
-                    <button mat-button (click)="addIN()">Add</button>
+                    <button mat-button class="Buttonadd" (click)="addIN()">Confirm name</button>
                   </div>
               <tr *ngFor="let item of this.EMAIL_CC let i = index">
                 <table>
@@ -2070,7 +2183,6 @@
                   </mat-form-field>
                 </td>
                 <td class=" Titlereview">
-                  <mat-hint> *Click "Add" to confirm name</mat-hint>
                   <form class="example-form">
                     <mat-form-field class="widthcom" appearance="outline">
                       <mat-label>Select Name</mat-label>
@@ -2084,7 +2196,7 @@
                     </mat-form-field>
                   </form>
                   <div class="center">
-                    <button mat-button (click)="addIN()">Add</button>
+                    <button mat-button class="Buttonadd" (click)="addIN()">Confirm name</button>
                   </div>
               <tr *ngFor="let item of this.EMAIL_CC let i = index">
                 <table>
@@ -2470,4 +2582,5 @@
       </mat-card-content>
     </mat-card>
   </div>
+</div>
 </div>

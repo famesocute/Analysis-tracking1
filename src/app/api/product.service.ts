@@ -152,12 +152,16 @@ export class ProductService {
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/21_TRACKING_ANALYSIS_SELECT_UPLOAD_LIST_BY_REQ.php?data1=' + data1)
   
     }
-    TRACKING_ANALYSIS_SEND_MAIL(data1:any) {
+  
+    TRACKING_ANALYSIS_SEND_MAIL(product: any) {
   
       console.log("TRACKING_ANALYSIS_SEND_MAIL Loop ")
   
-      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/22_TRACKING_ANALYSIS_SEND_MAIL.php?data1='+data1)
+      return this.http.post('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/22_TRACKING_ANALYSIS_SEND_MAIL.php', product, {
+        headers: { 'content-type': 'application/x-www-form-urlencoded' }
+    })
     }
+
     TRACKING_ANALYSIS_SELECT_DATA_BY_REQ(data1:any) {
   
       console.log("TRACKING_ANALYSIS_SELECT_DATA_BY_REQ Loop ")
@@ -179,4 +183,25 @@ export class ProductService {
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/25_TRACKING_ANALYSIS_SELECT_JOB_JOBDUTY.php?data1='+data1)
   
     }
+    TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON_NEW(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON_NEW Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/27_TRACKING_ANALYSIS_SELECT_QUESTION_BY_DOCON_NEW.php?data1='+data1)
+  
+    }
+    TRACKING_ANALYSIS_DELETE_FILE(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_DELETE_FILE Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/26_TRACKING_ANALYSIS_DELETE_FILE.php?data1='+data1)
+  
+    }
+    TRACKING_ANALYSIS_SELECT_BOOKING_STEP_REQ(data1:any,data2:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_BOOKING_STEP_REQ Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/28_TRACKING_ANALYSIS_SELECT_BOOKING_STEP_REQ.php?data1='+data1+'&data2='+data2)
+  
+    }   
 }

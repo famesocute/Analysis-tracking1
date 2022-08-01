@@ -113,9 +113,9 @@
                   <mat-form-field class="example-full-width " appearance="outline">
                     <mat-label>Select Name</mat-label>
                     <input type="text" placeholder="Pick one" aria-label="Name" matInput
-                      [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="this.Analyzer">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      [formControl]="myControl2" [matAutocomplete]="auto2" [(ngModel)]="this.Analyzer">
+                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
                         {{option}}
                       </mat-option>
                     </mat-autocomplete>

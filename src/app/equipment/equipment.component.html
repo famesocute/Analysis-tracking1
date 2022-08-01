@@ -1,0 +1,91 @@
+
+    <div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+      <span class="sr-only"></span>
+    </div>
+    <ng-template #elseBlock>
+    
+      <div class="border-bottom Toolbar">
+        <div class="row">
+          <div class="col-xl-1"></div>
+          <div class="col-xl-7 center" style="padding :15px 0 ;">
+            <button mat-button>Home</button>
+            <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
+            <button mat-button>Equipment Calendar</button>
+            <button mat-button>Job tracking</button>
+            <button mat-button>Search previous report</button>
+          </div>
+    
+          <div class="col-xl-4 center " *ngIf="isValid;else other_content">
+            <div class="row">
+              <div class="col-xl-8">
+                {{this.nameonly}}
+                ({{this.Codelocal}})
+                {{this.departmentlocal}}
+              </div>
+              <div class="col-xl-4">
+                <button mat-raised-button color="primary" (click)="Logout()">Log out</button>
+              </div>
+            </div>
+          </div>
+    
+          <ng-template #other_content>
+            <div class="col-xl-4 center ">
+              <button mat-raised-button color="primary" (click)="Gologin()">Login</button>
+              <button mat-raised-button color="primary" style="margin-left:10px;" (click)="GoSignup()">Sign up</button>
+            </div>
+          </ng-template>
+    
+    
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <mat-card class="card1">
+            <mat-card-content>
+              <div class="row" style="padding-top : 30px;">
+                <h1 class="center WText ">Status</h1>
+                <button class="button button3 border border-light WText" >Resin molding</button>
+                <button class="button button3 border border-light WText" >Auto polishing machine</button>
+                <button class="button button3 border border-white WText" >Cutting machine</button>
+                <button class="button button3 border border-white WText" >VHX</button>
+                <button class="button button3 border border-light WText" >Pending Request</button>
+                <button class="button button3 border border-light WText" >Not Complete Request</button>
+                <button class="button button3 border border-white WText" >Complete Request</button>
+                <button class="button button3 border border-white WText" >My Request and Job</button>
+                <button class="button button3 border border-light WText" >Pending Request</button>
+                <button class="button button3 border border-light WText" >Not Complete Request</button>
+                <button class="button button3 border border-white WText" >Complete Request</button>
+                <button class="button button3 border border-white WText" >My Request and Job</button>
+                <button class="button button3 border border-light WText" >Pending Request</button>
+                <button class="button button3 border border-light WText" >Not Complete Request</button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+
+
+
+        <div class="col-sm-10" style="padding: 40px; ">
+            <div class="center mat-display-1">Booking Equipment</div>
+            <div class="container" style="padding-top: 10px; padding-bottom:20px; padding-right: 120px;">
+                <div class="navigator">
+                  <daypilot-navigator [config]="configNavigator" [events]="events" [(date)]="date" (dateChange)="changeDate($event)" #navigator></daypilot-navigator>
+                </div>
+                <div class="content">
+                  <div class="buttons">
+                  <button class="button2" (click)="viewDay()" [class]="this.configNavigator.selectMode == 'Day' ? 'selected' : ''">Day</button>
+                  <button class="button2" (click)="viewWeek()" [class]="this.configNavigator.selectMode == 'Week' ? 'selected' : ''">Week</button>
+                  <button class="button2" (click)="viewMonth()" [class]="this.configNavigator.selectMode == 'Month' ? 'selected' : ''">Month</button>
+                  </div>
+              
+                  <daypilot-calendar [config]="configDay" [events]="events" #day></daypilot-calendar>
+                  <daypilot-calendar [config]="configWeek" [events]="events" #week></daypilot-calendar>
+                  <daypilot-month [config]="configMonth" [events]="events" #month></daypilot-month>
+                </div>
+              
+              </div>
+        </div>
+        </div>
+      </ng-template>

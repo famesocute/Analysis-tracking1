@@ -76,15 +76,18 @@
             </tr>
             <tr>
               <th class=" Titlereview"></th>
-              <td class=" Titlereview"> Confirm</td>
+              <td class=" Titlereview"> 
+                <p>Confirm</p>
+                <p>(Supervisor)</p>
+              </td>
               <td class=" Titlereview" > 
                 <form class="example-form">
                   <mat-form-field class="widthcom" appearance="outline">
                     <mat-label>Select Name</mat-label>
-                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl"
-                      [matAutocomplete]="auto" [(ngModel)]="this.NameConfirm">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl2"
+                      [matAutocomplete]="auto2" [(ngModel)]="this.NameConfirm">
+                    <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions2 | async" [value]="option">
                         {{option}}
                       </mat-option>
                     </mat-autocomplete>
@@ -98,7 +101,7 @@
             <tr>
               <th class=" Titlereview">Analysis section</th>
               <td class=" Titlereview"> Controller</td>
-              <td class=" Titlereview">Wanutsanun Hintuang</td>
+              <td class=" Titlereview">{{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
               <td class=" Titlereview"></td>
               <td class=" Titlereview"></td>
               <td class=" Titlereview"></td>

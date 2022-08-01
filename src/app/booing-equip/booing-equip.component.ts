@@ -38,6 +38,7 @@ export class BooingEquipComponent implements OnInit {
   DataRes: any
   DataBooking: any
   DataResreq: any
+  Datastepcheck : any
 
   step_no = ""
   step1 = ""
@@ -102,7 +103,7 @@ export class BooingEquipComponent implements OnInit {
     this.configMonth.startDate = date;
     console.log(date)
     console.log(this.events)
-    console.log(this.events2)
+    // console.log(this.events2)
   }
 
   configDay: DayPilot.CalendarConfig = {
@@ -174,15 +175,15 @@ export class BooingEquipComponent implements OnInit {
         console.log(this.SelectedZZZ)
 
 
-        this.namelocal = sessionStorage.getItem("NAME");
-        this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-        this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+        this.namelocal = localStorage.getItem("NAME");
+        this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+        this.departmentlocal = localStorage.getItem("DEPARTMENT");
         if (this.departmentlocal != null) {
           this.isValid = true
           this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
         } else {
           window.alert("กรุณา login")
-          window.location.href = 'http://localhost:4200/Requestinfo?id=' + this.userType
+          window.location.href = 'http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id=' + this.userType
         }
     
         this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -259,9 +260,9 @@ export class BooingEquipComponent implements OnInit {
     this.router.navigate(['/Signup'])
   }
   Logout() {
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Goanalysishome() {
@@ -277,13 +278,14 @@ export class BooingEquipComponent implements OnInit {
     console.log(this.step_before1)
     var step_before2 = "Step" + this.step_before1   
     console.log(step_before2)
+    console.log(this.DataRes[0].REQ_NUM)
 
-    console.log( this.DataResreq.find((item: { STEP_BOOKING: any; }) => item.STEP_BOOKING === step_before2));
-    step_before_check = this.DataResreq.find((item: { STEP_BOOKING: any; }) => item.STEP_BOOKING === step_before2)
+    this.productService.TRACKING_ANALYSIS_SELECT_BOOKING_STEP_REQ(this.DataRes[0].REQ_NUM,step_before2).subscribe((data: {}) => {
+     console.log(data);
+     this.Datastepcheck = data
 
-    // this.DataResreq[0].STEP_BOOKING.substring(4)
 
-    if(step_no2 == "1"){
+     if(step_no2 == "1"){
 
       this.starttime = this.startT1 + ":" + this.startT2 + ":00"
       console.log(this.starttime)
@@ -350,7 +352,7 @@ export class BooingEquipComponent implements OnInit {
         window.location.reload()
       })
     }
-    else if(step_no2 > "1" && step_before_check != null){
+    else if(step_no2 > "1" && this.Datastepcheck != ''){
 
     this.starttime = this.startT1 + ":" + this.startT2 + ":00"
     console.log(this.starttime)
@@ -421,6 +423,9 @@ export class BooingEquipComponent implements OnInit {
     window.alert("กรุณาจองเครื่องมือstepก่อนหน้านี้")
   }
 
+    })
+
+    // this.DataResreq[0].STEP_BOOKING.substring(4)
   }
   onChange(deviceValue: any) {
     console.log(deviceValue);
@@ -510,11 +515,12 @@ export class BooingEquipComponent implements OnInit {
 
     const from = this.nav.control.visibleStart();
     const to = this.nav.control.visibleEnd();
-    this.ds.getEvents(from, to).subscribe(result => {
-      // this.events = result;
-      this.events = this.events2;
-      console.log(this.events)
-    });
+    console.log(this.events)
+    // this.ds.getEvents(from, to).subscribe(result => {
+    //   // this.events = result;
+    //   this.events = this.events2;
+    //   console.log(this.events)
+    // });
   }
 
   viewDay(): void {

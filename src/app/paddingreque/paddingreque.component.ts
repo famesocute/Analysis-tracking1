@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { QuestionComponent } from '../question/question.component';
 import { EditinfoComponent } from '../dialog/editinfo/editinfo.component'
 import { PenddingComponent } from '../dialog/edit_reviewer/pendding/pendding.component'
+import { PrintComponent } from '../dialog/print/print.component'
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -22,6 +23,8 @@ export class PaddingrequeComponent implements OnInit {
   nameonly: any
 
   isValid = false
+  open = false
+  Fill_initalchk = false
 
   table : any
 
@@ -48,6 +51,8 @@ export class PaddingrequeComponent implements OnInit {
   dataUploadSETdata : any
   DataResFlie : any
 
+  section3 = "Fill_inital"
+
   Fill_inital :any = "["
 
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private route: ActivatedRoute) {}
@@ -66,8 +71,13 @@ export class PaddingrequeComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
-      this.loading = false
-
+      
+      if(this.DataRes[0].STATUS_JOB == '1'){
+        this.open = true
+      }else{
+        window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnahomeNotcom'
+      }
+      
       this.ComConfirm = this.DataRes[0].REVI_PAND_CONFIRM_COM
       this.ccConfirm = this.DataRes[0].REVI_PAND_CONFIRM_CC1
       this.sample1 = this.DataRes[0].SAM_NAME.split("[]")
@@ -105,31 +115,36 @@ export class PaddingrequeComponent implements OnInit {
         var x 
         for(x in this.DataResFlie){
           if(this.DataResFlie[x].SECTION == "Fill_inital"){
-            // this.Interim = this.Interim + '"FILENAME":"' + this.DataResFlie[x].FILENAME + '"},'
-            var name = (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3)
-            
-            if(name == "PNG" || name == "png"|| name == "jpg")
-            {
+
+            if((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "PNG" || (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "png"|| (this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3) == "jpg"){
               this.Fill_inital = this.Fill_inital + '{"FILENAME":"",'  
             }
-            else{
+            else{  
               this.Fill_inital = this.Fill_inital + '{"FILENAME":"' + this.DataResFlie[x].FILENAME + '",'
             }
-           
+            console.log((this.DataResFlie[x].FILENAME).substring(this.DataResFlie[x].FILENAME.length - 3))
+            this.Fill_inital = this.Fill_inital + '"idupload_list":"' + this.DataResFlie[x].idupload_list + '",' 
             this.Fill_inital = this.Fill_inital + '"LINK":"http://163.50.57.95:84/' + this.DataResFlie[x].LINK + '"},'
           }
         }
-        this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
-        this.Fill_inital = this.Fill_inital + "]";
-      console.log(this.Fill_inital)
-  
-      var obj = JSON.parse(this.Fill_inital);
+        if(this.Fill_inital.length != 1){
+          this.Fill_inital = this.Fill_inital.substring(0, this.Fill_inital.length - 1);
+          this.Fill_inital = this.Fill_inital + "]";
+          console.log(this.Fill_inital)
 
-      console.log(obj)
-  
-      this.Fill_inital = obj
+          if(this.Fill_inital != "]"){
+          var obj = JSON.parse(this.Fill_inital);
+           console.log(obj)
+           this.Fill_inital = obj
+
+          if(this.Fill_inital != "]"){
+            this.Fill_initalchk = true
+          }
+        }
+        }
       })
     })
+    
     
     this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
       console.log(data);
@@ -153,15 +168,15 @@ export class PaddingrequeComponent implements OnInit {
       map(value => this._filter(value)),
     );
      
-    this.namelocal = sessionStorage.getItem("NAME");
-    this.Codelocal = sessionStorage.getItem("EMPLOY_CODE");
-    this.departmentlocal = sessionStorage.getItem("DEPARTMENT");
+    this.namelocal = localStorage.getItem("NAME");
+    this.Codelocal = localStorage.getItem("EMPLOY_CODE");
+    this.departmentlocal = localStorage.getItem("DEPARTMENT");
 
     if (this.namelocal != null) {
       this.isValid = true
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
     }
-   
+    this.loading = false
       
   }
 
@@ -172,30 +187,33 @@ export class PaddingrequeComponent implements OnInit {
   }
 
    onOpenDialogClick(){
-    this.productService.changeMessage(this.DataRes[0].REQ_NUM + "||"+this.DataRes[0].ID)
+    if (this.namelocal != null) {
+      this.productService.changeMessage(this.DataRes[0].REQ_NUM + "||" + this.DataRes[0].ID)
       const dialogRef = this.matDialog.open(QuestionComponent, {
-        disableClose : true,
+        disableClose: true,
         width: '500px',
       });
       dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result );
+        console.log('The dialog was closed');
+        console.log(result);
 
-      this.ngOnInit()
       });
-    
+    } else (
+      window.alert("Please login")
+    )
   }
   Goanalysishome(){
     this.router.navigate(['/Analyrequehome']) 
   }
   GoAswer(ID:any){
-    window.location.href ='http://localhost:4200/AnswerPage?id='+ID+'&usertype='+this.userType
+    window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnswerPage?id='+ID+'&usertype='+this.userType
   }
   GoAsweredit(ID:any){
-    window.location.href ='http://localhost:4200/AnswerEdit?id='+ID+'&usertype='+this.userType
+    window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnswerEdit?id='+ID+'&usertype='+this.userType
   }
 
   GoEstiStep(){
+    if(this.namelocal == this.DataRes[0].REVI_PAND_CONFIRM){
     let date: Date = new Date();
     var date2 = date.toLocaleString()
 
@@ -211,11 +229,14 @@ export class PaddingrequeComponent implements OnInit {
       this.router.navigate(['/Analyrequehome']) 
     })
     
-    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_CONTROL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_CONTROL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Estistep?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }else{
+    alert('Only Confirm Approve')
+  }
   }
 
   countrow = 0
@@ -234,12 +255,12 @@ export class PaddingrequeComponent implements OnInit {
   }
 
    myFunction() {
-    window.open("http://localhost:4200/Steppadding?id="+this.DataRes[0].ID);
+    window.open("http://163.50.57.95:82/Tracking_Analysis/Steppadding?id="+this.DataRes[0].ID);
   }
   Logout(){
-    sessionStorage.removeItem("NAME");
-    sessionStorage.removeItem("EMPLOY_CODE");
-    sessionStorage.removeItem("DEPARTMENT");
+    localStorage.removeItem("NAME");
+    localStorage.removeItem("EMPLOY_CODE");
+    localStorage.removeItem("DEPARTMENT");
     location.reload();
   }
   Gologin() {
@@ -278,6 +299,26 @@ export class PaddingrequeComponent implements OnInit {
 
     location.reload();
     });
+  }
+  Goprint(){
+    this.productService.changeMessage(this.DataRes[0].ID)
+    const dialogRef = this.matDialog.open(PrintComponent, {
+      disableClose : true,
+      width: '1500px',
+      height: '700px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    console.log(result );
+
+    location.reload();
+    });
+  }
+  deletefile(x:any){
+    this.productService.TRACKING_ANALYSIS_DELETE_FILE(x).subscribe((data: {}) => {
+      console.log(data);
+      location.reload();
+    })
   }
 }
 

@@ -31,6 +31,9 @@ import { PenddingComponent } from './dialog/edit_reviewer/pendding/pendding.comp
 import { ReEstiStepComponent } from './dialog/edit_reviewer/re-esti-step/re-esti-step.component';
 import { Re2EstiStepComponent } from './dialog/edit_reviewer/re2-esti-step/re2-esti-step.component';
 import { InfoComponent } from './dialog/edit_reviewer/info/info.component';
+import { PrintComponent } from './dialog/print/print.component';
+import { SendmailQuestionComponent } from './dialog/sendmail-question/sendmail-question.component';
+import { EquipmentComponent } from './equipment/equipment.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
@@ -63,7 +66,10 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'Pendding', component: PenddingComponent },
 { path: 'ReEstiStep', component: ReEstiStepComponent },
 { path: 'Re2EstiStep', component: Re2EstiStepComponent },
-{ path: 'Info', component: InfoComponent },];
+{ path: 'Info', component: InfoComponent },
+{ path: 'Print', component: PrintComponent },
+{ path: 'SendmailQuestion', component: SendmailQuestionComponent },
+{ path: 'Equipment', component: EquipmentComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

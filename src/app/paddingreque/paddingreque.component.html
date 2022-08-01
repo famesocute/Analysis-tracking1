@@ -1,3 +1,5 @@
+<div *ngIf="this.open">
+  
 <div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
   <span class="sr-only"></span>
 </div>
@@ -108,13 +110,6 @@
                 <div class="col-sm-8">{{this.DataRes[0].REQ_TER}}</div>
               </div>
 
-
-              <div class="row" style=" padding-top : 10px;">
-                <div class="col-sm-4"><b>Phone:</b></div>
-                <div class="col-sm-8">{{this.DataRes[0].PHONE}}</div>
-              </div>
-
-
               <div class="row" style=" padding-top : 10px;">
                 <div class="col-sm-4"><b>Department:</b></div>
                 <div class="col-sm-8">{{this.DataRes[0].DEP_MENT}} </div>
@@ -128,34 +123,60 @@
 
 
               <mat-card class="cardAT">
-
+                
               </mat-card>
             </div>
           </div>
-          <div>
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th width="100px" class=" Titlereview">No.</th>
-                    <th width="500px">File Name</th>
-                   
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of Fill_inital let i = index">
-                    <th scope="row">{{i+1}}</th>
-                    <td *ngIf="item.FILENAME != '';else other_content">
-                        <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
-                    </td>
-                    <ng-template #other_content>
+            <mat-dialog-content>
+        
+              <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
 
-                        <td> <img [src]="item.LINK" width="300" height="auto"></td>
+                  <div class="mb-3">
+          
+                      <input class="form-control" type="text" name="Register_no" value="{{this.DataRes[0].REQ_NUM}}" hidden>
+                      <input class="form-control" type="text" name="section" value="{{section3}}" hidden>
+                      <br>            
+                  </div>            
+                  <th>Select file to upload:</th> <br>
+          
+                  <div class="input-group mb-3">
+          
+                      <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+          
+                      <input class="btn btn-dark" type="submit" value="Upload" name="submit">             
+                 </div>            
+              </form>              
+          </mat-dialog-content>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="100px" class=" Titlereview">No.</th>
+                <th width="500px">File Name</th>
+                <th width="100px">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <div *ngIf="this.Fill_initalchk">
+              <tr *ngFor="let item of Fill_inital let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td *ngIf="item.FILENAME != '';else other_content">
+                    <a class="btn btn" [href]="item.LINK">{{ item.FILENAME }}</a>
+                </td>
+                <ng-template #other_content>
 
-                    </ng-template>
-                </tr>
-                </tbody>
-              </table>
-        </div>
+                    <td> <img [src]="item.LINK" width="300" height="auto"></td>
+
+                </ng-template>
+                <td>
+                  <button mat-mini-fab color="primary" (click)="deletefile(item.idupload_list)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </td>
+            </tr>
+            </div>
+            </tbody>
+          </table> 
+        
         </mat-card-content>
       </mat-card>
       <mat-card class="card1">
@@ -173,7 +194,7 @@
         </mat-card-title-group>
         <mat-card-content>
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
               <div class="input1">
                 <div class="row">
                   <div class="col-sm-7"><b>Number of sample:</b></div>
@@ -181,8 +202,8 @@
                 </div>
                 <div class="input1">
                   <div class="row">
-                    <div class="col-sm-3"><b>Piority:</b></div>
-                    <div class="col-sm-9">{{this.DataRes[0].PIORITY}}</div>
+                    <div class="col-sm-5"><b>Send sample date:</b></div>
+                    <div class="col-sm-7">{{this.DataRes[0].SEND_SAM_DATE}}</div>
                   </div>
                 </div>
               </div>
@@ -190,25 +211,26 @@
             <div class="col-sm-4">
               <div class="input1">
                 <div class="row">
-                  <div class="col-sm-5"><b>Send sample date:</b></div>
-                  <div class="col-sm-7">{{this.DataRes[0].SEND_SAM_DATE}}</div>
+                  <div class="col-sm-3"><b>Piority:</b></div>
+                  <div class="col-sm-9">{{this.DataRes[0].PIORITY}}</div>
                 </div>
               </div>
+              <div class="input1">
+                <div class="row">
+                  <div class="col-sm-6"><b>Expected finish date:</b></div>
+                  <div class="col-sm-6">{{this.DataRes[0].FINISH_DATE}}</div>
+                </div>
+              </div>
+              
+            </div>
+            <div class="col-sm-4">
               <div class="input1">
                 <div class="row">
                   <div class="col-sm-2"><b>Reason:</b></div>
                   <div class="col-sm-10">{{this.DataRes[0].REASON}}</div>
                 </div>
               </div>
-
-            </div>
-            <div class="col-sm-5">
-              <div class="input1">
-                <div class="row">
-                  <div class="col-sm-5"><b>Expected finish date:</b></div>
-                  <div class="col-sm-7">{{this.DataRes[0].FINISH_DATE}}</div>
-                </div>
-              </div>
+              
               <div class="input1">
                 <div class="row">
                   <div class="col-sm-2"><b>Holiday:</b></div>
@@ -225,8 +247,8 @@
                   <td width="200px">
                     <div class="input1" style="padding: 0 10px ;">
                       <div class="row">
-                        <div class="col-sm-3"><b>Lot no:</b></div>
-                        <div class="col-sm-9"> {{ item.Lot_no }}</div>
+                        <div class="col-sm-4"><b>Lot no:</b></div>
+                        <div class="col-sm-8"> {{ item.Lot_no }}</div>
                       </div>
                     </div>
 
@@ -240,11 +262,11 @@
                     </div>
 
                   </td>
-                  <td width="200px">
+                  <td width="300px">
                     <div class="input1" style="padding: 0 10px ;">
                       <div class="row">
-                        <div class="col-sm-4"><b>Remarks:</b></div>
-                        <div class="col-sm-8">{{ item.Remarks }}</div>
+                        <div class="col-sm-6"><b>No.sample /remarks:</b></div>
+                        <div class="col-sm-6">{{ item.Remarks }}</div>
                       </div>
                     </div>
                   </td>
@@ -405,11 +427,12 @@
         <mat-card-content>
           <p>*Please print the label before send sample to Q30 section</p>
           <div class=" container-fluid center " style=" background-color: #ffebcd; ">
-            <button mat-flat-button class="Buttonaddquetion2"> Print Label
+            <button mat-flat-button class="Buttonaddquetion2" (click)="Goprint()"> Print Label
               <mat-icon>print</mat-icon>
             </button>
 
           </div>
+        
         </mat-card-content>
       </mat-card>
 
@@ -479,7 +502,6 @@
                     </mat-form-field>
                   </td>
                   <td class=" Titlereview">
-                    <mat-hint> *Click "Add" to confirm name</mat-hint>
                     <form class="example-form">
                       <mat-form-field class="widthcom " appearance="outline">
                         <mat-label>Select Name</mat-label>
@@ -493,7 +515,7 @@
                       </mat-form-field>
                     </form>
                     <div class="center">
-                      <button mat-button (click)="addIN()">Add</button>
+                      <button mat-button class="Buttonadd" (click)="addIN()">Confirm name</button>
                     </div>
 
                 <tr *ngFor="let item of this.EMAIL_CC let i = index">
@@ -591,3 +613,4 @@
   </div>
 
 </ng-template>
+</div>

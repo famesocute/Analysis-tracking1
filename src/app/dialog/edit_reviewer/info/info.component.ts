@@ -27,8 +27,14 @@ export class InfoComponent implements OnInit {
   order =""
 
   myControl = new FormControl();
+  myControl2 = new FormControl();
+  myControl3 = new FormControl();
+  myControl4 = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
+  filteredOptions2!: Observable<string[]>;
+  filteredOptions3!: Observable<string[]>;
+  filteredOptions4!: Observable<string[]>;
   EMAIL_CC: string[] = [];
 
   loading = true
@@ -80,8 +86,35 @@ export class InfoComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
+    this.filteredOptions2 = this.myControl2.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter2(value)),
+    );
+    this.filteredOptions3 = this.myControl3.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter3(value)),
+    );
+    this.filteredOptions4 = this.myControl4.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter4(value)),
+    );
   }
   private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter2(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter3(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter4(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
@@ -114,19 +147,19 @@ export class InfoComponent implements OnInit {
     })
 
     if(this.order == '1'){
-      var qtest2 = " "+this.Check+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+      var qtest2 = " "+this.Check+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data); 
       })
     }else if(this.order == '2'){
-      var qtest2 = " "+this.Confirm+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+      var qtest2 = " "+this.Confirm+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data); 
       })
     }else if(this.order == '3'){
-      var qtest2 = " "+this.approval+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://localhost:4200/Estistep?id="+this.DataRes[0].ID+" "
+      var qtest2 = " "+this.approval+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data); 
