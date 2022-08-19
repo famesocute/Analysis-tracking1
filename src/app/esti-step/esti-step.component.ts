@@ -68,6 +68,8 @@ export class EstiStepComponent implements OnInit {
   section3 = "Fill_inital"
   Fill_initalchk = false
 
+  checklotno = true
+
   constructor(public router: Router,  public productService: ProductService,private matDialog: MatDialog,private fb: FormBuilder,private route: ActivatedRoute) {
     this.productForm = this.fb.group({
 
@@ -251,6 +253,7 @@ export class EstiStepComponent implements OnInit {
   }
   save(){
     if(this.namelocal == this.DataRes[0].REVI_ANASEC_CONTROL){
+      if(this.Analyzer != ""){
     let date: Date = new Date();
     var date2 = date.toLocaleString()
 
@@ -264,7 +267,8 @@ export class EstiStepComponent implements OnInit {
         console.log(data); 
       }) 
       
-      var qtest2 = " "+this.Analyzer+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Estistep?id="+this.DataRes[0].ID+" "
+    
+      var qtest2 = " "+this.Analyzer+";||"+this.EMAIL_CC+"||Q-Analysis Request ->(Estimate Step Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please estimate step. Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Estistep?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
@@ -285,6 +289,9 @@ export class EstiStepComponent implements OnInit {
       this.ngOnInit()
       });
     }else{
+      alert('Please fill analyzer name')
+    }
+    }else{
       alert('Only Controller Approve')
     }
   }
@@ -299,11 +306,22 @@ export class EstiStepComponent implements OnInit {
     var val2 = ""
     for (var val in this.productForm.value.quantities) {
       console.log(val);
+
+
+      if(this.productForm.value.quantities[val].Technique == ''){
+        window.alert("Please fill technique at least 1 technique")
+        this.checklotno = false
+        break;
+      }else{
+        this.checklotno = true
+      }
+
       val2 = val2 + this.productForm.value.quantities[val].Technique + "||" + this.productForm.value.quantities[val].Samplenumber +"||" + "initial" +"[]"
     }
     val2 = val2.substring(0, val2.length - 2);
     console.log(val2)
 
+    if(this.checklotno == true){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
       " SET  `PRE_ESTI_TECHNIQUE` = '" + val2 + "',`ESTI_STEP_TIME` = '" + date2 + "',`STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_CONFIRM + "', `STATUS_JOB` = '4' " +
@@ -314,11 +332,12 @@ export class EstiStepComponent implements OnInit {
       this.router.navigate(['/Analyrequehome']) 
     })
 
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.EMAIL_CC+"||Q-Analysis Request ->(Estimate Cost Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve estimate cost. Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
     })
+  }
   }else{
     alert('Only Analyst Approve')
   }

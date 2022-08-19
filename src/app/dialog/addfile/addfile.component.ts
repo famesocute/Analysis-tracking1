@@ -65,7 +65,7 @@ export class AddfileComponent implements OnInit {
     
   }
   GoAnahome(){
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.DataRes[0].REVI_PAND_ISSUE_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Paddingreque?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.DataRes[0].REVI_PAND_ISSUE_CC+"||Q-Analysis Request ->(Approve Request Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve request.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Paddingreque?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 

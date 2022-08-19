@@ -79,7 +79,7 @@ export class RequestformfillComponent implements OnInit {
     [{ data: 'X-ray 2D', check: false },
     { data: 'X-ray 3D', check: false },
     { data: 'SEM-Microscope', check: false },
-    { data: 'Cross section', check: false },
+    { data: 'DPA', check: false },
     { data: 'Ion-milling', check: false },
     { data: 'VHX', check: false },
     { data: 'Metallurgical Microscope', check: false },
@@ -87,14 +87,16 @@ export class RequestformfillComponent implements OnInit {
     { data: 'SEM-Mapping', check: false },
     { data: 'EDXRF', check: false },
     { data: 'CS Analyzer', check: false },
-    { data: 'ICP', check: false },
+    { data: 'ICP-OES', check: false },
     { data: 'FTIR', check: false },
     { data: 'GCMS', check: false },
     { data: 'DSC', check: false },
     { data: 'TG-DTA', check: false },
-    { data: 'Solder wettability', check: false },
+    { data: 'Solderability test', check: false },
     { data: 'Micro-probe', check: false },
     { data: 'Dust monitering', check: false },
+    { data: 'C-SAM', check: false },
+    { data: 'Waste water', check: false },
     ];
 
   productForm: FormGroup;
@@ -210,8 +212,6 @@ export class RequestformfillComponent implements OnInit {
   comment = "" // ช่อง input other
   AnsMany() {
     this.RequestTech = ""
-
-
     var i
     var count = 0
 
@@ -288,12 +288,13 @@ export class RequestformfillComponent implements OnInit {
       "`COMM_SAM_INFOR`, `DANGER`, `SAM_AF_TEST`, `RELATE_MAT`, `KEY_CHARA`, `KEY_STATE`, " +
       "`KEY_PHENO`, `QUESTION`, `REVI_PAND_ISSUER`, `REVI_PAND_CONFIRM`, `REVI_ANASEC_CONTROL`, " +
       "`REVI_ANASEC_ANAL`, `REVI_REAPPROV_CHECK`, `REVI_REAPPROV_CONFIRM`, `REVI_REAPPROV_APPROV`," +
-      "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " +
-      " VALUES ('1','" + this.NameConfirm + "','" + this.RequestNo + "', '" + this.month + "', '" + this.Title + "', '" + this.Background + "', '" + this.Purpose + "', '" + this.Hypothesis + "', '" + this.Analysistype + "'," +
-      " '" + this.Analysistype2 + "', '" + this.IssueDate + "', '" + this.namelocal + "', '" + this.Phone + "', '" + this.departmentlocal + "', '" + this.Product + "','1', '" + this.RequestTech + "', '" + this.RequestTech2 + "'," +
-      " '" + this.Numsample + "', '" + DatereceiveSam + "', '" + DateEepectSam + "', '" + this.holiday + "', '" + this.Piority + "', '" + this.Reason + "', '" + val2 + "'," +
-      " '" + this.AnaComment + "', '" + this.Dangerous + "', '" + this.SamAftertest + "', '" + this.Relatedmatters + "', '" + this.KeywordCharact + "', '" + this.KeywordState + "', '" + this.KeywordPheno + "', " +
-      " '', '" + this.namelocal + "', '" + this.NameConfirm + "','" + this.NameControl + "','','','','','','','" + this.ComIssuer + "','" + this.EMAIL_CC + "'  );"
+      "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " 
+
+      qtest = qtest + 'VALUES ("1","' + this.NameConfirm + '","' + this.RequestNo + '","' + this.month + '","' + this.Title + '","' + this.Background + '","' + this.Purpose + '","' + this.Hypothesis + '","' + this.Analysistype + '",' +
+      ' "' + this.Analysistype2 + '","' + this.IssueDate + '","' + this.namelocal + '","' + this.Phone + '","' + this.departmentlocal + '","' + this.Product + '","1", "' + this.RequestTech + '","' + this.RequestTech2 + '",' +
+      ' "' + this.Numsample + '","' + DatereceiveSam + '","' + DateEepectSam + '","' + this.holiday + '","' + this.Piority + '","' + this.Reason + '","' + val2 + '",' +
+      ' "' + this.AnaComment + '","' + this.Dangerous + '","' + this.SamAftertest + '","' + this.Relatedmatters + '","' + this.KeywordCharact + '","' + this.KeywordState + '","' + this.KeywordPheno + '", ' +
+      ' "", "' + this.namelocal + '","' + this.NameConfirm + '","' + this.NameControl + '","","","","","","","' + this.ComIssuer + '","' + this.EMAIL_CC + '"  );'
     console.log(qtest);
 
 if(this.checklotno == true){
@@ -303,6 +304,7 @@ if(this.checklotno == true){
     console.log(data);
     sessionStorage.setItem("RequestNo", this.RequestNo);
   this.router.navigate(['/Addfile'])
+    
   })
   }else{
     window.alert("Please fill confirm name(Supervisor)")

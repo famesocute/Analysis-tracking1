@@ -164,7 +164,7 @@ export class AnswerEditComponent implements OnInit {
 
       window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnahomeNotcom'
        
-    var qtest2 = " "+this.ANSWER_SENT_TO+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/AnswerPage?id="+this.Questiondata[0].ID+"&usertype="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.ANSWER_SENT_TO+";||"+this.EMAIL_CC+"||Q-Analysis Request ->(Answer Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/AnswerPage?id="+this.Questiondata[0].ID+"&usertype="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
     console.log(data);    

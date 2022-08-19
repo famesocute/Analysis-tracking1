@@ -235,6 +235,7 @@ export class InfoEditstepComponent implements OnInit {
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
         console.log(data);
       })
+      
       location.reload()
     })
   }

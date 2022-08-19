@@ -29,6 +29,8 @@ export class AnalyrequehomeComponent implements OnInit {
   message = ""
   isValid = false
 
+  value = 'Clear me';
+
   constructor(public router: Router, public productService: ProductService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {

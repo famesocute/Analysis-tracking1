@@ -22,6 +22,7 @@ export class InfoComponent implements OnInit {
   ComAnalyzer = ""
   controlcc = ""
   confirmcc = ""
+  analyzer = ""
 
   ID = ""
   order =""
@@ -30,11 +31,13 @@ export class InfoComponent implements OnInit {
   myControl2 = new FormControl();
   myControl3 = new FormControl();
   myControl4 = new FormControl();
+  myControl5 = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
   filteredOptions2!: Observable<string[]>;
   filteredOptions3!: Observable<string[]>;
   filteredOptions4!: Observable<string[]>;
+  filteredOptions5!: Observable<string[]>;
   EMAIL_CC: string[] = [];
 
   loading = true
@@ -63,6 +66,18 @@ export class InfoComponent implements OnInit {
        }
        if (this.DataRes[0].REVI_ANASEC_ANAL_CC != null) {
         this.confirmcc = this.DataRes[0].REVI_ANASEC_ANAL_CC.split(",");
+      }
+      if (this.DataRes[0].REVI_ANASEC_ANAL != null) {
+        this.analyzer = this.DataRes[0].REVI_ANASEC_ANAL;
+      }
+      if (this.DataRes[0].REVI_REAPPROV_CHECK != null) {
+        this.Check = this.DataRes[0].REVI_REAPPROV_CHECK;
+      }
+      if (this.DataRes[0].REVI_REAPPROV_CONFIRM != null) {
+        this.Confirm = this.DataRes[0].REVI_REAPPROV_CONFIRM;
+      }
+      if (this.DataRes[0].REVI_REAPPROV_APPROV != null) {
+        this.approval = this.DataRes[0].REVI_REAPPROV_APPROV;
       }
       
         this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
@@ -98,6 +113,10 @@ export class InfoComponent implements OnInit {
       startWith(''),
       map(value => this._filter4(value)),
     );
+    this.filteredOptions5 = this.myControl5.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter5(value)),
+    );
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
@@ -115,6 +134,11 @@ export class InfoComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
   private _filter4(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter5(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
@@ -137,7 +161,7 @@ export class InfoComponent implements OnInit {
   edit(){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVI_REAPPROV_CHECK` = '" + this.Check + "', `REVI_REAPPROV_CONFIRM` = '" + this.Confirm + "', " +
+      " SET `REVI_REAPPROV_CHECK` = '" + this.Check + "', `REVI_REAPPROV_CONFIRM` = '" + this.Confirm + "', `REVI_ANASEC_ANAL` = '" + this.analyzer + "', " +
       " `REVI_REAPPROV_APPROV` = '" + this.approval + "', `REVI_ANASEC_ANAL_COM` = '" + this.ComAnalyzer + "',"+
       " `REVI_ANASEC_ANAL_CC` = '" + this.EMAIL_CC + "'"+
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
@@ -147,19 +171,19 @@ export class InfoComponent implements OnInit {
     })
 
     if(this.order == '1'){
-      var qtest2 = " "+this.Check+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+      var qtest2 = " "+this.Check+";||"+this.EMAIL_CC+"||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data); 
       })
     }else if(this.order == '2'){
-      var qtest2 = " "+this.Confirm+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+      var qtest2 = " "+this.Confirm+";||"+this.EMAIL_CC+"||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data); 
       })
     }else if(this.order == '3'){
-      var qtest2 = " "+this.approval+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+      var qtest2 = " "+this.approval+";||"+this.EMAIL_CC+"||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data); 

@@ -150,8 +150,8 @@
                 <h4 style=" margin-top:30px "><b>Requester : </b> {{this.namelocal}}</h4>
                 <h4 style=" margin-top:30px "><b>Department : </b> {{this.departmentlocal}}</h4>
 
-                <mat-form-field appearance="outline">
-                  <mat-label>Product</mat-label>
+                <mat-form-field appearance="outline" >
+                  <mat-label >Product</mat-label>
                   <mat-select [(ngModel)]="this.Product">
                     <mat-option value="MLCC">MLCC</mat-option>
                     <mat-option value="BLM">BLM</mat-option>
@@ -231,7 +231,7 @@
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
                         [(ngModel)]="Tech[3].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckChecked">
-                        Cross section
+                        DPA
                       </label>
                     </div>
                   </div>
@@ -257,6 +257,13 @@
                         [(ngModel)]="Tech[6].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckDefault">
                         Metallurgical Microscope
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="Tech[19].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        C-SAM
                       </label>
                     </div>
                   </div>
@@ -310,7 +317,7 @@
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                         [(ngModel)]="Tech[11].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckDefault">
-                        ICP
+                        ICP-OES
                       </label>
                     </div>
                   </div>
@@ -385,7 +392,7 @@
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                         [(ngModel)]="Tech[16].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckDefault">
-                        Solder wettability
+                        Solderability test
                       </label>
                     </div>
                   </div>
@@ -408,7 +415,13 @@
                     </div>
                   </div>
                   <div class="col-sm-3">
-
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        [(ngModel)]="Tech[20].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        Waste water
+                      </label>
+                    </div>
                   </div>
                 </div>
 
@@ -434,7 +447,7 @@
               <div class="col-sm-4">
                 <div class="centerbox">
                   <div class="form-group" style="margin-left: 10px; ">
-                    <label for="Title"><b>Number of sample:</b></label>
+                    <label for="Title"><b>Number of sample (pcs):</b></label>
                     <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample">
                   </div>
                 </div>
@@ -472,7 +485,7 @@
                 </div>
                 <br>
                 <div class="form-group" style="margin-left: 10px; ">
-                  <label for="Title"><b>Holiday:</b></label>
+                  <label for="Title"><b>Holiday(days):</b></label>
                   <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.holiday">
                 </div>
               </div>
@@ -499,7 +512,7 @@
                     </td>
                     <td>
                       <div class="form-group input1" style="padding: 0 20px ;">
-                        <label for="Samplename"><b>No.sample /remarks:</b></label>
+                        <label for="Samplename"><b>No.sample(pcs) /remarks:</b></label>
                         <input type="Samplename" class="form-control" id="Samplename" formControlName="Remarks">
                       </div>
                     </td>

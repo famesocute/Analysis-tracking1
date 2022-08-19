@@ -410,6 +410,7 @@
                   <th width="70px">Step</th>
                   <th>Technique</th>
                   <th width="150px">Quantity</th>
+                  <th >Standard time(min)</th>
                   <th>Basic Charge (THB/Request)</th>
                   <th>Operation Charge (THB)</th>
                   <th>Estimate Cost (THB)</th>
@@ -420,9 +421,10 @@
                   <th>{{item.step}}</th>
                   <td>{{item.equip}}</td>
                   <td>{{item.quantity}}</td>
+                  <td>{{item.strtime}}</td>
                   <td>{{item.basiccharge}}</td>
                   <td>{{item.operationcharge}}</td>
-                  <td>{{item.estimatecost}}</td>
+                  <td>{{item.estimatecost.toFixed(2)}}</td>
                 </tr>
               </tbody>
             </table>
@@ -442,6 +444,12 @@
             </div>
 
             <div *ngIf="isvalideditstep;else go_next">
+              <div  class="center" style="color:#d25050 ;">
+                *** The operation charge is depending on number of sample and anlaysis point.
+                <br>
+                *** The technique that operation charge = 0 .Operation charge will depend on real operation time
+              </div>
+              <br>
               <div class="row center">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-3 center"><button mat-raised-button color="primary" class="button2"
@@ -454,7 +462,7 @@
 
             <ng-template #go_next>
               <div class="center">Please analyzer revise the steps</div>
-              <div class="center">Reason : {{this.DataRes[0].REASON_DELINE}}</div>
+              <div class="center">Reason :  {{this.DataRes[0].REASON_DELINE}}</div>
             </ng-template>
 
           </mat-card-content>

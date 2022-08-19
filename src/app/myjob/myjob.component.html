@@ -57,7 +57,8 @@
         </div>
 
         <div class="col-sm-10" style="padding: 40px; ">
-          <div style=" padding-top: 30px;" class=" font1 center mat-display-3">Analysis request</div>
+          <div style=" padding-top: 30px;" class=" font1 center size">Analysis request</div>
+          <div  class=" font1 center " style="padding-top: 20px; font-size: 20px;">(My Request and job)</div>
           <br>
           <h2>You is next person</h2>
           <br>
@@ -240,6 +241,41 @@
               </table>
 
             </mat-tab>
+             <!-- August -->
+             <mat-tab label="August">
+              <table class="table ">
+                 <thead class="table-danger">
+                   <tr>
+                     <th width="80px" style=" text-align:center">Month</th>
+                     <th width="120px">Department</th>
+                     <th width="130px">Next person</th>
+                     <th width="200px">Request No.</th>
+                     <th width="200px" style=" text-align:center">Title</th>
+                     <th style=" text-align:center">Issuer</th>
+                   </tr>
+                 </thead>
+               </table>
+               <table class="table ">
+                 <tbody>
+                   <tr *ngFor="let item of table let i = index">
+                       <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                         <div *ngIf="item.MONTH == 'August'">
+                       <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                         <div class="row">
+                           <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                           <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                           <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
+                           <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                           <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                           <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
+                         </div>
+                       </button>
+                     </div>
+                     </div>
+                   </tr>
+                 </tbody>
+               </table>
+             </mat-tab>
           </mat-tab-group>
 
         </div>

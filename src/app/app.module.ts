@@ -47,6 +47,7 @@ import { MyjobComponent } from './myjob/myjob.component';
 import { EstistepEditComponent } from './dialog/estistep-edit/estistep-edit.component';
 import {DayPilotModule} from "@daypilot/daypilot-lite-angular";
 import {DataService} from "./booing-equip/data.service";
+import {DataService2} from "./equipment/data.service";
 import { TrackingstatusComponent } from './trackingstatus/trackingstatus.component';
 import { EditBookingComponent } from './dialog/edit-booking/edit-booking.component';
 import { FactoryApproveComponent } from './dialog/factory-approve/factory-approve.component';
@@ -65,6 +66,8 @@ import {NgxPrintModule} from 'ngx-print';
 import { PrintComponent } from './dialog/print/print.component';
 import { SendmailQuestionComponent } from './dialog/sendmail-question/sendmail-question.component';
 import { EquipmentComponent } from './equipment/equipment.component';
+import { AddOperationtimeComponent } from './dialog/add-operationtime/add-operationtime.component';
+import { AddReporttimeComponent } from './dialog/add-reporttime/add-reporttime.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +107,8 @@ import { EquipmentComponent } from './equipment/equipment.component';
     PrintComponent,
     SendmailQuestionComponent,
     EquipmentComponent,
+    AddOperationtimeComponent,
+    AddReporttimeComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,7 +140,7 @@ import { EquipmentComponent } from './equipment/equipment.component';
     DayPilotModule,
     NgxPrintModule
   ],
-  providers: [DataService],
+  providers: [DataService,DataService2],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

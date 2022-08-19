@@ -44,31 +44,29 @@
           <mat-card class="card1">
             <mat-card-content>
               <div class="row" style="padding-top : 30px;">
-                <h1 class="center WText ">Status</h1>
+                <h1 class="center WText ">Equipment</h1>
+
                 <button class="button button3 border border-light WText" >Resin molding</button>
-                <button class="button button3 border border-light WText" >Auto polishing machine</button>
-                <button class="button button3 border border-white WText" >Cutting machine</button>
-                <button class="button button3 border border-white WText" >VHX</button>
-                <button class="button button3 border border-light WText" >Pending Request</button>
-                <button class="button button3 border border-light WText" >Not Complete Request</button>
-                <button class="button button3 border border-white WText" >Complete Request</button>
-                <button class="button button3 border border-white WText" >My Request and Job</button>
-                <button class="button button3 border border-light WText" >Pending Request</button>
-                <button class="button button3 border border-light WText" >Not Complete Request</button>
-                <button class="button button3 border border-white WText" >Complete Request</button>
-                <button class="button button3 border border-white WText" >My Request and Job</button>
-                <button class="button button3 border border-light WText" >Pending Request</button>
-                <button class="button button3 border border-light WText" >Not Complete Request</button>
+                <button class="button button3 border border-light WText" (click)="onChange('Polishing')">Polishing machine</button>
+                <button class="button button3 border border-white WText" (click)="onChange('Cutting')">Cutting machine</button>
+                <button class="button button3 border border-white WText" (click)="onChange('VHX')">VHX</button>
+                <button class="button button3 border border-light WText" >Metallurgical Microscope</button>
+                <button class="button button3 border border-light WText" >FTIR</button>
+                <button class="button button3 border border-white WText" >TG-DTA</button>
+                <button class="button button3 border border-white WText" >DSC</button>
+                <button class="button button3 border border-light WText" >EDXRF</button>
+                <button class="button button3 border border-light WText" >GCMS</button>
+                <button class="button button3 border border-light WText" >ICP-OES</button>
+                <button class="button button3 border border-white WText" (click)="onChange('SEM')">SEM</button>
+                <button class="button button3 border border-white WText" >X-ray</button>
+                <button class="button button3 border border-light WText" >Titration</button>
               </div>
             </mat-card-content>
           </mat-card>
 
         </div>
-
-
-
-        <div class="col-sm-10" style="padding: 40px; ">
-            <div class="center mat-display-1">Booking Equipment</div>
+        <div class="col-sm-10" style="padding-top: 40px; ">
+            <div class="center mat-display-1">Booking Equipment({{this.namequip}})</div>
             <div class="container" style="padding-top: 10px; padding-bottom:20px; padding-right: 120px;">
                 <div class="navigator">
                   <daypilot-navigator [config]="configNavigator" [events]="events" [(date)]="date" (dateChange)="changeDate($event)" #navigator></daypilot-navigator>

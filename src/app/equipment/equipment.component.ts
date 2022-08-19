@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { ViewChild, AfterViewInit } from "@angular/core";
+import { ProductService } from '../api/product.service';
 import {
   DayPilot,
   DayPilotCalendarComponent,
   DayPilotMonthComponent,
   DayPilotNavigatorComponent
 } from "@daypilot/daypilot-lite-angular";
-import { DataService } from "./data.service";
+import { DataService2 } from "./data.service";
 
 @Component({
   selector: 'app-equipment',
@@ -24,6 +25,14 @@ export class EquipmentComponent implements OnInit {
   Codelocal: any
   departmentlocal: any
   nameonly: any
+
+  DataBooking: any
+  newDate: any
+  newDate2: any
+  sample1: any
+  sample2: any
+
+  namequip = ""
 
   @ViewChild("day") day!: DayPilotCalendarComponent;
   @ViewChild("week") week!: DayPilotCalendarComponent;
@@ -83,7 +92,7 @@ export class EquipmentComponent implements OnInit {
 
   };
 
-  constructor(public router: Router,private ds: DataService,private route: ActivatedRoute) { 
+  constructor(public router: Router,private ds: DataService2,private route: ActivatedRoute,public productService: ProductService) { 
     this.viewWeek();
   }
 
@@ -97,6 +106,11 @@ export class EquipmentComponent implements OnInit {
       this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
     }
     this.loading = false
+
+    this.productService.TRACKING_ANALYSIS_SELECT_BOOKING().subscribe((data: {}) => {
+      console.log(data);
+      this.DataBooking = data
+    })
   }
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
@@ -164,5 +178,94 @@ export class EquipmentComponent implements OnInit {
 
   getfata() {
     console.log(this.ds.events)
+  }
+
+  onChange(deviceValue: any) {
+    console.log(deviceValue);
+    this.namequip = deviceValue
+    console.log(this.namequip)
+
+    var booking = "["
+    var count = 0
+    var x
+    var y
+    for (x in this.DataBooking) {
+      console.log(this.DataBooking[x].EQUIPMENT);
+      if (deviceValue == "Ion-milling" || deviceValue == "Cross-milling" || deviceValue == "X-ray2D" || deviceValue == "X-ray3D" || deviceValue == "X-ray reflow"|| deviceValue == "EDXRF" || deviceValue == "EDXRF_RoHS") 
+      {
+        if ((this.DataBooking[x].EQUIPMENT == "Ion-milling" || this.DataBooking[x].EQUIPMENT == "Cross-milling") && (deviceValue == "Ion-milling"|| deviceValue == "Cross-milling")) {
+          this.newDate = this.DataBooking[x].DATE_BOOKING_START + "T" + this.DataBooking[x].TIME_BOOKING_START
+          this.newDate2 = this.DataBooking[x].DATE_BOOKING_END + "T" + this.DataBooking[x].TIME_BOOKING_END
+          console.log(this.newDate)
+          console.log(this.newDate2)
+          count = count + 1
+          booking = booking + '{"id":"' + count + '",'
+          booking = booking + '"start":"' + this.newDate + '",'
+          booking = booking + '"end":"' + this.newDate2 + '",'
+          booking = booking + '"text":"' + this.DataBooking[x].PIC + '"},'
+          console.log(booking)
+        }
+        if ((this.DataBooking[x].EQUIPMENT == "X-ray2D" || this.DataBooking[x].EQUIPMENT == "X-ray3D" || this.DataBooking[x].EQUIPMENT == "X-ray reflow")&& (deviceValue == "X-ray2D"||deviceValue == "X-ray3D"|| deviceValue == "X-ray reflow")) {
+          this.newDate = this.DataBooking[x].DATE_BOOKING_START + "T" + this.DataBooking[x].TIME_BOOKING_START
+          this.newDate2 = this.DataBooking[x].DATE_BOOKING_END + "T" + this.DataBooking[x].TIME_BOOKING_END
+          console.log(this.newDate)
+          console.log(this.newDate2)
+          count = count + 1
+          booking = booking + '{"id":"' + count + '",'
+          booking = booking + '"start":"' + this.newDate + '",'
+          booking = booking + '"end":"' + this.newDate2 + '",'
+          booking = booking + '"text":"' + this.DataBooking[x].PIC + '"},'
+          console.log(booking)
+        }
+        if ((this.DataBooking[x].EQUIPMENT == "EDXRF" || this.DataBooking[x].EQUIPMENT == "EDXRF_RoHS")&& (deviceValue == "EDXRF"||deviceValue == "EDXRF_RoHS")) {
+          this.newDate = this.DataBooking[x].DATE_BOOKING_START + "T" + this.DataBooking[x].TIME_BOOKING_START
+          this.newDate2 = this.DataBooking[x].DATE_BOOKING_END + "T" + this.DataBooking[x].TIME_BOOKING_END
+          console.log(this.newDate)
+          console.log(this.newDate2)
+          count = count + 1
+          booking = booking + '{"id":"' + count + '",'
+          booking = booking + '"start":"' + this.newDate + '",'
+          booking = booking + '"end":"' + this.newDate2 + '",'
+          booking = booking + '"text":"' + this.DataBooking[x].PIC + '"},'
+          console.log(booking)
+        }
+      }
+      else {
+        if (deviceValue == this.DataBooking[x].EQUIPMENT) {
+          // const [month, day, year] = this.DataBooking[x].DATE_BOOKING_START.split("/");
+          // const newDate = `${year}-${month}-${day}T${this.DataBooking[x].TIME_BOOKING_START}`
+          // console.log(newDate)
+
+          // const [ month2,day2, year2] = this.DataBooking[x].DATE_BOOKING_END.split("/");
+          // const newDate2 = `${year2}-${month2}-${day2}T${this.DataBooking[x].TIME_BOOKING_END}`
+          // console.log(newDate2)
+          this.newDate = this.DataBooking[x].DATE_BOOKING_START + "T" + this.DataBooking[x].TIME_BOOKING_START
+          this.newDate2 = this.DataBooking[x].DATE_BOOKING_END + "T" + this.DataBooking[x].TIME_BOOKING_END
+
+          console.log(this.newDate)
+          console.log(this.newDate2)
+          count = count + 1
+          booking = booking + '{"id":"' + count + '",'
+          booking = booking + '"start":"' + this.newDate + '",'
+          booking = booking + '"end":"' + this.newDate2 + '",'
+
+          booking = booking + '"text":"' + this.DataBooking[x].PIC + '"},'
+        }
+       
+      }
+
+    }
+    if (booking != "[") {
+      booking = booking.substring(0, booking.length - 1);
+      booking = booking + "]";
+      console.log(booking)
+      var obj = JSON.parse(booking);
+      this.events = obj
+      console.log(this.events)
+    }
+    else{
+      this.events = []
+    }
+    console.log(this.events)
   }
 }

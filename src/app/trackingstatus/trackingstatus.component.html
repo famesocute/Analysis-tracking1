@@ -47,7 +47,7 @@
       <div class="center">
         <div class="row">
           <!-- FACTORY APPROVED -->
-          <div class="col-xl" >
+          <div class="col-xl">
             <div class="row">
               <div class="col-sm-7 '">
                 <div class="card card_track2">
@@ -65,8 +65,8 @@
                 <img src="../assets/Tracking_web/Image/substract_color.png">
               </div>
             </div>
-            </div>
-        <!-- Step -->
+          </div>
+          <!-- Step -->
           <div class="col-md " *ngFor="let item of sample1 let i = index">
             <div class="col-xl" *ngIf="isValid1[i];else stepanalysis">
               <div class="row">
@@ -89,24 +89,24 @@
               </div>
             </div>
             <ng-template #stepanalysis>
-                <div class="row">
-                  <div class="col-sm-7 '">
-                    <div class="card card_track2">
-                      <div class="card-body">
-                        <img src="../assets/Tracking_web/Image/chemist.png">
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <p class="center"><b>Step{{i+1}}</b></p>
-                      <p class="center"><b>{{item.equip}}</b></p>
-                      <p></p>
+              <div class="row">
+                <div class="col-sm-7 '">
+                  <div class="card card_track2">
+                    <div class="card-body">
+                      <img src="../assets/Tracking_web/Image/chemist.png">
                     </div>
                   </div>
-                  <div class="col-sm-5 center'" style="padding-top:17px;">
-                    <img src="../assets/Tracking_web/Image/substract_color.png">
+                  <br>
+                  <div>
+                    <p class="center"><b>Step{{i+1}}</b></p>
+                    <p class="center"><b>{{item.equip}}</b></p>
+                    <p></p>
                   </div>
                 </div>
+                <div class="col-sm-5 center'" style="padding-top:17px;">
+                  <img src="../assets/Tracking_web/Image/substract_color.png">
+                </div>
+              </div>
             </ng-template>
           </div>
 
@@ -153,7 +153,8 @@
           </ng-template>
 
           <!-- Approve report -->
-          <div class="col-xl  " *ngIf="this.DataRes[0].STATUS_JOB == 9 || this.DataRes[0].STATUS_JOB == 10 ;else other_con1">
+          <div class="col-xl  "
+            *ngIf="this.DataRes[0].STATUS_JOB == 9 || this.DataRes[0].STATUS_JOB == 10 ;else other_con1">
             <div class="card card_track2">
               <div class="card-body">
                 <img src="../assets/Tracking_web/Image/ready.png">
@@ -164,7 +165,7 @@
               <p><b>APPROVED REPORT</b></p>
               <p></p>
             </div>
-            
+
           </div>
           <ng-template #other_con1>
             <div class="col-xl  " *ngIf="this.DataRes[0].REVISE_STATUS == 1 ;else other_con2">
@@ -181,7 +182,7 @@
             </div>
           </ng-template>
           <ng-template #other_con2>
-          
+
             <div class="col-xl ">
               <div class="card card_track">
                 <div class="card-body">
@@ -233,7 +234,7 @@
       </mat-card>
 
       <div *ngIf="this.departmentlocal  == 'MTQ00'; else facsee">
-      
+
         <div class="container Tablesize">
           <table class="table tablestyle border">
             <thead>
@@ -243,7 +244,7 @@
                 <th class="Titlereview" width="100px">Quantity</th>
                 <th class="Titlereview" width="200px">Plan time</th>
                 <th class="Titlereview" width="300px">Status</th>
-  
+
               </tr>
             </thead>
             <tbody>
@@ -254,171 +255,206 @@
                 <td class="Titlereview">{{this.DataRes[0].ESTI_COST_TIME}}</td>
                 <td class="Titlereview">Approved</td>
               </tr>
-  
+
             </tbody>
           </table>
-        </div>     
+        </div>
 
-      <div class="container Tablesize">
-        <table class="table tablestyle table-bordered">
-          <thead>
-            <tr>
-              <th class="Titlereview" width="50px">Step</th>
-              <th class="Titlereview" width="100px">Technique</th>
-              <th class="Titlereview" width="50px">Quantity</th>
-              <th class="Titlereview" width="200px">Plan time</th>
-              <th class="Titlereview" width="550px">Status</th>
-              <th class="Titlereview" width="100px">Add time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of DataResreq let i = index">
-              <th class="Titlereview">{{item.STEP_BOOKING}}</th>
-              <td class="Titlereview">{{item.EQUIPMENT}}</td>
-              <td class="Titlereview">{{item.SAMPLE_NUM}}</td>
-              <td class="Titlereview">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}} to
-                <br>
-                {{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}
-              </td>
-              <td class="Titlereview">
-                <div *ngIf="isValidButton3[i]; else complete">
-                <div class="row">
-                  <div class="col-sm-5">
-                    <div *ngIf="isValidButton2[i]; else timeshow">
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <div *ngIf="isValidButton[i]; else start_time">
-                            <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                              (click)="starttime(item.ID_BOOKING,i)">Start</button>
+        <div class="container Tablesize">
+          <table class="table tablestyle table-bordered">
+            <thead>
+              <tr>
+                <th class="Titlereview" width="50px">Step</th>
+                <th class="Titlereview" width="100px">Technique</th>
+                <th class="Titlereview" width="50px">Quantity</th>
+                <th class="Titlereview" width="200px">Plan time</th>
+                <th class="Titlereview" width="550px">Status</th>
+                <th class="Titlereview" width="100px">Add time</th>
+                <!-- <th class="Titlereview" width="100px">Edit time</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of DataResreq let i = index">
+                <th class="Titlereview">{{item.STEP_BOOKING}}</th>
+                <td class="Titlereview">{{item.EQUIPMENT}}</td>
+                <td class="Titlereview">{{item.SAMPLE_NUM}}</td>
+                <td class="Titlereview">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}} to
+                  <br>
+                  {{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}
+                </td>
+                <td class="Titlereview">
+                  <div *ngIf="isValidButton3[i]; else complete">
+                    <div class="row">
+                      <div class="col-sm-5">
+                        <div *ngIf="isValidButton2[i]; else timeshow">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div *ngIf="isValidButton[i]; else start_time">
+                                <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                                  (click)="starttime(item.ID_BOOKING,i)">Start</button>
+                              </div>
+                              <ng-template #start_time>
+                                {{this.DataResreq[i].START_TIME}}
+                                <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                                  disabled>Start</button>
+                              </ng-template>
+                            </div>
+                            <div class="col-sm-6">
+                              <div *ngIf="isValidButton[i]; else end_time">
+                                <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                                  disabled>End</button>
+                              </div>
+                              <ng-template #end_time>
+                                <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                                  (click)="Endtime(item.ID_BOOKING,i)">End</button>
+                              </ng-template>
+                            </div>
                           </div>
-                          <ng-template #start_time>
-                            {{this.DataResreq[i].START_TIME}}
+                        </div>
+                        <ng-template #timeshow>
+                          {{this.DataResreq[i].START_TIME}} to {{this.DataResreq[i].END_TIME}}
+                        </ng-template>
+                      </div>
+
+
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <p><b>Break time (min)</b></p>
+                          </div>
+                          <div class="col-sm-6">
+                            <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time"
+                              [(ngModel)]="this.breaktime[i]">
+                          </div>
+                        </div>
+
+                      </div>
+                      <div class="col-sm-3">
+                        <button mat-raised-button class="button2" style="background: #f28482 ;"
+                          (click)="finish(item.ID_BOOKING,i)">Finish</button>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #complete>
+                    {{this.DataResreq[i].START_TIME}} to {{this.DataResreq[i].END_TIME}}
+                    <div><b>Operation time :</b></div>
+                    <div>{{this.DataResreq[i].OPERATION_TIME}}</div>
+                  </ng-template>
+                </td>
+                <td class="Titlereview">
+                  <button mat-mini-fab color="primary" class="button3"
+                  (click)="addtime(this.DataResreq[i].ID_BOOKING)">
+                  <mat-icon>add</mat-icon>
+                  </button>
+                </td>
+                <!-- <td class="Titlereview">
+                  <button mat-mini-fab color="primary" class="button3"
+                  (click)="edittime(this.DataResreq[i].ID_BOOKING)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                </td> -->
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="container Tablesize">
+          <table class="table tablestyle table-bordered">
+            <thead>
+              <tr>
+                <th class="Titlereview" width="50px">Step</th>
+                <th class="Titlereview" width="100px">Technique</th>
+                <th class="Titlereview" width="100px">Quantity</th>
+                <th class="Titlereview" width="500px">Status</th>
+                <th class="Titlereview" width="80px">Add time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="Titlereview"></th>
+                <td class="Titlereview">Issue report</td>
+                <td class="Titlereview"></td>
+                <td class="Titlereview">
+                  <div *ngIf="isValidshowIssueRe; else show1">
+                    <button mat-mini-fab color="primary" class="button3" style="background: #8fcaca ;"
+                      (click)="addreporttime()">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+                  <ng-template #show1>
+                    <div class="row">
+                      <div div class="col-sm-4">
+                        <div *ngIf="isValidIssueRefinish; else Refinish">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <div *ngIf="isValidIssueRe; else start_time2">
+                                <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                                  (click)="starttimereport()">Start</button>
+                              </div>
+
+                              <ng-template #start_time2>
+                                {{this.DataIssue[0].START_TIME}}
+                                <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                                  disabled>Start</button>
+                              </ng-template>
+                            </div>
+
+                            <div class="col-sm-6">
+                              <div *ngIf="isValidIssueRe; else end_time2">
+                                <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                                  disabled>End</button>
+                              </div>
+                              <ng-template #end_time2>
+                                {{this.DataIssue[0].END_TIME}}
+                                <button mat-raised-button class="button2" style="background: #8fcaca ;"
+                                  (click)="endtimereport()">End</button>
+                              </ng-template>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <ng-template #Refinish>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            {{this.DataIssue[0].START_TIME}}
                             <button mat-raised-button class="button2" style="background: #8fcaca ;"
                               disabled>Start</button>
-                          </ng-template>
-                        </div>
-                        <div class="col-sm-6">
-                          <div *ngIf="isValidButton[i]; else end_time">
+                          </div>
+                          <div class="col-sm-6">
+                            {{this.DataIssue[0].END_TIME}}
                             <button mat-raised-button class="button2" style="background: #8fcaca ;"
                               disabled>End</button>
                           </div>
-                          <ng-template #end_time>
-                            <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                              (click)="Endtime(item.ID_BOOKING,i)">End</button>
-                          </ng-template>
+                        </div>
+
+                      </ng-template>
+
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <p><b>Break time (min)</b></p>
+                          </div>
+                          <div class="col-sm-6">
+                            <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time"
+                              [(ngModel)]="this.breaktimereport">
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <ng-template #timeshow>
-                      {{this.DataResreq[i].START_TIME}} to {{this.DataResreq[i].END_TIME}}
-                    </ng-template>
-                  </div>
-                  
-
-                  <div class="col-sm-4">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <p><b>Break time (min)</b></p>
+                      <div class="col-sm-2">
+                        <button mat-mini-fab color="primary" class="button3" style="background: #8fcaca ;"
+                          (click)="calreporttime()">
+                          <mat-icon>queue icon</mat-icon>
+                        </button>
                       </div>
-                      <div class="col-sm-6">
-                        <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time"
-                        [(ngModel)]="this.breaktime[i]">
+                      <div class="col-sm-2">
+                        <button mat-raised-button class="button2" style="background: #f28482 ;"
+                          (click)="finishreport()">Finish</button>
                       </div>
                     </div>
-
-                  </div>
-                  <div class="col-sm-3">
-                    <button mat-raised-button class="button2" style="background: #f28482 ;"
-                      (click)="finish(item.ID_BOOKING,i)">Finish</button>
-                  </div>
-                  </div>
-                </div>
-                <ng-template #complete>
-                  {{this.DataResreq[i].START_TIME}} to {{this.DataResreq[i].END_TIME}}
-                  <div><b>Operation time :</b></div>
-                  <div>{{this.DataResreq[i].OPERATION_TIME}}</div>
-                </ng-template>
-              </td>
-              <td class="Titlereview">
-                <button mat-mini-fab color="primary" class="button3" (click)="edittime(this.DataResreq[i].ID_BOOKING)">
-                  <mat-icon>edit</mat-icon>
-                </button>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-
-      <div class="container Tablesize">
-        <table class="table tablestyle border">
-          <thead>
-            <tr>
-              <th class="Titlereview" width="50px">Step</th>
-              <th class="Titlereview" width="200px">Technique</th>
-              <th class="Titlereview" width="100px">Quantity</th>
-              <th class="Titlereview" width="500px">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th class="Titlereview"></th>
-              <td class="Titlereview">Issue report</td>
-              <td class="Titlereview"></td>
-              <td class="Titlereview">
-                <div *ngIf="isValidshowIssueRe; else show1">
-                  <button mat-mini-fab color="primary" class="button3" style="background: #8fcaca ;"(click)="addreporttime()">
-                    <mat-icon>add</mat-icon>
-                  </button>
-                </div>
-                <ng-template #show1>
-                  <div class="row">
-                    <div div class="col-sm-2">
-                      <div *ngIf="isValidIssueRe; else start_time2">
-                      <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                        (click)="starttimereport()">Start</button>
-                      </div>
-              
-                    <ng-template #start_time2>
-                      {{this.DataIssue[0].START_TIME}}
-                      <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                        disabled>Start</button>
-                    </ng-template>
-                  </div>
-           
-                  <div class="col-sm-2">
-                    <div *ngIf="isValidIssueRe; else end_time2">
-                      <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                        disabled>End</button>
-                    </div>  
-                    <ng-template #end_time2>
-                      {{this.DataIssue[0].END_TIME}}
-                      <button mat-raised-button class="button2" style="background: #8fcaca ;"
-                      (click)="endtimereport()">End</button>
-                    </ng-template>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <p><b>Break time (min)</b></p>
-                      </div>
-                      <div class="col-sm-6">
-                        <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time"
-                        [(ngModel)]="this.breaktimereport">
-                      </div>
-                  </div>
-                </div>
-                <div class="col-sm-2">
-                  <button mat-mini-fab color="primary" class="button3" style="background: #8fcaca ;"(click)="calreporttime()">
-                    <mat-icon>add</mat-icon>
-                  </button>
-                </div>
-                <div class="col-sm-2">
-                  <button mat-raised-button class="button2" style="background: #f28482 ;"
-                  (click)="finishreport()">Finish</button>
-                </div>
-                </div>
                   </ng-template>
+
                   <div>
                     <table>
                       <tr *ngFor="let item of this.DataIssue let i = index">
@@ -433,116 +469,124 @@
                             <b>Operation time :</b>{{item.OPERATION_TIME}}
                           </td>
                         </div>
-                        </tr>
-                      </table>
+                      </tr>
+                    </table>
                   </div>
-              </td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <ng-template  #facsee>
-      <div class="container Tablesize">
-        <table class="table tablestyle border">
-          <thead>
-            <tr>
-              <th class="Titlereview" width="100px">Step</th>
-              <th class="Titlereview" width="200px">Technique</th>
-              <th class="Titlereview" width="100px">Quantity</th>
-              <th class="Titlereview" width="200px">Plan time</th>
-              <th class="Titlereview" width="300px">Status</th>
-
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th class="Titlereview">0</th>
-              <td class="Titlereview">Pending approved</td>
-              <td class="Titlereview">{{this.DataRes[0].NUM_SAMPLE}}</td>
-              <td class="Titlereview">{{this.DataRes[0].ESTI_COST_TIME}}</td>
-              <td class="Titlereview">Approved</td>
-            </tr>
-
-          </tbody>
-        </table>
-      </div> 
-
-      <div class="container Tablesize">
-        <table class="table tablestyle table-bordered">
-          <thead>
-            <tr>
-              <th class="Titlereview" width="50px">Step</th>
-              <th class="Titlereview" width="100px">Technique</th>
-              <th class="Titlereview" width="50px">Quantity</th>
-              <th class="Titlereview" width="200px">Plan time</th>
-              <th class="Titlereview" width="550px">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of DataResreq let i = index">
-              <th class="Titlereview">{{item.STEP_BOOKING}}</th>
-              <td class="Titlereview">{{item.EQUIPMENT}}</td>
-              <td class="Titlereview">{{item.SAMPLE_NUM}}</td>
-              <td class="Titlereview">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}} to
-                <br>
-                {{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}
-              </td>
-              <td>
-                <div *ngIf="item.OPERATION_TIME != 0 ; else notfinish">
-                  <div class="center">Finished</div>
-                </div>
-                <ng-template #notfinish>
-                  <div *ngIf="item.START_TIME != null ; else notstart">
-                    <div class="center">Analysing</div>
-                  </div>
-                  </ng-template>
-                <ng-template #notstart>
-                  <div class="center">Not start</div>
-                </ng-template>
-              </td>
+                </td>
+      
+                  <td class="Titlereview">
+                    <button mat-mini-fab color="primary" class="button3"
+                    (click)="addtimere(this.DataRes[0].REQ_NUM)">
+                    <mat-icon>add</mat-icon>
+                    </button>
+                  </td>
+               
               </tr>
-              </tbody>
-              </table>
-              </div>
-              <div class="container Tablesize">
-                <table class="table tablestyle border">
-                  <thead>
-                    <tr>
-                      <th class="Titlereview" width="50px">Step</th>
-                      <th class="Titlereview" width="200px">Technique</th>
-                      <th class="Titlereview" width="100px">Quantity</th>
-                      <th class="Titlereview" width="500px">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th class="Titlereview"></th>
-                      <td class="Titlereview">Issue report</td>
-                      <td class="Titlereview"></td>
-                      <td class="Titlereview">
-                        
-                        <div *ngIf="validissue">
-                        <div *ngIf="this.DataIssue[0].OPERATION_TIME != null ; else reporting">
-                          <div>Finished</div>   
-                        </div>
-                        <ng-template #reporting>
-                          <div *ngIf="this.DataIssue[0].START_TIME != null ; else notfinish">
-                            <div>In process</div>
-                          </div>
-                          </ng-template>
-                          <ng-template #notfinish>
-                            <div>No Finished</div>
-                            {{this.DataIssue[0].OPERATION_TIME}}
-                          </ng-template>
-                          </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-    </ng-template>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #facsee>
+        <div class="container Tablesize">
+          <table class="table tablestyle border">
+            <thead>
+              <tr>
+                <th class="Titlereview" width="100px">Step</th>
+                <th class="Titlereview" width="200px">Technique</th>
+                <th class="Titlereview" width="100px">Quantity</th>
+                <th class="Titlereview" width="200px">Plan time</th>
+                <th class="Titlereview" width="300px">Status</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="Titlereview">0</th>
+                <td class="Titlereview">Pending approved</td>
+                <td class="Titlereview">{{this.DataRes[0].NUM_SAMPLE}}</td>
+                <td class="Titlereview">{{this.DataRes[0].ESTI_COST_TIME}}</td>
+                <td class="Titlereview">Approved</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="container Tablesize">
+          <table class="table tablestyle table-bordered">
+            <thead>
+              <tr>
+                <th class="Titlereview" width="50px">Step</th>
+                <th class="Titlereview" width="100px">Technique</th>
+                <th class="Titlereview" width="50px">Quantity</th>
+                <th class="Titlereview" width="200px">Plan time</th>
+                <th class="Titlereview" width="550px">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of DataResreq let i = index">
+                <th class="Titlereview">{{item.STEP_BOOKING}}</th>
+                <td class="Titlereview">{{item.EQUIPMENT}}</td>
+                <td class="Titlereview">{{item.SAMPLE_NUM}}</td>
+                <td class="Titlereview">{{item.DATE_BOOKING_START}},{{item.TIME_BOOKING_START}} to
+                  <br>
+                  {{item.DATE_BOOKING_END}},{{item.TIME_BOOKING_END}}
+                </td>
+                <td>
+                  <div *ngIf="item.OPERATION_TIME != 0 ; else notfinish">
+                    <div class="center">Finished</div>
+                  </div>
+                  <ng-template #notfinish>
+                    <div *ngIf="item.START_TIME != null ; else notstart">
+                      <div class="center">Analysing</div>
+                    </div>
+                  </ng-template>
+                  <ng-template #notstart>
+                    <div class="center">Not start</div>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="container Tablesize">
+          <table class="table tablestyle border">
+            <thead>
+              <tr>
+                <th class="Titlereview" width="50px">Step</th>
+                <th class="Titlereview" width="200px">Technique</th>
+                <th class="Titlereview" width="100px">Quantity</th>
+                <th class="Titlereview" width="500px">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="Titlereview"></th>
+                <td class="Titlereview">Issue report</td>
+                <td class="Titlereview"></td>
+                <td class="Titlereview">
+
+                  <div *ngIf="validissue">
+                    <div *ngIf="this.DataIssue[0].OPERATION_TIME != null ; else reporting">
+                      <div>Finished</div>
+                    </div>
+                    <ng-template #reporting>
+                      <div *ngIf="this.DataIssue[0].START_TIME != null ; else notfinish">
+                        <div>In process</div>
+                      </div>
+                    </ng-template>
+                    <ng-template #notfinish>
+                      <div>No Finished</div>
+                      {{this.DataIssue[0].OPERATION_TIME}}
+                    </ng-template>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </ng-template>
     </div>
     <div class="col-sm-1">
     </div>

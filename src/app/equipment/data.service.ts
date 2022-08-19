@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import { ProductService } from '../api/product.service';
 
 @Injectable()
-export class DataService {
+export class DataService2 {
   
   events: any[] = [
     {

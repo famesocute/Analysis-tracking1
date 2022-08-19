@@ -1,0 +1,225 @@
+<h2><b>Add time</b></h2>
+<div class="row">
+    <div class="col-sm-5">
+      <div class="input1">
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Start date*</mat-label>
+          <input matInput [matDatepicker]="picker1" [(ngModel)]="this.startdate">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="input1">
+        <div class="row " style="padding-top: 15px ;">
+          <div class="col-sm-2"  style="padding-top: 20px;"><b>Time*:</b></div>
+          <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-6">
+                  <div>Hours:</div>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="this.startT1">
+                    <option value="00">00</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                  </select>
+                </div>
+  
+                <div class="col-sm-6">
+                  <div>Minute:</div>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="this.startT2">
+                    <option value="00">00</option>
+                    <option value="05">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option> 
+                  </select>
+                </div>
+  
+                <!-- <div class="col-sm-4">
+                  <div>Second:</div>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="this.startT3">
+                    <option value="00">00</option>
+                    <option value="05">05</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="35">35</option>
+                    <option value="40">40</option>
+                    <option value="45">45</option>
+                    <option value="50">50</option>
+                    <option value="55">55</option> 
+                  </select>
+                </div> -->
+                <!-- <div class="col-sm-3">
+                  <div>Type time:</div>
+                  <select class="form-select" aria-label="Default select example" [(ngModel)]="this.type">
+                      <option value="AM">AM</option>
+                      <option value="PM">PM</option>
+                  </select>
+                </div> -->
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="input1">
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>End date*</mat-label>
+          <input matInput [matDatepicker]="picker2" [(ngModel)]="this.enddate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <div class="input1">
+        <div class="row" style="padding-top: 15px" >
+          <div class="col-sm-2" style="padding-top: 20px;"><b>Time*:</b></div>
+          <div class="col-sm-10">
+           
+            <div class="row">
+              <div class="col-sm-6">
+                <div>Hours:</div>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="this.endT1">
+                  <option value="00">00</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                </select>
+              </div>
+
+              <div class="col-sm-6">
+                <div>Minute:</div>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="this.endT2">
+                  <option value="00">00</option>
+                  <option value="05">05</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
+                  <option value="35">35</option>
+                  <option value="40">40</option>
+                  <option value="45">45</option>
+                  <option value="50">50</option>
+                  <option value="55">55</option> 
+                </select>
+              </div>
+
+              <!-- <div class="col-sm-4">
+                <div>Second:</div>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="this.endT3">
+                  <option value="00">00</option>
+                  <option value="05">05</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                  <option value="30">30</option>
+                  <option value="35">35</option>
+                  <option value="40">40</option>
+                  <option value="45">45</option>
+                  <option value="50">50</option>
+                  <option value="55">55</option> 
+                </select>
+              </div> -->
+              <!-- <div class="col-sm-3">
+                <div>Type time:</div>
+                <select class="form-select" aria-label="Default select example" [(ngModel)]="this.type2">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                </select>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-3">
+        <div class="center" style="padding-top: 8px;">
+      <p><b>Break time (min) :</b></p>
+    </div>
+    </div>
+    <div class="col-sm-4">
+      <input class="form-control" type="text" placeholder="Break time" matTooltip="Break time" [(ngModel)]="this.breaktime">
+    </div>
+    <div class="col-sm-5">
+
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-4">
+        <div class="center " style="padding-top: 5px;">
+            <button mat-flat-button mat-dialog-close class="button1 " (click)="save()">Edit</button>
+        </div>
+        
+    </div>
+    <div class="col-sm-4">
+        <div class="center " style="padding-top: 5px;">
+            <button mat-flat-button mat-dialog-close class="button1 " >Close</button>
+        </div> 
+    </div>
+    <div class="col-sm-2"></div>
+  </div>

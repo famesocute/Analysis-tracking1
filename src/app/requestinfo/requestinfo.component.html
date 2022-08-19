@@ -4,12 +4,12 @@
 </div>
 
 <ng-template #elseBlock>
-  <div class="container-fluid">
+  <div class="container-fluid"id="myDIV">
     <div class="border-bottom Toolbar">
       <div class="row">
         <div class="col-xl-1"></div>
         <div class="col-xl-7 center" style="padding :15px 0 ;">
-          <button mat-button>Home</button>
+          <button mat-button >Home</button>
           <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
           <button mat-button>Equipment Calendar</button>
           <button mat-button>Job tracking</button>
@@ -201,7 +201,7 @@
                   <div class="input1">
                     <div class="row">
                       <div class="col-sm-5"><b>Send sample date:</b></div>
-                      <div class="col-sm-7">{{this.DataRes[0].SEND_SAM_DATE}}</div>
+                      <div class="col-sm-7">{{this.DataRes[0].DATE_RECEIVE_SAM_REAL}}</div>
                     </div>
                   </div>
                 </div>
@@ -409,7 +409,7 @@
                   <td>{{item.quantity}}</td>
                   <td>{{item.basiccharge}}</td>
                   <td>{{item.operationcharge}}</td>
-                  <td>{{item.estimatecost}}</td>
+                  <td>{{item.estimatecost.toFixed(2)}}</td>
                 </tr>
               </tbody>
             </table>
@@ -459,7 +459,7 @@
                   <th>Technique</th>
                   <th width="150px">Quantity</th>
                   <th>Standard time/1pc.</th>
-                  <th>Standard time</th>
+                  <th>Standard time(min)</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -507,16 +507,11 @@
               </mat-card-title-group>
               <mat-card-content>
                 <div class="row">
-                  <div class="col-sm-4">
-                    
-                    <mat-form-field color="accent" appearance="outline">
-                      <mat-label>Send sample date:</mat-label>
-                      <input matInput [matDatepicker]="picker1" [(ngModel)]="this.SendDate">
-                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                      <mat-datepicker #picker1></mat-datepicker>
-                    </mat-form-field>
+                  <div class="col-sm-6">
+                    <br>
+                    Receive sample date : {{this.DataRes[0].DATE_RECEIVE_SAM_REAL}}
                   </div>
-                  <div class="col-sm-8">
+                  <div class="col-sm-6">
                     
                     <mat-form-field color="accent" appearance="outline">
                       <mat-label>Expected finish date:</mat-label>
@@ -741,7 +736,7 @@
               <mat-card-content>
                 <div class="row">
                   <div class="col-sm-4">
-                    Send sample date: {{this.DataRes[0].SUMMARY_SEND}}
+                    Send sample date: {{this.DataRes[0].DATE_RECEIVE_SAM_REAL}}
                   </div>
                   <div class="col-sm-8">
                     Expected finish date: {{this.DataRes[0].SUMMARY_FINISH}}
@@ -959,18 +954,22 @@
                     <tr>
                       <th width="70px">Step</th>
                       <th>Technique</th>
-                      <th>Operation time (hh:mm:ss) </th>
                       <th width="150px">Quantity</th>
-                      <th>Cost</th>
+                      <th>Operation time (hh:mm:ss) </th>
+                      <th>Basic charge(THB) </th>
+                      <th>Operation charge(THB) </th>
+                      <th>Cost(THB)</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let item of timefinish2 let i = index">
                       <th>{{item.step}}</th>
                       <td>{{item.equip}}</td>
-                      <td>{{item.operationtime}}</td>
                       <td>{{item.quantity}}</td>
-                      <td>{{item.cost}}</td>
+                      <td>{{item.operationtime}}</td>
+                      <td>{{item.basiccharge}}</td>
+                      <td>{{item.operationcharge}}</td>
+                      <td>{{item.cost.toFixed(2)}}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -983,7 +982,7 @@
                         <b>Total cost :</b>
                       </div>
                       <div class="col-sm-7">
-                        {{this.Totalcostfinish}} THB
+                        {{this.Totalcostfinish.toFixed(2)}} THB
                       </div>
                     </div>
                   </div>
@@ -992,6 +991,7 @@
           </mat-card>
         </div>
 
+        <div *ngIf="this.DataRes[0].STATUS_JOB == 9 || this.DataRes[0].STATUS_JOB == 10">
         <div style=" padding-bottom: 15px">
           <mat-card class="card1">
             <mat-card-title-group>
@@ -1004,20 +1004,23 @@
                 <div class="col-sm-2" style="padding-left: 70px;">
                   <b>Criteria</b>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                   <div>1 = ควรปรับปรุง / ไม่เห็นด้วยอย่างยิ่ง</div>
                   <div>2 = น้อย / ไม่เห็นด้วย</div>
                   <div>3 = พอใช้ / ปานกลาง</div>
                   <div>4 = ดี / เห็นด้วย</div>
                   <div>5 = ดีมาก / เห็นด้วยเป็นอย่างยิ่ง</div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                   <div>1= Bad / very delay and can't not use result.</div>
                   <div>2= Poor / delay and can't not use result.</div>
                   <div>3= Fair / Meet target and understand, can solve problem.</div>
                   <div>4 = Good / Meet target, Standard derivery</div>
                   <div>5 = Excellent / Get more benefit, fast speed, easy understand.</div>
                 </div>
+                <div class="col-sm-2">
+                <button mat-raised-button color="primary" class="button2" (click)="Remind()">Remind</button>
+              </div>
               </div>
 
               <div *ngIf="this.csvalid; else completeCS">
@@ -1375,11 +1378,15 @@
           </mat-card>
         </div>
       </div>
+      </div>
+    
       <div class="col-sm-1">
       </div>
     </div>
   </div>
 </ng-template>
+
+
 
 <!-- AnalystApprove -->
 <div *ngIf="isValid1">

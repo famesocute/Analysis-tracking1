@@ -72,7 +72,18 @@
               <th class=" Titlereview"></th>
               <td class=" Titlereview"> Analyst</td>
               <td class=" Titlereview">
-                {{this.DataRes[0].REVI_ANASEC_ANAL}}
+                <form class="example-form">
+                  <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl5"
+                      [matAutocomplete]="auto5" [(ngModel)]="this.analyzer">
+                    <mat-autocomplete autoActiveFirstOption #auto5="matAutocomplete">
+                      <mat-option *ngFor="let option of filteredOptions5 | async" [value]="option">
+                        {{option}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
               </td>
               <td class=" Titlereview">
                 {{this.DataRes[0].REVI_ANASEC_ANAL_TIME}}

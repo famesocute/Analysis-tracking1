@@ -34,6 +34,8 @@ import { InfoComponent } from './dialog/edit_reviewer/info/info.component';
 import { PrintComponent } from './dialog/print/print.component';
 import { SendmailQuestionComponent } from './dialog/sendmail-question/sendmail-question.component';
 import { EquipmentComponent } from './equipment/equipment.component';
+import { AddOperationtimeComponent } from './dialog/add-operationtime/add-operationtime.component';
+import { AddReporttimeComponent } from './dialog/add-reporttime/add-reporttime.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
@@ -69,7 +71,9 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'Info', component: InfoComponent },
 { path: 'Print', component: PrintComponent },
 { path: 'SendmailQuestion', component: SendmailQuestionComponent },
-{ path: 'Equipment', component: EquipmentComponent },];
+{ path: 'Equipment', component: EquipmentComponent },
+{ path: 'AddOperationtime', component: AddOperationtimeComponent },
+{ path: 'AddReporttime', component: AddReporttimeComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -5,6 +5,8 @@ import { ProductService } from '../api/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FactoryApproveComponent } from '../dialog/factory-approve/factory-approve.component';
 import { EditOperationtimeComponent } from '../dialog/edit-operationtime/edit-operationtime.component';
+import { AddOperationtimeComponent } from '../dialog/add-operationtime/add-operationtime.component';
+import { AddReporttimeComponent } from '../dialog/add-reporttime/add-reporttime.component'
 
 @Component({
   selector: 'app-trackingstatus',
@@ -45,6 +47,7 @@ export class TrackingstatusComponent implements OnInit {
   isValidshowIssueRe = true
   isValidstatusre = true
   validissue = false
+  isValidIssueRefinish = true
 
   breaktime = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   breaktime2: any
@@ -185,6 +188,9 @@ export class TrackingstatusComponent implements OnInit {
             this.validissue = true
             if (this.DataIssue[0].START_TIME != null) {
               this.isValidIssueRe = false
+              if(this.DataIssue[0].END_TIME != null){
+                this.isValidIssueRefinish = false
+              }
             }
             if(this.DataIssue[0].REQ_NUM != null){
               if(this.DataIssue[0].OPERATION_TIME != null){
@@ -557,6 +563,8 @@ export class TrackingstatusComponent implements OnInit {
   }
 
   Endtime(id: any, Array: any) {
+
+    console.log(this.DataResreq[0].START_TIME);
     let date: Date = new Date();
     var date2 = date.toLocaleString()
 
@@ -689,7 +697,7 @@ export class TrackingstatusComponent implements OnInit {
         min = 60 - min
         houre = this.operationtime2[0] - 1
         console.log(min)
-        houre = this.operationtime2[0] - this.breaktime2[0]
+        houre = houre - this.breaktime2[0]
         console.log(houre)
   
         min = min.toString();
@@ -757,18 +765,50 @@ export class TrackingstatusComponent implements OnInit {
       console.log(result);
     });
   }
-  edittime(ID: any) {
-    this.productService.changeMessage(ID)
+  // edittime(ID: any) {
+  //   this.productService.changeMessage(ID)
 
-    const dialogRef = this.matDialog.open(EditOperationtimeComponent, {
-      disableClose: true,
-      width: '700px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+  //   const dialogRef = this.matDialog.open(EditOperationtimeComponent, {
+  //     disableClose: true,
+  //     width: '700px',
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //     console.log(result);
 
-    });
-  }
-
+  //   });
+  // }
+  addtime(ID: any){
+      if (this.namelocal != null) {
+        this.productService.changeMessage(ID)
+        const dialogRef = this.matDialog.open(AddOperationtimeComponent, {
+          disableClose: true,
+          width: '700px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          console.log(result);
+  
+        });
+      } else (
+        window.alert("Please login")
+      )
+    }
+    addtimere(ID: any){
+      if (this.namelocal != null) {
+        this.productService.changeMessage(ID)
+        const dialogRef = this.matDialog.open(AddReporttimeComponent, {
+          disableClose: true,
+          width: '700px',
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          console.log(result);
+    
+        });
+      } else (
+        window.alert("Please login")
+      )
+    }
 }
+

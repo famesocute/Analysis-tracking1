@@ -184,7 +184,7 @@ export class DailyjobComponent implements OnInit {
           this.jobtoday = this.jobtoday + '"pic":"' + this.Datajob[x].REVI_ANASEC_ANAL + '",'
           this.jobtoday = this.jobtoday + '"numsam":"' + this.Datajob[x].NUM_SAMPLE + '",'
           this.jobtoday = this.jobtoday + '"standardtime":"' + timeofstep3 + '",'
-          this.jobtoday = this.jobtoday + '"real":"' + this.timesum + '",'
+          this.jobtoday = this.jobtoday + '"real":"' + this.timesum.toFixed(2) + '",'
           this.jobtoday = this.jobtoday + '"Currentstatus":"' + current + '",'
           this.jobtoday = this.jobtoday + '"Approver":"' + this.Datajob[x].STETUS_PERSON + '",'
           this.jobtoday = this.jobtoday + '"submitreport":"' + this.Datajob[x].REVI_ANASEC_ANAL_TIME + '",'

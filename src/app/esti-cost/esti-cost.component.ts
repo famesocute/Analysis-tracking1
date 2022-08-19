@@ -29,6 +29,7 @@ export class EstiCostComponent implements OnInit {
   DataRes : any
   DataResAllocation : any
  Allocation : any
+ timeofstep: any
 
   message = ""
 
@@ -44,6 +45,7 @@ export class EstiCostComponent implements OnInit {
   filteredOptions!: Observable<string[]>;
 
   EMAIL_CC: string[] = [];
+  Allocate: string[] = [];
 
   isValid = false
   isvalideditstep = true
@@ -160,10 +162,10 @@ export class EstiCostComponent implements OnInit {
 
           for (x in this.sam1) {
             a = this.sam1[x].split("||")
-
+            console.log( a[0])
             console.log( this.DataResAllocation.find((item: { EQUIPMENT: any; }) => item.EQUIPMENT === a[0]));
             this.Allocation = this.DataResAllocation.find((item: { EQUIPMENT: any; }) => item.EQUIPMENT === a[0])
-
+            console.log(this.Allocation)
             for(y in this.DataResAllocation){
               
               if (a[0] == this.DataResAllocation[y].EQUIPMENT){
@@ -177,10 +179,13 @@ export class EstiCostComponent implements OnInit {
               }
 
             }
-            Estimate_Cost = parseFloat(Operation_Charge) + parseFloat(this.Allocation.BASIC_CHARGE)
-            console.log(Estimate_Cost)
-            this.Totalcost =  this.Totalcost  +  Estimate_Cost
-            console.log(this.Totalcost)
+            // Estimate_Cost = parseFloat(Operation_Charge) + parseFloat(this.Allocation.BASIC_CHARGE)
+            // console.log(Estimate_Cost)
+            // this.Totalcost =  this.Totalcost  +  Estimate_Cost
+            // console.log(this.Totalcost)
+            this.Allocate[x] = a[0]
+            this.timeofstep = this.Allocation.TIME_PER_PIECE * a[1]
+          console.log(this.timeofstep)
 
             x =  parseInt(x)+1
             this.sam2 = this.sam2 + '{"step":"' + x+ '",'
@@ -188,7 +193,9 @@ export class EstiCostComponent implements OnInit {
             this.sam2 = this.sam2 + '"quantity":"' + a[1] + '",'
             this.sam2 = this.sam2 + '"basiccharge":"' + this.Allocation.BASIC_CHARGE + '",'
             this.sam2 = this.sam2 + '"operationcharge":"' + Operation_Charge.toFixed(2) + '",'
-            this.sam2 = this.sam2 + '"estimatecost":"' + Estimate_Cost.toFixed(2) + '"},'
+            this.sam2 = this.sam2 + '"count":"",'
+            this.sam2 = this.sam2 + '"strtime":"'+this.timeofstep+'",'
+            this.sam2 = this.sam2 + '"estimatecost":0},'
             
           }
     
@@ -197,6 +204,32 @@ export class EstiCostComponent implements OnInit {
           console.log(this.sam2)
           var obj = JSON.parse(this.sam2);
           this.sam2 = obj
+          console.log(this.Allocate)
+          console.log(this.sam2)
+          var Y
+          var Z
+          var count = 0
+          for (Y in this.Allocate){
+            for (Z in this.sam2){
+              if((this.sam2[Z].equip).substring(0,2) == this.Allocate[Y].substring(0,2)){
+                count = count + 1
+                this.sam2[Z].count = count
+              }
+            }
+            console.log(count)
+            count = 0
+          }
+          var Y
+          for (Y in this.sam2){
+            if(this.sam2[Y].count >= 2){
+              this.sam2[Y].basiccharge = 0
+            }
+          }
+        
+          for (Y in this.sam2){
+            this.sam2[Y].estimatecost = parseFloat(this.sam2[Y].basiccharge) + parseFloat(this.sam2[Y].operationcharge)
+            this.Totalcost =  this.Totalcost  +  this.sam2[Y].estimatecost
+          }
           console.log(this.sam2)
         }) 
       })
@@ -298,15 +331,10 @@ export class EstiCostComponent implements OnInit {
     const dialogRef = this.matDialog.open(EstistepEditComponent, {
       disableClose : true,
       width: '1000px',
+      height: '700px'
     });
     dialogRef.afterClosed().subscribe(result => {
     console.log(result );
-
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
-    console.log(qtest2);
-    this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
-      console.log(data); 
-    })
 
     location.reload()
     }); 
@@ -326,7 +354,7 @@ export class EstiCostComponent implements OnInit {
       this.router.navigate(['/Analyrequehome']) 
     })
  
-    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Q-Analysis Request ->(Analysis Status) "+this.DataRes[0].REQ_NUM+" : "+this.DataRes[0].TITLE+"||This request approved already.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
@@ -381,7 +409,7 @@ export class EstiCostComponent implements OnInit {
            location.reload();
        })
      
-       var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Quality Analysis Request Report ->"+this.DataRes[0].TITLE+"||Please click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
+       var qtest2 = " "+this.DataRes[0].REVI_ANASEC_ANAL+";||"+this.EMAIL_CC+"||Q-Analysis Request ->(Decline Step Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please edit a step. Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
        console.log(qtest2);
        this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
          console.log(data);
