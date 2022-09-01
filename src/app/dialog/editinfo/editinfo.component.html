@@ -397,7 +397,7 @@
         <div class="col-sm-4">
           <div class="centerbox">
             <div class="form-group" style="margin-left: 10px; ">
-              <label for="Title"><b>Number of sample:</b></label>
+              <label for="Title"><b>Number of sample(pcs):</b></label>
               <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.Numsample">
             </div>
           </div>
@@ -435,7 +435,7 @@
           </div>
           <br>
           <div class="form-group" style="margin-left: 10px; ">
-            <label for="Title"><b>Holiday:</b></label>
+            <label for="Title"><b>Holiday(days):</b></label>
             <input type="Title" class="form-control inputNumSam" id="Title" [(ngModel)]="this.holiday">
           </div>
         </div>
@@ -459,7 +459,7 @@
               </td>
               <td>
                 <div class="form-group input1" style="padding: 0 20px ;">
-                  <label for="Samplename"><b>No.sample /remarks:</b></label>
+                  <label for="Samplename"><b>Sample Q'ty(pcs) /remarks:</b></label>
                   <input type="Samplename" class="form-control" id="Samplename" [(ngModel)]="item.remake">
                 </div>
               </td>
@@ -475,82 +475,7 @@
       
     </mat-card-content>
   </mat-card>
-<br>
-  <mat-card class="card1">
-    <mat-card-title-group>
-      <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
-    </mat-card-title-group>
-    <mat-card-content>
-      <div class="form-group input1">
-        <textarea class="form-control" rows="3" id="AnaComment" [(ngModel)]="this.AnaComment"></textarea>
-      </div>
-    </mat-card-content>
-  </mat-card>
-<br>
-  <mat-card class="card1">
-    <mat-card-title-group>
-      <mat-card-title>Attention: Are dangerous or ESD substance included?</mat-card-title>
-    </mat-card-title-group>
-    <mat-card-content>
-      <!-- Dangerous -->
-      <div class=" col-sm-12 ">
-        <div class="form-check-inline">
-          <label class="form-check-label textbig" for="radio1">
-            <input type="radio" class="form-check-input" id="radio1" name="optradio2" value="option1"
-              (click)="getdatadan('Dangerous')"> Dangerous
-          </label>
-        </div>
-        <div class="form-check-inline">
-          <label class="form-check-label textbig" for="radio2">
-            <input type="radio" class="form-check-input" id="radio2" name="optradio2" value="option2"
-              (click)="getdatadan('Poisonous')"> Poisonous
-          </label>
-        </div>
-        <div class="form-check-inline">
-          <label class="form-check-label textbig" for="radio3">
-            <input type="radio" class="form-check-input" id="radio3" name="optradio2" value="option3"
-              (click)="getdatadan('Deleterious')"> Deleterious
-          </label>
-        </div>
-        <div class="form-check-inline">
-          <label class="form-check-label textbig" for="radio4">
-            <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
-              (click)="getdatadan('Heavy metal')"> Heavy metal
-          </label>
-        </div>
-        <div class="form-check-inline">
-          <label class="form-check-label textbig" for="radio4">
-            <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
-              (click)="getdatadan('ESD')"> ESD
-          </label>
-        </div>
-        <div class="form-check-inline">
-          <label class="form-check-label textbig" for="radio4">
-            <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
-              (click)="getdatadan('No')"> No
-          </label>
-        </div>
-      </div>
-      <!-- Sample after tested -->
-      <div class=" col-sm-12">
-        <label for="comment" class="font-weight-bold textbig" style=" margin-right: 10px"><b> Sample after tested:
-          </b></label>
 
-        <div class="form-check-inline">
-          <label class="form-check-label textbig" for="radio1">
-            <input type="radio" class="form-check-input" id="radio1" name="optradio3" value="option1"
-              (click)="getdataSamAf('Dispose sample')"> Dispose sample
-          </label>
-        </div>
-        <div class="form-check-inline">
-          <label class="form-check-label textbig" for="radio2">
-            <input type="radio" class="form-check-input" id="radio2" name="optradio3" value="option2"
-              (click)="getdataSamAf('ReturnResidualSample')">Return Residual Sample
-          </label>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
   <br>
   <mat-card class="card1">
     <mat-card-title-group>
@@ -647,6 +572,83 @@
       </div>
     </mat-card-content>
   </mat-card> 
+<br>
+  <mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <div class="form-group input1">
+        <textarea class="form-control" rows="3" id="AnaComment" [(ngModel)]="this.AnaComment"></textarea>
+      </div>
+    </mat-card-content>
+  </mat-card>
+<br>
+  <mat-card class="card1">
+    <mat-card-title-group>
+      <mat-card-title>Attention: Are dangerous or ESD substance included?</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+      <!-- Dangerous -->
+      <div class=" col-sm-12 ">
+        <div class="form-check-inline">
+          <label class="form-check-label textbig" for="radio1">
+            <input type="radio" class="form-check-input" id="radio1" name="optradio2" value="option1"
+              (click)="getdatadan('Dangerous')"> Dangerous
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label textbig" for="radio2">
+            <input type="radio" class="form-check-input" id="radio2" name="optradio2" value="option2"
+              (click)="getdatadan('Poisonous')"> Poisonous
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label textbig" for="radio3">
+            <input type="radio" class="form-check-input" id="radio3" name="optradio2" value="option3"
+              (click)="getdatadan('Deleterious')"> Deleterious
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label textbig" for="radio4">
+            <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+              (click)="getdatadan('Heavy metal')"> Heavy metal
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label textbig" for="radio4">
+            <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+              (click)="getdatadan('ESD')"> ESD
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label textbig" for="radio4">
+            <input type="radio" class="form-check-input" id="radio4" name="optradio2" value="option4"
+              (click)="getdatadan('No')"> No
+          </label>
+        </div>
+      </div>
+      <!-- Sample after tested -->
+      <div class=" col-sm-12">
+        <label for="comment" class="font-weight-bold textbig" style=" margin-right: 10px"><b> Sample after tested:
+          </b></label>
+
+        <div class="form-check-inline">
+          <label class="form-check-label textbig" for="radio1">
+            <input type="radio" class="form-check-input" id="radio1" name="optradio3" value="option1"
+              (click)="getdataSamAf('Dispose sample')"> Dispose sample
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label textbig" for="radio2">
+            <input type="radio" class="form-check-input" id="radio2" name="optradio3" value="option2"
+              (click)="getdataSamAf('ReturnResidualSample')">Return Residual Sample
+          </label>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
   <br>
   <div class="row center">
     <div class="col-sm-3"></div>

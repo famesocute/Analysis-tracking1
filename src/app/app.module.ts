@@ -68,6 +68,7 @@ import { SendmailQuestionComponent } from './dialog/sendmail-question/sendmail-q
 import { EquipmentComponent } from './equipment/equipment.component';
 import { AddOperationtimeComponent } from './dialog/add-operationtime/add-operationtime.component';
 import { AddReporttimeComponent } from './dialog/add-reporttime/add-reporttime.component';
+import { KPIOperationComponent } from './kpi-operation/kpi-operation.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { AddReporttimeComponent } from './dialog/add-reporttime/add-reporttime.c
     EquipmentComponent,
     AddOperationtimeComponent,
     AddReporttimeComponent,
+    KPIOperationComponent,
   ],
   imports: [
     BrowserModule,

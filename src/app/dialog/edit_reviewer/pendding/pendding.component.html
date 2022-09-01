@@ -22,7 +22,7 @@
           </thead>
           <tbody>
             <tr>
-              <th class=" Titlereview">Pending request</th>
+              <th class=" Titlereview">Issue request</th>
               <td class=" Titlereview"> Issuer</td>
               <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
               <td class=" Titlereview"> </td>
@@ -101,7 +101,20 @@
             <tr>
               <th class=" Titlereview">Analysis section</th>
               <td class=" Titlereview"> Controller</td>
-              <td class=" Titlereview">{{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
+              <td class=" Titlereview">
+                <form class="example-form">
+                  <mat-form-field class="widthcom" appearance="outline">
+                    <mat-label>Select Name</mat-label>
+                    <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl3"
+                      [matAutocomplete]="auto3" [(ngModel)]="this.NameControl">
+                    <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
+                      <mat-option *ngFor="let option3 of filteredOptions3 | async" [value]="option3">
+                        {{option3}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
+              </td>
               <td class=" Titlereview"></td>
               <td class=" Titlereview"></td>
               <td class=" Titlereview"></td>

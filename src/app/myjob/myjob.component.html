@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xl-1"></div>
     <div class="col-xl-7 center" style="padding :15px 0 ;">
-      <button mat-button>Home</button>
+      <!-- <button mat-button>Home</button> -->
       <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
       <button mat-button>Equipment Calendar</button>
       <button mat-button>Job tracking</button>
@@ -46,10 +46,14 @@
               <img src="../assets/Tracking_web/Image/702867-removebg-preview.png">
               <div class="row" style="padding-top : 30px;">
                 <h1 class="center WText ">Status</h1>
-                <button class="button button3 border border-light WText"(click)="padding()">Pending Request</button>
-                <button class="button button3 border border-light WText" (click)="Gonotcom()">Not Complete Request</button>
-                <button class="button button3 border border-white WText" (click)="Gocomplete()" >Complete Request</button>
-                <button class="button button3 border border-white WText" (click)="Gomyjob()">My Request and Job</button>
+                <button class="button button3 border border-light WText"(click)="padding()">
+                  <div class="toolside">Issue Request</div></button>
+                <button class="button button3 border border-light WText" (click)="Gonotcom()">
+                  <div class="toolside">Analysis Progress (tracking)</div></button>
+                <button class="button button3 border border-white WText" (click)="Gocomplete()" >
+                  <div class="toolside">Complete Request</div></button>
+                <button class="button button3 border border-white WText" (click)="Gomyjob()">
+                  <div class="toolside">My Request and Job</div></button>
               </div>
             </mat-card-content>
           </mat-card>
@@ -76,9 +80,8 @@
           </table>
           <table class="table ">
             <tbody>
-              <tr *ngFor="let item of table let i = index">
+              <tr *ngFor="let item of tablemystatus let i = index">
                 <div *ngIf="item.STETUS_PERSON == nameonly">
-                 
                   <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                     <div class="row">
                       <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -89,7 +92,6 @@
                       <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                     </div>
                   </button>
-
                 </div>
               </tr>
             </tbody>
@@ -98,7 +100,7 @@
           <h2>Your request</h2>
           <br>
           <!-- April -->
-          <mat-tab-group>
+          <mat-tab-group [(selectedIndex)]="demo1TabIndex">
             <mat-tab label="April">
               <table class="table ">
                 <thead class="table-danger">
@@ -115,7 +117,7 @@
               <table class="table ">
                 <tbody>
                   <tr *ngFor="let item of table let i = index">
-                      <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                      
                         <div *ngIf="item.MONTH == 'April'">
                       <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                         <div class="row">
@@ -127,7 +129,7 @@
                           <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                         </div>
                       </button>
-                    </div>
+            
                     </div>
                   </tr>
                 </tbody>
@@ -151,7 +153,7 @@
               <table class="table ">
                 <tbody>
                   <tr *ngFor="let item of table let i = index">
-                      <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                      
                         <div *ngIf="item.MONTH == 'May'">
                       <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                         <div class="row">
@@ -163,7 +165,7 @@
                           <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                         </div>
                       </button>
-                    </div>
+
                     </div>
                   </tr>
                 </tbody>
@@ -187,7 +189,7 @@
                 <tbody>
                   <tr *ngFor="let item of table let i = index">
                     <div *ngIf="item.MONTH == 'June'">
-                      <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                      
                       <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                         <div class="row">
                           <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -198,7 +200,7 @@
                           <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                         </div>
                       </button>
-                    </div>
+    
                     </div>
                   </tr>
                 </tbody>
@@ -222,7 +224,7 @@
               <table class="table ">
                 <tbody>
                   <tr *ngFor="let item of table let i = index">
-                      <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                      
                         <div *ngIf="item.MONTH == 'July'">
                       <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                         <div class="row">
@@ -234,7 +236,7 @@
                           <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                         </div>
                       </button>
-                    </div>
+            
                     </div>
                   </tr>
                 </tbody>
@@ -258,7 +260,7 @@
                <table class="table ">
                  <tbody>
                    <tr *ngFor="let item of table let i = index">
-                       <div *ngIf="item.REVI_PAND_ISSUER == nameonly || item.REVI_ANASEC_ANAL == nameonly">
+                       
                          <div *ngIf="item.MONTH == 'August'">
                        <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                          <div class="row">
@@ -270,7 +272,7 @@
                            <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                          </div>
                        </button>
-                     </div>
+             
                      </div>
                    </tr>
                  </tbody>

@@ -15,6 +15,7 @@ export class MyjobComponent implements OnInit {
   nameonly: any
 
   table: any
+  tablemystatus : any
   nextperson : any
 
   panelOpenState = false;
@@ -29,22 +30,58 @@ export class MyjobComponent implements OnInit {
   message = ""
   isValid = false
 
+  public demo1TabIndex = 1;
+  thismonth : any
+
   constructor(public router: Router, public productService: ProductService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.productService.TRACKING_ANALYSIS_SELECT_ALL_ORDER().subscribe((data: {}) => {
-      console.log(data);
-      this.table = data
-      this.productService.currentMessage.subscribe(message => this.message = message)
+    this.productService.currentMessage.subscribe(message => this.message = message)
 
       this.namelocal = localStorage.getItem("NAME");
       this.Codelocal = localStorage.getItem("EMPLOY_CODE");
       this.departmentlocal = localStorage.getItem("DEPARTMENT");
-
       if (this.namelocal != null) {
         this.isValid = true
         this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
       }
+
+      var d = new Date();
+      this.thismonth = d.getMonth();
+      console.log(this.thismonth);
+
+      this.demo1TabIndex = this.thismonth
+
+
+      this.productService.TRACKING_ANALYSIS_SELECT_ALL_ORDER().subscribe((data: {}) => {
+        console.log(data);
+        this.tablemystatus = data
+
+        var x
+      var nameData2
+
+      for (x in this.tablemystatus) {
+        nameData2 = this.tablemystatus[x].REVI_PAND_ISSUER.split("<");
+        this.tablemystatus[x].REVI_PAND_ISSUER = nameData2[0]
+
+        nameData2 = this.tablemystatus[x].STETUS_PERSON.split("<");
+        this.tablemystatus[x].STETUS_PERSON = nameData2[0]
+
+        nameData2 = this.tablemystatus[x].REVI_PAND_ISSUER.split("<");
+        this.tablemystatus[x].REVI_PAND_ISSUER = nameData2[0]
+        
+        nameData2 = this.tablemystatus[x].REVI_ANASEC_ANAL.split("<");
+        this.tablemystatus[x].REVI_ANASEC_ANAL = nameData2[0]
+
+        if (this.tablemystatus[x].TITLE.length >= 40) {
+          this.tablemystatus[x].TITLE = this.tablemystatus[x].TITLE.substring(0, 40) + " ..."
+        }
+      }
+      })
+
+      this.productService.TRACKING_ANALYSIS_SELECT_ALL_MYJOB(this.namelocal).subscribe((data: {}) => {
+        console.log(data);
+        this.table = data
       var x
       var nameData
       var nameData2

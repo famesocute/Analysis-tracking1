@@ -16,6 +16,7 @@ export class PenddingComponent implements OnInit {
 
   ComIssuer = ""
   NameConfirm = ""
+  NameControl = ""
 
   myControl = new FormControl();
   myControl2 = new FormControl();
@@ -25,6 +26,13 @@ export class PenddingComponent implements OnInit {
   EMAIL_CC: string[] = [];
 
   loading = true
+
+  myControl3 = new FormControl();
+  options3: string[] = [
+    'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Parawee Tassaneekati <parawee.tas@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>',
+    'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Supakan Sriwichai <supakan.sriwi@murata.com>', 'Panudda Majan <panudda.maj@murata.com>',
+    'Pichayapak Nantasai <pichayapak.nan@murata.com>'];
+  filteredOptions3!: Observable<string[]>;
 
   constructor(public productService: ProductService) { }
 
@@ -39,6 +47,11 @@ export class PenddingComponent implements OnInit {
       if (this.DataRes[0].REVI_PAND_ISSUE_COM != null) {
         this.ComIssuer = this.DataRes[0].REVI_PAND_ISSUE_COM;
         }
+      if(this.DataRes[0].REVI_ANASEC_CONTROL != null){
+         this.NameControl = this.DataRes[0].REVI_ANASEC_CONTROL;
+      }if(this.DataRes[0].REVI_PAND_CONFIRM != null){
+        this.NameConfirm = this.DataRes[0].REVI_PAND_CONFIRM;
+     }
 
         this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
           console.log(data);
@@ -65,6 +78,10 @@ export class PenddingComponent implements OnInit {
       startWith(''),
       map(value => this._filter2(value)),
     );
+    this.filteredOptions3 = this.myControl3.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter3(value)),
+    );
   }
 
   private _filter(value: string): string[] {
@@ -76,6 +93,12 @@ export class PenddingComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter3(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options3.filter(option3 => option3.toLowerCase().includes(filterValue));
+
   }
 
   countrow = 0
@@ -96,7 +119,7 @@ export class PenddingComponent implements OnInit {
     // UPDATE `mtq10_project_tracking_analysis`.`data_all` SET `REVI_PAND_CONFIRM` = 'Pichayapak Nantsffsai <pichayapak.nan@murata.com>', `REVI_PAND_ISSUE_COM` = 'sdf', `REVI_PAND_ISSUE_CC` = 'Wanutsanun Hiasdang <wanutsanun.hin@murata.com>,' WHERE (`ID` = '143');
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVI_PAND_ISSUE_COM` = '" + this.ComIssuer + "',`STETUS_PERSON` = '" + this.NameConfirm + "',`REVI_PAND_ISSUE_CC` = '" + this.EMAIL_CC + "',`REVI_PAND_CONFIRM` = '" + this.NameConfirm + "' " +
+      " SET `REVI_PAND_ISSUE_COM` = '" + this.ComIssuer + "',`STETUS_PERSON` = '" + this.NameConfirm + "',`REVI_PAND_ISSUE_CC` = '" + this.EMAIL_CC + "',`REVI_PAND_CONFIRM` = '" + this.NameConfirm + "',`REVI_ANASEC_CONTROL` = '" + this.NameControl + "' " +
       "  WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {

@@ -203,5 +203,40 @@ export class ProductService {
   
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/28_TRACKING_ANALYSIS_SELECT_BOOKING_STEP_REQ.php?data1='+data1+'&data2='+data2)
   
-    }   
+    }  
+    TRACKING_ANALYSIS_SELECT_ALL_ORDER_2() {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_ALL_ORDER_2 Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/29_TRACKING_ANALYSIS_SELECT_ALL_ORDER_2.php')
+  
+    } 
+    TRACKING_ANALYSIS_SELECT_ALL_ORDER_1() {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_ALL_ORDER_1 Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/30_TRACKING_ANALYSIS_SELECT_ALL_ORDER_1.php')
+  
+    }
+    TRACKING_ANALYSIS_SELECT_ALL_ORDER_3() {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_ALL_ORDER_3 Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/31_TRACKING_ANALYSIS_SELECT_ALL_ORDER_3.php')
+  
+    }
+    TRACKING_ANALYSIS_SELECT_SEARCH_BY_REQ(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_SEARCH_BY_REQ Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/32_TRACKING_ANALYSIS_SELECT_SEARCH_BY_REQ.php?data1='+data1)
+  
+    }
+    TRACKING_ANALYSIS_SELECT_ALL_MYJOB(data1:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_ALL_MYJOB Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/33_TRACKING_ANALYSIS_SELECT_ALL_MYJOB.php?data1='+data1)
+  
+    }
 }

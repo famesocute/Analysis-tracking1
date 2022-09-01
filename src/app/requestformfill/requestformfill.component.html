@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-xl-1"></div>
         <div class="col-xl-7 center" style="padding :15px 0 ;">
-          <button mat-button>Home</button>
+          <!-- <button mat-button>Home</button> -->
           <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
           <button mat-button>Equipment Calendar</button>
           <button mat-button>Job tracking</button>
@@ -72,7 +72,7 @@
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio1">
                           <input type="radio" class="form-check-input" id="radio1" name="Analysistype1" value="option1"
-                            (click)="getdata('Customercomplaint')">Customer complaint
+                            (click)="getdata('Customer complaint')">Customer complaint
                         </label>
                       </div>
                     </div>
@@ -100,19 +100,19 @@
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio4">
                           <input type="radio" class="form-check-input" id="radio4" name="Analysistype1" value="option4"
-                            (click)="getdata('Materialevaluation')">Material evaluation
+                            (click)="getdata('Material evaluation')">Material evaluation
                         </label>
                       </div>
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio5">
                           <input type="radio" class="form-check-input" id="radio5" name="Analysistype1" value="option5"
-                            (click)="getdata('Processevaluation')">Process evaluation
+                            (click)="getdata('Process evaluation')">Process evaluation
                         </label>
                       </div>
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio6">
                           <input type="radio" class="form-check-input" id="radio6" name="Analysistype1" value="option6"
-                            (click)="getdata('Productevaluation')">Product evaluation
+                            (click)="getdata('Product evaluation')">Product evaluation
                         </label>
                       </div>
                     </div>
@@ -191,6 +191,7 @@
             </div>
           </mat-card-content>
         </mat-card>
+
         <mat-card class="card1">
           <mat-card-title-group>
             <mat-card-title>Request Analysis Techniques</mat-card-title>
@@ -231,7 +232,7 @@
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
                         [(ngModel)]="Tech[3].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckChecked">
-                        DPA
+                        Cross section
                       </label>
                     </div>
                   </div>
@@ -247,7 +248,7 @@
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
                         [(ngModel)]="Tech[5].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckChecked">
-                        VHX
+                        VHX Miroscope
                       </label>
                     </div>
                   </div>
@@ -283,7 +284,7 @@
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                         [(ngModel)]="Tech[7].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckDefault">
-                        SEM-EDX
+                        SEM-EDS
                       </label>
                     </div>
                     <div class="form-check">
@@ -401,7 +402,7 @@
                       <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
                         [(ngModel)]="Tech[17].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckDefault">
-                        Micro-probe
+                        Micro-probing system
                       </label>
                     </div>
                   </div>
@@ -512,7 +513,7 @@
                     </td>
                     <td>
                       <div class="form-group input1" style="padding: 0 20px ;">
-                        <label for="Samplename"><b>No.sample(pcs) /remarks:</b></label>
+                        <label for="Samplename"><b>Sample Q'ty(pcs) /remarks:</b></label>
                         <input type="Samplename" class="form-control" id="Samplename" formControlName="Remarks">
                       </div>
                     </td>
@@ -534,6 +535,102 @@
             
           </mat-card-content>
         </mat-card>
+
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Keywords for searching</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="row" style=" margin-left: 10px; margin-right: 10px;">
+              <div class="col-sm-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Characteristic:</mat-label>
+                  <mat-select [(ngModel)]="KeywordCharact">
+                    <mat-option value="Adhesive">Adhesive</mat-option>
+                    <mat-option value="Binder">Binder</mat-option>
+                    <mat-option value="Detergent">Detergent</mat-option>
+                    <mat-option value="Electrode">Electrode</mat-option>
+                    <mat-option value="Filler">Filler</mat-option>
+                    <mat-option value="Flux">Flux</mat-option>
+                    <mat-option value="Glass">Glass</mat-option>
+                    <mat-option value="Insulator">Insulator</mat-option>
+                    <mat-option value="Magnetic material">Magnetic material</mat-option>
+                    <mat-option value="Metal">Metal</mat-option>
+                    <mat-option value="Paste">Paste</mat-option>
+                    <mat-option value="Piezoelectric">Piezoelectric</mat-option>
+                    <mat-option value="Plating solution">Plating solution</mat-option>
+                    <mat-option value="Printing ink">Printing ink</mat-option>
+                    <mat-option value="Raw material">Raw material</mat-option>
+                    <mat-option value="Resin">Resin</mat-option>
+                    <mat-option value="Resist">Resist</mat-option>
+                    <mat-option value="Semiconductor">Semiconductor</mat-option>
+                    <mat-option value="Solder">Solder</mat-option>
+                    <mat-option value="Solvent">Solvent</mat-option>
+                    <mat-option value="Varnish">Varnish</mat-option>
+                    <mat-option value="Waste water">Waste water</mat-option>
+                    <mat-option value="Wax">Wax</mat-option>
+                    <mat-option value="Oil">Oil</mat-option>
+                    <mat-option value="Painting">Painting</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>State:</mat-label>
+                  <mat-select [(ngModel)]="KeywordState">
+                    <mat-option value="Boundary">Boundary</mat-option>
+                    <mat-option value="Chip">Chip</mat-option>
+                    <mat-option value="Film">Film</mat-option>
+                    <mat-option value="Gas">Gas</mat-option>
+                    <mat-option value="Jig">Jig</mat-option>
+                    <mat-option value="Liquid">Liquid</mat-option>
+                    <mat-option value="Multilayer">Multilayer</mat-option>
+                    <mat-option value="Powder">Powder</mat-option>
+                    <mat-option value="Paste">Paste</mat-option>
+                    <mat-option value="Plate">Plate</mat-option>
+                    <mat-option value="Sheet">Sheet</mat-option>
+                    <mat-option value="Slurry">Slurry</mat-option>
+                    <mat-option value="Substate">Substate</mat-option>
+                    <mat-option value="Unit">Unit</mat-option>
+                    <mat-option value="Wire">Wire</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Phenomena:</mat-label>
+                  <mat-select [(ngModel)]="KeywordPheno">
+                    <mat-option value="Discolor">Discolor</mat-option>
+                    <mat-option value="Change in form">Change in form</mat-option>
+                    <mat-option value="Chemical state">Chemical state</mat-option>
+                    <mat-option value="Composition">Composition</mat-option>
+                    <mat-option value="Contamination">Contamination</mat-option>
+                    <mat-option value="Corrosion">Corrosion</mat-option>
+                    <mat-option value="Crack">Crack</mat-option>
+                    <mat-option value="Deformation">Deformation</mat-option>
+                    <mat-option value="Detachment">Detachment</mat-option>
+                    <mat-option value="Diffusion">Diffusion</mat-option>
+                    <mat-option value="Electrical characteristics">Electrical characteristics</mat-option>
+                    <mat-option value="Element distribution">Element distribution</mat-option>
+                    <mat-option value="Foreign object">Foreign object</mat-option>
+                    <mat-option value="Migration">Migration</mat-option>
+                    <mat-option value="Oxidization">Oxidization</mat-option>
+                    <mat-option value="Pore/Void">Pore/Void</mat-option>
+                    <mat-option value="Residue">Residue</mat-option>
+                    <mat-option value="Segregation">Segregation</mat-option>
+                    <mat-option value="Stress">Stress</mat-option>
+                    <mat-option value="Structure change">Structure change</mat-option>
+                    <mat-option value="Surface">Surface</mat-option>
+                    <mat-option value="Thermal properties change">Thermal properties change</mat-option>
+                    <mat-option value="Other">Other</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card> 
 
         <mat-card class="card1">
           <mat-card-title-group>
@@ -662,101 +759,6 @@
         </mat-card-content>
       </mat-card> -->
 
-        <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Keywords for searching</mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-            <div class="row" style=" margin-left: 10px; margin-right: 10px;">
-              <div class="col-sm-4">
-                <mat-form-field appearance="outline">
-                  <mat-label>Characteristic:</mat-label>
-                  <mat-select [(ngModel)]="KeywordCharact">
-                    <mat-option value="Adhesive">Adhesive</mat-option>
-                    <mat-option value="Binder">Binder</mat-option>
-                    <mat-option value="Detergent">Detergent</mat-option>
-                    <mat-option value="Electrode">Electrode</mat-option>
-                    <mat-option value="Filler">Filler</mat-option>
-                    <mat-option value="Flux">Flux</mat-option>
-                    <mat-option value="Glass">Glass</mat-option>
-                    <mat-option value="Insulator">Insulator</mat-option>
-                    <mat-option value="Magnetic material">Magnetic material</mat-option>
-                    <mat-option value="Metal">Metal</mat-option>
-                    <mat-option value="Paste">Paste</mat-option>
-                    <mat-option value="Piezoelectric">Piezoelectric</mat-option>
-                    <mat-option value="Plating solution">Plating solution</mat-option>
-                    <mat-option value="Printing ink">Printing ink</mat-option>
-                    <mat-option value="Raw material">Raw material</mat-option>
-                    <mat-option value="Resin">Resin</mat-option>
-                    <mat-option value="Resist">Resist</mat-option>
-                    <mat-option value="Semiconductor">Semiconductor</mat-option>
-                    <mat-option value="Solder">Solder</mat-option>
-                    <mat-option value="Solvent">Solvent</mat-option>
-                    <mat-option value="Varnish">Varnish</mat-option>
-                    <mat-option value="Waste water">Waste water</mat-option>
-                    <mat-option value="Wax">Wax</mat-option>
-                    <mat-option value="Oil">Oil</mat-option>
-                    <mat-option value="Painting">Painting</mat-option>
-                    <mat-option value="Other">Other</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-4">
-                <mat-form-field appearance="outline">
-                  <mat-label>State:</mat-label>
-                  <mat-select [(ngModel)]="KeywordState">
-                    <mat-option value="Boundary">Boundary</mat-option>
-                    <mat-option value="Chip">Chip</mat-option>
-                    <mat-option value="Film">Film</mat-option>
-                    <mat-option value="Gas">Gas</mat-option>
-                    <mat-option value="Jig">Jig</mat-option>
-                    <mat-option value="Liquid">Liquid</mat-option>
-                    <mat-option value="Multilayer">Multilayer</mat-option>
-                    <mat-option value="Powder">Powder</mat-option>
-                    <mat-option value="Paste">Paste</mat-option>
-                    <mat-option value="Plate">Plate</mat-option>
-                    <mat-option value="Sheet">Sheet</mat-option>
-                    <mat-option value="Slurry">Slurry</mat-option>
-                    <mat-option value="Substate">Substate</mat-option>
-                    <mat-option value="Unit">Unit</mat-option>
-                    <mat-option value="Wire">Wire</mat-option>
-                    <mat-option value="Other">Other</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="col-sm-4">
-                <mat-form-field appearance="outline">
-                  <mat-label>Phenomena:</mat-label>
-                  <mat-select [(ngModel)]="KeywordPheno">
-                    <mat-option value="Discolor">Discolor</mat-option>
-                    <mat-option value="Change in form">Change in form</mat-option>
-                    <mat-option value="Chemical state">Chemical state</mat-option>
-                    <mat-option value="Composition">Composition</mat-option>
-                    <mat-option value="Contamination">Contamination</mat-option>
-                    <mat-option value="Corrosion">Corrosion</mat-option>
-                    <mat-option value="Crack">Crack</mat-option>
-                    <mat-option value="Deformation">Deformation</mat-option>
-                    <mat-option value="Detachment">Detachment</mat-option>
-                    <mat-option value="Diffusion">Diffusion</mat-option>
-                    <mat-option value="Electrical characteristics">Electrical characteristics</mat-option>
-                    <mat-option value="Element distribution">Element distribution</mat-option>
-                    <mat-option value="Foreign object">Foreign object</mat-option>
-                    <mat-option value="Migration">Migration</mat-option>
-                    <mat-option value="Oxidization">Oxidization</mat-option>
-                    <mat-option value="Pore/Void">Pore/Void</mat-option>
-                    <mat-option value="Residue">Residue</mat-option>
-                    <mat-option value="Segregation">Segregation</mat-option>
-                    <mat-option value="Stress">Stress</mat-option>
-                    <mat-option value="Structure change">Structure change</mat-option>
-                    <mat-option value="Surface">Surface</mat-option>
-                    <mat-option value="Thermal properties change">Thermal properties change</mat-option>
-                    <mat-option value="Other">Other</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
-          </mat-card-content>
-        </mat-card> 
 
         <mat-card class="card1">
           <mat-card-title-group>
@@ -777,7 +779,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <th class=" Titlereview">Pending request</th>
+                    <th class=" Titlereview">Issue request</th>
                     <td class=" Titlereview"> Issuer</td>
                     <td class=" Titlereview">{{this.namelocal}}</td>
                     <td class=" Titlereview"> </td>
@@ -855,7 +857,20 @@
                   <tr>
                     <th class=" Titlereview">Analysis section</th>
                     <td class=" Titlereview"> Controller</td>
-                    <td class=" Titlereview">Wanutsanun Hintuang</td>
+                    <td class=" Titlereview">
+                      <form class="example-form">
+                        <mat-form-field class="widthcom" appearance="outline">
+                          <mat-label>Select Name</mat-label>
+                          <input type="text" placeholder="Pick one" aria-label="Name" matInput [formControl]="myControl3"
+                            [matAutocomplete]="auto3" [(ngModel)]="this.NameControl">
+                          <mat-autocomplete autoActiveFirstOption #auto3="matAutocomplete">
+                            <mat-option *ngFor="let option3 of filteredOptions3 | async" [value]="option3">
+                              {{option3}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                      </form>
+                    </td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>
                     <td class=" Titlereview"></td>

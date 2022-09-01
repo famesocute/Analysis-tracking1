@@ -100,6 +100,8 @@ export class RequestinfoComponent implements OnInit {
   score3 = ""
   score4 = ""
   score5 = ""
+  totallscore = 0
+  totallscore2 = 0
 
   reason1: any
   reason2: any
@@ -163,6 +165,7 @@ export class RequestinfoComponent implements OnInit {
     this.productService.TRACKING_ANALYSIS_SELECT_DATA_BY_ID(this.userType).subscribe((data: {}) => {
       console.log(data);
       this.DataRes = data
+
 
       if (this.DataRes[0].STATUS_JOB == 5 || this.DataRes[0].STATUS_JOB == 6 || this.DataRes[0].STATUS_JOB == 7 || this.DataRes[0].STATUS_JOB == 8 || this.DataRes[0].STATUS_JOB == 9 || this.DataRes[0].STATUS_JOB == 10) {
         this.open = true
@@ -409,9 +412,15 @@ export class RequestinfoComponent implements OnInit {
         this.outputCS2 = "["
 
         for (x in this.outputCS1) {
+          var numfive = 5
+          
           a = this.outputCS1[x].split("||")
           this.outputCS2 = this.outputCS2 + '{"score":"' + a[0] + '",'
           this.outputCS2 = this.outputCS2 + '"reason":"' + a[1] + '"},'
+
+          this.totallscore = (parseInt(a[0]) + this.totallscore)
+          this.totallscore2 = this.totallscore / 5
+          console.log(this.totallscore2)
 
         }
         this.outputCS2 = this.outputCS2.substring(0, this.outputCS2.length - 1);
@@ -421,6 +430,9 @@ export class RequestinfoComponent implements OnInit {
         var obj = JSON.parse(this.outputCS2);
         this.outputCS2 = obj
         console.log(this.outputCS2)
+
+        
+     
       }
 
 
@@ -839,6 +851,7 @@ export class RequestinfoComponent implements OnInit {
     } else {
       this.reason1 = ""
       this.score1 = value
+      this.check1 = true
     }
   }
   getdatascore2(value: any) {
@@ -856,6 +869,7 @@ export class RequestinfoComponent implements OnInit {
     } else {
       this.reason2 = ""
       this.score2 = value
+      this.check2 = true
     }
 
   }
@@ -874,6 +888,7 @@ export class RequestinfoComponent implements OnInit {
     } else {
       this.reason3 = ""
       this.score3 = value
+      this.check3 = true
     }
 
   }
@@ -892,6 +907,7 @@ export class RequestinfoComponent implements OnInit {
     } else {
       this.reason4 = ""
       this.score4 = value
+      this.check4 = true
     }
 
   }
@@ -910,6 +926,7 @@ export class RequestinfoComponent implements OnInit {
     } else {
       this.reason5 = ""
       this.score5 = value
+      this.check5 = true
     }
   }
   savesummary() {
@@ -966,6 +983,7 @@ export class RequestinfoComponent implements OnInit {
 
   AnalystApprove() {
     if (this.namelocal == this.DataRes[0].REVI_ANASEC_ANAL) {
+      if(this.Check != "" ){
 
       let date: Date = new Date();
       var date2 = date.toLocaleString()
@@ -1002,6 +1020,9 @@ export class RequestinfoComponent implements OnInit {
       } else {
         window.alert("Please fill expected finish date")
       }
+    }else{
+      window.alert("Please fill Checker")
+    }
     } else {
       window.alert("Only Analyzer Approve")
     }
@@ -1058,7 +1079,7 @@ export class RequestinfoComponent implements OnInit {
         console.log(data);
         location.reload();
       })
-      var qtest2 = " " + this.DataRes[0].REVI_ANASEC_ANAL + ";||" + this.EMAIL_CC + "||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+      var qtest2 = " " + this.DataRes[0].REVI_ANASEC_ANAL + ";||" + this.EMAIL_CC + "||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please revise report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data);
@@ -1122,7 +1143,7 @@ export class RequestinfoComponent implements OnInit {
         console.log(data);
         location.reload();
       })
-      var qtest2 = " " + this.DataRes[0].REVI_ANASEC_ANAL + ";||" + this.EMAIL_CC + "||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+      var qtest2 = " " + this.DataRes[0].REVI_ANASEC_ANAL + ";||" + this.EMAIL_CC + "||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please revise report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data);
@@ -1185,7 +1206,7 @@ export class RequestinfoComponent implements OnInit {
         console.log(data);
         location.reload();
       })
-      var qtest2 = " " + this.DataRes[0].REVI_ANASEC_ANAL + ";||" + this.EMAIL_CC + "||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
+      var qtest2 = " " + this.DataRes[0].REVI_ANASEC_ANAL + ";||" + this.EMAIL_CC + "||Q-Analysis Request Report ->(Approve Report Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please revise report.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id="+this.DataRes[0].ID+" "
       console.log(qtest2);
       this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
         console.log(data);

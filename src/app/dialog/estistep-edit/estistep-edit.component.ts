@@ -119,7 +119,7 @@ Remove(id:any){
       console.log(data);
   })
 
-  var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||||Q-Analysis Request ->(Estimate Cost Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||The step edited already.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
+  var qtest2 = " "+this.DataRes[0].REVI_PAND_ISSUER+";||||Q-Analysis Request ->(Estimate Cost Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||The step edited already.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 

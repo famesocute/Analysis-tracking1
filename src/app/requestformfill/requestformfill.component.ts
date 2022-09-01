@@ -21,6 +21,14 @@ export class RequestformfillComponent implements OnInit {
   filteredOptions!: Observable<string[]>;
   filteredOptions2!: Observable<string[]>;
 
+  myControl3 = new FormControl();
+options3: string[] = [
+  'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Parawee Tassaneekati <parawee.tas@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>',
+  'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Supakan Sriwichai <supakan.sriwi@murata.com>', 'Panudda Majan <panudda.maj@murata.com>',
+  'Pichayapak Nantasai <pichayapak.nan@murata.com>'];
+filteredOptions3!: Observable<string[]>;
+
+
   namelocal: any
   Codelocal: any
   departmentlocal: any
@@ -60,7 +68,7 @@ export class RequestformfillComponent implements OnInit {
   ccIssuer1 = ""
   ccIssuer2 = ""
   NameConfirm = ""
-  NameControl = "Wanutsanun Hintuang <wanutsanun.hin@murata.com>"
+  NameControl = ""
   month = ""
   holiday = ""
   checklotno = true
@@ -135,6 +143,10 @@ export class RequestformfillComponent implements OnInit {
       startWith(''),
       map(value => this._filter2(value)),
     );
+    this.filteredOptions3 = this.myControl3.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter3(value)),
+    );
     
     this.quantities().push(this.newQuantity());
 
@@ -187,7 +199,12 @@ export class RequestformfillComponent implements OnInit {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+  private _filter3(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
+    return this.options3.filter(option3 => option3.toLowerCase().includes(filterValue));
+
+  }
   // seach controler
 
   // Navi to Question
@@ -298,14 +315,21 @@ export class RequestformfillComponent implements OnInit {
     console.log(qtest);
 
 if(this.checklotno == true){
-  if(this.NameConfirm != ""){
-
+  if(this.NameConfirm != "" ){
+    if(this.Analysistype != "" ){
+      if(this.holiday != "" ){
   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
     console.log(data);
     sessionStorage.setItem("RequestNo", this.RequestNo);
   this.router.navigate(['/Addfile'])
     
   })
+}else{
+  window.alert("Please fill holiday")
+}
+}else{
+  window.alert("Please select analysis type")
+}
   }else{
     window.alert("Please fill confirm name(Supervisor)")
   }

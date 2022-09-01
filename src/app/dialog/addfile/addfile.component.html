@@ -6,7 +6,7 @@
             </div>
             <mat-dialog-content>
             
-                <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
+                <form ngNoForm action="http://163.50.57.95:5002/uploader" method="post" enctype="multipart/form-data">
 
                     <div class="mb-3">
             
@@ -22,7 +22,7 @@
             
                     <div class="input-group mb-3">
             
-                        <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+                        <input type="file" class="form-control" name="file" id="fileToUpload">
             
                         <input class="btn btn-dark" type="submit" value="Upload" name="submit">
             

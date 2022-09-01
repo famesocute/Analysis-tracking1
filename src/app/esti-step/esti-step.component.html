@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-xl-1"></div>
         <div class="col-xl-7 center" style="padding :15px 0 ;">
-          <button mat-button>Home</button>
+          <!-- <button mat-button>Home</button> -->
           <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
           <button mat-button>Equipment Calendar</button>
           <button mat-button>Job tracking</button>
@@ -128,8 +128,8 @@
               </div>
             </div>
             <mat-dialog-content>
-        
-              <form ngNoForm action="http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/18_upload.php" method="post" enctype="multipart/form-data">
+      
+              <form ngNoForm action="http://163.50.57.95:5002/uploader" method="post" enctype="multipart/form-data">
 
                   <div class="mb-3">
           
@@ -141,7 +141,7 @@
           
                   <div class="input-group mb-3">
           
-                      <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
+                      <input type="file" class="form-control" name="file" id="fileToUpload">
           
                       <input class="btn btn-dark" type="submit" value="Upload" name="submit">             
                  </div>            
@@ -196,8 +196,8 @@
               <div class="col-sm-4">
                 <div class="input1">
                   <div class="row">
-                    <div class="col-sm-7"><b>Number of sample:</b></div>
-                    <div class="col-sm-5">{{this.DataRes[0].NUM_SAMPLE}} </div>
+                    <div class="col-sm-7"><b>Number of sample(pcs):</b></div>
+                  <div class="col-sm-5">{{this.DataRes[0].NUM_SAMPLE}} </div>
                   </div>
                   <div class="input1">
                     <div class="row">
@@ -232,8 +232,8 @@
                 
                 <div class="input1">
                   <div class="row">
-                    <div class="col-sm-2"><b>Holiday:</b></div>
-                    <div class="col-sm-10">{{this.DataRes[0].HOLIDAY}}</div>
+                    <div class="col-sm-4"><b>Holiday(days):</b></div>
+                    <div class="col-sm-8">{{this.DataRes[0].HOLIDAY}}</div>
                   </div>
                 </div>
               </div>
@@ -264,8 +264,8 @@
                     <td width="300px">
                       <div class="input1" style="padding: 0 10px ;">
                         <div class="row">
-                          <div class="col-sm-6"><b>No.sample /remarks:</b></div>
-                          <div class="col-sm-6">{{ item.Remarks }}</div>
+                          <div class="col-sm-7"><b>Sample Q'ty(pcs) /remarks:</b></div>
+                        <div class="col-sm-5">{{ item.Remarks }}</div>
                         </div>
                       </div>
                     </td>
@@ -273,34 +273,6 @@
                 </table>
               </form>
             </div>
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-            {{this.DataRes[0].COMM_SAM_INFOR}}
-          </mat-card-content>
-        </mat-card>
-
-        <mat-card class="card1">
-          <mat-card-title-group>
-            <mat-card-title>Attention: Are dangerous or ESD substance included?</mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>
-            <!-- Dangerous -->
-            <div class=" col-sm-12 ">
-              {{this.DataRes[0].DANGER}}
-            </div>
-            <!-- Sample after tested -->
-
-            <div class="row">
-              <div class="col-sm-2"><b>Sample after tested:</b></div>
-              <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
-            </div>
-
           </mat-card-content>
         </mat-card>
 
@@ -337,6 +309,34 @@
                 </div>
               </div>
             </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Comment & Description (elements, structure, size, condition, etc.)</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            {{this.DataRes[0].COMM_SAM_INFOR}}
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="card1">
+          <mat-card-title-group>
+            <mat-card-title>Attention: Are dangerous or ESD substance included?</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <!-- Dangerous -->
+            <div class=" col-sm-12 ">
+              {{this.DataRes[0].DANGER}}
+            </div>
+            <!-- Sample after tested -->
+
+            <div class="row">
+              <div class="col-sm-2"><b>Sample after tested:</b></div>
+              <div class="col-sm-10">{{this.DataRes[0].SAM_AF_TEST}}</div>
+            </div>
+
           </mat-card-content>
         </mat-card>
 
@@ -506,7 +506,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th class=" Titlereview">Pending request</th>
+                      <th class=" Titlereview">Issue request</th>
                       <td class=" Titlereview"> Issuer</td>
                       <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
                       <td class=" Titlereview">
@@ -523,7 +523,7 @@
                       <td class=" Titlereview"> {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
                       <td class=" Titlereview">
                         <div class="center" style="padding-top:10px ;">
-                          {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                          {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
                         </div>
                       </td>
                       <td class=" Titlereview">
@@ -693,7 +693,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <th class=" Titlereview">Pending request</th>
+                      <th class=" Titlereview">Issue request</th>
                       <td class=" Titlereview">Issuer</td>
                       <td class=" Titlereview">{{this.DataRes[0].REVI_PAND_ISSUER}}</td>
                       <td class=" Titlereview">
@@ -710,11 +710,11 @@
                       <td class=" Titlereview"> {{this.DataRes[0].REVI_PAND_CONFIRM}} </td>
                       <td class=" Titlereview">
                         <div class="center" style="padding-top:10px ;">
-                          {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
+                          {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
                         </div>
                       </td>
                       <td class=" Titlereview">
-                        {{this.DataRes[0].REVI_PAND_CONFIRM_COM}}
+                        {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
                       </td>
                       <td class=" Titlereview">
                         <p *ngFor="let item of this.confirmcc let i = index">
@@ -728,7 +728,7 @@
                       <td class=" Titlereview"> {{this.DataRes[0].REVI_ANASEC_CONTROL}}</td>
                       <td class=" Titlereview">
                         <div class="center" style="padding-top:10px ;">
-                          {{this.DataRes[0].REVI_PAND_CONFIRM_TIME}}
+                          {{this.DataRes[0].REVI_ANASEC_CONTROL_TIME}}
                         </div>
                       </td>
                       <td class=" Titlereview">

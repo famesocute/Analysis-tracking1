@@ -340,7 +340,7 @@ export class EstiCostComponent implements OnInit {
     }); 
   }
   GoRequeinfo(){
-    if(this.namelocal == this.DataRes[0].REVI_PAND_CONFIRM){
+    if(this.namelocal == this.DataRes[0].REVI_PAND_ISSUER){
     let date: Date = new Date();
     var date2 = date.toLocaleString()
 
@@ -391,7 +391,7 @@ export class EstiCostComponent implements OnInit {
     window.open("http://163.50.57.95:82/Tracking_Analysis/Steppadding?id="+this.DataRes[0].ID);
   }
   decline(){
-    if(this.namelocal == this.DataRes[0].REVI_PAND_CONFIRM){ 
+    if(this.namelocal == this.DataRes[0].REVI_PAND_ISSUER){ 
 
     this.reasondecline = prompt('Why are you deline? ');
       console.log(this.reasondecline);

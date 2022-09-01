@@ -16,6 +16,7 @@ export class AnahomeCompleteComponent implements OnInit {
 
   table: any
   nextperson : any
+  DataRessaerch : any
 
   panelOpenState = false;
   month: any = []
@@ -29,13 +30,23 @@ export class AnahomeCompleteComponent implements OnInit {
   message = ""
   isValid = false
 
+  searchre = ""
+  thismonth : any
+  public demo1TabIndex = 1;
+
   constructor(public router: Router, public productService: ProductService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.productService.TRACKING_ANALYSIS_SELECT_ALL_ORDER().subscribe((data: {}) => {
+    this.productService.TRACKING_ANALYSIS_SELECT_ALL_ORDER_3().subscribe((data: {}) => {
       console.log(data);
       this.table = data
       this.productService.currentMessage.subscribe(message => this.message = message)
+
+      var d = new Date();
+      this.thismonth = d.getMonth();
+      console.log(this.thismonth);
+
+      this.demo1TabIndex = this.thismonth
 
       this.namelocal = localStorage.getItem("NAME");
       this.Codelocal = localStorage.getItem("EMPLOY_CODE");
@@ -113,4 +124,32 @@ export class AnahomeCompleteComponent implements OnInit {
       window.location.href ='http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id='+ID  
     }
   }
+
+  Search(){
+    if(this.searchre != ""){
+    this.productService.TRACKING_ANALYSIS_SELECT_SEARCH_BY_REQ(this.searchre).subscribe((data: {}) => {
+      console.log(data);
+      this.DataRessaerch = data
+      console.log(this.DataRessaerch);
+
+      var x
+      var nameData2
+
+      for (x in this.DataRessaerch) {
+        nameData2 = this.DataRessaerch[x].REVI_PAND_ISSUER.split("<");
+        this.DataRessaerch[x].REVI_PAND_ISSUER = nameData2[0]
+
+        nameData2 = this.DataRessaerch[x].STETUS_PERSON.split("<");
+        this.DataRessaerch[x].STETUS_PERSON = nameData2[0]
+
+        if (this.DataRessaerch[x].TITLE.length >= 40) {
+          this.DataRessaerch[x].TITLE = this.DataRessaerch[x].TITLE.substring(0, 40) + " ..."
+        }
+      }
+
+    })
+  }else{
+    this.DataRessaerch = []
+  }
+}
 }

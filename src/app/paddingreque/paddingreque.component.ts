@@ -226,6 +226,7 @@ export class PaddingrequeComponent implements OnInit {
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
+      alert('Request be approved')
       this.router.navigate(['/Analyrequehome']) 
     })
     

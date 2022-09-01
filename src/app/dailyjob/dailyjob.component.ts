@@ -25,6 +25,7 @@ export class DailyjobComponent implements OnInit {
   start = ""
 
   forfinish2 = false
+  jobtodaychk = false
 
   constructor(public productService: ProductService) { }
 
@@ -125,6 +126,7 @@ export class DailyjobComponent implements OnInit {
               console.log(this.timesum)
 
               this.forfinish2 = true
+            
             }else{
               this.forfinish2 = true
             }
@@ -132,9 +134,11 @@ export class DailyjobComponent implements OnInit {
             if(this.DataResbookingreq[0].START_TIME != null){
               this.start = this.DataResbookingreq[0].START_TIME
               console.log(this.start)
-            }
+            } 
           } 
          })
+         var timesum2 = this.timesum
+         console.log(timesum2)
            
 
         if (forfinish == true ) {
@@ -184,7 +188,7 @@ export class DailyjobComponent implements OnInit {
           this.jobtoday = this.jobtoday + '"pic":"' + this.Datajob[x].REVI_ANASEC_ANAL + '",'
           this.jobtoday = this.jobtoday + '"numsam":"' + this.Datajob[x].NUM_SAMPLE + '",'
           this.jobtoday = this.jobtoday + '"standardtime":"' + timeofstep3 + '",'
-          this.jobtoday = this.jobtoday + '"real":"' + this.timesum.toFixed(2) + '",'
+          this.jobtoday = this.jobtoday + '"real":"' + timesum2.toFixed(2) + '",'
           this.jobtoday = this.jobtoday + '"Currentstatus":"' + current + '",'
           this.jobtoday = this.jobtoday + '"Approver":"' + this.Datajob[x].STETUS_PERSON + '",'
           this.jobtoday = this.jobtoday + '"submitreport":"' + this.Datajob[x].REVI_ANASEC_ANAL_TIME + '",'
@@ -197,9 +201,17 @@ export class DailyjobComponent implements OnInit {
       this.jobtoday = this.jobtoday.substring(0, this.jobtoday.length - 1);
       this.jobtoday = this.jobtoday + "]";
       console.log(this.jobtoday)
-      var obj = JSON.parse(this.jobtoday);
-      this.jobtoday = obj
-      console.log(this.jobtoday)
+      if(this.jobtoday != "]"){
+        var obj = JSON.parse(this.jobtoday);
+        this.jobtoday = obj
+        console.log(this.jobtoday)
+      }
+      else{
+        this.jobtoday = []
+      }
+
+        
+    
     })
   }
 }

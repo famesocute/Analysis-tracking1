@@ -332,7 +332,7 @@ export class EstiStepComponent implements OnInit {
       this.router.navigate(['/Analyrequehome']) 
     })
 
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.EMAIL_CC+"||Q-Analysis Request ->(Estimate Cost Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve estimate cost. Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.DataRes[0].REVI_PAND_ISSUER+";||"+this.EMAIL_CC+";"+this.DataRes[0].REVI_PAND_CONFIRM+"||Q-Analysis Request ->(Estimate Cost Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve estimate cost. Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Esticost?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 

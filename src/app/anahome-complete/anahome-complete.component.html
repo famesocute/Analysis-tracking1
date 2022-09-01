@@ -2,7 +2,7 @@
     <div class="row">
       <div class="col-xl-1"></div>
       <div class="col-xl-7 center" style="padding :15px 0 ;">
-        <button mat-button>Home</button>
+        <!-- <button mat-button>Home</button> -->
         <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
         <button mat-button>Equipment Calendar</button>
         <button mat-button>Job tracking</button>
@@ -46,11 +46,15 @@
                 <img src="../assets/Tracking_web/Image/702867-removebg-preview.png">
                 <div class="row" style="padding-top : 30px;">
                   <h1 class="center WText ">Status</h1>
-                  <button class="button button3 border border-light WText"(click)="pending()">Issue Request</button>
-                  <button class="button button3 border border-light WText"(click)="Gonotcom()">Analysis Progress (tracking)
+                  <button class="button button3 border border-light WText"(click)="pending()">
+                    <div class="toolside">Issue Request</div> </button>
+                  <button class="button button3 border border-light WText"(click)="Gonotcom()">
+                    <div class="toolside">Analysis Progress (tracking)</div>
                   </button>
-                  <button class="button button3 border border-white WText">Complete Request</button>
-                  <button class="button button3 border border-white WText" (click)="Gomyjob()">My Request and Job</button>
+                  <button class="button button3 border border-white WText">
+                    <div class="toolside">Complete Request</div></button>
+                  <button class="button button3 border border-white WText" (click)="Gomyjob()">
+                    <div class="toolside">My Request and Job</div></button>
                 </div>
               </mat-card-content>
             </mat-card>
@@ -62,373 +66,40 @@
           <div class="col-sm-10" style="padding: 40px; ">
             <div style=" padding-top: 30px;" class=" font1 center size">Analysis request</div>
             <div  class=" font1 center " style="padding-top: 20px; font-size: 20px;">(Complete Request)</div>
-            <button mat-raised-button color="primary" style=" margin-bottom: 20px;" (click)='addform()'>+ Add analysis
-              request form</button>
-            <br>
+            <div class="row">
+              <div class="col-sm-8">
+                <button mat-raised-button color="primary" style=" margin-bottom: 20px;" (click)='addform()'>+ Add analysis
+                  request form</button>
+                </div>
+                <div class="col-sm-2">
+                    <input type="Title" class="form-control" id="Title" [(ngModel)]="this.searchre">
+                </div>
+                <div class="col-sm-2">
+                  <button mat-raised-button color="primary" (click)='Search()'>Search</button>
+                  </div>
+              </div>
+              <table class="table ">
+                <tbody>
+                  <tr *ngFor="let item of DataRessaerch let i = index">      
+                    <div *ngIf="item.STATUS_JOB == '10'">         
+                      <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                        <div class="row">
+                          <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                          <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
+                          <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                          <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                          <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
+                        </div>
+                      </button>
+                      </div>
+                  </tr>
+                </tbody>
+              </table>
+              
             <!-- All -->
-            <mat-tab-group>
-              <mat-tab label="All">
-                <mat-tab-group>
-                  <mat-tab label="All">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-  
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-                          <div *ngIf="item.STATUS_JOB == '10'">
-                          <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                            <div class="row">
-                              <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                              <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                              <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                            </div>
-                          </button>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="MT300">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MT300'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                              <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                              <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="MT400">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MT400'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                              <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                              <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="MT500">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MT500'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                              <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                              <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="MT600">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MT600'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                              <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                              <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="MT700">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MT700'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                              <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                              <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                              <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                              <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="MT800">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MT800'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                                <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                                <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                                <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="MT900">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MT900'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                                <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                                <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                                <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="SGA">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                                <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                                <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                                <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                  <mat-tab label="MT100">
-                    <br>
-                    <table class="table ">
-                      <thead class="table-danger">
-                        <tr>
-                          <th width="80px" style=" text-align:center">Month</th>
-                          <th width="120px">Department</th>
-                          <th width="130px">Next person</th>
-                          <th width="200px">Request No.</th>
-                          <th width="200px" style=" text-align:center">Title</th>
-                          <th style=" text-align:center">Issuer</th>
-                        </tr>
-                      </thead>
-                    </table>
-                    <table class="table ">
-                      <tbody>
-                        <tr *ngFor="let item of table let i = index">
-  
-                          <div *ngIf="item.DEP_MENT == 'MT100'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
-                            <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
-                              <div class="row">
-                                <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
-                                <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
-                                <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
-                                <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
-                                <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
-                                <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
-                              </div>
-                            </button>
-                            </div>
-                          </div>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </mat-tab>
-                </mat-tab-group>
-              </mat-tab>
+            <mat-tab-group [(selectedIndex)]="demo1TabIndex">
+             
               <!-- April -->
               <mat-tab label="April">
                 <mat-tab-group>
@@ -451,7 +122,7 @@
                         <tr *ngFor="let item of table let i = index">
   
                           <div *ngIf="item.MONTH == 'April'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                            
                             <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -462,7 +133,7 @@
                                 <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                               </div>
                             </button>
-                            </div>
+                         
                           </div>
                         </tr>
                       </tbody>
@@ -488,7 +159,7 @@
   
                           <div *ngIf="item.MONTH == 'April'">
                             <div *ngIf="item.DEP_MENT == 'MT300'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -499,7 +170,7 @@
                               <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -526,7 +197,7 @@
   
                           <div *ngIf="item.MONTH == 'April'">
                             <div *ngIf="item.DEP_MENT == 'MT400'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -537,7 +208,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -564,7 +235,7 @@
   
                           <div *ngIf="item.MONTH == 'April'">
                             <div *ngIf="item.DEP_MENT == 'MT500'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -575,7 +246,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -602,7 +273,7 @@
   
                           <div *ngIf="item.MONTH == 'April'">
                             <div *ngIf="item.DEP_MENT == 'MT600'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -613,7 +284,7 @@
                               <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -640,7 +311,7 @@
   
                           <div *ngIf="item.MONTH == 'April'">
                             <div *ngIf="item.DEP_MENT == 'MT700'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -651,7 +322,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -678,7 +349,7 @@
   
                           <div *ngIf="item.MONTH == 'April'">
                             <div *ngIf="item.DEP_MENT == 'MT800'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -689,7 +360,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -716,7 +387,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT900'">
                             <div *ngIf="item.MONTH == 'April'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -727,7 +398,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -754,7 +425,7 @@
   
                           <div *ngIf="item.MONTH == 'April'">
                             <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -765,7 +436,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -792,7 +463,7 @@
   
                           <div *ngIf="item.MONTH == 'April'">
                             <div *ngIf="item.DEP_MENT == 'MT100'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -803,7 +474,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -834,7 +505,7 @@
                         <tr *ngFor="let item of table let i = index">
   
                           <div *ngIf="item.MONTH == 'May'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                            
                             <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -845,7 +516,7 @@
                               <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                               </div>
                             </button>
-                            </div>
+                            
                           </div>
                         </tr>
                       </tbody>
@@ -871,7 +542,7 @@
   
                           <div *ngIf="item.MONTH == 'May'">
                             <div *ngIf="item.DEP_MENT == 'MT300'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -882,7 +553,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -910,7 +581,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT400'">
                             <div *ngIf="item.MONTH == 'May'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -921,7 +592,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
   
                           </div>
@@ -951,7 +622,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT500'">
                             <div *ngIf="item.MONTH == 'May'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -962,7 +633,7 @@
                               <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -988,7 +659,7 @@
                         <tr *ngFor="let item of table let i = index">
                           <div *ngIf="item.DEP_MENT == 'MT600'">
                             <div *ngIf="item.MONTH == 'May'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -999,7 +670,7 @@
                               <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1026,7 +697,7 @@
   
                           <div *ngIf="item.MONTH == 'May'">
                             <div *ngIf="item.DEP_MENT == 'MT700'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1037,7 +708,7 @@
                               <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -1064,7 +735,7 @@
   
                           <div *ngIf="item.MONTH == 'May'">
                             <div *ngIf="item.DEP_MENT == 'MT800'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                 <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1075,7 +746,7 @@
                                 <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1102,7 +773,7 @@
   
                           <div *ngIf="item.MONTH == 'May'">
                             <div *ngIf="item.DEP_MENT == 'MT900'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1113,7 +784,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1139,7 +810,7 @@
                         <tr *ngFor="let item of table let i = index">
                             <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
                               <div *ngIf="item.MONTH == 'May'">
-                                <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                                
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1150,7 +821,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1177,7 +848,7 @@
   
                           <div *ngIf="item.MONTH == 'May'">
                             <div *ngIf="item.DEP_MENT == 'MT100'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1188,7 +859,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1220,7 +891,7 @@
                         <tr *ngFor="let item of table let i = index">
   
                           <div *ngIf="item.MONTH == 'June'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                            
                             <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1231,7 +902,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                               </div>
                             </button>
-                            </div>
+                            
                           </div>
                         </tr>
                       </tbody>
@@ -1257,7 +928,7 @@
   
                           <div *ngIf="item.MONTH == 'June'">
                             <div *ngIf="item.DEP_MENT == 'MT300'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1268,7 +939,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1296,7 +967,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT400'">
                             <div *ngIf="item.MONTH == 'June'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1306,12 +977,9 @@
                                   <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
-                              </button>
-                              </div>
+                              </button>                             
                             </div>
-  
-                          </div>
-  
+                          </div>  
                         </tr>
   
                       </tbody>
@@ -1337,7 +1005,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT500'">
                             <div *ngIf="item.MONTH == 'June'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1348,7 +1016,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -1374,7 +1042,7 @@
                         <tr *ngFor="let item of table let i = index">
                           <div *ngIf="item.DEP_MENT == 'MT600'">
                             <div *ngIf="item.MONTH == 'June'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1385,7 +1053,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -1412,7 +1080,7 @@
   
                           <div *ngIf="item.MONTH == 'June'">
                             <div *ngIf="item.DEP_MENT == 'MT700'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1423,7 +1091,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1450,7 +1118,7 @@
   
                           <div *ngIf="item.MONTH == 'June'">
                             <div *ngIf="item.DEP_MENT == 'MT800'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1461,7 +1129,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1488,7 +1156,7 @@
   
                           <div *ngIf="item.MONTH == 'June'">
                             <div *ngIf="item.DEP_MENT == 'MT900'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1499,7 +1167,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1526,7 +1194,7 @@
   
                           <div *ngIf="item.MONTH == 'June'">
                             <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1537,7 +1205,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1564,7 +1232,7 @@
   
                           <div *ngIf="item.MONTH == 'June'">
                             <div *ngIf="item.DEP_MENT == 'MT100'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1575,7 +1243,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1608,7 +1276,7 @@
                         <tr *ngFor="let item of table let i = index">
   
                           <div *ngIf="item.MONTH == 'July'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                            
                             <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1619,7 +1287,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                               </div>
                             </button>
-                            </div>
+                           
                           </div>
                         </tr>
                       </tbody>
@@ -1645,7 +1313,7 @@
   
                           <div *ngIf="item.MONTH == 'July'">
                             <div *ngIf="item.DEP_MENT == 'MT300'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1656,7 +1324,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1684,7 +1352,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT400'">
                             <div *ngIf="item.MONTH == 'July'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1694,12 +1362,9 @@
                                   <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
-                              </button>
-                              </div>
-                            </div>
-  
-                          </div>
-  
+                              </button>                            
+                            </div> 
+                          </div> 
                         </tr>
   
                       </tbody>
@@ -1725,7 +1390,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT500'">
                             <div *ngIf="item.MONTH == 'July'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1736,7 +1401,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -1762,7 +1427,7 @@
                         <tr *ngFor="let item of table let i = index">
                           <div *ngIf="item.DEP_MENT == 'MT600'">
                             <div *ngIf="item.MONTH == 'July'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1773,7 +1438,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -1800,7 +1465,7 @@
   
                           <div *ngIf="item.MONTH == 'July'">
                             <div *ngIf="item.DEP_MENT == 'MT700'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1811,7 +1476,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1838,7 +1503,7 @@
   
                           <div *ngIf="item.MONTH == 'July'">
                             <div *ngIf="item.DEP_MENT == 'MT800'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1849,7 +1514,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1876,7 +1541,7 @@
   
                           <div *ngIf="item.MONTH == 'July'">
                             <div *ngIf="item.DEP_MENT == 'MT900'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1887,7 +1552,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1914,7 +1579,7 @@
   
                           <div *ngIf="item.MONTH == 'July'">
                             <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1925,7 +1590,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1952,7 +1617,7 @@
   
                           <div *ngIf="item.MONTH == 'July'">
                             <div *ngIf="item.DEP_MENT == 'MT100'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -1963,7 +1628,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -1996,7 +1661,7 @@
                         <tr *ngFor="let item of table let i = index">
   
                           <div *ngIf="item.MONTH == 'August'">
-                            <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                            
                             <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                               <div class="row">
                                 <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2007,7 +1672,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                               </div>
                             </button>
-                            </div>
+                           
                           </div>
                         </tr>
                       </tbody>
@@ -2033,7 +1698,7 @@
   
                           <div *ngIf="item.MONTH == 'August'">
                             <div *ngIf="item.DEP_MENT == 'MT300'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2044,7 +1709,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -2072,7 +1737,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT400'">
                             <div *ngIf="item.MONTH == 'August'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2082,10 +1747,8 @@
                                   <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
-                              </button>
-                              </div>
-                            </div>
-  
+                              </button>                            
+                            </div>  
                           </div>
   
                         </tr>
@@ -2113,7 +1776,7 @@
   
                           <div *ngIf="item.DEP_MENT == 'MT500'">
                             <div *ngIf="item.MONTH == 'August'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2124,7 +1787,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -2150,7 +1813,7 @@
                         <tr *ngFor="let item of table let i = index">
                           <div *ngIf="item.DEP_MENT == 'MT600'">
                             <div *ngIf="item.MONTH == 'August'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2161,7 +1824,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -2188,7 +1851,7 @@
   
                           <div *ngIf="item.MONTH == 'August'">
                             <div *ngIf="item.DEP_MENT == 'MT700'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2199,7 +1862,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -2226,7 +1889,7 @@
   
                           <div *ngIf="item.MONTH == 'August'">
                             <div *ngIf="item.DEP_MENT == 'MT800'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2237,7 +1900,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                             
                             </div>
                           </div>
                         </tr>
@@ -2264,7 +1927,7 @@
   
                           <div *ngIf="item.MONTH == 'August'">
                             <div *ngIf="item.DEP_MENT == 'MT900'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2275,7 +1938,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -2302,7 +1965,7 @@
   
                           <div *ngIf="item.MONTH == 'August'">
                             <div *ngIf="item.DEP_MENT == 'MTA00' || item.DEP_MENT == 'MTB00' || item.DEP_MENT == 'MTE00' || item.DEP_MENT == 'MTF00'|| item.DEP_MENT == 'MTM00'|| item.DEP_MENT == 'MTQ00'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2313,7 +1976,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
@@ -2340,7 +2003,7 @@
   
                           <div *ngIf="item.MONTH == 'August'">
                             <div *ngIf="item.DEP_MENT == 'MT100'">
-                              <div *ngIf="item.STATUS_JOB == '0' || item.STATUS_JOB == '1' || item.STATUS_JOB == '2' || item.STATUS_JOB == '3' || item.STATUS_JOB == '4'">
+                              
                               <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                                 <div class="row">
                                   <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
@@ -2351,7 +2014,7 @@
                                   <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
                                 </div>
                               </button>
-                              </div>
+                              
                             </div>
                           </div>
                         </tr>
