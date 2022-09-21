@@ -159,9 +159,12 @@ export class AddReporttimeComponent implements OnInit {
             console.log(this.operationtime3)
           }
           var qtest = ""
-          qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`booking_equipment` " +
-            " SET  `BREAK_TIME` = '" + this.breaktime + "',`START_TIME` = '" + mixstart + "', `END_TIME` = '" + mixend + "',`OPERATION_TIME` = '" + this.operationtime3 + "' " +
-            " WHERE (`ID_BOOKING` = '" + this.message + "')  ; "
+          // qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`booking_equipment` " +
+          //   " SET  `BREAK_TIME` = '" + this.breaktime + "',`START_TIME` = '" + mixstart + "', `END_TIME` = '" + mixend + "',`OPERATION_TIME` = '" + this.operationtime3 + "' " +
+          //   " WHERE (`ID_BOOKING` = '" + this.message + "')  ; "
+          // console.log(qtest);
+
+          qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`issue_report` (`REQ_NUM`, `START_TIME`, `END_TIME`, `BREAK_TIME`, `OPERATION_TIME`) VALUES ('" + this.message + "', '" + mixstart + "', '" + mixend + "', '" + this.breaktime + "', '" + this.operationtime3 + "');"
           console.log(qtest);
           this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
             console.log(data);

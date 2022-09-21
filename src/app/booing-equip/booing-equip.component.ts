@@ -69,9 +69,9 @@ export class BooingEquipComponent implements OnInit {
   step_before1 = ""
 
   myControl = new FormControl();
-  options: string[] = ['Pornpimon Pengto', 'Soontree Chaiwut', 'Napapon',
-    'Parawee Tassaneekati ', 'Panudda Majan', 'Pichayapak Nantasai',
-    'Supakan Sriwichai ', 'Suticha Pringthai ', 'Thanyarat Sukkay ',
+  options: string[] = ['Soontree Chaiwut', 'Napapon',
+    'Parawee Tassaneekati', 'Panudda Majan', 'Gunyarat Prabhong',
+    'Supakan Sriwichai', 'Suticha Pringthai', 'Thanyarat Sukkay',
     'Wanutsanun Hintuang'];
   filteredOptions!: Observable<string[]>;
 
@@ -181,6 +181,8 @@ export class BooingEquipComponent implements OnInit {
         if (this.departmentlocal != null) {
           this.isValid = true
           this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
+          this.nameonly = this.nameonly.substring(0, this.nameonly.length - 1);
+          
         } else {
           window.alert("กรุณา login")
           window.location.href = 'http://163.50.57.95:82/Tracking_Analysis/Requestinfo?id=' + this.userType
@@ -343,6 +345,7 @@ export class BooingEquipComponent implements OnInit {
         console.log(this.DataRes[0].TITLE)
 
         this.analyzer = this.DataRes[0].REVI_ANASEC_ANAL.substring(0, this.namelocal.indexOf('<'));
+        console.log( this.analyzer[0])
 
         var qtest = ""
         qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`booking_equipment` (`REQ_NUM`,`TITLE`,`PIC`, `STEP_BOOKING`, `EQUIPMENT`, `SAMPLE_NUM`, " +
@@ -616,5 +619,21 @@ export class BooingEquipComponent implements OnInit {
   GoAnaNoCom() {
     this.router.navigate(['/AnahomeNotcom'])
   }
-
+  GoEquip(){
+    this.router.navigate(['/Equipment'])
+  }
+  KPI(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/KPIOperation'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  Daily(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/Dailyjob'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
 }

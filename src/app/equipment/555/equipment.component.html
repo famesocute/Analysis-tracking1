@@ -7,11 +7,11 @@
         <div class="row">
             <div class="col-xl-1"></div>
             <div class="col-xl-7 center" style="padding :15px 0 ;">
+                <button mat-button>Home</button>
                 <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
-                <button mat-button (click)="GoEquip()">Equipment Calendar</button>
+                <button mat-button>Equipment Calendar</button>
+                <button mat-button>Job tracking</button>
                 <button mat-button>Search previous report</button>
-                <button mat-button (click)="KPI()">Analysis index (KPI)</button>
-                <button mat-button (click)="Daily()">Daily job</button>
             </div>
 
             <div class="col-xl-4 center " *ngIf="isValid;else other_content">
@@ -42,30 +42,20 @@
                 <mat-card-content>
                     <div class="row" style="padding-top : 30px;">
                         <h1 class="center WText ">Equipment</h1>
-                        <button class="button button3 border border-light WText" (click)="onChange('RESIN_MOLDING')">Resin molding</button>
+                        <button class="button button3 border border-light WText" (click)="onChange('Resin molding')">Resin molding</button>
                         <button class="button button3 border border-light WText" (click)="onChange('Polishing')">Polishing machine</button>
                         <button class="button button3 border border-white WText" (click)="onChange('Cutting')">Cutting machine</button>
                         <button class="button button3 border border-white WText" (click)="onChange('VHX')">VHX</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('Metallurgical')">Metallurgical Microscope</button>
+                        <button class="button button3 border border-light WText" (click)="onChange('Metallurgical Microscope')">Metallurgical Microscope</button>
                         <button class="button button3 border border-light WText" (click)="onChange('FTIR')">FTIR</button>
-                        <button class="button button3 border border-white WText" (click)="onChange('Ion-milling')">Ion-milling</button>
                         <button class="button button3 border border-white WText" (click)="onChange('TG-DTA')">TG-DTA</button>
                         <button class="button button3 border border-white WText" (click)="onChange('DSC')">DSC</button>
                         <button class="button button3 border border-light WText" (click)="onChange('EDXRF')">EDXRF</button>
                         <button class="button button3 border border-light WText" (click)="onChange('GCMS')">GCMS</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('ICP')">ICP-OES</button>
+                        <button class="button button3 border border-light WText" (click)="onChange('ICP-OES')">ICP-OES</button>
                         <button class="button button3 border border-white WText" (click)="onChange('SEM')">SEM</button>
-                        <button class="button button3 border border-white WText" (click)="onChange('X-ray2D')">X-ray</button>
+                        <button class="button button3 border border-white WText" (click)="onChange('X-ray')">X-ray</button>
                         <button class="button button3 border border-light WText" (click)="onChange('Titration')">Titration</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('C_SAM')">C-SAM</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('CS Analyzer')">CS Analyzer</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('Solderwet')">Solderwet</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('Micro-probe')">Micro-probe</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('Micro-probe')">Micro-probe</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('FE-SEM')">FE-SEM</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('HPLC')">HPLC</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('CE')">CE</button>
-                        <button class="button button3 border border-light WText" (click)="onChange('Other')">Other</button>
                     </div>
                 </mat-card-content>
             </mat-card>

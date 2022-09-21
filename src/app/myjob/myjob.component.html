@@ -4,9 +4,10 @@
     <div class="col-xl-7 center" style="padding :15px 0 ;">
       <!-- <button mat-button>Home</button> -->
       <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
-      <button mat-button>Equipment Calendar</button>
-      <button mat-button>Job tracking</button>
+      <button mat-button (click)="GoEquip()">Equipment Calendar</button>
       <button mat-button>Search previous report</button>
+      <button mat-button (click)="KPI()">Analysis index (KPI)</button>
+      <button mat-button (click)="Daily()">Daily job</button>
     </div>
 
     <div class="col-xl-4 center " *ngIf="isValid;else other_content">
@@ -262,6 +263,41 @@
                    <tr *ngFor="let item of table let i = index">
                        
                          <div *ngIf="item.MONTH == 'August'">
+                       <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
+                         <div class="row">
+                           <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>
+                           <div class="col-sm-1" style="text-align: left ;">{{item.DEP_MENT}}</div>
+                           <div class="col-sm-2" style="text-align: left ;">{{ item.STETUS_PERSON}}</div>
+                           <div class="col-sm-2" style="text-align: left ;">{{item.REQ_NUM}}</div>
+                           <div class="col-sm-4" style="text-align: left ;">{{item.TITLE}}</div>
+                           <div class="col-sm-2">{{ item.REVI_PAND_ISSUER}}</div>
+                         </div>
+                       </button>
+             
+                     </div>
+                   </tr>
+                 </tbody>
+               </table>
+             </mat-tab>
+             <!-- September -->
+             <mat-tab label="September">
+              <table class="table ">
+                 <thead class="table-danger">
+                   <tr>
+                     <th width="80px" style=" text-align:center">Month</th>
+                     <th width="120px">Department</th>
+                     <th width="130px">Next person</th>
+                     <th width="200px">Request No.</th>
+                     <th width="200px" style=" text-align:center">Title</th>
+                     <th style=" text-align:center">Issuer</th>
+                   </tr>
+                 </thead>
+               </table>
+               <table class="table ">
+                 <tbody>
+                   <tr *ngFor="let item of table let i = index">
+                       
+                         <div *ngIf="item.MONTH == 'September'">
                        <button mat-raised-button class="block" (click)="Opennextpage(item.ID,item.STATUS_JOB)">
                          <div class="row">
                            <div class="col-sm-1" style="text-align: left ;">{{ item.MONTH }}</div>

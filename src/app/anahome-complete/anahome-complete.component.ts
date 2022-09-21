@@ -97,11 +97,25 @@ export class AnahomeCompleteComponent implements OnInit {
   Gonotcom(){
     this.router.navigate(['/AnahomeNotcom'])
   }
-  GoAnaNoCom(){
-    this.router.navigate(['/AnahomeNotcom'])
+  GoEquip(){
+    this.router.navigate(['/Equipment'])
   }
   pending(){
     this.router.navigate(['/Analyrequehome'])
+  }
+  KPI(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/KPIOperation'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  Daily(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/Dailyjob'])
+    }else{
+        window.alert("Only Q30 member")
+   }
   }
   Opennextpage(ID: any, STATUS_JOB: any) {
     console.log(STATUS_JOB)

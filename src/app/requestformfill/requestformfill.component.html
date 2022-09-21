@@ -6,9 +6,10 @@
         <div class="col-xl-7 center" style="padding :15px 0 ;">
           <!-- <button mat-button>Home</button> -->
           <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
-          <button mat-button>Equipment Calendar</button>
-          <button mat-button>Job tracking</button>
+          <button mat-button (click)="GoEquip()">Equipment Calendar</button>
           <button mat-button>Search previous report</button>
+          <button mat-button (click)="KPI()">Analysis index (KPI)</button>
+          <button mat-button (click)="Daily()">Daily job</button>
         </div>
     
         <div class="col-xl-4 center " *ngIf="isValid;else other_content">
@@ -123,7 +124,7 @@
                       <div class="form-check-inline">
                         <label class="form-check-label" for="radio7">
                           <input type="radio" class="form-check-input" id="radio7" name="Analysistype1" value="option7"
-                            (click)="getdata('RoHS')">RoHS Spacial
+                            (click)="getdata('RoHS')">RoHS Special
                         </label>
                       </div>
                       <div class="col-sm-5">
@@ -152,13 +153,20 @@
 
                 <mat-form-field appearance="outline" >
                   <mat-label >Product</mat-label>
+                  <mat-hint><p style="color: #880808 ;">*Please select product</p></mat-hint>
                   <mat-select [(ngModel)]="this.Product">
                     <mat-option value="MLCC">MLCC</mat-option>
-                    <mat-option value="BLM">BLM</mat-option>
                     <mat-option value="MAWTR">MAWTR</mat-option>
                     <mat-option value="MAOPN">MAOPN</mat-option>
                     <mat-option value="MKVLED">MKVLED</mat-option>
                     <mat-option value="SMD">SMD</mat-option>
+                    <mat-option value="BLM15">BLM15</mat-option>
+                    <mat-option value="BLM15H">BLM15H</mat-option>
+                    <mat-option value="BLM18">BLM18</mat-option>
+                    <mat-option value="BLM03">BLM03</mat-option>
+                    <mat-option value="BLM02">BLM02</mat-option>
+                    <mat-option value="BLM15EX">BLM15EX</mat-option>
+                    <mat-option value="BLM03H">BLM03H</mat-option>
                     <mat-option value="PAC">PAC</mat-option>
                     <mat-option value="METAL PLATE">METAL PLATE</mat-option>
                     <mat-option value="PLASTIC INJECTION">PLASTIC INJECTION</mat-option>
@@ -217,6 +225,13 @@
                         [(ngModel)]="Tech[1].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckChecked">
                         X-ray 3D
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="Tech[21].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        FE-SEM
                       </label>
                     </div>
                   </div>
@@ -303,6 +318,13 @@
                         EDXRF
                       </label>
                     </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="Tech[22].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        HPLC
+                      </label>
+                    </div>
                   </div>
                   <div class="col-sm-3">
                     <div class="form-check">
@@ -310,6 +332,13 @@
                         [(ngModel)]="Tech[10].check" (ngModelChange)="AnsMany()">
                       <label class="form-check-label" for="flexCheckDefault">
                         CS Analyzer
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
+                        [(ngModel)]="Tech[23].check" (ngModelChange)="AnsMany()">
+                      <label class="form-check-label" for="flexCheckChecked">
+                        CE
                       </label>
                     </div>
                   </div>
@@ -558,6 +587,7 @@
                     <mat-option value="Metal">Metal</mat-option>
                     <mat-option value="Paste">Paste</mat-option>
                     <mat-option value="Piezoelectric">Piezoelectric</mat-option>
+                    <mat-option value="Chip ferrite beads">Chip ferrite beads</mat-option>
                     <mat-option value="Plating solution">Plating solution</mat-option>
                     <mat-option value="Printing ink">Printing ink</mat-option>
                     <mat-option value="Raw material">Raw material</mat-option>
@@ -715,13 +745,11 @@
         <mat-card-content>
 
           <div class="row">
-            <div class="col-sm-3"><button mat-raised-button color="primary">Relate with all request</button></div>
-            <div class="col-sm-3"><button mat-raised-button color="primary">Relate with your department request</button>
+            <div class="col-sm-6 " style="padding-left: 100px;"><button mat-raised-button color="primary">Relate with all request</button></div>
+            <div class="col-sm-6"><button mat-raised-button color="primary" class="center">Relate with your department request</button>
             </div>
-            <div class="col-sm-3"></div>
-            <div class="col-sm-3"></div>
           </div>
-
+          <br>
           <table class="table table-striped">
             <thead>
               <tr>

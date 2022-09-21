@@ -225,6 +225,23 @@ export class TrackingstatusComponent implements OnInit {
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
   }
+  KPI(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/KPIOperation'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  Daily(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/Dailyjob'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  GoEquip(){
+    this.router.navigate(['/Equipment'])
+  }
   addreporttime(){
     var qtest = ""
     qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`issue_report` " +

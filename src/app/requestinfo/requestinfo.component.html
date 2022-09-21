@@ -11,9 +11,10 @@
         <div class="col-xl-7 center" style="padding :15px 0 ;">
           <!-- <button mat-button >Home</button> -->
           <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
-          <button mat-button>Equipment Calendar</button>
-          <button mat-button>Job tracking</button>
+          <button mat-button (click)="GoEquip()">Equipment Calendar</button>
           <button mat-button>Search previous report</button>
+          <button mat-button (click)="KPI()">Analysis index (KPI)</button>
+          <button mat-button (click)="Daily()">Daily job</button>
         </div>
 
         <div class="col-xl-4 center " *ngIf="isValid;else other_content">
@@ -598,7 +599,7 @@
           <div style=" padding-bottom: 15px">
             <mat-card class="card1">
               <mat-card-title-group>
-                <mat-card-title>Result file</mat-card-title>
+                <mat-card-title>Final report</mat-card-title>
               </mat-card-title-group>
               <mat-card-content>
                 <mat-dialog-content>
@@ -611,7 +612,7 @@
                           <input class="form-control" type="text" name="section" value="{{section2}}" hidden>
                           <br>            
                       </div>            
-                      <th>Select file to upload:</th> <br>
+                      <th>Select final report to upload*:</th> <br>
               
                       <div class="input-group mb-3">
               
@@ -678,7 +679,8 @@
                           <input class="form-control" type="text" name="section" value="{{section3}}" hidden>
                           <br>            
                       </div>            
-                      <th>Select file to upload:</th> <br>
+                      <th>Select only result picture to upload :</th>
+                       <br>
               
                       <div class="input-group mb-3">
               
@@ -819,7 +821,7 @@
           <div style=" padding-bottom: 15px">
             <mat-card class="card1">
               <mat-card-title-group>
-                <mat-card-title>Result file</mat-card-title>
+                <mat-card-title>Final report</mat-card-title>
               </mat-card-title-group>
               <mat-card-content>
                 <mat-dialog-content>
@@ -832,7 +834,7 @@
                           <input class="form-control" type="text" name="section" value="{{section2}}" hidden>
                           <br>            
                       </div>            
-                      <th>Select file to upload:</th> <br>
+                      <th>Select final report to upload*:</th> <br>
               
                       <div class="input-group mb-3">
               
@@ -899,7 +901,7 @@
                           <input class="form-control" type="text" name="section" value="{{section3}}" hidden>
                           <br>            
                       </div>            
-                      <th>Select file to upload:</th> <br>
+                      <th>Select only result picture to upload :</th> <br>
               
                       <div class="input-group mb-3">
               

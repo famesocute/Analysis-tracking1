@@ -36,6 +36,7 @@ import { SendmailQuestionComponent } from './dialog/sendmail-question/sendmail-q
 import { EquipmentComponent } from './equipment/equipment.component';
 import { AddOperationtimeComponent } from './dialog/add-operationtime/add-operationtime.component';
 import { AddReporttimeComponent } from './dialog/add-reporttime/add-reporttime.component';
+import { KPIOperationComponent } from './kpi-operation/kpi-operation.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
@@ -73,7 +74,8 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'SendmailQuestion', component: SendmailQuestionComponent },
 { path: 'Equipment', component: EquipmentComponent },
 { path: 'AddOperationtime', component: AddOperationtimeComponent },
-{ path: 'AddReporttime', component: AddReporttimeComponent },];
+{ path: 'AddReporttime', component: AddReporttimeComponent },
+{ path: 'KPIOperation', component: KPIOperationComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -273,6 +273,23 @@ export class PaddingrequeComponent implements OnInit {
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
   }
+  GoEquip(){
+    this.router.navigate(['/Equipment'])
+  }
+  KPI(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/KPIOperation'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  Daily(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/Dailyjob'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
   editinfo(){
       this.productService.changeMessage(this.DataRes[0].ID)
         const dialogRef = this.matDialog.open(EditinfoComponent, {

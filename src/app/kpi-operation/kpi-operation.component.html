@@ -1,1 +1,186 @@
-<p>kpi-operation works!</p>
+<div *ngIf="this.loading; else elseBlock" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
+</div>
+<ng-template #elseBlock>
+  <div class="row">
+    <div class="col-xl-1" style="background-color: #8fcaca ;"></div>
+    <div class="col-xl-10">
+      <br>
+      <div style=" padding-top: 30px;" class=" font1 center size"><b>ANALYSIS INDEX (KPI) REPORT</b></div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-xl-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Month</mat-label>
+            <mat-hint><p style="color: #880808 ;">*Have to reset ->Select date -> click search(If not data will wrong)</p></mat-hint>
+            <mat-select [(ngModel)]="this.Month">
+              <mat-option value="January">January</mat-option>
+              <mat-option value="February">February</mat-option>
+              <mat-option value="March">March</mat-option>
+              <mat-option value="April">April</mat-option>
+              <mat-option value="May">May</mat-option>
+              <mat-option value="June">June</mat-option>
+              <mat-option value="July">July</mat-option>
+              <mat-option value="August">August</mat-option>
+              <mat-option value="September">September</mat-option>
+              <mat-option value="October">October</mat-option>
+              <mat-option value="November">November</mat-option>
+              <mat-option value="December">December</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-2">
+          <mat-form-field appearance="outline">
+            <mat-label>Year</mat-label>
+            <mat-select [(ngModel)]="this.Year">
+              <mat-option value="2022">2022</mat-option>
+              <mat-option value="2023">2023</mat-option>
+              <mat-option value="2024">2024</mat-option>
+              <mat-option value="2025">2025</mat-option>
+              <mat-option value="2026">2026</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-1">
+          <div style="padding-top: 10px;">
+            <button mat-raised-button color="primary" (click)="Search()">Search</button>
+          </div>
+        </div>
+        <div class="col-xl-7">
+          <div style="padding-top: 10px;">
+            <button mat-raised-button color="warn" (click)="Reset()">Reset</button>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <b>1. Analysis Support</b>
+      </div>
+      <div>- By Job categorize</div>
+      <br>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="center">
+            <div class="card" style="width: 520px ;">
+              <div class="card-body center">
+                <div>
+                  <canvasjs-chart [options]="chartOptions1" [styles]="{width: '500px', height:'300px'}">
+                  </canvasjs-chart>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6" style="text-align: right ;">
+                  <b>Total request :</b>
+                </div>
+                <div class="col-sm-6">
+                  {{this.TotalJobCatagorize}} requests
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="center">
+            <div class="card" style="width: 520px ;">
+              <div class="card-body center">
+                <div>
+                  <canvasjs-chart [options]="chartOptions2" [styles]="{width: '500px', height:'320px'}">
+                  </canvasjs-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="center">
+        <div class="card" style="width: 550px ;">
+          <div class="card-body center">
+            <div>
+              <canvasjs-chart [options]="chartOptions3" [styles]="{width: '520px', height:'320px'}"></canvasjs-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>- By Analyst</div>
+      <br>
+      <div class="row">
+        <div class="col-sm-6" style="text-align: right ;">
+          <div class="center">
+            <div class="card" style="width: 520px ;">
+              <div class="card-body center">
+                <div>
+                  <canvasjs-chart [options]="chartOptions4" [styles]="{width: '500px', height:'320px'}">
+                  </canvasjs-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="center">
+            <div class="card" style="width: 520px ;">
+              <div class="card-body center">
+                <div>
+                  <canvasjs-chart [options]="chartOptions5" [styles]="{width: '500px', height:'320px'}">
+                  </canvasjs-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="center">
+        <div class="card" style="width: 520px ;">
+          <div class="card-body center">
+            <div>
+              <canvasjs-chart [options]="chartOptions6" [styles]="{width: '500px', height:'320px'}">
+              </canvasjs-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div>
+        <b>2. Machine service and operation time</b>
+      </div>
+      <!-- <div>- By Job categorize</div> -->
+      <br>
+      <!-- <div class="row">
+        <div class="col-sm-6" style="text-align: right ;"> -->
+          <div class="center">
+            <div class="card" style="width: 520px ;">
+              <div class="card-body center">
+                <div>
+                  <canvasjs-chart [options]="chartOptions7" [styles]="{width: '500px', height:'320px'}">
+                  </canvasjs-chart>
+                </div>
+              </div>
+            </div>
+            <div class="card" style="width: 520px ;">
+              <div class="card-body center">
+                <div>
+                  <canvasjs-chart [options]="chartOptions8" [styles]="{width: '500px', height:'320px'}">
+                  </canvasjs-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- </div>
+        <div class="col-sm-6">
+          <div class="center">
+           
+          </div>
+        </div>
+      </div> -->
+     
+    </div>
+
+
+    <div class="col-xl-1" style="background-color: #8fcaca ;"></div>
+  </div>
+
+</ng-template>

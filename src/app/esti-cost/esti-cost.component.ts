@@ -375,6 +375,24 @@ export class EstiCostComponent implements OnInit {
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
   }
+  GoEquip(){
+    this.router.navigate(['/Equipment'])
+  }
+  KPI(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/KPIOperation'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  Daily(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/Dailyjob'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  
   Logout(){
     localStorage.removeItem("NAME");
     localStorage.removeItem("EMPLOY_CODE");

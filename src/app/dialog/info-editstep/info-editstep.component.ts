@@ -21,6 +21,7 @@ export class InfoEditstepComponent implements OnInit {
   ID: any
   isvalideditstep: any
 
+  reque_no = ""
   productForm: FormGroup;
   BOOKINGDB: any
   BOOKINGDBNEW: any
@@ -63,6 +64,8 @@ export class InfoEditstepComponent implements OnInit {
       var obj = JSON.parse(this.sample2);
       this.sample1 = obj
       console.log(this.sample1)
+      console.log(sp)
+      this.reque_no = sp[1]
       this.productService.TRACKING_ANALYSIS_SELECT_BOOKING_BYREQ(sp[1]).subscribe((data: {}) => {
         console.log(data)
         this.BOOKINGDB = data
@@ -83,7 +86,7 @@ export class InfoEditstepComponent implements OnInit {
               this.BOOKINGDBNEW = this.BOOKINGDBNEW + '"OPERATER":"' + this.BOOKINGDB[x].OPERATER + '",'
               this.BOOKINGDBNEW = this.BOOKINGDBNEW + '"OPERATION_TIME":"' + this.BOOKINGDB[x].OPERATION_TIME + '",'
               this.BOOKINGDBNEW = this.BOOKINGDBNEW + '"PIC":"' + this.BOOKINGDB[x].PIC + '",'
-              this.BOOKINGDBNEW = this.BOOKINGDBNEW + '"REQ_NUM":"' + this.BOOKINGDB[x].REQ_NUM + '",'
+              this.BOOKINGDBNEW = this.BOOKINGDBNEW + '"REQ_NUM":"' +  this.reque_no+ '",'
               this.BOOKINGDBNEW = this.BOOKINGDBNEW + '"SAMPLE_NUM":"' + this.BOOKINGDB[x].SAMPLE_NUM + '",'
               this.BOOKINGDBNEW = this.BOOKINGDBNEW + '"START_TIME":"' + this.BOOKINGDB[x].START_TIME + '",'
               this.BOOKINGDBNEW = this.BOOKINGDBNEW + '"TIME_BOOKING_END":"' + this.BOOKINGDB[x].TIME_BOOKING_END + '",'
@@ -96,9 +99,11 @@ export class InfoEditstepComponent implements OnInit {
         this.BOOKINGDBNEW = this.BOOKINGDBNEW.substring(0, this.BOOKINGDBNEW.length - 1);
         this.BOOKINGDBNEW = this.BOOKINGDBNEW + "]";
         console.log(this.BOOKINGDBNEW)
+        if(this.BOOKINGDBNEW != "]"){
         var obj = JSON.parse(this.BOOKINGDBNEW);
         this.BOOKINGDBNEW = obj
         console.log(this.BOOKINGDBNEW)
+        }
       })
 
     })
@@ -156,7 +161,7 @@ export class InfoEditstepComponent implements OnInit {
     console.log(this.sample2)
   }
   edit() {
-    var del = "DELETE FROM `mtq10_project_tracking_analysis`.`booking_equipment` WHERE (`REQ_NUM` = '" + this.BOOKINGDB[0].REQ_NUM + "');"
+    var del = "DELETE FROM `mtq10_project_tracking_analysis`.`booking_equipment` WHERE (`REQ_NUM` = '" +  this.reque_no + "');"
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(del).subscribe((data: {}) => {
       console.log(data);
 

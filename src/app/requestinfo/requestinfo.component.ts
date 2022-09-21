@@ -198,13 +198,13 @@ export class RequestinfoComponent implements OnInit {
         newdata = newdata.substring(0, newdata.length - 1);
         newdata = newdata + "]";
         console.log(newdata)
-
+        if(newdata != "]" ){
         var obj = JSON.parse(newdata);
 
         console.log(obj)
 
         this.dataUploadSETdata = obj
-
+      }
       })
       this.productService.TRACKING_ANALYSIS_SELECT_ADDFILE_BY_REQ(this.DataRes[0].REQ_NUM).subscribe((data: {}) => {
         console.log(data);
@@ -820,12 +820,29 @@ export class RequestinfoComponent implements OnInit {
   GoAnaNoCom() {
     this.router.navigate(['/AnahomeNotcom'])
   }
+  GoEquip(){
+    this.router.navigate(['/Equipment'])
+  }
+  KPI(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/KPIOperation'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  Daily(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/Dailyjob'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
   Goedit() {
     this.productService.changeMessage(this.DataRes[0].ID + "||" + this.DataRes[0].REQ_NUM)
     const dialogRef = this.matDialog.open(InfoEditstepComponent, {
       disableClose: true,
       width: '1000px',
-      height: '700px'
+      height: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');

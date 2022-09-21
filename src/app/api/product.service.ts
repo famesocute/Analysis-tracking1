@@ -239,4 +239,18 @@ export class ProductService {
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/33_TRACKING_ANALYSIS_SELECT_ALL_MYJOB.php?data1='+data1)
   
     }
+    TRACKING_ANALYSIS_SELECT_KPI_MONTH_YEAR(data1:any,data2:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_KPI_MONTH_YEAR Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/35_TRACKING_ANALYSIS_SELECT_KPI_MONTH_YEAR.php?data1='+data1+'&data2='+data2)
+  
+    }
+    TRACKING_ANALYSIS_SELECT_URGENT_BOOK() {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_URGENT_BOOK Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/34_TRACKING_ANALYSIS_SELECT_URGENT_BOOK.php')
+  
+    }    
 }

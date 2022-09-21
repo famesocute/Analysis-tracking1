@@ -19,10 +19,10 @@ export class EditBookingComponent implements OnInit {
   enddate1: any
 
   myControl = new FormControl();
-  options: string[] = ['Pornpimon Pengto', 'Soontree Chaiwut', 'Napapon',
-    'Parawee Tassaneekati ', 'Panudda Majan', 'Pichayapak Nantasai',
-    'Supakan Sriwichai ', 'Suticha Pringthai ', 'Thanyarat Sukkay ',
-    'Wanutsanun Hintuang'];
+  options: string[] = ['Soontree Chaiwut', 'Napapon',
+  'Parawee Tassaneekati', 'Panudda Majan', 'Gunyarat Prabhong',
+  'Supakan Sriwichai', 'Suticha Pringthai', 'Thanyarat Sukkay',
+  'Wanutsanun Hintuang'];
   filteredOptions!: Observable<string[]>;
 
   operator = ""

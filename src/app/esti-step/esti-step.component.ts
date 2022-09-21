@@ -324,7 +324,7 @@ export class EstiStepComponent implements OnInit {
     if(this.checklotno == true){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET  `PRE_ESTI_TECHNIQUE` = '" + val2 + "',`ESTI_STEP_TIME` = '" + date2 + "',`STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_CONFIRM + "', `STATUS_JOB` = '4' " +
+      " SET  `PRE_ESTI_TECHNIQUE` = '" + val2 + "',`ESTI_STEP_TIME` = '" + date2 + "',`STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "', `STATUS_JOB` = '4' " +
       " WHERE (`ID` = '"+this.DataRes[0].ID+"')  ; " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -353,6 +353,23 @@ export class EstiStepComponent implements OnInit {
   }
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
+  }
+  GoEquip(){
+    this.router.navigate(['/Equipment'])
+  }
+  KPI(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/KPIOperation'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  Daily(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/Dailyjob'])
+    }else{
+        window.alert("Only Q30 member")
+   }
   }
 
   countrow = 0

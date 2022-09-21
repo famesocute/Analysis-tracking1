@@ -70,6 +70,7 @@ filteredOptions3!: Observable<string[]>;
   NameConfirm = ""
   NameControl = ""
   month = ""
+  year : any
   holiday = ""
   checklotno = true
 
@@ -105,6 +106,9 @@ filteredOptions3!: Observable<string[]>;
     { data: 'Dust monitering', check: false },
     { data: 'C-SAM', check: false },
     { data: 'Waste water', check: false },
+    { data: 'FE-SEM', check: false },
+    { data: 'HPLC', check: false },
+    { data: 'CE', check: false },
     ];
 
   productForm: FormGroup;
@@ -299,7 +303,7 @@ filteredOptions3!: Observable<string[]>;
     console.log(val2)
     var qtest = ""
     qtest = qtest + "INSERT INTO `mtq10_project_tracking_analysis`.`data_all` " +
-      "(`STATUS_JOB`,`STETUS_PERSON`,`REQ_NUM`,`MONTH`, `TITLE`, `BACKGRUD`, `PURPOSE`, `HYPO`, `ANA_TYPE`,`ANA_TYPE2`, `ISSUE_DATE`, " +
+      "(`STATUS_JOB`,`STETUS_PERSON`,`REQ_NUM`,`MONTH`,`YEAR`, `TITLE`, `BACKGRUD`, `PURPOSE`, `HYPO`, `ANA_TYPE`,`ANA_TYPE2`, `ISSUE_DATE`, " +
       "`REQ_TER`, `PHONE`, `DEP_MENT`, `PRODUCT`, `ATTACH_FILE`, `REQ_ANA_TECHNI`,`REQ_ANA_TECHNI2`, `NUM_SAMPLE`" +
       ", `SEND_SAM_DATE`, `FINISH_DATE`, `HOLIDAY`, `PIORITY`, `REASON`,  `SAM_NAME`, " +
       "`COMM_SAM_INFOR`, `DANGER`, `SAM_AF_TEST`, `RELATE_MAT`, `KEY_CHARA`, `KEY_STATE`, " +
@@ -307,7 +311,7 @@ filteredOptions3!: Observable<string[]>;
       "`REVI_ANASEC_ANAL`, `REVI_REAPPROV_CHECK`, `REVI_REAPPROV_CONFIRM`, `REVI_REAPPROV_APPROV`," +
       "`REVI_CS_ISSUE`, `REVI_COMPLET_CLOSE`,`REVI_PAND_ISSUE_COM`,`REVI_PAND_ISSUE_CC`) " 
 
-      qtest = qtest + 'VALUES ("1","' + this.NameConfirm + '","' + this.RequestNo + '","' + this.month + '","' + this.Title + '","' + this.Background + '","' + this.Purpose + '","' + this.Hypothesis + '","' + this.Analysistype + '",' +
+      qtest = qtest + 'VALUES ("1","' + this.NameConfirm + '","' + this.RequestNo + '","' + this.month + '","' + this.year + '","' + this.Title + '","' + this.Background + '","' + this.Purpose + '","' + this.Hypothesis + '","' + this.Analysistype + '",' +
       ' "' + this.Analysistype2 + '","' + this.IssueDate + '","' + this.namelocal + '","' + this.Phone + '","' + this.departmentlocal + '","' + this.Product + '","1", "' + this.RequestTech + '","' + this.RequestTech2 + '",' +
       ' "' + this.Numsample + '","' + DatereceiveSam + '","' + DateEepectSam + '","' + this.holiday + '","' + this.Piority + '","' + this.Reason + '","' + val2 + '",' +
       ' "' + this.AnaComment + '","' + this.Dangerous + '","' + this.SamAftertest + '","' + this.Relatedmatters + '","' + this.KeywordCharact + '","' + this.KeywordState + '","' + this.KeywordPheno + '", ' +
@@ -318,12 +322,16 @@ if(this.checklotno == true){
   if(this.NameConfirm != "" ){
     if(this.Analysistype != "" ){
       if(this.holiday != "" ){
+        if(this.Product != ""){
   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
     console.log(data);
     sessionStorage.setItem("RequestNo", this.RequestNo);
   this.router.navigate(['/Addfile'])
     
   })
+}else{
+  window.alert("Please fill Product")
+}
 }else{
   window.alert("Please fill holiday")
 }
@@ -373,9 +381,11 @@ if(this.checklotno == true){
 
       const d = new Date();
       this.month = months[d.getMonth()];
+      this.year = d.getFullYear();
 
       console.log(date2);
       console.log(this.years);
+      console.log(this.year);
 
       var date3: any
 
@@ -509,5 +519,21 @@ if(this.checklotno == true){
   GoAnaNoCom(){
     this.router.navigate(['/AnahomeNotcom'])
   }
-
+  GoEquip(){
+    this.router.navigate(['/Equipment'])
+  }
+  KPI(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/KPIOperation'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
+  Daily(){
+    if(this.departmentlocal == 'MTQ00'){
+      this.router.navigate(['/Dailyjob'])
+    }else{
+        window.alert("Only Q30 member")
+   }
+  }
 }

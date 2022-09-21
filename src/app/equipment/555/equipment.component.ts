@@ -7,7 +7,7 @@ import {
   DayPilot,
   DayPilotCalendarComponent,
   DayPilotMonthComponent,
-  DayPilotNavigatorComponent,
+  DayPilotNavigatorComponent
 } from "@daypilot/daypilot-lite-angular";
 import { DataService2 } from "./data.service";
 import { MatDialog } from '@angular/material/dialog';
@@ -80,7 +80,6 @@ export class EquipmentComponent implements OnInit {
     showMonths: 1,
     cellWidth: 25,
     cellHeight: 25,
-    
     onVisibleRangeChanged: args => {
       this.loadEvents();
     }
@@ -91,17 +90,15 @@ export class EquipmentComponent implements OnInit {
   }
 
   changeDate(date: DayPilot.Date): void {
-    console.log(date)
-
     this.configDay.startDate = date;
     this.configWeek.startDate = date;
     this.configMonth.startDate = date;
     const unixTimestamp = Math.floor(date.getTime() / 1000);
     console.log(unixTimestamp+"000");
     this.setfirstWeek(unixTimestamp+"000")
+    var getses = sessionStorage.getItem("EQUIPMENT_SAVE")
+    this.onChange(getses)
     console.log(this.events)
-    this.onChange(sessionStorage.getItem("deviceValue_EQU"))
-    sessionStorage.setItem("unixTimestamp_EQU",unixTimestamp.toString())
     // console.log(this.events2)
   }
 
@@ -137,12 +134,10 @@ export class EquipmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    sessionStorage.setItem("EQUIPMENT_SAVE","")
     this.namelocal = localStorage.getItem("NAME");
     this.Codelocal = localStorage.getItem("EMPLOY_CODE");
     this.departmentlocal = localStorage.getItem("DEPARTMENT");
-
-    
-   
 
     if (this.namelocal != null) {
       this.isValid = true
@@ -155,26 +150,7 @@ export class EquipmentComponent implements OnInit {
       console.log(data);
       this.DataBooking = data
       // this.setfirstWeek()
-
       this.TableDateWeek = [[]]
-      console.log(sessionStorage.getItem("unixTimestamp_EQU"));
-      console.log(sessionStorage.getItem("deviceValue_EQU"));
-  
-      if(sessionStorage.getItem("unixTimestamp_EQU") != null && sessionStorage.getItem("deviceValue_EQU") != null) {
-        const unixTime = sessionStorage.getItem("unixTimestamp_EQU")+"000";
-
-        console.log(unixTime);
-        const dateObject = new Date(parseInt(unixTime))
-        const dateObject2 = new DayPilot.Date(dateObject)
-        console.log(dateObject2);
-        // this.nav.config(dateObject2);
-        // console.log(this.nav.control);
-
-        this.changeDate(dateObject2)
-        this.onChange(sessionStorage.getItem("deviceValue_EQU"))
-        console.log("OK");
-      }
-  
       this.loading = false
     })
   }
@@ -811,8 +787,8 @@ export class EquipmentComponent implements OnInit {
             table = table + '"Title":"' + first.TITLE + '",'
             table = table + '"Request_No":"' + first.REQ_NUM + '",'
             table = table + '"Number_Sample":"' + first.SAMPLE_NUM + '",'
-            table = table + '"Start":"' + first.DATE_BOOKING_START + "  " + first.TIME_BOOKING_START +  '",'
-            table = table + '"End":"' + first.DATE_BOOKING_END +  "  " + first.TIME_BOOKING_END +  '",'
+            table = table + '"Start":"' + first.DATE_BOOKING_START + '",'
+            table = table + '"End":"' + first.DATE_BOOKING_END + '",'
             table = table + '"ID_BOOKING":"' + first.ID_BOOKING + '",'
             table = table + '"PIC":"' + first.PIC.trim() + '",'
             table = table + '"Operation":"' + first.OPERATER + '"},'
@@ -844,9 +820,6 @@ export class EquipmentComponent implements OnInit {
   GoAnaNoCom() {
     this.router.navigate(['/AnahomeNotcom'])
   }
-  GoEquip(){
-    this.router.navigate(['/Equipment'])
-  }
   Logout() {
     localStorage.removeItem("NAME");
     localStorage.removeItem("EMPLOY_CODE");
@@ -859,21 +832,6 @@ export class EquipmentComponent implements OnInit {
   GoSignup() {
     this.router.navigate(['/Signup'])
   }
-  KPI(){
-    if(this.departmentlocal == 'MTQ00'){
-      this.router.navigate(['/KPIOperation'])
-    }else{
-        window.alert("Only Q30 member")
-   }
-  }
-  Daily(){
-    if(this.departmentlocal == 'MTQ00'){
-      this.router.navigate(['/Dailyjob'])
-    }else{
-        window.alert("Only Q30 member")
-   }
-  }
-  
   loadEvents(): void {
 
     const from = this.nav.control.visibleStart();
@@ -912,8 +870,14 @@ export class EquipmentComponent implements OnInit {
   }
 
   onChange(deviceValue: any) {
-    sessionStorage.setItem("deviceValue_EQU",deviceValue.toString())
+    var getses = sessionStorage.getItem("EQUIPMENT_SAVE")
+    if (getses == deviceValue){
 
+    }
+    else{
+      sessionStorage.setItem("EQUIPMENT_SAVE",deviceValue)
+    }
+   
     console.log(deviceValue);
     this.namequip = deviceValue
     console.log(this.namequip)
@@ -1015,8 +979,6 @@ export class EquipmentComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       console.log(result);
-
-      location.reload();
     });
   }
   delete(ID_BOOKING: string) {
@@ -1045,7 +1007,6 @@ export class EquipmentComponent implements OnInit {
     // this.productService.changeMessage(ID_BOOKING)
     // window.open('http://163.50.57.95:82/Tracking_Analysis/BooingEquip?id=' + ID_BOOKING);
     if (this.namequip != '') {
-      if (this.departmentlocal == 'MTQ00') {
       this.productService.changeMessage(this.namequip)
       const dialogRef = this.matDialog.open(AddBookingEquipmentComponent, {
 
@@ -1056,10 +1017,7 @@ export class EquipmentComponent implements OnInit {
         console.log('The dialog was closed');
         console.log(result);
       });
-    }else{
-      window.alert("Edit only Q30 member")
     }
-  }
     else {
       window.alert("โปรดเลือก Equipment")
     }

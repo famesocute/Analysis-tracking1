@@ -22,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
+import * as CanvasJSAngularChart from '../assets/Tracking_web/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -69,6 +71,7 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { AddOperationtimeComponent } from './dialog/add-operationtime/add-operationtime.component';
 import { AddReporttimeComponent } from './dialog/add-reporttime/add-reporttime.component';
 import { KPIOperationComponent } from './kpi-operation/kpi-operation.component';
+import { AddBookingEquipmentComponent } from './dialog/add-booking-equipment/add-booking-equipment.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +114,8 @@ import { KPIOperationComponent } from './kpi-operation/kpi-operation.component';
     AddOperationtimeComponent,
     AddReporttimeComponent,
     KPIOperationComponent,
+    CanvasJSChart,
+    AddBookingEquipmentComponent
   ],
   imports: [
     BrowserModule,

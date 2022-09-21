@@ -11,9 +11,10 @@
       <div class="col-xl-7 center" style="padding :15px 0 ;">
         <!-- <button mat-button>Home</button> -->
         <button mat-button (click)="GoAnaNoCom()">Analysis request form</button>
-        <button mat-button>Equipment Calendar</button>
-        <button mat-button>Job tracking</button>
+        <button mat-button (click)="GoEquip()">Equipment Calendar</button>
         <button mat-button>Search previous report</button>
+        <button mat-button (click)="KPI()">Analysis index (KPI)</button>
+        <button mat-button (click)="Daily()">Daily job</button>
       </div>
 
       <div class="col-xl-4 center " *ngIf="isValid;else other_content">
@@ -422,7 +423,7 @@
         </mat-card-content>
       </mat-card>
 
-      <mat-card class="card1">
+      <!-- <mat-card class="card1">
         <mat-card-title-group>
           <mat-card-title>Label of Samples</mat-card-title>
         </mat-card-title-group>
@@ -436,7 +437,7 @@
           </div>
         
         </mat-card-content>
-      </mat-card>
+      </mat-card> -->
 
       <div class="center" style="padding-bottom: 20px;">
         <button mat-flat-button class="Buttonaddquetion3 rounded-circle" (click)="myFunction()">

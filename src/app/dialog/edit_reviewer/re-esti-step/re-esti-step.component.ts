@@ -17,10 +17,18 @@ export class ReEstiStepComponent implements OnInit {
   ComIssuer = ""
   NameConfirm = ""
   ComConfirm = ""
+  NameControl = ""
 
   myControl = new FormControl();
   options: string[] = [];
   filteredOptions!: Observable<string[]>;
+  myControl3 = new FormControl();
+  options3: string[] = [
+    'Wanutsanun Hintuang <wanutsanun.hin@murata.com>', 'Parawee Tassaneekati <parawee.tas@murata.com>', 'Suticha Pringthai <suticha.pri@murata.com>',
+    'Thanyarat Sukkay <thanyarat.suk@murata.com>', 'Supakan Sriwichai <supakan.sriwi@murata.com>', 'Panudda Majan <panudda.maj@murata.com>',
+    'Pichayapak Nantasai <pichayapak.nan@murata.com>'];
+  filteredOptions3!: Observable<string[]>;
+
   EMAIL_CC: string[] = [];
 
   loading = true
@@ -40,6 +48,9 @@ export class ReEstiStepComponent implements OnInit {
       }
       if (this.DataRes[0].REVI_PAND_CONFIRM_COM != null) {
         this.ComConfirm = this.DataRes[0].REVI_PAND_CONFIRM_COM;
+      }
+      if(this.DataRes[0].REVI_ANASEC_CONTROL != null){
+        this.NameControl = this.DataRes[0].REVI_ANASEC_CONTROL;
       }
 
         this.productService.TRACKING_ANALYSIS_READ_EXCEL().subscribe((data: {}) => {
@@ -63,6 +74,10 @@ export class ReEstiStepComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value)),
     );
+    this.filteredOptions3 = this.myControl3.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter3(value)),
+    );
 
     this.loading = false
   }
@@ -71,6 +86,12 @@ export class ReEstiStepComponent implements OnInit {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  private _filter3(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options3.filter(option3 => option3.toLowerCase().includes(filterValue));
+
   }
 
   countrow = 0
@@ -90,14 +111,14 @@ export class ReEstiStepComponent implements OnInit {
   edit(){
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "',`REVI_PAND_CONFIRM_CC1` = '" + this.EMAIL_CC + "',`STETUS_PERSON` = '" + this.ComConfirm + "' " +
+      " SET `REVI_PAND_CONFIRM_COM` = '" + this.ComConfirm + "',`REVI_PAND_CONFIRM_CC1` = '" + this.EMAIL_CC + "',`STETUS_PERSON` = '" + this.NameControl + "',`REVI_ANASEC_CONTROL` = '" + this.NameControl + "' " +
       "  WHERE (`ID` = '"+this.DataRes[0].ID+"'); " 
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
       console.log(data); 
     })
 
-    var qtest2 = " "+this.DataRes[0].REVI_PAND_CONFIRM+";||"+this.EMAIL_CC+"||Q-Analysis Request ->(Approve Request Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve request.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Estistep?id="+this.DataRes[0].ID+" "
+    var qtest2 = " "+this.NameControl+";||"+this.EMAIL_CC+"||Q-Analysis Request ->(Approve Request Status)Request NO."+this.DataRes[0].REQ_NUM+":"+this.DataRes[0].TITLE+"||Please approve request.Click the attached link to view contents http://163.50.57.95:82/Tracking_Analysis/Estistep?id="+this.DataRes[0].ID+" "
     console.log(qtest2);
     this.productService.TRACKING_ANALYSIS_SEND_MAIL(qtest2).subscribe((data: {}) => {
       console.log(data); 
