@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { auto } from '@popperjs/core';
 import { ProductService } from '../api/product.service';
 
 @Component({
@@ -319,6 +320,10 @@ export class KPIOperationComponent implements OnInit {
   chartOptions7:any
   chartOptions8:any
 
+  Month2 = "7"
+  Year2 = "2022"
+  DataKPI_EQUIP : any
+
   constructor(public productService: ProductService) { }
 
   ngOnInit(): void {
@@ -330,13 +335,317 @@ export class KPIOperationComponent implements OnInit {
     this.Analyzer_fac()
     this.Cspoint()
     this.Machine_ser()
+
+  
   }
 
   Reset(){
     location.reload();
   }
+  sumtime(timelast : any,time1 : any,time2 : any,time3 : any){
 
+    time1 = time1 * 3600
+    time2 = time2 * 60
+    timelast = parseInt(timelast) + parseInt(time1) + parseInt(time2) + parseInt(time3)
+
+    return(timelast)
+  }
+
+  oper_time:any = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
   Search() {
+    console.log();
+    this.productService.TRACKING_ANALYSIS_SELECT_KPI_MONTH_YEAR_BOOKING(this.Year, this.getMonthFromString(this.Month)).subscribe((data: {}) => {
+      this.DataKPI_EQUIP = data
+      console.log(this.DataKPI_EQUIP);
+      var a
+      var lasttime = 0
+      var lasttime2 = 0
+      for(a in this.DataKPI_EQUIP){
+        console.log(this.DataKPI_EQUIP[a].EQUIPMENT)
+        if (this.DataKPI_EQUIP[a].EQUIPMENT == "SEM"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[0] =this.oper_time[0]+ lasttime
+            
+            
+          }
+          lasttime = 0
+          
+        }
+        else if (this.DataKPI_EQUIP[a].EQUIPMENT == "Cutting"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[1] =this.oper_time[1]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "Polishing"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[2] =this.oper_time[2]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "RESIN_MOLDING"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[3] =this.oper_time[3]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "Ion-milling" || this.DataKPI_EQUIP[a].EQUIPMENT == "Cross-milling"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[4] =this.oper_time[4]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "VHX"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[5] =this.oper_time[5]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "Metallurgical"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[6] =this.oper_time[6]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "EDXRF_RoHS" || this.DataKPI_EQUIP[a].EQUIPMENT == "EDXRF"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[7] =this.oper_time[7]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "ICP"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[8] =this.oper_time[8]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "C_SAM"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[9] =this.oper_time[9]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "CS Analyzer"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[10] =this.oper_time[10]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "FTIR"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[11] =this.oper_time[11]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "GCMS"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[12] =this.oper_time[12]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "DSC"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[13] =this.oper_time[13]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "TG-DTA"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[14] =this.oper_time[14]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "Solderwet"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[15] =this.oper_time[15]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "Micro-probe"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[16] =this.oper_time[16]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "FE-SEM"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[17] =this.oper_time[17]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "HPLC"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[18] =this.oper_time[18]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "CE"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[19] =this.oper_time[19]+ lasttime
+          }
+          lasttime = 0
+          
+        }else if (this.DataKPI_EQUIP[a].EQUIPMENT == "X-ray2D" || this.DataKPI_EQUIP[a].EQUIPMENT == "X-ray3D" || this.DataKPI_EQUIP[a].EQUIPMENT == "X-ray reflow"){
+
+          var timez = this.DataKPI_EQUIP[a].OPERATION_TIME.split(":")
+          console.log(timez)
+          if (timez != 0) {
+            console.log(this.sumtime(lasttime,timez[0],timez[1],timez[2]))
+            lasttime = this.sumtime(lasttime,timez[0],timez[1],timez[2])
+            lasttime = lasttime/3600
+            console.log(lasttime)
+            this.oper_time[21] =this.oper_time[21]+ lasttime
+          }
+          lasttime = 0
+          
+        }
+        
+      }
+
+      console.log(this.oper_time[0])
+      console.log(this.oper_time)
+      
+    })
 
     this.productService.TRACKING_ANALYSIS_SELECT_KPI_MONTH_YEAR(this.Year, this.Month).subscribe((data: {}) => {
       this.DataKPI = data
@@ -1043,7 +1352,6 @@ export class KPIOperationComponent implements OnInit {
           // console.log(result)
 
         }
-
         this.JobCatagorize()
         this.RequestEachFactory()
         this.Piority()
@@ -1056,6 +1364,14 @@ export class KPIOperationComponent implements OnInit {
     })
   }
 
+ getMonthFromString(Month:any){
+
+    var d = Date.parse(Month + "1, 2012");
+    if(!isNaN(d)){
+       return new Date(d).getMonth() + 1;
+    }
+    return -1;
+  }
   JobCatagorize() {
 
     this.chartOptions1 = {
@@ -1614,7 +1930,7 @@ export class KPIOperationComponent implements OnInit {
     this.chartOptions7 = {
       theme: "light2",
       title:{
-        text: "Angular Column Chart"  
+        text: "Machine operation time (unit hrs)"  
       },
       animationEnabled: true,
       axisY: {
@@ -1623,42 +1939,28 @@ export class KPIOperationComponent implements OnInit {
       data: [{        
         type: "column",
         dataPoints: [
-          { label: "SEM", y: 20 },
-          { label: "Cutting", y: 24 },
-          { label: "Polishing", y: 29 },
-          { label: "RESIN_MOLDING", y: 73 },
-          { label: "Ion-milling", y: 20 },
-          { label: "VHX", y: 29 },
-          { label: "Metallurgical", y: 73 },
-          { label: "EDXRF", y: 73 },
-          { label: "ICP", y: 20 },
-          { label: "C_SAM", y: 24 },
-          { label: "CS Analyzer", y: 29 },
-        ]
-      }]
-    }	
-    this.chartOptions8 = {
-      theme: "light2",
-      title:{
-        text: "Angular Column Chart"  
-      },
-      animationEnabled: true,
-      axisY: {
-        maximum: 120
-      },
-      data: [{        
-        type: "column",
-        dataPoints: [
-          { label: "FTIR", y: 73 },
-          { label: "GCMS", y: 73 },
-          { label: "DSC", y: 100 },
-          { label: "TG-DTA", y: 73 },
-          { label: "Solderwet", y: 73 },
-          { label: "Micro-probe", y: 20 },
-          { label: "FE-SEM", y: 73 },
-          { label: "HPLC", y: 50 },
-          { label: "CE", y: 73 },
-          { label: "Other", y: 73 },
+          { label: "X-ray", y: this.oper_time[21] },
+          { label: "SEM", y: this.oper_time[0] },
+          { label: "Cutting", y: this.oper_time[1] },
+          { label: "Polishing", y: this.oper_time[2] },
+          { label: "RESIN_MOLDING", y: this.oper_time[3] },
+          { label: "Ion-milling", y: this.oper_time[4] },
+          { label: "VHX", y: this.oper_time[5] },
+          { label: "Metallurgical", y: this.oper_time[6] },
+          { label: "EDXRF", y: this.oper_time[7] },
+          { label: "ICP", y: this.oper_time[8] },
+          { label: "C_SAM", y: this.oper_time[9] },
+          { label: "CS", y: this.oper_time[10] },
+          { label: "FTIR", y: this.oper_time[11] },
+          { label: "GCMS", y: this.oper_time[12] },
+          { label: "DSC", y: this.oper_time[13] },
+          { label: "TG-DTA", y: this.oper_time[14] },
+          { label: "Solderwet", y: this.oper_time[15] },
+          { label: "Micro-probe", y: this.oper_time[16] },
+          { label: "FE-SEM", y: this.oper_time[17] },
+          { label: "HPLC", y: this.oper_time[18] },
+          // { label: "CE", y: this.oper_time[19] },
+          { label: "Other", y: this.oper_time[20] },
         ]
       }]
     }	
