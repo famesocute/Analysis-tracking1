@@ -73,6 +73,9 @@ export class PaddingrequeComponent implements OnInit {
       this.DataRes = data
       
       if(this.DataRes[0].STATUS_JOB == '1'){
+
+        
+
         this.open = true
       }else{
         window.location.href ='http://163.50.57.95:82/Tracking_Analysis/AnahomeNotcom'
@@ -291,6 +294,7 @@ export class PaddingrequeComponent implements OnInit {
    }
   }
   editinfo(){
+    if (this.namelocal == this.DataRes[0].REVI_PAND_ISSUER) {
       this.productService.changeMessage(this.DataRes[0].ID)
         const dialogRef = this.matDialog.open(EditinfoComponent, {
           disableClose : true,
@@ -303,6 +307,9 @@ export class PaddingrequeComponent implements OnInit {
   
         location.reload();
         });
+      }else{
+        window.alert("Only issuer can edit")
+   }
   }
   editreviewer(){
     this.productService.changeMessage(this.DataRes[0].ID)

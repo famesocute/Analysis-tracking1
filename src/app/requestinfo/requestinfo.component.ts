@@ -75,6 +75,7 @@ export class RequestinfoComponent implements OnInit {
   approvalcc = ""
   summarydetail = ""
   finishDate = ""
+  startDate = ""
   Totalcostfinish = 0
   datereceivesam = ""
 
@@ -1008,7 +1009,11 @@ export class RequestinfoComponent implements OnInit {
       var finishDate1 = this.finishDate.toLocaleString()
       var finishDate2 = finishDate1.split(",");
       console.log(finishDate2[0])
-      if (finishDate2[0] != "") {
+
+      var startDate1 = this.startDate.toLocaleString()
+      var startDate2 = startDate1.split(",");
+      console.log(startDate2[0])
+      if (finishDate2[0] != "" && startDate2[0] != "") {
 
         console.log(this.summarydetail)
 
@@ -1017,7 +1022,7 @@ export class RequestinfoComponent implements OnInit {
           " SET `STATUS_JOB` = '6', `REVI_REAPPROV_CHECK` = '" + this.Check + "', `REVI_REAPPROV_CONFIRM` = '" + this.Confirm + "', " +
           " `REVI_REAPPROV_APPROV` = '" + this.approval + "', `REVI_ANASEC_ANAL_COM` = '" + this.ComAnalyzer + "', `STETUS_PERSON` = '" + this.Check + "'," +
           " `REVI_ANASEC_ANAL_CC` = '" + this.EMAIL_CC + "', `REVI_ANASEC_ANAL_TIME` = '" + date2 + "'," +
-          " `SUMMARY_FINISH` = '" + finishDate2[0] + "', `SUMMARY_DETAIL` = '" + this.summarydetail + "' " +
+          " `SUMMARY_STRAT` = '" + startDate2[0] + "', `SUMMARY_FINISH` = '" + finishDate2[0] + "', `SUMMARY_DETAIL` = '" + this.summarydetail + "' " +
           " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
         console.log(qtest);
         this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -1045,9 +1050,12 @@ export class RequestinfoComponent implements OnInit {
     }
   }
   NoCheckerApprov() {
+    let date: Date = new Date();
+      var date2 = date.toLocaleString()
+
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "' " +
+      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "', `APPROVE_REPORT_DATE` = '" + date2 + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -1107,9 +1115,12 @@ export class RequestinfoComponent implements OnInit {
   }
 
   NoConfirmApprov() {
+    let date: Date = new Date();
+      var date2 = date.toLocaleString()
+
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "' " +
+      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "', `APPROVE_REPORT_DATE` = '" + date2 + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -1171,9 +1182,12 @@ export class RequestinfoComponent implements OnInit {
   }
 
   NoApproverApprov() {
+    let date: Date = new Date();
+      var date2 = date.toLocaleString()
+      
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
-      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "' " +
+      " SET `STATUS_JOB` = '9', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "', `APPROVE_REPORT_DATE` = '" + date2 + "' " +
       " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
     console.log(qtest);
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -1194,7 +1208,7 @@ export class RequestinfoComponent implements OnInit {
       var qtest = ""
       qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`data_all` " +
         " SET `STATUS_JOB` = '9', `REVI_REAPPROV_APPROV_COM` = '" + this.comapproval + "', `REVI_REAPPROV_APPROV_CC` = '" + this.EMAIL_CC + "', " +
-        " `REVI_REAPPROV_APPROV_TIME` = '" + date2 + "', `REVISE_STATUS` = '2', `SUMMARY_DETAIL` = '" + this.summarydetail + "', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "' " +
+        " `REVI_REAPPROV_APPROV_TIME` = '" + date2 + "', `APPROVE_REPORT_DATE` = '" + date2 + "', `REVISE_STATUS` = '2', `SUMMARY_DETAIL` = '" + this.summarydetail + "', `STETUS_PERSON` = '" + this.DataRes[0].REVI_PAND_ISSUER + "' " +
         " WHERE (`ID` = '" + this.DataRes[0].ID + "')  ; "
       console.log(qtest);
       this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
@@ -1279,7 +1293,7 @@ export class RequestinfoComponent implements OnInit {
   }
 
   editinfo() {
-
+    if (this.namelocal == this.DataRes[0].REVI_PAND_ISSUER) {
     this.productService.changeMessage(this.DataRes[0].ID)
     const dialogRef = this.matDialog.open(EditinfoComponent, {
       disableClose: true,
@@ -1292,6 +1306,9 @@ export class RequestinfoComponent implements OnInit {
 
       this.ngOnInit()
     });
+  }else{
+    window.alert("Only issuer can edit")
+}
   }
   editreviewer(x: any) {
     this.productService.changeMessage(this.DataRes[0].ID + "||" + x)

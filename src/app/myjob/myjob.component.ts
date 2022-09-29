@@ -45,6 +45,7 @@ export class MyjobComponent implements OnInit {
         this.isValid = true
         this.nameonly = this.namelocal.substring(0, this.namelocal.indexOf('<'));
       }
+      console.log(this.namelocal);
 
       var d = new Date();
       this.thismonth = d.getMonth();

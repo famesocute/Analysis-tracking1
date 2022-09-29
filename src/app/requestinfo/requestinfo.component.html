@@ -513,14 +513,23 @@
               </mat-card-title-group>
               <mat-card-content>
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <br>
                     Receive sample date : {{this.DataRes[0].DATE_RECEIVE_SAM_REAL}}
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     
                     <mat-form-field color="accent" appearance="outline">
-                      <mat-label>Expected finish date:</mat-label>
+                      <mat-label>Start date:</mat-label>
+                      <input matInput [matDatepicker]="picker3" [(ngModel)]="this.startDate">
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3 color="primary"></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-4">
+                    
+                    <mat-form-field color="accent" appearance="outline">
+                      <mat-label>Finish date:</mat-label>
                       <input matInput [matDatepicker]="picker2" [(ngModel)]="this.finishDate">
                       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                       <mat-datepicker #picker2 color="primary"></mat-datepicker>
@@ -746,8 +755,11 @@
                   <div class="col-sm-4">
                     Send sample date: {{this.DataRes[0].DATE_RECEIVE_SAM_REAL}}
                   </div>
-                  <div class="col-sm-8">
-                    Expected finish date: {{this.DataRes[0].SUMMARY_FINISH}}
+                  <div class="col-sm-4">
+                    Start date: {{this.DataRes[0].SUMMARY_STRAT}}
+                  </div>
+                  <div class="col-sm-4">
+                    Finish date: {{this.DataRes[0].SUMMARY_FINISH}}
                   </div>
                 </div>
 

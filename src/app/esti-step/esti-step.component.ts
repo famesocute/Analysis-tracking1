@@ -424,7 +424,7 @@ export class EstiStepComponent implements OnInit {
     window.open("http://163.50.57.95:82/Tracking_Analysis/Steppadding?id="+this.DataRes[0].ID);
   }
   editinfo(){
-  
+    if (this.namelocal == this.DataRes[0].REVI_PAND_ISSUER) {
     this.productService.changeMessage(this.DataRes[0].ID)
       const dialogRef = this.matDialog.open(EditinfoComponent, {
         disableClose : true,
@@ -437,6 +437,9 @@ export class EstiStepComponent implements OnInit {
 
       this.ngOnInit()
       });
+    }else{
+      window.alert("Only issuer can edit")
+ }
     
 }
 editreviewer1(){

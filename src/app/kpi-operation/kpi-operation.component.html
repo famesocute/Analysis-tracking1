@@ -10,7 +10,7 @@
       <br>
       <br>
       <div class="row">
-        <div class="col-xl-2">
+        <div class="col-xl-3">
           <mat-form-field appearance="outline">
             <mat-label>Month</mat-label>
             <mat-hint><p style="color: #880808 ;">*Have to reset ->Select date -> click search(If not data will wrong)</p></mat-hint>
@@ -30,7 +30,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-xl-2">
+        <div class="col-xl-3">
           <mat-form-field appearance="outline">
             <mat-label>Year</mat-label>
             <mat-select [(ngModel)]="this.Year">
@@ -47,7 +47,7 @@
             <button mat-raised-button color="primary" (click)="Search()">Search</button>
           </div>
         </div>
-        <div class="col-xl-7">
+        <div class="col-xl-5">
           <div style="padding-top: 10px;">
             <button mat-raised-button color="warn" (click)="Reset()">Reset</button>
           </div>
@@ -159,6 +159,17 @@
               </div>
             </div>          
           </div>
+          <br>
+          <div>
+            <b>3. Summary KPI (Excel file)</b>
+          </div>
+          <!-- <div>- By Job categorize</div> -->
+          <br>
+          <h3>3.1 Analysis_Request : </h3>
+          <button (click)="download()"> Download </button>
+          <br>
+          <br>
+          <h3>3.2 Equipment OP : </h3>
     </div>
 
 

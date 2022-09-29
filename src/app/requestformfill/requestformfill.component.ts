@@ -188,7 +188,9 @@ filteredOptions3!: Observable<string[]>;
   removeQuantity(i: number) {
     this.quantities().removeAt(i);
   }
-
+  Labscope(){
+    window.open("http://asean.murata.co.jp/orgs/CEAB015M0/Pages/Update-lab-scope-2022_2.aspx");
+  }
 
 
   // seach box
@@ -323,12 +325,16 @@ if(this.checklotno == true){
     if(this.Analysistype != "" ){
       if(this.holiday != "" ){
         if(this.Product != ""){
+          if(DatereceiveSam != DateEepectSam){
   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
     console.log(data);
     sessionStorage.setItem("RequestNo", this.RequestNo);
   this.router.navigate(['/Addfile'])
     
   })
+}else{
+  window.alert("Please select another expected finish date.")
+}
 }else{
   window.alert("Please fill Product")
 }

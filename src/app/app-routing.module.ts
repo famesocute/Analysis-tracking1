@@ -6,7 +6,6 @@ import { RequestformfillComponent } from './requestformfill/requestformfill.comp
 import { QuestionComponent } from './question/question.component';
 import { AnswerPageComponent } from './answer-page/answer-page.component';
 import { BooingEquipComponent } from './booing-equip/booing-equip.component';
-import { CSresultComponent } from './csresult/csresult.component';
 import { SteppaddingComponent } from './steppadding/steppadding.component';
 import { EstiStepComponent } from './esti-step/esti-step.component';
 import { EstiCostComponent } from './esti-cost/esti-cost.component';
@@ -45,7 +44,6 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'Question', component: QuestionComponent },
 { path: 'AnswerPage', component: AnswerPageComponent },
 { path: 'BooingEquip', component: BooingEquipComponent },
-{ path: 'CSresult', component: CSresultComponent },
 { path: 'Steppadding', component: SteppaddingComponent },
 { path: 'Estistep', component: EstiStepComponent },
 { path: 'Esticost', component: EstiCostComponent },

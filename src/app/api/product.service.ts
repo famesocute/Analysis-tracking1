@@ -260,4 +260,50 @@ export class ProductService {
       return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/36_TRACKING_ANALYSIS_SELECT_KPI_MONTH_YEAR_BOOKING.php?data1='+data1+'&data2='+data2)
   
     } 
+    TRACKING_ANALYSIS_SELECT_KPI_OUTPUT_JOB(data1:any,data2:any) {
+  
+      console.log("TRACKING_ANALYSIS_SELECT_KPI_OUTPUT_JOB Loop ")
+  
+      return this.http.get('http://163.50.57.95/php_app/Q10_API/Tracking_Analysis/38_TRACKING_ANALYSIS_SELECT_KPI_OUTPUT_JOB.php?data1='+data1+'&data2='+data2)
+  
+    } 
+
+    //----------------------------------------------------------------------------------
+    downloadFile(data : any, filename='data') {
+      let csvData = this.ConvertToCSV(data, ['PS_ratio','CS_score', '_1Day', '_2to3Days', 'More_3Day','Total_request', 'Normal', 'Urgent', 'Receive_job_per_day','Output_job_per_day', 'Customer_complaint', 'NC', 'Defective','Material_eva', 'Process_eva', 'Product_eva', 'RoHS_Special','Other', 'Total_300', 'Total_400', 'Total_500','Total_600', 'Total_700', 'Total_800', 'Total_900','Total_6A0', 'Total_9A0', 'Total_SGA', 'Normal_300','Normal_400', 'Normal_500', 'Normal_600', 'Normal_700','Normal_800', 'Normal_900', 'Normal_6A0', 'Normal_9A0','Normal_SGA', 'Urgent_300', 'Urgent_400', 'Urgent_500','Urgent_600', 'Urgent_700', 'Urgent_800', 'Urgent_900', 'Urgent_6A0', 'Urgent_9A0', 'Urgent_SGA']);
+      console.log(csvData)
+      let blob = new Blob(['\ufeff' + csvData], { type: 'text/csv;charset=utf-8;' });
+      let dwldLink = document.createElement("a");
+      let url = URL.createObjectURL(blob);
+      let isSafariBrowser = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1;
+      if (isSafariBrowser) {  //if Safari open in new window to save file with random filename.
+          dwldLink.setAttribute("target", "_blank");
+      }
+      dwldLink.setAttribute("href", url);
+      dwldLink.setAttribute("download", filename + ".csv");
+      dwldLink.style.visibility = "hidden";
+      document.body.appendChild(dwldLink);
+      dwldLink.click();
+      document.body.removeChild(dwldLink);
+  }
+ConvertToCSV(objArray: any, headerList: any) {
+       let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+       let str = '';
+       let row = 'S.No,';
+for (let index in headerList) {
+           row += headerList[index] + ',';
+       }
+       row = row.slice(0, -1);
+       str += row + '\r\n';
+       for (let i = 0; i < array.length; i++) {
+           let line = (i+1)+'';
+           for (let index in headerList) {
+              let head = headerList[index];
+line += ',' + array[i][head];
+           }
+           str += line + '\r\n';
+       }
+       return str;
+   }
+      //----------------------------------------------------------------------------------
 }
