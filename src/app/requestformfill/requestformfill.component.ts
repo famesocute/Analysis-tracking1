@@ -227,7 +227,38 @@ filteredOptions3!: Observable<string[]>;
   getdataSamAf(value: any) {
     this.SamAftertest = value
   }
- 
+  onChange(deviceValue: any) {
+    if(this.Sendsampledate != ""){
+      if(this.EepectedDate != ""){
+
+        console.log(this.Sendsampledate)
+        console.log(this.EepectedDate)
+
+      }else{
+        window.alert("Please select expected finish date")
+      }
+    }else{
+      window.alert("Please select send sample date")
+    }
+    
+  }
+  msToTime(s: any) {
+    var ms = s % 1000;
+    s = (s - ms) / 1000;
+    var secs = s % 60;
+    s = (s - secs) / 60;
+    var mins = s % 60;
+    var hrs = (s - mins) / 60;
+
+    return hrs + ':' + mins + ':' + secs;
+  }
+
+  dateto24(time1: any) {
+    var time2 = time1.split(":")
+    var time3 = parseInt(time2[0]) + 12
+    console.log(time3)
+    return (time3 + ":" + time2[1] + ":" + time2[2])
+  }
 
   // check box
 
@@ -276,14 +307,14 @@ filteredOptions3!: Observable<string[]>;
   }
 
   sentinfo(){
-    var DatereceiveSam = ""
+    var DatereceiveSam 
     var Sendsampledate2 = this.Sendsampledate.toLocaleString()
-    DatereceiveSam = Sendsampledate2.substring(0, 9)
+    DatereceiveSam = Sendsampledate2.split(",")
     console.log(DatereceiveSam)
 
-    var DateEepectSam = ""
+    var DateEepectSam 
     var DateEepectSam2 = this.EepectedDate.toLocaleString()
-    DateEepectSam = DateEepectSam2.substring(0, 9)
+    DateEepectSam = DateEepectSam2.split(",")
     console.log(DateEepectSam)
 
     var val2 = ""
@@ -315,7 +346,7 @@ filteredOptions3!: Observable<string[]>;
 
       qtest = qtest + 'VALUES ("1","' + this.NameConfirm + '","' + this.RequestNo + '","' + this.month + '","' + this.year + '","' + this.Title + '","' + this.Background + '","' + this.Purpose + '","' + this.Hypothesis + '","' + this.Analysistype + '",' +
       ' "' + this.Analysistype2 + '","' + this.IssueDate + '","' + this.namelocal + '","' + this.Phone + '","' + this.departmentlocal + '","' + this.Product + '","1", "' + this.RequestTech + '","' + this.RequestTech2 + '",' +
-      ' "' + this.Numsample + '","' + DatereceiveSam + '","' + DateEepectSam + '","' + this.holiday + '","' + this.Piority + '","' + this.Reason + '","' + val2 + '",' +
+      ' "' + this.Numsample + '","' + DatereceiveSam[0] + '","' + DateEepectSam[0] + '","' + this.holiday + '","' + this.Piority + '","' + this.Reason + '","' + val2 + '",' +
       ' "' + this.AnaComment + '","' + this.Dangerous + '","' + this.SamAftertest + '","' + this.Relatedmatters + '","' + this.KeywordCharact + '","' + this.KeywordState + '","' + this.KeywordPheno + '", ' +
       ' "", "' + this.namelocal + '","' + this.NameConfirm + '","' + this.NameControl + '","","","","","","","' + this.ComIssuer + '","' + this.EMAIL_CC + '"  );'
     console.log(qtest);
@@ -325,7 +356,7 @@ if(this.checklotno == true){
     if(this.Analysistype != "" ){
       if(this.holiday != "" ){
         if(this.Product != ""){
-          if(DatereceiveSam != DateEepectSam){
+          if(DatereceiveSam[0] != DateEepectSam[0]){
   this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {
     console.log(data);
     sessionStorage.setItem("RequestNo", this.RequestNo);

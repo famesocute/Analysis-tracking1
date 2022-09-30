@@ -20,6 +20,7 @@ export class KPIOperationComponent implements OnInit {
   period: any
   CStotal = 0
   Request_CS = 0
+  approve_report = 0
 
   overdue = 0
   Gooddue = 0
@@ -577,6 +578,8 @@ export class KPIOperationComponent implements OnInit {
           if (this.DataKPI[i].APPROVE_REPORT_DATE == "" || this.DataKPI[i].APPROVE_REPORT_DATE == null) {
 
           } else {
+            this.approve_report = this.approve_report + 1
+
             console.log(this.DataKPI[i].APPROVE_REPORT_DATE);
             var timecalEND = this.DataKPI[i].APPROVE_REPORT_DATE.split(" ")
             if (timecalEND[2] == "PM") {
@@ -1400,11 +1403,11 @@ export class KPIOperationComponent implements OnInit {
         this.Out_per_day = this.Total_output_re / 22
         console.log(this.Out_per_day)
 
-        var oneday = this.period_type[0] / this.Total_re
+        var oneday = (this.period_type[0] / this.approve_report)*100
         console.log(oneday)
-        var twoday = this.period_type[1] / this.Total_re
+        var twoday = (this.period_type[1] / this.approve_report)*100
         console.log(twoday)
-        var morethreeday = this.period_type[2] / this.Total_re
+        var morethreeday = (this.period_type[2] / this.approve_report)*100
         console.log(morethreeday)
 
         // CS total cal

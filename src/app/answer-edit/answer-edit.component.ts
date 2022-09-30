@@ -173,7 +173,7 @@ export class AnswerEditComponent implements OnInit {
     var qtest = ""
     qtest = qtest + "UPDATE `mtq10_project_tracking_analysis`.`question` SET `ANSWER_DETAIL` = '" + this.ANSWER_DETAIL + "', " +
       "`ANSWER_SENT_TO` = '" + this.ANSWER_SENT_TO + "', `ANSWER_CC1_SENT_TO` = '" + this.EMAIL_CC + "', " +
-      " `ANSWER_DATE` = '" + this.ANSWER_DATE + "'," +
+      " `ANSWER_DATE` = '" + this.ANSWER_DATE + "', `ANSWER_PERSON` = '" + this.namelocal + "', " +
       " `STATUS_QUESTION` = '" + this.STATUS_QUESTION + "' WHERE (`ID` = '" + this.ID_Q + "');"
       
     this.productService.TRACKING_ANALYSIS_QUERY_DATA(qtest).subscribe((data: {}) => {

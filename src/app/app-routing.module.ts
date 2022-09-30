@@ -36,6 +36,7 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { AddOperationtimeComponent } from './dialog/add-operationtime/add-operationtime.component';
 import { AddReporttimeComponent } from './dialog/add-reporttime/add-reporttime.component';
 import { KPIOperationComponent } from './kpi-operation/kpi-operation.component';
+import { SearchingComponent } from './searching/searching.component';
 
 
 const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillComponent },
@@ -73,7 +74,8 @@ const routes: Routes = [{ path: 'Requestformfill', component: RequestformfillCom
 { path: 'Equipment', component: EquipmentComponent },
 { path: 'AddOperationtime', component: AddOperationtimeComponent },
 { path: 'AddReporttime', component: AddReporttimeComponent },
-{ path: 'KPIOperation', component: KPIOperationComponent },];
+{ path: 'KPIOperation', component: KPIOperationComponent },
+{ path: 'Searching', component: SearchingComponent },];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

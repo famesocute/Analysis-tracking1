@@ -440,7 +440,7 @@ export class EstiCostComponent implements OnInit {
     
 }
 editinfo(){
-  if (this.namelocal == this.DataRes[0].REVI_PAND_ISSUER) {
+  if (this.namelocal == this.DataRes[0].REVI_PAND_ISSUER || this.namelocal == this.DataRes[0].REVI_ANASEC_ANAL) {
   this.productService.changeMessage(this.DataRes[0].ID)
     const dialogRef = this.matDialog.open(EditinfoComponent, {
       disableClose : true,
@@ -454,7 +454,7 @@ editinfo(){
     this.ngOnInit()
     });
   }else{
-    window.alert("Only issuer can edit")
+    window.alert("ํYou can't edit this request")
 }
 }
 deletefile(x:any){
